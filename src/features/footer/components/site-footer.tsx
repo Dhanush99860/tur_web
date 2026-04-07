@@ -25,8 +25,6 @@ const socialLinks: SocialLink[] = [
   { label: "YouTube", href: "/contact", icon: "youtube" },
 ];
 
-const paymentLabels = ["VISA", "MC", "AMEX", "PayPal"] as const;
-
 function SocialIcon({ icon }: Pick<SocialLink, "icon">) {
   if (icon === "instagram") {
     return (
@@ -58,14 +56,6 @@ function SocialIcon({ icon }: Pick<SocialLink, "icon">) {
     <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
       <path d="M20.2 7.2a2.8 2.8 0 0 0-2-2c-1.7-.5-8.2-.5-8.2-.5s-6.5 0-8.2.5a2.8 2.8 0 0 0-2 2C-.7 9-.7 12-.7 12s0 3 .5 4.8a2.8 2.8 0 0 0 2 2c1.7.5 8.2.5 8.2.5s6.5 0 8.2-.5a2.8 2.8 0 0 0 2-2c.5-1.8.5-4.8.5-4.8s0-3-.5-4.8ZM8.7 15.4V8.6l5.8 3.4Z" />
     </svg>
-  );
-}
-
-function PaymentBadge({ label }: { label: (typeof paymentLabels)[number] }) {
-  return (
-    <span className="inline-flex h-9 min-w-[4.2rem] items-center justify-center rounded-[12px] border border-[var(--border)] bg-white px-3 font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--foreground)] shadow-[0_10px_20px_rgba(10,20,24,0.04)]">
-      {label}
-    </span>
   );
 }
 
@@ -149,35 +139,10 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 pt-6 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--foreground)]">
-              We Accept
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2.5">
-              {paymentLabels.map((label) => (
-                <PaymentBadge key={label} label={label} />
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-[var(--muted-foreground)] lg:justify-center">
-            {socialLinks.map((link) => (
-              <SmartLink
-                key={`label-${link.label}`}
-                href={link.href}
-                className="inline-flex items-center gap-2 transition hover:text-[var(--foreground)]"
-              >
-                <SocialIcon icon={link.icon} />
-                <span>{link.label}</span>
-              </SmartLink>
-            ))}
-          </div>
-
-          <div className="text-sm text-[var(--muted-foreground)] lg:text-right">
-            <p>{`Copyright ${new Date().getFullYear()} ${siteConfig.shortName}. ${siteConfig.legalName}.`}</p>
-            <p className="mt-1">All rights reserved.</p>
-          </div>
+        <div className="pt-6">
+          <p className="text-center text-sm text-[var(--muted-foreground)]">
+            {`Copyright ${new Date().getFullYear()} ${siteConfig.shortName}. ${siteConfig.legalName}. All rights reserved.`}
+          </p>
         </div>
       </PageContainer>
     </footer>

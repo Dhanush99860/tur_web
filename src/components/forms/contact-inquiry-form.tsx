@@ -186,12 +186,12 @@ export function ContactInquiryForm({
             <h2 className="mt-2.5 font-display text-[clamp(1.5rem,2vw,1.95rem)] leading-[0.98] tracking-[-0.045em] text-[var(--foreground)]">
               {title}
             </h2>
-            <p className="mt-2 max-w-[40ch] text-[12px] leading-5.5 text-[var(--muted-foreground)] sm:text-[13px]">
+            <p className="mt-2 max-w-[30ch] text-[12px] leading-5.5 text-[var(--muted-foreground)] sm:text-[13px]">
               {description}
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 sm:max-w-[50rem] sm:justify-end">
+          <div className="flex flex-wrap items-center gap-2 sm:max-w-[80rem] sm:justify-end">
             <span className="rounded-full border border-[color-mix(in_srgb,var(--border)_88%,white)] bg-white/78 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
               24h response
             </span>
