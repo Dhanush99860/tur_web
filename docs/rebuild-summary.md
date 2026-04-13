@@ -1,5 +1,138 @@
 # Rebuild Summary
 
+## Family Card Footer Cleanup
+- Removed the redundant `Family Landing Page` footer labels from the shared family cards used on `/door-hardware` and `/automatic-operators`.
+- Replaced them with compact `Includes ...` scope previews so each family card now communicates what sits inside the route more quickly.
+- Applied the footer-meta change consistently across Door Hardware and Automatic Operators while keeping the existing `Explore Family` CTA behavior unchanged.
+- Files changed:
+  - `src/content/catalog/sections.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `docs/rebuild-summary.md`
+
+## Automatic Operators Section Hub Pass
+- Upgraded `/automatic-operators` into a real section hub using the same section-page architecture as Door Hardware while keeping the page clearly distinct in content and logic.
+- Built the page around 6 core operator families:
+  - `Sliding Doors`
+  - `Controlled Physical Access`
+  - `Revolving Doors`
+  - `Swing Door Drives`
+  - `All Glass Systems`
+  - `Automatic Pulse Generators & Sensors`
+- Added movement and control logic, a compact route hierarchy band, a project-support close, and a compact FAQ / technical guidance section so the page now works as an operator-led route map instead of a generic family grid.
+- Kept the page separate from Door Hardware by using operator-led imagery, movement / entrance-system language, and automation-specific project-support copy.
+- Files changed:
+  - `src/app/(marketing)/automatic-operators/page.tsx`
+  - `src/content/catalog/sections.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `docs/rebuild-summary.md`
+
+## Door Hardware Function And FAQ Addition
+- Added a function-based specification section to `/door-hardware` so users can understand the hardware package by opening requirement before choosing a family.
+- Added a compact FAQ / technical guidance section to improve long-tail SEO, user routing clarity and project-led technical understanding.
+- Kept the page aligned to the same 5-family Door Hardware hierarchy:
+  - `American Standard`
+  - `European Ironmongery`
+  - `Glass Hardware`
+  - `Access Control`
+  - `Sealing Systems`
+- Files changed:
+  - `src/content/catalog/sections.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `src/types/index.ts`
+  - `docs/rebuild-summary.md`
+
+## Door Hardware Support Section Upgrade
+- Upgraded the final `/door-hardware` support section so it feels more premium, more project-guidance-led, and less like a generic CTA strip.
+- Kept the CTA purpose unchanged:
+  - `Request Door Hardware Details`
+  - `Download Company Profile`
+- Refined the layout by strengthening the left content area with compact support signals and integrating the right guidance card more closely into the section.
+- Limited the changes to the closing support block without affecting the rest of the page.
+- Files changed:
+  - `src/content/catalog/sections.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `src/types/index.ts`
+  - `docs/rebuild-summary.md`
+
+## Door Hardware Hierarchy Band Compression
+- Kept the hierarchy-explainer section on `/door-hardware`, but compressed it into a much smaller orientation band so it supports the page instead of dominating it.
+- Reduced the layout significantly by switching from a tall instructional module to a compact heading block with a tighter `Section -> Family -> Detail` route strip and three smaller step cards.
+- Preserved the core navigation logic:
+  - `Section`
+  - `Family`
+  - `Detail`
+- Files changed:
+  - `src/content/catalog/sections.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `docs/rebuild-summary.md`
+
+## Door Hardware Premium Hub Refinement
+- Refined `/door-hardware` into a more premium section-hub page while keeping the homepage, global theme, header, footer, typography direction, and navigation styling untouched.
+- Corrected the hero imagery to true door-hardware visuals so the page now opens with hardware-led ironmongery context rather than operator-led entrance imagery.
+- Kept Door Hardware consistently focused on 5 core families:
+  - `American Standard`
+  - `European Ironmongery`
+  - `Glass Hardware`
+  - `Access Control`
+  - `Sealing Systems`
+- Made the family cards more specific and route-oriented by adding clearer family roles plus scope lines that indicate what each route includes.
+- Updated the project-support copy so the page now reads more credibly as a project-guidance and technical-coordination entry point.
+- Files changed:
+  - `src/content/catalog/sections.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `src/types/index.ts`
+  - `docs/rebuild-summary.md`
+
+## Door Hardware IA Normalization Pass
+- Normalized `/door-hardware` from 6 legacy entries back to 5 core Door Hardware families:
+  - `American Standard`
+  - `European Ironmongery`
+  - `Glass Hardware`
+  - `Access Control`
+  - `Sealing Systems`
+- Removed `Automatic Door Operator` from the Door Hardware primary IA so it no longer appears as a sixth equal family on the section page or in the Door Hardware mega navigation.
+- Kept `Automatic Operators` as the primary home for operator-led routes, avoiding the old duplication between the two top-level sections.
+- Aligned the Door Hardware page, desktop mega panel, and mobile navigation to the same 5-family hierarchy without changing the homepage, global header style, footer style, or theme system.
+- Files changed:
+  - `src/content/catalog/sections.ts`
+  - `src/content/site/navigation.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `docs/rebuild-summary.md`
+
+## Door Hardware Visual Depth Pass
+- Deepened the `/door-hardware` layout so the section page feels more intentional, layered and premium without changing the homepage, global theme, header, footer or navigation.
+- Improved the section-hub composition in place by upgrading:
+  - the hero framing
+  - the family-route presentation
+  - the hierarchy explainer block
+  - the closing project-support composition
+- Kept the Door Hardware section focused on its core family routes so the page remains a clean family-led hub rather than a duplicated mixed-system index.
+- Kept the family route hierarchy unchanged, so `/door-hardware` still routes cleanly into the existing family pages without altering downstream family or product routes.
+- Files changed:
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `src/content/catalog/sections.ts`
+  - `src/content/catalog/categories.ts`
+  - `docs/rebuild-summary.md`
+
+## Door Hardware Section Landing Page Pass
+- Upgraded `/door-hardware` into a clearer section landing page without touching the approved homepage, global navigation, footer, or theme system.
+- Added a dedicated section-level page component so section landing pages can differ cleanly from family landing pages without forcing a broad route rewrite.
+- Clarified the inside-page hierarchy on the Door Hardware route so users move from:
+  - section
+  - family
+  - deeper child or product pages where dedicated routes already exist
+- Separated section-level catalog content into its own source file so the codebase is better prepared for the next rollout steps:
+  - `American Standard`
+  - `Hang The Door`
+  - future section and family landing pages
+- Files changed:
+  - `src/app/(marketing)/door-hardware/page.tsx`
+  - `src/content/catalog/sections.ts`
+  - `src/content/catalog/categories.ts`
+  - `src/features/catalog/components/catalog-section-landing-page.tsx`
+  - `src/types/index.ts`
+  - `docs/rebuild-summary.md`
+
 ## Homepage Content Hierarchy Pass
 - Improved homepage information architecture so the sections now read as a project-led B2B journey instead of a mixed catalog / consumer flow.
 - Updated hero, trusted partners, featured products, resources, story, featured carousel, collection tabs, spotlight, testimonials, and trust-banner copy to better reflect TUR's architectural hardware, automatic entry, access, glass, sealing, and technical-services scope.

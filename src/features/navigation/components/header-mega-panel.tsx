@@ -167,7 +167,7 @@ export function HeaderMegaPanel({
                     >
                       <div className="group/gh flex shrink-0 items-start justify-between gap-3 border-b border-[var(--nav-line)] px-4 py-2.5 bg-[color-mix(in_srgb,var(--nav-soft)_88%,white)]">
                         <div className="min-w-0">
-                          <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--foreground)] opacity-75">
+                          <span className="text-[12px] font-bold uppercase tracking-[0.09em] text-[var(--foreground)] opacity-75">
                             {group.label}
                           </span>
                           {group.description ? (
@@ -321,7 +321,7 @@ export function HeaderMegaPanel({
                   }
                 }}
                 className={cn(
-                  "rounded-full border px-2.5 py-[5px] text-[8px] font-medium uppercase tracking-[0.12em] transition-all duration-150",
+                  "rounded-full border px-2.5 py-[2px] text-[8px] font-medium tracking-[0.0001em] transition-all duration-150",
                   group.items.some((entry) => entry.key === activePreviewItem.key)
                     ? "border-[var(--border)] bg-[var(--background)] text-[var(--foreground)]"
                     : "border-transparent text-[var(--muted-foreground)] hover:border-[var(--nav-line)] hover:text-[var(--foreground)]",

@@ -1,5 +1,6 @@
 import { createInquiryHref } from "@/content/site/site-config";
-import type { CatalogCard, CatalogFamily, CatalogSection, CatalogSectionSlug } from "@/types";
+import { catalogSections, getCatalogSection } from "@/content/catalog/sections";
+import type { CatalogCard, CatalogFamily, CatalogSectionSlug } from "@/types";
 
 const productHref = (slug: string) => `/products/${slug}`;
 
@@ -559,72 +560,6 @@ const automaticOperatorFamilies: CatalogFamily[] = [
   },
 ];
 
-export const catalogSections: CatalogSection[] = [
-  {
-    slug: "door-hardware",
-    title: "Door Hardware",
-    description:
-      "Architectural door hardware families spanning American Standard, European Ironmongery, Glass Hardware, Access Control and Sealing Systems.",
-    intro:
-      "Door Hardware is the main route into TUR's architectural hardware offer, organised around the core specification categories used across commercial and premium architectural projects.",
-    image: "/tur/project-b.jpg",
-    imageAlt: "Architectural door hardware from TUR",
-    highlights: ["American Standard", "European Ironmongery", "Glass Hardware", "Access Control", "Sealing Systems"],
-    primaryCta: {
-      label: "Request Door Hardware Details",
-      href: createInquiryHref("Door Hardware Inquiry"),
-    },
-    secondaryCta: {
-      label: "Download Company Profile",
-      href: "/downloads",
-    },
-    supportTitle: "A clean page-based route into core hardware categories",
-    supportBody:
-      "The Door Hardware landing page replaces collection-first discovery with clear category pages and deeper product routes where dedicated detail pages already exist.",
-    keywords: [
-      "door hardware",
-      "architectural hardware",
-      "american standard",
-      "european ironmongery",
-      "glass hardware",
-      "access control",
-      "sealing systems",
-    ],
-    updatedAt: "2026-03-19",
-  },
-  {
-    slug: "automatic-operators",
-    title: "Automatic Operators",
-    description:
-      "Sliding, revolving, swing and controlled access systems shaped for premium entrance performance and project coordination.",
-    intro:
-      "Automatic Operators is the gateway into TUR's entrance automation offer, spanning sliding doors, revolving doors, swing drives, all-glass systems and controlled physical access.",
-    image: "/tur/slider-3.webp",
-    imageAlt: "Automatic operator systems from TUR",
-    highlights: ["Sliding Doors", "Controlled Physical Access", "Swing Door Drives", "All Glass Systems"],
-    primaryCta: {
-      label: "Request Automatic Operators Details",
-      href: createInquiryHref("Automatic Operators Inquiry"),
-    },
-    secondaryCta: {
-      label: "Contact TUR",
-      href: "/contact",
-    },
-    supportTitle: "Automatic entry systems for controlled and premium entrances",
-    supportBody:
-      "These family routes give the homepage a clear path into sliding, revolving, swing and controlled access systems without relying on a storefront category page.",
-    keywords: [
-      "automatic operators",
-      "automatic doors",
-      "sliding doors",
-      "revolving doors",
-      "swing door drives",
-      "controlled physical access",
-    ],
-    updatedAt: "2026-03-20",
-  },
-];
-
 export const catalogFamilies = [...doorHardwareFamilies, ...automaticOperatorFamilies];
 
 export const catalogSectionRoutes = catalogSections.map((section) => `/${section.slug}`);
@@ -633,9 +568,7 @@ export const catalogFamilyRoutes = catalogFamilies.map(
   (family) => `/${family.section}/${family.slug}`,
 );
 
-export function getCatalogSection(slug: CatalogSectionSlug) {
-  return catalogSections.find((section) => section.slug === slug);
-}
+export { catalogSections, getCatalogSection };
 
 export function getCatalogFamiliesBySection(section: CatalogSectionSlug) {
   return catalogFamilies.filter((family) => family.section === section);
@@ -645,6 +578,24 @@ export function getCatalogFamily(section: CatalogSectionSlug, slug: string) {
   return catalogFamilies.find(
     (family) => family.section === section && family.slug === slug,
   );
+}
+
+export function getCatalogSectionFamilyCards(section: CatalogSectionSlug): CatalogCard[] {
+  const catalogSection = getCatalogSection(section);
+
+  if (catalogSection?.routeCards?.length) {
+    return catalogSection.routeCards;
+  }
+
+  return getCatalogFamiliesBySection(section).map((family) => ({
+    title: family.title,
+    description: family.description,
+    href: `/${family.section}/${family.slug}`,
+    eyebrow: section === "door-hardware" ? "Door Hardware Family" : "System Family",
+    ctaLabel: "Explore Family",
+    image: family.image,
+    imageAlt: family.imageAlt,
+  }));
 }
 
 export function getCatalogSectionCards(section: CatalogSectionSlug): CatalogCard[] {

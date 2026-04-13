@@ -611,29 +611,12 @@ const doorHardwareSupportGroups: HeaderNavigationGroup[] = [
       }),
     ],
   },
-  {
-    label: "Automatic Door Operator",
-    description: "Operator detail pages that often support mixed hardware schedules.",
-    href: createFamilyHref("automatic-operators", "swing-door-drives"),
-    items: [
-      createProductLeaf({
-        key: "door-hardware-tsw150",
-        slug: "tsw150-automatic-door-operator",
-        previewEyebrow: "Automatic Operators",
-      }),
-      createProductLeaf({
-        key: "door-hardware-tsw120",
-        slug: "tsw120-automatic-door-operator",
-        previewEyebrow: "Automatic Operators",
-      }),
-    ],
-  },
 ];
 
 const automaticOperatorsPrimaryGroups: HeaderNavigationGroup[] = [
   {
     label: "Sliding Doors",
-    description: "Sliding families for coordinated circulation and controlled entrance flow.",
+    description: "Sliding families for coordinated circulation.",
     href: createFamilyHref("automatic-operators", "sliding-doors"),
     items: [
       createFamilyLeaf({

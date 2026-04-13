@@ -96,12 +96,57 @@ export type CatalogSectionSlug = "door-hardware" | "automatic-operators";
 export type CatalogCard = {
   title: string;
   description: string;
+  scope?: string;
   eyebrow?: string;
   href?: string;
   ctaLabel?: string;
   note?: string;
   image?: string;
   imageAlt?: string;
+};
+
+export type CatalogSectionGrid = {
+  eyebrow: string;
+  title: string;
+  description: string;
+};
+
+export type CatalogSectionStructureStep = {
+  label: string;
+  title: string;
+  description: string;
+};
+
+export type CatalogSectionStructure = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  steps: CatalogSectionStructureStep[];
+};
+
+export type CatalogSectionFunctionItem = {
+  title: string;
+  description: string;
+};
+
+export type CatalogSectionFunctionMap = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  note?: string;
+  items: CatalogSectionFunctionItem[];
+};
+
+export type CatalogSectionFaqItem = {
+  question: string;
+  answer: string;
+};
+
+export type CatalogSectionFaq = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: CatalogSectionFaqItem[];
 };
 
 export type CatalogFamily = {
@@ -126,13 +171,20 @@ export type CatalogSection = {
   title: string;
   description: string;
   intro: string;
+  organizationLine?: string;
+  supportSignals?: string[];
   image: string;
   imageAlt: string;
   highlights: string[];
+  routeCards?: CatalogCard[];
   primaryCta: LinkItem;
   secondaryCta: LinkItem;
+  familyGrid: CatalogSectionGrid;
+  functionMap?: CatalogSectionFunctionMap;
+  structure: CatalogSectionStructure;
   supportTitle: string;
   supportBody: string;
+  faq?: CatalogSectionFaq;
   keywords: string[];
   updatedAt?: string;
 };
