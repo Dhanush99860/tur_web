@@ -98,11 +98,13 @@ export type CatalogCard = {
   description: string;
   scope?: string;
   eyebrow?: string;
+  priority?: "primary" | "secondary";
   href?: string;
   ctaLabel?: string;
   note?: string;
   image?: string;
   imageAlt?: string;
+  imageClassName?: string;
 };
 
 export type CatalogSectionGrid = {
@@ -137,6 +139,43 @@ export type CatalogSectionFunctionMap = {
   items: CatalogSectionFunctionItem[];
 };
 
+export type CatalogFamilyHierarchyStep = {
+  label: string;
+  title: string;
+};
+
+export type CatalogFamilyHierarchy = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  routeLine?: string;
+  steps: CatalogFamilyHierarchyStep[];
+};
+
+export type CatalogFamilyDetailBridge = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  note?: string;
+  items: CatalogCard[];
+};
+
+export type CatalogFamilySupportPanel = {
+  title: string;
+  items: string[];
+};
+
+export type CatalogFamilyHub = {
+  companionTag?: string;
+  organizationLine?: string;
+  heroImageClassName?: string;
+  routeGrid: CatalogSectionGrid;
+  functionMap: CatalogSectionFunctionMap;
+  hierarchy: CatalogFamilyHierarchy;
+  detailBridge: CatalogFamilyDetailBridge;
+  supportPanel: CatalogFamilySupportPanel;
+};
+
 export type CatalogSectionFaqItem = {
   question: string;
   answer: string;
@@ -163,6 +202,7 @@ export type CatalogFamily = {
   secondaryCta: LinkItem;
   supportTitle: string;
   supportBody: string;
+  familyHub?: CatalogFamilyHub;
   keywords: string[];
 };
 

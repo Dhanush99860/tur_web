@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCatalogFamily } from "@/content/catalog/categories";
 import { pageSeo } from "@/content/site/seo";
+import { CatalogFamilyLandingPage } from "@/features/catalog/components/catalog-family-landing-page";
 import { CatalogLandingPage } from "@/features/catalog/components/catalog-landing-page";
 import { StructuredData } from "@/features/seo/components/structured-data";
 import { createPageMetadata } from "@/lib/seo/metadata";
@@ -55,33 +56,35 @@ export default async function DoorHardwareFamilyPage({
     notFound();
   }
 
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Door Hardware", path: "/door-hardware" },
+    { name: family.title, path: `/door-hardware/${family.slug}` },
+  ];
+
   return (
     <>
       <StructuredData
-        data={createBreadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "Door Hardware", path: "/door-hardware" },
-          { name: family.title, path: `/door-hardware/${family.slug}` },
-        ])}
+        data={createBreadcrumbSchema(breadcrumbs)}
       />
-      <CatalogLandingPage
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Door Hardware", path: "/door-hardware" },
-          { name: family.title, path: `/door-hardware/${family.slug}` },
-        ]}
-        eyebrow="Door Hardware"
-        title={family.title}
-        description={family.description}
-        intro={family.intro}
-        image={family.image}
-        imageAlt={family.imageAlt}
-        cards={family.cards}
-        primaryCta={family.primaryCta}
-        secondaryCta={family.secondaryCta}
-        supportTitle={family.supportTitle}
-        supportBody={family.supportBody}
-      />
+      {family.familyHub ? (
+        <CatalogFamilyLandingPage family={family} breadcrumbs={breadcrumbs} />
+      ) : (
+        <CatalogLandingPage
+          breadcrumbs={breadcrumbs}
+          eyebrow="Door Hardware"
+          title={family.title}
+          description={family.description}
+          intro={family.intro}
+          image={family.image}
+          imageAlt={family.imageAlt}
+          cards={family.cards}
+          primaryCta={family.primaryCta}
+          secondaryCta={family.secondaryCta}
+          supportTitle={family.supportTitle}
+          supportBody={family.supportBody}
+        />
+      )}
     </>
   );
 }

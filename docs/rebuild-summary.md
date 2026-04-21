@@ -1,5 +1,33 @@
 # Rebuild Summary
 
+## American Standard Image-Led Refinement
+- Updated `/door-hardware/american-standard` to use the local team image set more strategically while keeping the existing family-hub section order intact.
+- Upgraded the hero to a more family-accurate hardware-led visual, added route-specific imagery to the primary child routes, and introduced compact image-backed detail-bridge cards for the routes that already continue deeper.
+- Kept the function logic layer, route hierarchy band and project-support close intentionally text-led so the page gains visual depth without losing calm route-first clarity.
+- Files changed:
+  - `src/content/catalog/categories.ts`
+  - `src/features/catalog/components/catalog-family-landing-page.tsx`
+  - `src/types/index.ts`
+  - `docs/rebuild-summary.md`
+
+## American Standard Family Hub Upgrade
+- Upgraded `/door-hardware/american-standard` from a generic family page into a true family hub within Door Hardware.
+- Rebuilt the page around 7 coordinated child routes:
+  - `Hang The Door`
+  - `Control The Door`
+  - `Secure The Door`
+  - `Bolt The Door`
+  - `Furnish The Door`
+  - `Emergency Exits`
+  - `Ancillary Products`
+- Separated `Emergency Exits` and `Ancillary Products`, added function-based routing logic and a compact family-to-route-to-detail hierarchy band, and clarified how the family bridges into deeper detail-ready routes.
+- Files changed:
+  - `src/app/(marketing)/door-hardware/[category]/page.tsx`
+  - `src/content/catalog/categories.ts`
+  - `src/features/catalog/components/catalog-family-landing-page.tsx`
+  - `src/types/index.ts`
+  - `docs/rebuild-summary.md`
+
 ## Family Card Footer Cleanup
 - Removed the redundant `Family Landing Page` footer labels from the shared family cards used on `/door-hardware` and `/automatic-operators`.
 - Replaced them with compact `Includes ...` scope previews so each family card now communicates what sits inside the route more quickly.

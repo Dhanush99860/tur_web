@@ -12,38 +12,109 @@ const doorHardwareFamilies: CatalogFamily[] = [
     description:
       "Coordinated hardware families for hanging, controlling, securing and furnishing architectural door sets.",
     intro:
-      "American Standard organises the core door functions used across commercial, hospitality and institutional specifications.",
-    image: "/tur/project-1.jpg",
-    imageAlt: "American Standard architectural door hardware",
-    highlights: ["Hang The Door", "Control The Door", "Secure The Door"],
+      "American Standard organizes the core door functions used across commercial, hospitality, healthcare and institutional specifications, helping teams move from family-level coordination into more specific child routes.",
+    image: "/tur/slider-1.webp",
+    imageAlt: "Coordinated American Standard lever, cylinder and mortise lock hardware from TUR",
+    highlights: [
+      "7 coordinated routes",
+      "One clear family entry point",
+      "Move from family to the right child route before reviewing deeper detail pages",
+    ],
     cards: [
       {
         title: "Hang The Door",
-        description: "Core hanging hardware for coordinated door schedules.",
+        description:
+          "Coordinated hanging hardware for leaf movement, support and opening preparation.",
         href: productHref("hang-the-door"),
-        eyebrow: "Family",
-        ctaLabel: "View Product",
+        eyebrow: "Primary Route",
+        priority: "primary",
+        scope:
+          "Includes hinges, concealed hinges, rising hinges and related hanging routes where dedicated pages exist.",
+        ctaLabel: "Explore Route",
+        image: "/tur/slider-4.webp",
+        imageAlt: "Coordinated opening with visible hinges and hanging support hardware from TUR",
+        imageClassName: "object-left-center",
       },
       {
         title: "Control The Door",
-        description: "Control hardware for dependable movement and closing.",
+        description:
+          "Dependable movement, closing behavior and control hardware for coordinated openings.",
         href: productHref("control-the-door"),
-        eyebrow: "Family",
-        ctaLabel: "View Product",
+        eyebrow: "Primary Route",
+        priority: "primary",
+        scope:
+          "Includes closers, floor-spring and controlled movement routes where available.",
+        ctaLabel: "Explore Route",
+        image: "/tur/slider-5.webp",
+        imageAlt: "Overhead closer hardware for controlled door movement from TUR",
+        imageClassName: "object-[24%_center]",
       },
       {
         title: "Secure The Door",
         description: "Security-led hardware for protected and controlled openings.",
         href: productHref("secure-the-door"),
-        eyebrow: "Family",
-        ctaLabel: "View Product",
+        eyebrow: "Primary Route",
+        priority: "primary",
+        scope:
+          "Includes sash locks, latch locks, deadbolts, hook locks and related securing routes.",
+        ctaLabel: "Explore Route",
+        image: "/tur/slider-6.webp",
+        imageAlt: "Mortise lock case and cylinder for secure door coordination from TUR",
+        imageClassName: "object-[32%_center]",
       },
       {
-        title: "Emergency Exits and Ancillary Products",
+        title: "Bolt The Door",
+        description: "Dedicated closure and bolting solutions for coordinated openings.",
+        href: createInquiryHref("American Standard Bolt The Door Inquiry"),
+        eyebrow: "Secondary Route",
+        priority: "secondary",
+        scope:
+          "Includes bolting hardware used alongside lock and latch coordination.",
+        ctaLabel: "Explore Route",
+        image: "/tur/slider-2.webp",
+        imageAlt: "Coordinated edge hardware and closing detail from TUR",
+        imageClassName: "object-left-center",
+      },
+      {
+        title: "Furnish The Door",
         description:
-          "Life-safety and supporting components used to complete coordinated packages.",
-        eyebrow: "Support Range",
-        note: "Catalog support available on request.",
+          "Finishing hardware that completes the visual and tactile door-set package.",
+        href: createInquiryHref("American Standard Furnish The Door Inquiry"),
+        eyebrow: "Primary Route",
+        priority: "primary",
+        scope:
+          "Includes lever, trim and furnishing-led routes where detail pages exist.",
+        ctaLabel: "Explore Route",
+        image: "/tur/mc-1.jpg",
+        imageAlt: "Premium lever and trim hardware composition from TUR",
+        imageClassName: "object-[58%_center]",
+      },
+      {
+        title: "Emergency Exits",
+        description:
+          "Life-safety and exit hardware for compliant emergency egress conditions.",
+        href: createInquiryHref("American Standard Emergency Exits Inquiry"),
+        eyebrow: "Secondary Route",
+        priority: "secondary",
+        scope: "Includes rim, vertical rod and related exit-device routes.",
+        ctaLabel: "Explore Route",
+        image: "/tur/sliding-f.jpg",
+        imageAlt: "Double-leaf opening with coordinated hardware suited to life-safety routing from TUR",
+        imageClassName: "object-[24%_center]",
+      },
+      {
+        title: "Ancillary Products",
+        description:
+          "Supporting hardware and accessories used to complete the coordinated package.",
+        href: createInquiryHref("American Standard Ancillary Products Inquiry"),
+        eyebrow: "Secondary Route",
+        priority: "secondary",
+        scope:
+          "Catalog support available where dedicated detail pages are still being staged.",
+        ctaLabel: "Explore Route",
+        image: "/tur/slider-1.webp",
+        imageAlt: "Coordinated hardware components used to complete the package from TUR",
+        imageClassName: "object-left-center",
       },
     ],
     primaryCta: {
@@ -56,8 +127,145 @@ const doorHardwareFamilies: CatalogFamily[] = [
     },
     supportTitle: "Specification-led American Standard coordination",
     supportBody:
-      "Use this landing page as a family overview, then move into dedicated product pages or contact TUR for project coordination and catalog support.",
-    keywords: ["american standard", "door hardware", "hang the door", "secure the door"],
+      "Use this family page as the route into dedicated child pages or contact TUR for project coordination, catalog support, approvals and technical follow-up.",
+    familyHub: {
+      companionTag: "American Standard",
+      heroImageClassName: "object-[34%_center]",
+      organizationLine:
+        "American Standard is structured by opening function: hanging, controlling, securing, bolting, furnishing, life-safety egress and supporting package components.",
+      routeGrid: {
+        eyebrow: "American Standard Routes",
+        title: "Choose the right child route",
+        description:
+          "Use the family as the coordination layer, then move into the route that matches the opening function before reviewing deeper detail content.",
+      },
+      functionMap: {
+        eyebrow: "Specified by Function",
+        title: "Map the opening by function",
+        description:
+          "American Standard organizes the opening by function: hanging, controlling, securing, bolting, furnishing, emergency egress and supporting package components.",
+        note:
+          "Start with the function requirement, then move into the right American Standard route.",
+        items: [
+          {
+            title: "Hang the opening",
+            description:
+              "Use hanging routes for hinges, pivots and coordinated leaf support hardware.",
+          },
+          {
+            title: "Control the opening",
+            description:
+              "Use control routes for closers, floor springs and managed movement behavior.",
+          },
+          {
+            title: "Secure the opening",
+            description:
+              "Use secure routes for locks, latches, deadbolts and controlled closure security.",
+          },
+          {
+            title: "Bolt the opening",
+            description:
+              "Use bolt routes where dedicated bolting hardware is required in the package.",
+          },
+          {
+            title: "Furnish the opening",
+            description:
+              "Use furnishing routes for handles, trim and final hardware expression.",
+          },
+          {
+            title: "Exit safely",
+            description:
+              "Use emergency-exit routes where compliant life-safety hardware is required.",
+          },
+          {
+            title: "Complete the package",
+            description:
+              "Use ancillary routes for supporting components that complete the coordinated schedule.",
+          },
+        ],
+      },
+      hierarchy: {
+        eyebrow: "Structured Landing Pages",
+        title: "Choose the right route",
+        description:
+          "Start with the family, move into the right child route, then go deeper only where a dedicated detail page exists.",
+        routeLine: "American Standard -> Route -> Detail",
+        steps: [
+          {
+            label: "Family",
+            title: "Start with American Standard",
+          },
+          {
+            label: "Route",
+            title: "Choose the right function route",
+          },
+          {
+            label: "Detail",
+            title: "Go deeper only where needed",
+          },
+        ],
+      },
+      detailBridge: {
+        eyebrow: "Detail Routes",
+        title: "Some routes already continue into dedicated detail pages",
+        description:
+          "Use American Standard as the family overview, then move into child routes that already contain deeper model-level pages where TUR has staged dedicated content.",
+        note:
+          "Emergency Exits and the remaining American Standard routes can still be coordinated through inquiry-led support while dedicated detail content is being staged.",
+        items: [
+          {
+            title: "Hang The Door",
+            description:
+              "A staged route for hanging hardware families and coordinated hinge-led detail review.",
+            href: productHref("hang-the-door"),
+            ctaLabel: "Explore Route",
+            image: "/tur/slider-4.webp",
+            imageAlt: "Coordinated hanging hardware and opening support from TUR",
+            imageClassName: "object-left-center",
+          },
+          {
+            title: "Control The Door",
+            description:
+              "A staged route for closer-led coordination, managed movement and controlled closing behavior.",
+            href: productHref("control-the-door"),
+            ctaLabel: "Explore Route",
+            image: "/tur/slider-5.webp",
+            imageAlt: "Closer-led movement control hardware from TUR",
+            imageClassName: "object-[24%_center]",
+          },
+          {
+            title: "Secure The Door",
+            description:
+              "A staged route for lock, latch and controlled-opening security families.",
+            href: productHref("secure-the-door"),
+            ctaLabel: "Explore Route",
+            image: "/tur/slider-6.webp",
+            imageAlt: "Secure opening lock and cylinder hardware from TUR",
+            imageClassName: "object-[32%_center]",
+          },
+        ],
+      },
+      supportPanel: {
+        title: "Support Focus",
+        items: [
+          "Family guidance",
+          "Package coordination",
+          "Approval support",
+          "Technical follow-up",
+        ],
+      },
+    },
+    keywords: [
+      "american standard",
+      "door hardware",
+      "hang the door",
+      "control the door",
+      "secure the door",
+      "bolt the door",
+      "furnish the door",
+      "emergency exits",
+      "ancillary products",
+    ],
   },
   {
     section: "door-hardware",
