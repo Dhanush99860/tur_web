@@ -11,8 +11,8 @@ export const catalogSections: CatalogSection[] = [
       "Door Hardware is the main route into TUR's architectural hardware offer, organised around the core specification categories used across commercial and premium architectural projects.",
     organizationLine:
       "Door Hardware is structured by how openings are specified: hanging, controlling, securing, furnishing, access coordination and sealing performance.",
-    image: "/tur/mc-1.jpg",
-    imageAlt: "Coordinated lever, lockset and premium ironmongery detail from TUR",
+    image: "/tur/format-lockset.jpg",
+    imageAlt: "Format UK branded lockset and euro cylinder — TUR door hardware",
     highlights: [
       "American Standard",
       "European Ironmongery",
@@ -51,8 +51,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/glass-hardware",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/project-3.jpg",
-        imageAlt: "Frameless glass fitting and patch hardware detail from TUR",
+        image: "/tur/cat-glass-hardware.jpg",
+        imageAlt: "Glass hinges and clip hardware for frameless architectural applications",
       },
       {
         title: "Access Control",
@@ -62,8 +62,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/access-control",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/slider-5.webp",
-        imageAlt: "Electromagnetic locking and access coordination hardware from TUR",
+        image: "/tur/cat-access-control.jpg",
+        imageAlt: "G·U access control — turnstiles and controlled glass entrance systems",
       },
       {
         title: "Sealing Systems",
@@ -73,8 +73,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/sealing-systems",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/sliding-a.jpg",
-        imageAlt: "Threshold, perimeter and door bottom sealing detail from TUR",
+        image: "/tur/cat-sealing-systems.jpg",
+        imageAlt: "Door bottom seal and threshold system for architectural openings",
       },
     ],
     primaryCta: {

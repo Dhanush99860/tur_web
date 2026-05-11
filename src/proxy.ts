@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import {
   copyForwardableSearchParams,
   resolveLegacyFamilyRedirect,
+  resolveLegacyProductRedirect,
 } from "@/lib/seo/legacy-redirects";
 
 export function proxy(request: NextRequest) {
@@ -10,17 +11,31 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const destinationPathname = resolveLegacyFamilyRedirect(
+  // 1. Try product-level redirect first (specific product / listing IDs)
+  const productDestination = resolveLegacyProductRedirect(
     request.nextUrl.pathname,
     request.nextUrl.searchParams,
   );
 
-  if (!destinationPathname) {
+  if (productDestination) {
+    const destinationUrl = request.nextUrl.clone();
+    destinationUrl.pathname = productDestination;
+    destinationUrl.search = "";
+    return NextResponse.redirect(destinationUrl, 308);
+  }
+
+  // 2. Fall through to family-level redirect
+  const familyDestination = resolveLegacyFamilyRedirect(
+    request.nextUrl.pathname,
+    request.nextUrl.searchParams,
+  );
+
+  if (!familyDestination) {
     return NextResponse.next();
   }
 
   const destinationUrl = request.nextUrl.clone();
-  destinationUrl.pathname = destinationPathname;
+  destinationUrl.pathname = familyDestination;
   destinationUrl.search = "";
   copyForwardableSearchParams(destinationUrl.searchParams, request.nextUrl.searchParams);
 
@@ -28,5 +43,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/door_hardware/sub/:path*", "/automatic_operators/sub/:path*"],
+  matcher: [
+    "/door_hardware/:path*",
+    "/automatic_operators/:path*",
+  ],
 };

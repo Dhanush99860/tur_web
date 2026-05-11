@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Door hardware placeholder</title>
+  <desc id="desc">Neutral placeholder used when the legacy TUR page has no extractable product image.</desc>
+  <rect width="800" height="600" fill="#f2f3f4"/>
+  <rect x="188" y="116" width="424" height="368" rx="18" fill="#ffffff" stroke="#d4d8dd" stroke-width="10"/>
+  <rect x="236" y="164" width="252" height="272" rx="8" fill="#e7eaee" stroke="#c3c8ce" stroke-width="8"/>
+  <circle cx="530" cy="300" r="24" fill="#b7bec6"/>
+  <rect x="300" y="214" width="78" height="172" rx="12" fill="#c9ced4"/>
+  <rect x="392" y="214" width="78" height="172" rx="12" fill="#d8dce1"/>
+  <text x="400" y="536" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#707780">TUR DOOR HARDWARE</text>
+</svg>

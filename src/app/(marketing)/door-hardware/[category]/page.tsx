@@ -3,20 +3,15 @@ import { notFound } from "next/navigation";
 import { getCatalogFamily } from "@/content/catalog/categories";
 import { pageSeo } from "@/content/site/seo";
 import { CatalogFamilyLandingPage } from "@/features/catalog/components/catalog-family-landing-page";
-import { CatalogLandingPage } from "@/features/catalog/components/catalog-landing-page";
 import { StructuredData } from "@/features/seo/components/structured-data";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { createBreadcrumbSchema } from "@/lib/schema/site";
 
 type DoorHardwareFamilyPageProps = {
-  params: Promise<{
-    category: string;
-  }>;
+  params: Promise<{ category: string }>;
 };
 
-export async function generateMetadata({
-  params,
-}: DoorHardwareFamilyPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: DoorHardwareFamilyPageProps): Promise<Metadata> {
   const { category } = await params;
   const family = getCatalogFamily("door-hardware", category);
 
@@ -39,22 +34,20 @@ export async function generateMetadata({
 }
 
 export function generateStaticParams() {
-  return ["american-standard", "european-ironmongery", "glass-hardware", "access-control", "sealing-systems"].map(
-    (category) => ({
-      category,
-    }),
-  );
+  return [
+    "american-standard",
+    "european-ironmongery",
+    "glass-hardware",
+    "access-control",
+    "sealing-systems",
+  ].map((category) => ({ category }));
 }
 
-export default async function DoorHardwareFamilyPage({
-  params,
-}: DoorHardwareFamilyPageProps) {
+export default async function DoorHardwareFamilyPage({ params }: DoorHardwareFamilyPageProps) {
   const { category } = await params;
   const family = getCatalogFamily("door-hardware", category);
 
-  if (!family) {
-    notFound();
-  }
+  if (!family) notFound();
 
   const breadcrumbs = [
     { name: "Home", path: "/" },
@@ -64,27 +57,8 @@ export default async function DoorHardwareFamilyPage({
 
   return (
     <>
-      <StructuredData
-        data={createBreadcrumbSchema(breadcrumbs)}
-      />
-      {family.familyHub ? (
-        <CatalogFamilyLandingPage family={family} breadcrumbs={breadcrumbs} />
-      ) : (
-        <CatalogLandingPage
-          breadcrumbs={breadcrumbs}
-          eyebrow="Door Hardware"
-          title={family.title}
-          description={family.description}
-          intro={family.intro}
-          image={family.image}
-          imageAlt={family.imageAlt}
-          cards={family.cards}
-          primaryCta={family.primaryCta}
-          secondaryCta={family.secondaryCta}
-          supportTitle={family.supportTitle}
-          supportBody={family.supportBody}
-        />
-      )}
+      <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
+      <CatalogFamilyLandingPage family={family} breadcrumbs={breadcrumbs} />
     </>
   );
 }

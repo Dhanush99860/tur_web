@@ -2,20 +2,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCatalogFamily } from "@/content/catalog/categories";
 import { pageSeo } from "@/content/site/seo";
-import { CatalogLandingPage } from "@/features/catalog/components/catalog-landing-page";
+import { CatalogFamilyLandingPage } from "@/features/catalog/components/catalog-family-landing-page";
 import { StructuredData } from "@/features/seo/components/structured-data";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { createBreadcrumbSchema } from "@/lib/schema/site";
 
 type AutomaticOperatorFamilyPageProps = {
-  params: Promise<{
-    category: string;
-  }>;
+  params: Promise<{ category: string }>;
 };
 
-export async function generateMetadata({
-  params,
-}: AutomaticOperatorFamilyPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: AutomaticOperatorFamilyPageProps): Promise<Metadata> {
   const { category } = await params;
   const family = getCatalogFamily("automatic-operators", category);
 
@@ -45,48 +41,25 @@ export function generateStaticParams() {
     "swing-door-drives",
     "all-glass-systems",
     "automatic-pulse-generators-and-sensors",
-  ].map((category) => ({
-    category,
-  }));
+  ].map((category) => ({ category }));
 }
 
-export default async function AutomaticOperatorFamilyPage({
-  params,
-}: AutomaticOperatorFamilyPageProps) {
+export default async function AutomaticOperatorFamilyPage({ params }: AutomaticOperatorFamilyPageProps) {
   const { category } = await params;
   const family = getCatalogFamily("automatic-operators", category);
 
-  if (!family) {
-    notFound();
-  }
+  if (!family) notFound();
+
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Automatic Operators", path: "/automatic-operators" },
+    { name: family.title, path: `/automatic-operators/${family.slug}` },
+  ];
 
   return (
     <>
-      <StructuredData
-        data={createBreadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "Automatic Operators", path: "/automatic-operators" },
-          { name: family.title, path: `/automatic-operators/${family.slug}` },
-        ])}
-      />
-      <CatalogLandingPage
-        breadcrumbs={[
-          { name: "Home", path: "/" },
-          { name: "Automatic Operators", path: "/automatic-operators" },
-          { name: family.title, path: `/automatic-operators/${family.slug}` },
-        ]}
-        eyebrow="Automatic Operators"
-        title={family.title}
-        description={family.description}
-        intro={family.intro}
-        image={family.image}
-        imageAlt={family.imageAlt}
-        cards={family.cards}
-        primaryCta={family.primaryCta}
-        secondaryCta={family.secondaryCta}
-        supportTitle={family.supportTitle}
-        supportBody={family.supportBody}
-      />
+      <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
+      <CatalogFamilyLandingPage family={family} breadcrumbs={breadcrumbs} />
     </>
   );
 }

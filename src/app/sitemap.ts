@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { catalogFamilies, catalogSections } from "@/content/catalog/categories";
 import { products } from "@/content/catalog/products";
+import { routeGroups } from "@/content/catalog/route-groups";
 import { pageSeo } from "@/content/site/seo";
 import { absoluteUrl } from "@/lib/seo/metadata";
 
@@ -9,6 +10,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     catalogSections.map((section) => [section.slug, section.updatedAt]),
   );
   const staticPages = [pageSeo.home, pageSeo.about, pageSeo.downloads, pageSeo.contact];
+
+  // Only index products that are real detail pages (not route-group proxies or option-only stubs)
+  const indexableProducts = products.filter(
+    (p) => !p.isRouteGroup && p.isIndexable !== false,
+  );
 
   const entries: MetadataRoute.Sitemap = [
     ...staticPages.map((page, index) => ({
@@ -31,7 +37,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.76,
     })),
-    ...products.map((product) => ({
+    ...routeGroups.map((group) => ({
+      url: absoluteUrl(`/door-hardware/${group.familySlug}/${group.slug}`),
+      lastModified: new Date("2026-03-20"),
+      changeFrequency: "monthly" as const,
+      priority: 0.74,
+    })),
+    ...indexableProducts.map((product) => ({
       url: absoluteUrl(`/products/${product.slug}`),
       lastModified: new Date(product.updatedAt ?? "2026-03-20"),
       changeFrequency: "monthly" as const,

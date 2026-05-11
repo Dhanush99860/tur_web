@@ -42,6 +42,7 @@ export type HeaderNavigationItem = {
   href: string;
   description?: string;
   panel?: HeaderNavigationPanel;
+  comingSoon?: boolean;
 };
 
 export type HeaderUtilityItem = {
@@ -129,24 +130,6 @@ type PreviewOverrides = Partial<
   >
 >;
 
-function createFamilyPreview(
-  section: CatalogSectionSlug,
-  slug: string,
-  overrides: PreviewOverrides = {},
-) {
-  const family = requireFamily(section, slug);
-
-  return {
-    eyebrow: overrides.eyebrow ?? family.title,
-    title: overrides.title ?? family.title,
-    description: overrides.description ?? family.description,
-    href: overrides.href ?? createFamilyHref(section, slug),
-    image: overrides.image ?? family.image,
-    imageAlt: overrides.imageAlt ?? family.imageAlt,
-    ctaLabel: overrides.ctaLabel ?? "Explore family",
-  } satisfies HeaderNavigationPreview;
-}
-
 function createProductPreview(slug: string, overrides: PreviewOverrides = {}) {
   const product = requireProduct(slug);
 
@@ -159,43 +142,6 @@ function createProductPreview(slug: string, overrides: PreviewOverrides = {}) {
     imageAlt: overrides.imageAlt ?? product.imageAlt,
     ctaLabel: overrides.ctaLabel ?? "View product",
   } satisfies HeaderNavigationPreview;
-}
-
-type FamilyLeafInput = {
-  key: string;
-  label: string;
-  section: CatalogSectionSlug;
-  familySlug: string;
-  description: string;
-  previewEyebrow?: string;
-  previewTitle?: string;
-  previewDescription?: string;
-  ctaLabel?: string;
-};
-
-function createFamilyLeaf({
-  key,
-  label,
-  section,
-  familySlug,
-  description,
-  previewEyebrow,
-  previewTitle,
-  previewDescription,
-  ctaLabel,
-}: FamilyLeafInput) {
-  return {
-    key,
-    label,
-    href: createFamilyHref(section, familySlug),
-    description,
-    preview: createFamilyPreview(section, familySlug, {
-      eyebrow: previewEyebrow,
-      title: previewTitle ?? label,
-      description: previewDescription ?? description,
-      ctaLabel,
-    }),
-  } satisfies HeaderNavigationLeafItem;
 }
 
 type ProductLeafInput = {
@@ -266,191 +212,51 @@ const doorHardwareFamilies = getCatalogFamiliesBySection("door-hardware");
 const automaticOperatorFamilies = getCatalogFamiliesBySection("automatic-operators");
 
 export const headerAnnouncement = {
-  message: "Since 1670 heritage, 30+ years of regional experience, and project-led technical support.",
-  ctaLabel: "Send Inquiry",
+  message: "Architectural Door Hardware & Automatic Entry Systems — Since 1670",
+  ctaLabel: "Get in Touch",
   ctaHref: "/contact",
 };
 
-export const headerUtilityItems: HeaderUtilityItem[] = [
-  {
-    label: "EN",
-    muted: true,
-    hasChevron: true,
-    options: [
-      {
-        label: "English",
-        description: "Current navigation language",
-        current: true,
-      },
-      {
-        label: "Arabic",
-        description: "Arabic navigation layer can be added later.",
-        disabled: true,
-      },
-    ],
-  },
-];
+export const headerUtilityItems: HeaderUtilityItem[] = [];
 
 const doorHardwareCoreGroups: HeaderNavigationGroup[] = [
   {
     label: "American Standard",
-    description: "Core door functions arranged under the American Standard route.",
     href: createFamilyHref("door-hardware", "american-standard"),
     items: [
-      createProductLeaf({
-        key: "american-hang-the-door",
-        slug: "hang-the-door",
-        previewEyebrow: "American Standard",
-      }),
-      createProductLeaf({
-        key: "american-control-the-door",
-        slug: "control-the-door",
-        previewEyebrow: "American Standard",
-      }),
-      createProductLeaf({
-        key: "american-secure-the-door",
-        slug: "secure-the-door",
-        previewEyebrow: "American Standard",
-      }),
-      createFamilyLeaf({
-        key: "american-bolt-the-door",
-        label: "Bolt The Door",
-        section: "door-hardware",
-        familySlug: "american-standard",
-        description: "Bolting hardware within the American Standard specification route.",
-        previewEyebrow: "American Standard",
-      }),
-      createFamilyLeaf({
-        key: "american-ancillary-products",
-        label: "Ancillary Products",
-        section: "door-hardware",
-        familySlug: "american-standard",
-        description: "Supporting accessories and package-completion items for coordinated schedules.",
-        previewEyebrow: "American Standard",
-      }),
-      createFamilyLeaf({
-        key: "american-emergency-exits",
-        label: "Emergency Exits",
-        section: "door-hardware",
-        familySlug: "american-standard",
-        description: "Life-safety exit components kept within the wider American Standard route.",
-        previewEyebrow: "American Standard",
-      }),
-      createFamilyLeaf({
-        key: "american-furnish-the-door",
-        label: "Furnish The Door",
-        section: "door-hardware",
-        familySlug: "american-standard",
-        description: "Furnishing-led hardware selections grouped under the American Standard overview.",
-        previewEyebrow: "American Standard",
-      }),
+      createProductLeaf({ key: "american-hang-the-door", slug: "hang-the-door" }),
+      createProductLeaf({ key: "american-control-the-door", slug: "control-the-door" }),
+      createProductLeaf({ key: "american-secure-the-door", slug: "secure-the-door" }),
+      createProductLeaf({ key: "american-bolt-the-door", slug: "american-bolt-the-door" }),
+      createProductLeaf({ key: "american-ancillary-products", slug: "american-ancillary-products" }),
+      createProductLeaf({ key: "american-emergency-exits", slug: "american-emergency-exits" }),
+      createProductLeaf({ key: "american-furnish-the-door", slug: "american-furnish-the-door" }),
     ],
   },
   {
     label: "European Ironmongery",
-    description: "Premium ironmongery families for furnishing and secure closure.",
     href: createFamilyHref("door-hardware", "european-ironmongery"),
     items: [
-      createFamilyLeaf({
-        key: "euro-hang-the-door",
-        label: "Hang The Door",
-        section: "door-hardware",
-        familySlug: "european-ironmongery",
-        description: "Hanging hardware within the European ironmongery route.",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createFamilyLeaf({
-        key: "euro-control-the-door",
-        label: "Control The Door",
-        section: "door-hardware",
-        familySlug: "european-ironmongery",
-        description: "Door-control hardware grouped under the premium ironmongery route.",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createFamilyLeaf({
-        key: "euro-secure-the-door",
-        label: "Secure The Door",
-        section: "door-hardware",
-        familySlug: "european-ironmongery",
-        description: "Security-led ironmongery selections for protected openings.",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createProductLeaf({
-        key: "euro-cylinders",
-        slug: "cylinders",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createProductLeaf({
-        key: "euro-furnish-the-door",
-        slug: "furnish-the-door",
-        label: "Furnish The Door",
-        description: "Lever design route for furnishing-led ironmongery packages.",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createProductLeaf({
-        key: "euro-bolt-the-door",
-        slug: "bolt-the-door",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createFamilyLeaf({
-        key: "euro-ancillary-products",
-        label: "Ancillary Products",
-        section: "door-hardware",
-        familySlug: "european-ironmongery",
-        description: "Supporting project accessories and completion items.",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createFamilyLeaf({
-        key: "euro-emergency-exits",
-        label: "Emergency Exits",
-        section: "door-hardware",
-        familySlug: "european-ironmongery",
-        description: "Exit hardware held within the premium ironmongery route.",
-        previewEyebrow: "European Ironmongery",
-      }),
-      createProductLeaf({
-        key: "euro-furnish-the-door-lever-handle",
-        slug: "furnish-the-door-lever-handle",
-        previewEyebrow: "European Ironmongery",
-      }),
+      createProductLeaf({ key: "euro-hang-the-door", slug: "euro-hang-the-door" }),
+      createProductLeaf({ key: "euro-control-the-door", slug: "euro-control-the-door" }),
+      createProductLeaf({ key: "euro-secure-the-door", slug: "euro-secure-the-door" }),
+      createProductLeaf({ key: "euro-cylinders", slug: "cylinders" }),
+      createProductLeaf({ key: "euro-furnish-the-door", slug: "furnish-the-door" }),
+      createProductLeaf({ key: "euro-bolt-the-door", slug: "bolt-the-door" }),
+      createProductLeaf({ key: "euro-ancillary-products", slug: "euro-ancillary-products" }),
+      createProductLeaf({ key: "euro-emergency-exits", slug: "euro-emergency-exits" }),
+      createProductLeaf({ key: "euro-furnish-the-door-lever-handle", slug: "furnish-the-door-lever-handle" }),
     ],
   },
   {
     label: "Glass Hardware",
-    description: "Frameless fittings, patch hardware and supporting glass details.",
     href: createFamilyHref("door-hardware", "glass-hardware"),
     items: [
-      createProductLeaf({
-        key: "glass-hinge-glass-clip",
-        slug: "glass-hinge-glass-clip",
-        previewEyebrow: "Glass Hardware",
-      }),
-      createProductLeaf({
-        key: "glass-bathroom-handle-glass-knob",
-        slug: "bathroom-handle-glass-knob",
-        previewEyebrow: "Glass Hardware",
-      }),
-      createProductLeaf({
-        key: "glass-patch-fitting",
-        slug: "tg-pf103",
-        label: "Patch Fitting",
-        description: "Hydraulic patch fitting coordination for frameless glass doors.",
-        previewEyebrow: "Glass Hardware",
-        previewTitle: "Patch Fitting",
-      }),
-      createProductLeaf({
-        key: "glass-pull-handle",
-        slug: "pull-handle",
-        previewEyebrow: "Glass Hardware",
-      }),
-      createFamilyLeaf({
-        key: "glass-lipseal",
-        label: "Lipseal",
-        section: "door-hardware",
-        familySlug: "glass-hardware",
-        description: "Supporting glass sealing detail kept within the glass hardware overview.",
-        previewEyebrow: "Glass Hardware",
-      }),
+      createProductLeaf({ key: "glass-hinge-glass-clip", slug: "glass-hinge-glass-clip" }),
+      createProductLeaf({ key: "glass-bathroom-handle-glass-knob", slug: "bathroom-handle-glass-knob" }),
+      createProductLeaf({ key: "glass-patch-fitting", slug: "tg-pf103" }),
+      createProductLeaf({ key: "glass-pull-handle", slug: "pull-handle" }),
+      createProductLeaf({ key: "glass-lipseal", slug: "lipseal" }),
     ],
   },
 ];
@@ -458,157 +264,34 @@ const doorHardwareCoreGroups: HeaderNavigationGroup[] = [
 const doorHardwareSupportGroups: HeaderNavigationGroup[] = [
   {
     label: "Access Control",
-    description: "Locking, release and electronic access routes for secure openings.",
     href: createFamilyHref("door-hardware", "access-control"),
     items: [
-      createProductLeaf({
-        key: "access-electromagnetic-locks",
-        slug: "electromagnetic-locks",
-        previewEyebrow: "Access Control",
-      }),
-      createProductLeaf({
-        key: "access-electric-strikes",
-        slug: "electric-strikes",
-        previewEyebrow: "Access Control",
-      }),
-      createFamilyLeaf({
-        key: "access-armature-mounting-accessories",
-        label: "Armature Mounting Accessories",
-        section: "door-hardware",
-        familySlug: "access-control",
-        description: "Supporting accessories for coordinated electromagnetic locking arrangements.",
-        previewEyebrow: "Access Control",
-      }),
-      createFamilyLeaf({
-        key: "access-electromechanical-locking-devices",
-        label: "Electromechanical Locking Devices",
-        section: "door-hardware",
-        familySlug: "access-control",
-        description: "Project-led electromechanical locking options within the access-control route.",
-        previewEyebrow: "Access Control",
-      }),
-      createProductLeaf({
-        key: "access-e-access",
-        slug: "e-access",
-        previewEyebrow: "Access Control",
-      }),
-      createFamilyLeaf({
-        key: "access-digital-keypad-system",
-        label: "Digital Keypad System",
-        section: "door-hardware",
-        familySlug: "access-control",
-        description: "Keypad-led access layer kept within the wider secure-entry family.",
-        previewEyebrow: "Access Control",
-      }),
-      createFamilyLeaf({
-        key: "access-infrared-wireless-exit-devices",
-        label: "Infrared & Wireless Exit Devices",
-        section: "door-hardware",
-        familySlug: "access-control",
-        description: "Exit-triggering devices for coordinated egress and managed access.",
-        previewEyebrow: "Access Control",
-      }),
-      createFamilyLeaf({
-        key: "access-electromagnetic-door-holders",
-        label: "Electromagnetic Door Holders",
-        section: "door-hardware",
-        familySlug: "access-control",
-        description: "Door-holder solutions for coordinated hold-open and release strategies.",
-        previewEyebrow: "Access Control",
-      }),
-      createFamilyLeaf({
-        key: "access-control-accessories",
-        label: "Access Control Accessories",
-        section: "door-hardware",
-        familySlug: "access-control",
-        description: "Supporting accessories that complete access-control packages.",
-        previewEyebrow: "Access Control",
-      }),
+      createProductLeaf({ key: "access-electromagnetic-locks", slug: "electromagnetic-locks" }),
+      createProductLeaf({ key: "access-electric-strikes", slug: "electric-strikes" }),
+      createProductLeaf({ key: "access-armature-mounting-accessories", slug: "armature-mounting-accessories" }),
+      createProductLeaf({ key: "access-electromechanical-locking-devices", slug: "electromechanical-locking-devices" }),
+      createProductLeaf({ key: "access-e-access", slug: "e-access" }),
+      createProductLeaf({ key: "access-digital-keypad-system", slug: "digital-keypad-system" }),
+      createProductLeaf({ key: "access-infrared-wireless-exit-devices", slug: "infrared-wireless-exit-devices" }),
+      createProductLeaf({ key: "access-electromagnetic-door-holders", slug: "electromagnetic-door-holders" }),
+      createProductLeaf({ key: "access-control-accessories", slug: "access-control-accessories" }),
     ],
   },
   {
     label: "Sealing Systems",
-    description: "Threshold, perimeter and weather-control routes for coordinated openings.",
     href: createFamilyHref("door-hardware", "sealing-systems"),
     items: [
-      createProductLeaf({
-        key: "sealing-door-bottom-seals",
-        slug: "door-bottom-seals",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createProductLeaf({
-        key: "sealing-threshold-plate-seals",
-        slug: "threshold-plate-seals",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createFamilyLeaf({
-        key: "sealing-threshold-plates",
-        label: "Threshold Plates",
-        section: "door-hardware",
-        familySlug: "sealing-systems",
-        description: "Threshold plate routes within the wider perimeter-performance family.",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createFamilyLeaf({
-        key: "sealing-intumescent-seals",
-        label: "Intumescent Seals",
-        section: "door-hardware",
-        familySlug: "sealing-systems",
-        description: "Fire and smoke sealing products kept within the coordinated sealing route.",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createProductLeaf({
-        key: "sealing-door-frame-perimeter-seals",
-        slug: "door-frame-perimeter-seals",
-        label: "Door Frame Or Perimeter Seals",
-        previewEyebrow: "Sealing Systems",
-        previewTitle: "Door Frame Or Perimeter Seals",
-      }),
-      createFamilyLeaf({
-        key: "sealing-astragals",
-        label: "Astragals",
-        section: "door-hardware",
-        familySlug: "sealing-systems",
-        description: "Astragal routes for coordinated perimeter control.",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createFamilyLeaf({
-        key: "sealing-magnetic-astragals",
-        label: "Magnetic Astragals",
-        section: "door-hardware",
-        familySlug: "sealing-systems",
-        description: "Magnetic astragal options held within the broader sealing family.",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createFamilyLeaf({
-        key: "sealing-self-adhesive-seals",
-        label: "Self Adhesive Seals",
-        section: "door-hardware",
-        familySlug: "sealing-systems",
-        description: "Self-adhesive sealing routes for supplementary perimeter detailing.",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createFamilyLeaf({
-        key: "sealing-brush-strip-seals",
-        label: "Brush Strip Seals",
-        section: "door-hardware",
-        familySlug: "sealing-systems",
-        description: "Brush-strip solutions for threshold and perimeter control.",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createFamilyLeaf({
-        key: "sealing-complementary-products",
-        label: "Complementary Products",
-        section: "door-hardware",
-        familySlug: "sealing-systems",
-        description: "Supporting items that complete wider sealing-system packages.",
-        previewEyebrow: "Sealing Systems",
-      }),
-      createProductLeaf({
-        key: "sealing-weather-stripping",
-        slug: "weather-stripping",
-        previewEyebrow: "Sealing Systems",
-      }),
+      createProductLeaf({ key: "sealing-door-bottom-seals", slug: "door-bottom-seals" }),
+      createProductLeaf({ key: "sealing-threshold-plate-seals", slug: "threshold-plate-seals" }),
+      createProductLeaf({ key: "sealing-threshold-plates", slug: "threshold-plates" }),
+      createProductLeaf({ key: "sealing-intumescent-seals", slug: "intumescent-seals" }),
+      createProductLeaf({ key: "sealing-door-frame-perimeter-seals", slug: "door-frame-perimeter-seals" }),
+      createProductLeaf({ key: "sealing-astragals", slug: "astragals" }),
+      createProductLeaf({ key: "sealing-magnetic-astragals", slug: "magnetic-astragals" }),
+      createProductLeaf({ key: "sealing-self-adhesive-seals", slug: "self-adhesive-seals" }),
+      createProductLeaf({ key: "sealing-brush-strip-seals", slug: "brush-strip-seals" }),
+      createProductLeaf({ key: "sealing-complementary-products", slug: "complementary-products-sealing" }),
+      createProductLeaf({ key: "sealing-weather-stripping", slug: "weather-stripping" }),
     ],
   },
 ];
@@ -616,167 +299,38 @@ const doorHardwareSupportGroups: HeaderNavigationGroup[] = [
 const automaticOperatorsPrimaryGroups: HeaderNavigationGroup[] = [
   {
     label: "Sliding Doors",
-    description: "Sliding families for coordinated circulation.",
     href: createFamilyHref("automatic-operators", "sliding-doors"),
     items: [
-      createFamilyLeaf({
-        key: "auto-sliding-prismatic-cmw",
-        label: "Prismatic sliding door CMW",
-        section: "automatic-operators",
-        familySlug: "sliding-doors",
-        description: "Prismatic sliding configuration for structured commercial entrance flow.",
-        previewEyebrow: "Sliding Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sliding-curved-cmr",
-        label: "Curved sliding door CMR",
-        section: "automatic-operators",
-        familySlug: "sliding-doors",
-        description: "Curved sliding route for premium entrance geometry and circulation control.",
-        previewEyebrow: "Sliding Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sliding-telescoping-emt",
-        label: "Telescoping sliding door EMT",
-        section: "automatic-operators",
-        familySlug: "sliding-doors",
-        description: "Telescoping sliding family for constrained openings and efficient movement.",
-        previewEyebrow: "Sliding Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sliding-escape-hmf-ft",
-        label: "Escape route sliding door HM-F FT",
-        section: "automatic-operators",
-        familySlug: "sliding-doors",
-        description: "Escape-route-ready sliding family for safety-led entrance planning.",
-        previewEyebrow: "Sliding Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sliding-heavymaster-hm",
-        label: "heavyMaster HM",
-        section: "automatic-operators",
-        familySlug: "sliding-doors",
-        description: "Heavy-duty sliding route for demanding architectural entrance applications.",
-        previewEyebrow: "Sliding Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sliding-economaster-em",
-        label: "econoMaster EM",
-        section: "automatic-operators",
-        familySlug: "sliding-doors",
-        description: "Economy-minded sliding family for controlled daily circulation.",
-        previewEyebrow: "Sliding Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sliding-compactmaster-cm",
-        label: "compactMaster CM",
-        section: "automatic-operators",
-        familySlug: "sliding-doors",
-        description: "Compact sliding configuration for tighter entrance footprints.",
-        previewEyebrow: "Sliding Doors",
-      }),
+      createProductLeaf({ key: "auto-sliding-prismatic-cmw", slug: "prismatic-sliding-door-cmw" }),
+      createProductLeaf({ key: "auto-sliding-curved-cmr", slug: "curved-sliding-door-cmr" }),
+      createProductLeaf({ key: "auto-sliding-telescoping-emt", slug: "telescoping-sliding-door-emt" }),
+      createProductLeaf({ key: "auto-sliding-escape-hmf-ft", slug: "escape-route-sliding-door-hm-f-ft" }),
+      createProductLeaf({ key: "auto-sliding-heavymaster-hm", slug: "heavymaster-hm" }),
+      createProductLeaf({ key: "auto-sliding-economaster-em", slug: "economaster-em" }),
+      createProductLeaf({ key: "auto-sliding-compactmaster-cm", slug: "compactmaster-cm" }),
     ],
   },
   {
     label: "Controlled Physical Access",
-    description: "Guided access, barriers and turnstile-led secure circulation.",
     href: createFamilyHref("automatic-operators", "controlled-physical-access"),
     items: [
-      createFamilyLeaf({
-        key: "auto-access-reader-posts",
-        label: "Reader posts and pedestrian guiding bar",
-        section: "automatic-operators",
-        familySlug: "controlled-physical-access",
-        description: "Supporting reader-post and guiding-bar systems for managed access layouts.",
-        previewEyebrow: "Controlled Physical Access",
-      }),
-      createFamilyLeaf({
-        key: "auto-access-gsi-security-curved",
-        label: "GSI security curved sliding door",
-        section: "automatic-operators",
-        familySlug: "controlled-physical-access",
-        description: "Security-led sliding access route within the broader controlled-entry family.",
-        previewEyebrow: "Controlled Physical Access",
-      }),
-      createFamilyLeaf({
-        key: "auto-access-full-height-turnstile",
-        label: "Full-height turnstile",
-        section: "automatic-operators",
-        familySlug: "controlled-physical-access",
-        description: "Full-height turnstile solution for secure high-control entry points.",
-        previewEyebrow: "Controlled Physical Access",
-      }),
-      createFamilyLeaf({
-        key: "auto-access-sensor-barriers",
-        label: "Sensor barriers",
-        section: "automatic-operators",
-        familySlug: "controlled-physical-access",
-        description: "Barrier systems for sensor-led guided access and controlled throughput.",
-        previewEyebrow: "Controlled Physical Access",
-      }),
-      createFamilyLeaf({
-        key: "auto-access-swing-gates",
-        label: "Swing gates",
-        section: "automatic-operators",
-        familySlug: "controlled-physical-access",
-        description: "Controlled swing-gate systems for managed pedestrian movement.",
-        previewEyebrow: "Controlled Physical Access",
-      }),
-      createFamilyLeaf({
-        key: "auto-access-turnstiles",
-        label: "Turnstiles",
-        section: "automatic-operators",
-        familySlug: "controlled-physical-access",
-        description: "Turnstile systems for secure circulation and controlled entry volumes.",
-        previewEyebrow: "Controlled Physical Access",
-      }),
-      createFamilyLeaf({
-        key: "auto-access-3-arm-2-arm-turnstiles",
-        label: "3-arm / 2-arm turnstiles",
-        section: "automatic-operators",
-        familySlug: "controlled-physical-access",
-        description: "Tripod-style turnstiles grouped under the controlled physical access route.",
-        previewEyebrow: "Controlled Physical Access",
-      }),
+      createProductLeaf({ key: "auto-access-reader-posts", slug: "reader-posts-guiding-bar" }),
+      createProductLeaf({ key: "auto-access-gsi-security-curved", slug: "gsi-curved-sliding-access" }),
+      createProductLeaf({ key: "auto-access-full-height-turnstile", slug: "full-height-turnstile" }),
+      createProductLeaf({ key: "auto-access-sensor-barriers", slug: "sensor-barriers" }),
+      createProductLeaf({ key: "auto-access-swing-gates", slug: "swing-gates" }),
+      createProductLeaf({ key: "auto-access-turnstiles", slug: "turnstile-systems" }),
+      createProductLeaf({ key: "auto-access-3-arm-2-arm-turnstiles", slug: "tripod-turnstiles" }),
     ],
   },
   {
     label: "Revolving Doors",
-    description: "Security, standard and all-glass revolving entrance routes.",
     href: createFamilyHref("automatic-operators", "revolving-doors"),
     items: [
-      createFamilyLeaf({
-        key: "auto-revolving-gsi-security",
-        label: "GSI security revolving door",
-        section: "automatic-operators",
-        familySlug: "revolving-doors",
-        description: "Security revolving door route for controlled premium entrances.",
-        previewEyebrow: "Revolving Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-revolving-ggr-large-capacity",
-        label: "GGR large-capacity revolving door",
-        section: "automatic-operators",
-        familySlug: "revolving-doors",
-        description: "Large-capacity revolving system for higher throughput public entries.",
-        previewEyebrow: "Revolving Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-revolving-ggg-all-glass",
-        label: "GGG all-glass revolving door",
-        section: "automatic-operators",
-        familySlug: "revolving-doors",
-        description: "All-glass revolving family for premium architectural entrance expression.",
-        previewEyebrow: "Revolving Doors",
-      }),
-      createFamilyLeaf({
-        key: "auto-revolving-gra-graf-standard",
-        label: "GRA and GRA-F standard revolving door",
-        section: "automatic-operators",
-        familySlug: "revolving-doors",
-        description: "Standard revolving door families for dependable premium circulation.",
-        previewEyebrow: "Revolving Doors",
-      }),
+      createProductLeaf({ key: "auto-revolving-gsi-security", slug: "gsi-security-revolving-door" }),
+      createProductLeaf({ key: "auto-revolving-ggr-large-capacity", slug: "ggr-large-capacity-revolving" }),
+      createProductLeaf({ key: "auto-revolving-ggg-all-glass", slug: "ggg-all-glass-revolving-door" }),
+      createProductLeaf({ key: "auto-revolving-gra-graf-standard", slug: "gra-standard-revolving-door" }),
     ],
   },
 ];
@@ -784,81 +338,29 @@ const automaticOperatorsPrimaryGroups: HeaderNavigationGroup[] = [
 const automaticOperatorsSupportGroups: HeaderNavigationGroup[] = [
   {
     label: "Swing Door Drives",
-    description: "Accessible swing operators and coordinated door-drive routes.",
     href: createFamilyHref("automatic-operators", "swing-door-drives"),
     items: [
-      createProductLeaf({
-        key: "auto-swing-dtn-80",
-        slug: "swing-door-drives",
-        label: "DTN 80",
-        previewEyebrow: "Swing Door Drives",
-        previewTitle: "DTN 80",
-      }),
+      createProductLeaf({ key: "auto-swing-dtn-80", slug: "swing-door-drives" }),
+      createProductLeaf({ key: "auto-swing-tsw150", slug: "tsw150-automatic-door-operator" }),
+      createProductLeaf({ key: "auto-swing-tsw120", slug: "tsw120-automatic-door-operator" }),
     ],
   },
   {
     label: "All Glass Systems",
-    description: "shopMaster routes for premium all-glass movement systems.",
     href: createFamilyHref("automatic-operators", "all-glass-systems"),
     items: [
-      createProductLeaf({
-        key: "auto-all-glass-shopmaster-gsw-a",
-        slug: "sliding-doors",
-        label: "shopMaster GSW-A",
-        description: "All-glass system for coordinated architectural entrance movement.",
-        previewEyebrow: "All Glass Systems",
-        previewTitle: "shopMaster GSW-A",
-      }),
-      createFamilyLeaf({
-        key: "auto-all-glass-shopmaster-gsw-m-g30",
-        label: "shopMaster GSW-M G30",
-        section: "automatic-operators",
-        familySlug: "all-glass-systems",
-        description: "All-glass family for premium coordinated entrances.",
-        previewEyebrow: "All Glass Systems",
-      }),
-      createFamilyLeaf({
-        key: "auto-all-glass-shopmaster-gsw-m",
-        label: "shopMaster GSW-M",
-        section: "automatic-operators",
-        familySlug: "all-glass-systems",
-        description: "Supporting all-glass system family for premium movement applications.",
-        previewEyebrow: "All Glass Systems",
-      }),
+      createProductLeaf({ key: "auto-all-glass-shopmaster-gsw-a", slug: "sliding-doors" }),
+      createProductLeaf({ key: "auto-all-glass-shopmaster-gsw-m-g30", slug: "shopmaster-gsw-m-g30" }),
+      createProductLeaf({ key: "auto-all-glass-shopmaster-gsw-m", slug: "shopmaster-gsw-m" }),
     ],
   },
   {
     label: "Automatic Pulse Generators & Sensors",
-    description: "Activation devices, safety sensors and control-input layers.",
-    href: createFamilyHref(
-      "automatic-operators",
-      "automatic-pulse-generators-and-sensors",
-    ),
+    href: createFamilyHref("automatic-operators", "automatic-pulse-generators-and-sensors"),
     items: [
-      createFamilyLeaf({
-        key: "auto-sensors-activation-devices",
-        label: "Activation Devices",
-        section: "automatic-operators",
-        familySlug: "automatic-pulse-generators-and-sensors",
-        description: "Activation and trigger devices for coordinated automatic entrances.",
-        previewEyebrow: "Pulse Generators & Sensors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sensors-safety-sensors",
-        label: "Safety Sensors",
-        section: "automatic-operators",
-        familySlug: "automatic-pulse-generators-and-sensors",
-        description: "Safety sensor layers for automatic entrances and protected circulation.",
-        previewEyebrow: "Pulse Generators & Sensors",
-      }),
-      createFamilyLeaf({
-        key: "auto-sensors-control-inputs",
-        label: "Control Inputs",
-        section: "automatic-operators",
-        familySlug: "automatic-pulse-generators-and-sensors",
-        description: "Control inputs, push buttons and supporting automatic-entry triggers.",
-        previewEyebrow: "Pulse Generators & Sensors",
-      }),
+      createProductLeaf({ key: "auto-sensors-activation-devices", slug: "activation-devices-sensors" }),
+      createProductLeaf({ key: "auto-sensors-safety-sensors", slug: "safety-sensors" }),
+      createProductLeaf({ key: "auto-sensors-control-inputs", slug: "control-inputs" }),
     ],
   },
 ];
@@ -892,6 +394,8 @@ export const mainNavigation = [
       groups: [...automaticOperatorsPrimaryGroups, ...automaticOperatorsSupportGroups],
     },
   },
+  { label: "Master Key", href: "/products", comingSoon: true },
+  { label: "All Products", href: "/products" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] satisfies HeaderNavigationItem[];

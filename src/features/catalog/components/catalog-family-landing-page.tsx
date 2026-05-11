@@ -1,536 +1,450 @@
 import Image from "next/image";
 import type { BreadcrumbItem, CatalogCard, CatalogFamily } from "@/types";
+import { catalogFamilies } from "@/content/catalog/categories";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { CoverImage } from "@/components/shared/cover-image";
 import { ArrowUpRightIcon } from "@/components/shared/icons";
 import { SmartLink } from "@/components/shared/smart-link";
 import { PageContainer } from "@/components/layout/page-container";
 import { buttonClassName } from "@/components/ui/button";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { cn } from "@/lib/utils/cn";
 
 type CatalogFamilyLandingPageProps = {
   family: CatalogFamily;
   breadcrumbs?: BreadcrumbItem[];
 };
 
-function FamilyRouteCard({ card, index }: { card: CatalogCard; index: number }) {
+// ── Card WITH image ──
+function ImageCard({ card }: { card: CatalogCard }) {
   const isPrimary = card.priority !== "secondary";
-  const mediaSizes = isPrimary
-    ? "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 28vw"
-    : "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 20vw";
 
-  const content = (
-    <div
-      className={cn(
-        "h-full overflow-hidden rounded-[1.3rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--card)_97%,var(--panel))] shadow-[0_18px_34px_-30px_rgba(17,20,20,0.22)] transition duration-300",
-        isPrimary
-          ? "hover:border-[var(--accent)] hover:shadow-[0_28px_58px_-36px_rgba(17,20,20,0.26)]"
-          : "hover:border-[var(--accent)] hover:shadow-[0_24px_46px_-34px_rgba(17,20,20,0.22)]",
-      )}
-    >
-      {card.image ? (
-        <div
-          className={cn(
-            "relative overflow-hidden border-b border-[var(--border)] bg-[var(--surface)]",
-            isPrimary
-              ? "min-h-[13.5rem] sm:min-h-[15rem] lg:min-h-[16rem] xl:min-h-[17rem]"
-              : "min-h-[8.5rem] sm:min-h-[9.25rem] xl:min-h-[9.75rem]",
-          )}
-        >
-          <Image
-            src={card.image}
-            alt={card.imageAlt ?? card.title}
-            fill
-            sizes={mediaSizes}
-            className={cn(
-              "object-cover transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]",
-              card.imageClassName,
-            )}
-          />
-          <div
-            aria-hidden="true"
-            className={cn(
-              "absolute inset-0",
-              isPrimary
-                ? "bg-[linear-gradient(180deg,rgba(10,12,16,0.08)_0%,rgba(10,12,16,0.12)_30%,rgba(10,12,16,0.46)_100%)]"
-                : "bg-[linear-gradient(180deg,rgba(10,12,16,0.05)_0%,rgba(10,12,16,0.08)_34%,rgba(10,12,16,0.36)_100%)]",
-            )}
-          />
-          <div
-            className={cn(
-              "relative z-10 flex items-start justify-between gap-4",
-              isPrimary ? "p-4 sm:p-5" : "p-3.5 sm:p-4",
-            )}
-          >
-            <p className="eyebrow text-white/72">
-              {card.eyebrow ?? (isPrimary ? "Primary Route" : "Route")}
-            </p>
-            <span className="rounded-full border border-white/16 bg-[rgba(15,18,24,0.24)] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
-              0{index + 1}
-            </span>
-          </div>
-        </div>
-      ) : (
-        <div className={cn("flex items-start justify-between gap-4", isPrimary ? "p-5 sm:p-6" : "p-4 sm:p-5")}>
-          <p className="eyebrow">{card.eyebrow ?? (isPrimary ? "Primary Route" : "Route")}</p>
-          <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">
-            0{index + 1}
-          </span>
-        </div>
-      )}
-
-      <div className={cn("flex flex-col", isPrimary ? "p-5 sm:p-6" : "p-4 sm:p-5")}>
-        <h3
-          className={cn(
-            "font-display leading-[1.02] tracking-[-0.04em] text-[var(--foreground)]",
-            isPrimary ? "text-[1.5rem] sm:text-[1.7rem]" : "text-[1.22rem] sm:text-[1.34rem]",
-          )}
-        >
+  const inner = (
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--accent)_55%,var(--border))] hover:shadow-[0_14px_40px_-16px_rgba(0,0,0,0.14)]">
+      <div className="absolute inset-x-0 top-0 z-10 h-[2.5px] origin-left scale-x-0 rounded-t-[1.25rem] bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--panel)]">
+        <Image
+          src={card.image!}
+          alt={card.imageAlt ?? card.title}
+          fill
+          sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 33vw"
+          className={["object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]", card.imageClassName ?? ""].join(" ")}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(6,8,12,0.32)_100%)]" />
+        <span className="absolute left-3 top-3 rounded-full border border-white/18 bg-[rgba(6,8,12,0.52)] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm">
+          {card.eyebrow ?? (isPrimary ? "Primary Route" : "Secondary Route")}
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="text-[1rem] font-semibold leading-[1.18] tracking-[-0.022em] text-[var(--foreground)]">
           {card.title}
         </h3>
-        <p
-          className={cn(
-            "mt-4 text-[color-mix(in_srgb,var(--foreground)_82%,transparent)]",
-            isPrimary ? "text-[0.98rem] leading-7" : "text-[0.92rem] leading-6.5",
-          )}
-        >
+        <p className="mt-2 flex-1 text-[12.5px] leading-[1.72] text-[var(--muted-foreground)]">
           {card.description}
         </p>
         {card.scope ? (
-          <div
-            className={cn(
-              "mt-4 rounded-[1rem] border border-[var(--border)] bg-[var(--panel)]",
-              isPrimary ? "px-4 py-3.5" : "px-3.5 py-3",
-            )}
-          >
-            <p className="text-[11px] leading-6 text-[var(--muted-foreground)]">{card.scope}</p>
-          </div>
+          <p className="mt-3.5 rounded-[0.5rem] bg-[var(--panel)] px-3 py-1.5 text-[10.5px] font-medium leading-snug text-[var(--muted-foreground)]">
+            {card.scope}
+          </p>
         ) : null}
-        <div
-          className={cn(
-            "mt-5 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-4 text-sm font-medium text-[var(--foreground)]",
-            isPrimary && "mt-6",
-          )}
-        >
-          <span>{card.ctaLabel ?? "Explore Route"}</span>
-          {card.href ? <ArrowUpRightIcon className="h-4 w-4 shrink-0" /> : null}
+        <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-4">
+          <span className="text-[12px] font-semibold tracking-[-0.01em] text-[var(--foreground)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+            {card.href ? (card.ctaLabel ?? "Explore Route") : "Available on request"}
+          </span>
+          {card.href ? (
+            <ArrowUpRightIcon className="h-3.5 w-3.5 text-[var(--muted-foreground)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" />
+          ) : null}
         </div>
       </div>
     </div>
   );
 
-  if (card.href) {
-    return (
-      <SmartLink href={card.href} className="group block h-full">
-        {content}
-      </SmartLink>
-    );
-  }
-
-  return <article className="h-full">{content}</article>;
+  if (card.href) return <SmartLink href={card.href} className="block h-full">{inner}</SmartLink>;
+  return <article className="h-full">{inner}</article>;
 }
 
-function DetailBridgeCard({ card }: { card: CatalogCard }) {
-  if (card.image) {
-    const content = (
-      <CoverImage
-        src={card.image}
-        alt={card.imageAlt ?? card.title}
-        sizes="(max-width: 767px) 100vw, (max-width: 1279px) 33vw, 24vw"
-        className="h-full min-h-[15rem] sm:min-h-[16rem] rounded-[1.15rem] border border-[var(--border)]"
-        imageClassName={cn(
-          "object-cover transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]",
-          card.imageClassName,
-        )}
-        overlayClassName="bg-[linear-gradient(180deg,rgba(10,12,16,0.08)_0%,rgba(10,12,16,0.22)_38%,rgba(10,12,16,0.8)_100%)]"
-      >
-        <div className="flex h-full flex-col justify-between p-4 sm:p-5">
-          <div className="flex items-start justify-between gap-4">
-            <p className="eyebrow text-white/72">Detail Route</p>
-            <ArrowUpRightIcon className="mt-0.5 h-4 w-4 shrink-0 text-white/82" />
-          </div>
-          <div>
-            <h3 className="text-[1.12rem] font-medium leading-[1.12] tracking-[-0.025em] text-white">
-              {card.title}
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-white/82">{card.description}</p>
-            <div className="mt-4 border-t border-white/14 pt-3.5 text-sm font-medium text-white">
-              {card.ctaLabel ?? "Explore Route"}
-            </div>
-          </div>
-        </div>
-      </CoverImage>
-    );
+// ── Text card (no image) ──
+function TextCard({ card, index }: { card: CatalogCard; index: number }) {
+  const num = String(index + 1).padStart(2, "0");
+  const isPrimary = card.priority !== "secondary";
 
-    if (card.href) {
-      return (
-        <SmartLink href={card.href} className="group block h-full">
-          {content}
-        </SmartLink>
-      );
-    }
-
-    return <article className="h-full">{content}</article>;
-  }
-
-  const content = (
-    <div className="h-full rounded-[1.15rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--card)_97%,var(--panel))] p-4 sm:p-5 shadow-[0_18px_30px_-30px_rgba(17,20,20,0.2)] transition duration-300 hover:border-[var(--accent)]">
-      <p className="eyebrow">Detail Route</p>
-      <h3 className="mt-3 text-[1.08rem] font-medium leading-[1.12] tracking-[-0.025em] text-[var(--foreground)]">
+  const inner = (
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] p-5 transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--accent)_55%,var(--border))] hover:shadow-[0_12px_36px_-16px_rgba(0,0,0,0.12)]">
+      <div className="absolute inset-x-0 top-0 h-[2.5px] origin-left scale-x-0 rounded-t-[1.25rem] bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
+      <div className="flex items-start justify-between gap-2">
+        <span className={["text-[8.5px] font-bold uppercase tracking-[0.28em]", isPrimary ? "text-[var(--accent)]" : "text-[var(--muted-foreground)]"].join(" ")}>
+          {card.eyebrow ?? (isPrimary ? "Primary Route" : "Secondary Route")}
+        </span>
+        <span className="font-display text-[1.65rem] leading-none tracking-[-0.06em] text-[color-mix(in_srgb,var(--border)_90%,transparent)] transition-colors duration-300 group-hover:text-[color-mix(in_srgb,var(--accent)_22%,var(--border))]">
+          {num}
+        </span>
+      </div>
+      <h3 className="mt-3.5 text-[1.02rem] font-semibold leading-[1.18] tracking-[-0.024em] text-[var(--foreground)]">
         {card.title}
       </h3>
-      <p className="mt-3 text-sm leading-6 text-[var(--muted-foreground)]">{card.description}</p>
-      <div className="mt-4 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-3.5 text-sm font-medium text-[var(--foreground)]">
-        <span>{card.ctaLabel ?? "Explore Route"}</span>
-        {card.href ? <ArrowUpRightIcon className="h-4 w-4 shrink-0" /> : null}
+      <p className="mt-2 flex-1 text-[12.5px] leading-[1.72] text-[var(--muted-foreground)]">
+        {card.description}
+      </p>
+      {(card.scope ?? card.note) ? (
+        <p className="mt-4 rounded-[0.5rem] bg-[var(--panel)] px-3 py-1.5 text-[10.5px] font-medium leading-snug text-[var(--muted-foreground)]">
+          {card.scope ?? card.note}
+        </p>
+      ) : null}
+      <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-4">
+        <span className="text-[12px] font-semibold tracking-[-0.01em] text-[var(--foreground)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+          {card.href ? (card.ctaLabel ?? "Explore Route") : "Available on request"}
+        </span>
+        {card.href ? (
+          <ArrowUpRightIcon className="h-3.5 w-3.5 text-[var(--muted-foreground)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" />
+        ) : null}
       </div>
     </div>
   );
 
-  if (card.href) {
-    return <SmartLink href={card.href}>{content}</SmartLink>;
-  }
+  if (card.href) return <SmartLink href={card.href} className="block h-full">{inner}</SmartLink>;
+  return <article className="h-full">{inner}</article>;
+}
 
-  return <article>{content}</article>;
+function FamilyCard({ card, index }: { card: CatalogCard; index: number }) {
+  if (card.image) return <ImageCard card={card} />;
+  return <TextCard card={card} index={index} />;
 }
 
 export function CatalogFamilyLandingPage({
-  breadcrumbs,
   family,
+  breadcrumbs,
 }: CatalogFamilyLandingPageProps) {
-  const hub = family.familyHub;
+  const sectionLabel = family.section === "door-hardware" ? "Door Hardware" : "Automatic Operators";
+  const sectionHref = `/${family.section}`;
+  const cardLabel = family.section === "door-hardware" ? "Routes" : "Products";
+  const gridTitle = family.section === "door-hardware" ? `${family.title} Routes` : `${family.title} Products`;
 
-  if (!hub) {
-    return null;
-  }
-
-  const hasPrioritySplit = family.cards.some((card) => card.priority);
-  const primaryCards = hasPrioritySplit
-    ? family.cards.filter((card) => card.priority !== "secondary")
-    : family.cards;
-  const secondaryCards = hasPrioritySplit
-    ? family.cards.filter((card) => card.priority === "secondary")
-    : [];
-  const routeLineItems = hub.hierarchy.routeLine
-    ?.split("->")
-    .map((item) => item.trim())
-    .filter(Boolean);
+  const relatedFamilies = (family.relatedFamilySlugs ?? [])
+    .map((slug) => catalogFamilies.find((f) => f.slug === slug))
+    .filter(Boolean) as CatalogFamily[];
 
   return (
     <>
       {breadcrumbs ? <Breadcrumbs items={breadcrumbs} /> : null}
-      <main id="main-content">
-        <PageContainer className="section-shell pt-8 sm:pt-10 lg:pt-12">
-          <section className="grid gap-5 xl:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)]">
-            <div className="surface-panel relative overflow-hidden p-6 sm:p-8 lg:p-10">
-              <div
-                aria-hidden="true"
-                className="absolute inset-y-0 right-0 w-[42%] bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--warm)_68%,transparent),transparent_72%)]"
-              />
-              <div className="relative">
-                <div className="flex flex-wrap items-center gap-3">
-                  <p className="eyebrow">Door Hardware</p>
-                  {hub.companionTag ? (
-                    <span className="rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">
-                      {hub.companionTag}
-                    </span>
-                  ) : null}
-                </div>
-                <h1 className="mt-5 font-display text-[clamp(3rem,5.1vw,5rem)] leading-[0.92] tracking-[-0.06em] text-[var(--foreground)]">
+      <main id="main-content" className="pb-28">
+
+        {/* ══════════════════════════════════════
+            HERO
+        ══════════════════════════════════════ */}
+        <PageContainer className="pt-10 sm:pt-14">
+          <div className="grid items-stretch gap-6 lg:grid-cols-[1fr_0.72fr] lg:gap-8 xl:gap-10">
+
+            {/* Left — text panel */}
+            <div className="flex flex-col rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] p-7 sm:p-9 lg:p-10">
+              <div className="mb-6 flex flex-wrap items-center gap-2">
+                <SmartLink href={sectionHref} className="text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)] transition-opacity hover:opacity-70">
+                  {sectionLabel}
+                </SmartLink>
+                <svg viewBox="0 0 12 12" fill="none" className="h-2 w-2 shrink-0 text-[var(--border)]">
+                  <path d="M3 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-[var(--muted-foreground)]">
                   {family.title}
-                </h1>
-                <p className="mt-5 max-w-[35ch] text-[clamp(1.04rem,1.45vw,1.24rem)] leading-[1.56] text-[color-mix(in_srgb,var(--foreground)_86%,transparent)]">
-                  {family.description}
-                </p>
-                <p className="mt-5 max-w-[58ch] text-[1rem] leading-7 text-[color-mix(in_srgb,var(--foreground)_74%,transparent)]">
-                  {family.intro}
-                </p>
-                {hub.organizationLine ? (
-                  <div className="mt-6 max-w-[60ch] rounded-[1rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--card)_95%,var(--panel))] px-4 py-3.5 shadow-[0_18px_34px_-32px_rgba(17,20,20,0.18)]">
-                    <p className="eyebrow">Specified by Function</p>
-                    <p className="mt-2 text-sm leading-6 text-[color-mix(in_srgb,var(--foreground)_78%,transparent)]">
-                      {hub.organizationLine}
-                    </p>
-                  </div>
-                ) : null}
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <SmartLink href={family.primaryCta.href} className={buttonClassName()}>
-                    {family.primaryCta.label}
-                  </SmartLink>
-                  <SmartLink href={family.secondaryCta.href} className={buttonClassName("secondary")}>
-                    {family.secondaryCta.label}
-                  </SmartLink>
-                </div>
+                </span>
               </div>
-            </div>
-
-            <CoverImage
-              src={family.image}
-              alt={family.imageAlt}
-              sizes="(max-width: 1279px) 100vw, 50vw"
-              priority
-              className="surface-panel min-h-[22rem] overflow-hidden sm:min-h-[28rem] xl:min-h-full"
-              imageClassName={cn("object-cover object-center", hub.heroImageClassName)}
-              overlayClassName="bg-[linear-gradient(180deg,rgba(12,15,20,0.08)_0%,rgba(12,15,20,0.18)_42%,rgba(12,15,20,0.54)_100%)]"
-            >
-              <div className="flex h-full items-end justify-end p-4 sm:p-6">
-                <div className="max-w-[22rem] rounded-[1.25rem] border border-white/18 bg-[rgba(15,18,24,0.34)] p-5 text-white shadow-[0_28px_64px_-40px_rgba(0,0,0,0.48)] backdrop-blur-md">
-                  <p className="eyebrow text-white/72">Family Overview</p>
-                  <h2 className="mt-3 font-display text-[clamp(1.55rem,2.4vw,2.2rem)] leading-[0.98] tracking-[-0.045em] text-white">
-                    {family.cards.length} coordinated routes
-                  </h2>
-                  <p className="mt-3 text-sm leading-6 text-white/82">
-                    Move from family into the right child route before reviewing deeper detail pages.
-                  </p>
-                  <div className="mt-4 grid gap-2">
-                    {family.highlights.map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-[0.95rem] border border-white/16 bg-white/8 px-3.5 py-3 text-sm leading-5.5 text-white/88"
-                      >
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </CoverImage>
-          </section>
-        </PageContainer>
-
-        <PageContainer className="section-shell pt-0">
-          <section className="surface-panel relative overflow-hidden p-6 sm:p-8 lg:p-9">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,color-mix(in_srgb,var(--warm)_38%,transparent),transparent)]"
-            />
-            <div className="relative">
-              <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_8.25rem] xl:items-end">
-                <div className="max-w-[54rem]">
-                  <p className="eyebrow">{hub.routeGrid.eyebrow}</p>
-                  <h2 className="mt-3 max-w-[18ch] font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[0.94] tracking-[-0.058em] text-[var(--foreground)]">
-                    {hub.routeGrid.title}
-                  </h2>
-                  <p className="mt-4 max-w-[50ch] text-[1rem] leading-7 text-[color-mix(in_srgb,var(--foreground)_76%,transparent)]">
-                    {hub.routeGrid.description}
-                  </p>
-                </div>
-
-                <div className="xl:justify-self-end">
-                  <div className="rounded-[1.05rem] border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-right shadow-[var(--shadow-soft)]">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]">
-                      Child Routes
-                    </p>
-                    <p className="mt-1 font-display text-[2rem] leading-none tracking-[-0.05em] text-[var(--foreground)]">
-                      {family.cards.length}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 grid gap-4 xl:grid-cols-2">
-                {primaryCards.map((card, index) => (
-                  <FamilyRouteCard
-                    key={`${card.title}-${card.href ?? card.note ?? "static"}`}
-                    card={card}
-                    index={index}
-                  />
-                ))}
-              </div>
-
-              {secondaryCards.length ? (
-                <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                  {secondaryCards.map((card, index) => (
-                    <FamilyRouteCard
-                      key={`${card.title}-${card.href ?? card.note ?? "static"}`}
-                      card={card}
-                      index={index + primaryCards.length}
-                    />
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          </section>
-        </PageContainer>
-
-        <PageContainer className="section-shell pt-0">
-          <section className="surface-panel relative overflow-hidden p-6 sm:p-8 lg:p-9">
-            <div
-              aria-hidden="true"
-              className="absolute inset-y-0 right-0 w-[28%] bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--warm)_58%,transparent),transparent_78%)]"
-            />
-            <div className="relative">
-              <SectionHeading
-                eyebrow={hub.functionMap.eyebrow}
-                title={hub.functionMap.title}
-                description={hub.functionMap.description}
-                className="sm:flex-col sm:items-start sm:justify-start"
-              />
-              <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                {hub.functionMap.items.map((item, index) => (
-                  <article
-                    key={item.title}
-                    className="rounded-[1.05rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--card)_97%,var(--panel))] px-4 py-4 shadow-[0_16px_28px_-30px_rgba(17,20,20,0.2)]"
-                  >
-                    <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--muted-foreground)]">
-                      0{index + 1}
-                    </p>
-                    <h3 className="mt-2.5 text-[1.02rem] font-medium leading-[1.12] tracking-[-0.025em] text-[var(--foreground)]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
-                      {item.description}
-                    </p>
-                  </article>
-                ))}
-              </div>
-              {hub.functionMap.note ? (
-                <p className="mt-4 text-sm leading-6 text-[var(--muted-foreground)]">
-                  {hub.functionMap.note}
-                </p>
-              ) : null}
-            </div>
-          </section>
-        </PageContainer>
-
-        <PageContainer className="section-shell pt-0">
-          <section className="surface-panel relative overflow-hidden p-5 sm:p-6 lg:p-6">
-            <div
-              aria-hidden="true"
-              className="absolute inset-y-0 right-0 w-[24%] bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--warm)_54%,transparent),transparent_78%)]"
-            />
-            <div className="relative grid gap-5 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:items-center">
-              <div className="max-w-[32rem]">
-                <p className="eyebrow">{hub.hierarchy.eyebrow}</p>
-                <h2 className="mt-2.5 font-display text-[clamp(2rem,3.2vw,2.7rem)] leading-[0.98] tracking-[-0.05em] text-[var(--foreground)]">
-                  {hub.hierarchy.title}
-                </h2>
-                <p className="mt-3 max-w-[42ch] text-[0.98rem] leading-7 text-[var(--muted-foreground)]">
-                  {hub.hierarchy.description}
-                </p>
-                {routeLineItems?.length ? (
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
-                    {routeLineItems.map((item, index) => (
-                      <div key={`${item}-${index}`} className="flex items-center gap-2">
-                        <span className="rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--foreground)]">
-                          {item}
-                        </span>
-                        {index < routeLineItems.length - 1 ? (
-                          <span
-                            aria-hidden="true"
-                            className="text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--muted-foreground)]"
-                          >
-                            -&gt;
-                          </span>
-                        ) : null}
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-3">
-                {hub.hierarchy.steps.map((step, index) => (
-                  <article
-                    key={step.label}
-                    className="relative rounded-[1rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--card)_97%,var(--panel))] px-4 py-4 shadow-[0_16px_28px_-30px_rgba(17,20,20,0.22)]"
-                  >
-                    <span className="absolute right-4 top-3 font-display text-[1.3rem] leading-none tracking-[-0.05em] text-[color-mix(in_srgb,var(--border)_78%,transparent)]">
-                      0{index + 1}
-                    </span>
-                    <p className="eyebrow">{step.label}</p>
-                    <h3 className="mt-2.5 max-w-[13ch] text-[1.02rem] font-medium leading-[1.12] tracking-[-0.025em] text-[var(--foreground)]">
-                      {step.title}
-                    </h3>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-        </PageContainer>
-
-        <PageContainer className="section-shell pt-0">
-          <section className="surface-panel relative overflow-hidden p-5 sm:p-6 lg:p-7">
-            <div
-              aria-hidden="true"
-              className="absolute inset-y-0 right-0 w-[26%] bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--warm)_58%,transparent),transparent_78%)]"
-            />
-            <div className="relative grid gap-5 xl:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] xl:items-start">
-              <div className="max-w-[34rem]">
-                <SectionHeading
-                  eyebrow={hub.detailBridge.eyebrow}
-                  title={hub.detailBridge.title}
-                  description={hub.detailBridge.description}
-                  className="sm:flex-col sm:items-start sm:justify-start"
-                />
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-3">
-                {hub.detailBridge.items.map((item) => (
-                  <DetailBridgeCard
-                    key={`${item.title}-${item.href ?? item.note ?? "static"}`}
-                    card={item}
-                  />
-                ))}
-              </div>
-            </div>
-            {hub.detailBridge.note ? (
-              <p className="relative mt-4 text-sm leading-6 text-[var(--muted-foreground)]">
-                {hub.detailBridge.note}
+              <h1 className="font-display text-[clamp(2.5rem,4.6vw,4.6rem)] font-medium leading-[0.91] tracking-[-0.065em] text-[var(--foreground)]">
+                {family.title}
+              </h1>
+              <div className="my-6 h-px bg-[var(--border)]" />
+              <p className="max-w-[40ch] text-[clamp(0.95rem,1.25vw,1.1rem)] leading-[1.64] text-[var(--muted-foreground)]">
+                {family.description}
               </p>
-            ) : null}
-          </section>
-        </PageContainer>
-
-        <PageContainer className="section-shell pt-0">
-          <section className="surface-panel relative overflow-hidden p-6 sm:p-8 lg:p-9">
-            <div
-              aria-hidden="true"
-              className="absolute inset-y-0 right-0 w-[34%] bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--warm)_66%,transparent),transparent_76%)]"
-            />
-            <div className="relative grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_22rem] xl:items-start">
-              <div className="max-w-[46rem]">
-                <SectionHeading
-                  eyebrow="Project Support"
-                  title={family.supportTitle}
-                  description={family.supportBody}
-                  className="sm:flex-col sm:items-start sm:justify-start"
-                />
+              <p className="mt-4 max-w-[54ch] text-[0.89rem] leading-[1.76] text-[var(--muted-foreground)] opacity-80">
+                {family.intro}
+              </p>
+              <div className="my-6 h-px bg-[var(--border)]" />
+              <div className="flex flex-wrap gap-3">
+                <SmartLink href={family.primaryCta.href} className={buttonClassName()}>
+                  {family.primaryCta.label}
+                </SmartLink>
+                <SmartLink href={family.secondaryCta.href} className={buttonClassName("secondary")}>
+                  {family.secondaryCta.label}
+                </SmartLink>
               </div>
+              <div className="mt-7 flex flex-wrap gap-2">
+                {family.highlights.map((h) => (
+                  <span key={h} className="rounded-full border border-[var(--border)] px-3 py-1 text-[11px] font-medium text-[var(--foreground)]">
+                    {h}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-              <div className="rounded-[1.3rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--card)_97%,var(--panel))] p-5 sm:p-6 shadow-[0_24px_42px_-34px_rgba(17,20,20,0.24)]">
-                <p className="eyebrow">{hub.supportPanel.title}</p>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-                  {hub.supportPanel.items.map((item, index) => (
-                    <article
-                      key={item}
-                      className="rounded-[1rem] border border-[var(--border)] bg-[color-mix(in_srgb,var(--card)_98%,var(--panel))] px-4 py-3.5 shadow-[0_16px_28px_-32px_rgba(17,20,20,0.2)]"
-                    >
-                      <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--muted-foreground)]">
-                        0{index + 1}
-                      </p>
-                      <p className="mt-2 text-[0.96rem] font-medium tracking-[-0.02em] text-[var(--foreground)]">
-                        {item}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-                <div className="mt-5 grid gap-3">
-                  <SmartLink href={family.primaryCta.href} className={cn(buttonClassName(), "w-full")}>
-                    {family.primaryCta.label}
-                  </SmartLink>
-                  <SmartLink
-                    href={family.secondaryCta.href}
-                    className={cn(buttonClassName("secondary"), "w-full")}
-                  >
-                    {family.secondaryCta.label}
-                  </SmartLink>
+            {/* Right — image */}
+            <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] border border-[var(--border)] lg:min-h-0">
+              <Image src={family.image} alt={family.imageAlt} fill priority sizes="(max-width: 1023px) 100vw, 38vw" className="object-cover object-center" />
+              <div className="absolute inset-0 bg-[linear-gradient(175deg,rgba(6,8,12,0.04)_0%,rgba(6,8,12,0.62)_100%)]" />
+              <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6">
+                <div className="rounded-[1.1rem] border border-white/14 bg-[rgba(8,10,16,0.58)] p-4 backdrop-blur-[12px] sm:p-5">
+                  <div className="mb-3 flex items-center gap-4">
+                    <div>
+                      <p className="font-display text-[1.9rem] leading-none tracking-[-0.06em] text-white">{family.cards.length}</p>
+                      <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-white/55">{cardLabel}</p>
+                    </div>
+                    <div className="h-8 w-px bg-white/14" />
+                    <div>
+                      <p className="font-display text-[1.9rem] leading-none tracking-[-0.06em] text-white">{family.highlights.length}</p>
+                      <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-white/55">Key Items</p>
+                    </div>
+                  </div>
+                  <p className="text-[11.5px] leading-[1.58] text-white/65">{family.supportTitle}</p>
                 </div>
               </div>
             </div>
-          </section>
+          </div>
         </PageContainer>
+
+        {/* ══════════════════════════════════════
+            ROUTES / PRODUCTS GRID
+        ══════════════════════════════════════ */}
+        <PageContainer className="pt-20 sm:pt-24">
+          <div className="mb-10 flex flex-col gap-4 border-b border-[var(--border)] pb-8 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+                {sectionLabel} &middot; {family.title}
+              </p>
+              <h2 className="font-display text-[clamp(1.85rem,3.2vw,3rem)] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)]">
+                {gridTitle}
+              </h2>
+            </div>
+            <div className="shrink-0 rounded-[1rem] border border-[var(--border)] bg-[var(--card)] px-5 py-3 text-center sm:text-right">
+              <p className="font-display text-[2.4rem] leading-none tracking-[-0.065em] text-[var(--accent)]">{family.cards.length}</p>
+              <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--muted-foreground)]">{cardLabel}</p>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {family.cards.map((card, i) => (
+              <FamilyCard key={card.title} card={card} index={i} />
+            ))}
+          </div>
+        </PageContainer>
+
+        {/* ══════════════════════════════════════
+            APPLICATIONS
+        ══════════════════════════════════════ */}
+        {family.applications?.length ? (
+          <PageContainer className="pt-20 sm:pt-24">
+            <div className="mb-10">
+              <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+                Applications &middot; {family.title}
+              </p>
+              <h2 className="font-display text-[clamp(1.85rem,3.2vw,3rem)] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)]">
+                Where {family.title} is Specified
+              </h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {family.applications.map((app, i) => (
+                <div
+                  key={app.title}
+                  className="rounded-[1.1rem] border border-[var(--border)] bg-[var(--card)] p-5 transition-[border-color] duration-200 hover:border-[color-mix(in_srgb,var(--accent)_40%,var(--border))]"
+                >
+                  <span className="font-display text-[1.55rem] leading-none tracking-[-0.06em] text-[color-mix(in_srgb,var(--accent)_22%,var(--border))]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-3 text-[0.94rem] font-semibold leading-snug tracking-[-0.02em] text-[var(--foreground)]">
+                    {app.title}
+                  </h3>
+                  <p className="mt-2 text-[12.5px] leading-[1.72] text-[var(--muted-foreground)]">
+                    {app.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </PageContainer>
+        ) : null}
+
+        {/* ══════════════════════════════════════
+            KEY FEATURES
+        ══════════════════════════════════════ */}
+        {family.featurePoints?.length ? (
+          <PageContainer className="pt-20 sm:pt-24">
+            <div className="overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)]">
+              <div className="grid lg:grid-cols-2">
+                {/* Left: heading */}
+                <div className="border-b border-[var(--border)] p-7 sm:p-9 lg:border-b-0 lg:border-r lg:p-10">
+                  <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+                    Key Features
+                  </p>
+                  <h2 className="font-display text-[clamp(1.85rem,3vw,2.8rem)] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)]">
+                    Why specify {family.title}
+                  </h2>
+                  <p className="mt-4 max-w-[38ch] text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
+                    {family.description}
+                  </p>
+                </div>
+                {/* Right: feature list */}
+                <div className="p-7 sm:p-9 lg:p-10">
+                  <ul className="flex flex-col gap-5">
+                    {family.featurePoints.map((f) => (
+                      <li key={f.title} className="flex gap-4">
+                        <span className="mt-0.5 flex h-[1.2rem] w-[1.2rem] shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--accent)_14%,transparent)]">
+                          <svg viewBox="0 0 10 10" fill="none" className="h-[9px] w-[9px]">
+                            <path d="M1.5 5l2.5 2.5 4.5-5" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </span>
+                        <div>
+                          <p className="text-[0.88rem] font-semibold leading-snug tracking-[-0.018em] text-[var(--foreground)]">
+                            {f.title}
+                          </p>
+                          <p className="mt-0.5 text-[12.5px] leading-[1.7] text-[var(--muted-foreground)]">
+                            {f.description}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </PageContainer>
+        ) : null}
+
+        {/* ══════════════════════════════════════
+            FAQ
+        ══════════════════════════════════════ */}
+        {family.faq?.length ? (
+          <PageContainer className="pt-20 sm:pt-24">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.65fr] lg:gap-16">
+              {/* Left: sticky heading */}
+              <div className="lg:sticky lg:top-[7rem] lg:self-start">
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+                  FAQ
+                </p>
+                <h2 className="font-display text-[clamp(1.85rem,3vw,2.8rem)] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)]">
+                  Common questions
+                </h2>
+                <p className="mt-4 max-w-[32ch] text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
+                  Answers to frequently asked questions about {family.title}.
+                </p>
+                <SmartLink
+                  href={family.primaryCta.href}
+                  className="mt-6 inline-flex items-center gap-2 text-[12px] font-semibold text-[var(--accent)] transition-opacity hover:opacity-70"
+                >
+                  {family.primaryCta.label}
+                  <ArrowUpRightIcon className="h-3 w-3" />
+                </SmartLink>
+              </div>
+              {/* Right: accordion */}
+              <div className="overflow-hidden rounded-[1.25rem] border border-[var(--border)]">
+                {family.faq.map((item, i) => (
+                  <details
+                    key={item.question}
+                    className={["group px-6", i > 0 ? "border-t border-[var(--border)]" : ""].join(" ")}
+                  >
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-5 py-5 text-left">
+                      <span className="text-[0.9rem] font-medium leading-[1.52] tracking-[-0.018em] text-[var(--foreground)]">
+                        {item.question}
+                      </span>
+                      <span className="mt-0.5 flex h-[1.35rem] w-[1.35rem] shrink-0 items-center justify-center rounded-full border border-[var(--border)] text-[var(--muted-foreground)] transition-all duration-200 group-open:rotate-45 group-open:border-[var(--accent)] group-open:text-[var(--accent)]">
+                        <svg viewBox="0 0 12 12" fill="none" className="h-2.5 w-2.5">
+                          <path d="M6 2v8M2 6h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                        </svg>
+                      </span>
+                    </summary>
+                    <p className="pb-5 pr-8 text-[13px] leading-[1.78] text-[var(--muted-foreground)]">
+                      {item.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </PageContainer>
+        ) : null}
+
+        {/* ══════════════════════════════════════
+            RELATED FAMILIES
+        ══════════════════════════════════════ */}
+        {relatedFamilies.length > 0 ? (
+          <PageContainer className="pt-20 sm:pt-24">
+            <div className="mb-10 flex flex-col gap-4 border-b border-[var(--border)] pb-8 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+                  Continue Exploring
+                </p>
+                <h2 className="font-display text-[clamp(1.85rem,3.2vw,3rem)] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)]">
+                  Related Families
+                </h2>
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedFamilies.map((rel) => (
+                <SmartLink
+                  key={rel.slug}
+                  href={`/${rel.section}/${rel.slug}`}
+                  className="group block"
+                >
+                  <div className="overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--accent)_55%,var(--border))] hover:shadow-[0_14px_40px_-16px_rgba(0,0,0,0.14)]">
+                    <div className="relative aspect-[16/9] overflow-hidden">
+                      <Image
+                        src={rel.image}
+                        alt={rel.imageAlt}
+                        fill
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                      />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgba(6,8,12,0.28)_100%)]" />
+                      <span className="absolute left-3 top-3 rounded-full border border-white/18 bg-[rgba(6,8,12,0.52)] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm">
+                        {rel.section === "door-hardware" ? "Door Hardware" : "Automatic Operators"}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h3 className="text-[1rem] font-semibold leading-snug tracking-[-0.022em] text-[var(--foreground)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+                        {rel.title}
+                      </h3>
+                      <p className="mt-2 line-clamp-2 text-[12.5px] leading-[1.68] text-[var(--muted-foreground)]">
+                        {rel.description}
+                      </p>
+                      <div className="mt-4 flex items-center gap-1.5 text-[11.5px] font-semibold text-[var(--accent)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                        Explore family
+                        <ArrowUpRightIcon className="h-3 w-3 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      </div>
+                    </div>
+                  </div>
+                </SmartLink>
+              ))}
+            </div>
+          </PageContainer>
+        ) : null}
+
+        {/* ══════════════════════════════════════
+            SUPPORT BANNER
+        ══════════════════════════════════════ */}
+        <PageContainer className="pt-20 sm:pt-24">
+          <div className="grid gap-8 overflow-hidden rounded-[1.5rem] border border-[color-mix(in_srgb,var(--accent)_35%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_6%,var(--background))] p-7 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16 lg:p-10">
+            <div>
+              <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+                Project Support
+              </p>
+              <h2 className="font-display text-[clamp(1.5rem,2.3vw,2.1rem)] font-medium leading-[1.06] tracking-[-0.04em] text-[var(--foreground)]">
+                {family.supportTitle}
+              </h2>
+              <p className="mt-3 max-w-[58ch] text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
+                {family.supportBody}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {family.highlights.slice(0, 3).map((h) => (
+                  <span
+                    key={h}
+                    className="rounded-full border border-[color-mix(in_srgb,var(--accent)_28%,transparent)] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] px-3.5 py-1.5 text-[11px] font-semibold text-[var(--accent)]"
+                  >
+                    {h}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="flex shrink-0 flex-col gap-3 lg:min-w-[15rem]">
+              <SmartLink href={family.primaryCta.href} className={buttonClassName()}>
+                {family.primaryCta.label}
+              </SmartLink>
+              <SmartLink href={family.secondaryCta.href} className={buttonClassName("secondary")}>
+                {family.secondaryCta.label}
+              </SmartLink>
+            </div>
+          </div>
+        </PageContainer>
+
       </main>
     </>
   );

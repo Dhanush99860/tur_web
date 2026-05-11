@@ -188,6 +188,16 @@ export type CatalogSectionFaq = {
   items: CatalogSectionFaqItem[];
 };
 
+export type CatalogFamilyApplication = {
+  title: string;
+  description: string;
+};
+
+export type CatalogFamilyFeaturePoint = {
+  title: string;
+  description: string;
+};
+
 export type CatalogFamily = {
   section: CatalogSectionSlug;
   slug: string;
@@ -203,6 +213,10 @@ export type CatalogFamily = {
   supportTitle: string;
   supportBody: string;
   familyHub?: CatalogFamilyHub;
+  applications?: CatalogFamilyApplication[];
+  featurePoints?: CatalogFamilyFeaturePoint[];
+  faq?: CatalogSectionFaqItem[];
+  relatedFamilySlugs?: string[];
   keywords: string[];
 };
 
@@ -242,6 +256,38 @@ export type CatalogCollection = {
   section: CatalogSectionSlug;
 };
 
+export type ProductSpec = {
+  label: string;
+  value: string;
+};
+
+export type ProductComparisonSpec = {
+  columns: string[];
+  rows: {
+    label: string;
+    values: string[];
+  }[];
+};
+
+export type ProductModelRow = {
+  modelNo: string;
+  inches?: string;
+  mm?: string;
+  note?: string;
+};
+
+export type ProductVariant = {
+  key: string;
+  label: string;
+  description?: string;
+  series?: string;
+  modelRows?: ProductModelRow[];
+  finishOptions?: string[];
+  howToOrder?: string;
+  orderCodeExample?: string;
+  options?: string[];
+};
+
 export type Product = {
   slug: string;
   title: string;
@@ -249,6 +295,16 @@ export type Product = {
   section: CatalogSectionSlug;
   familySlug: string;
   familyTitle: string;
+  /** Slug of the route group this product belongs to (e.g. "hang-the-door") */
+  routeGroupSlug?: string;
+  /** Display title of the route group (e.g. "Hang The Door") */
+  routeGroupTitle?: string;
+  /** True when this record IS a route group listing page, not a real product */
+  isRouteGroup?: boolean;
+  /** True when this is an option/accessory-only page, not a stand-alone product */
+  isOptionOnly?: boolean;
+  /** Set false to exclude from sitemap and product listings */
+  isIndexable?: boolean;
   category: string;
   description: string;
   shortDescription: string;
@@ -259,17 +315,48 @@ export type Product = {
   features: string[];
   applications: string[];
   finishOptions: string[];
+  /** Structured technical specification rows */
+  specs?: ProductSpec[];
+  /** Multi-column comparison table for products with 1-leaf/2-leaf or 2-leaf/4-leaf configurations */
+  comparisonSpecs?: ProductComparisonSpec;
+  /** Model number table rows */
+  modelRows?: ProductModelRow[];
+  /** "How to order" instructions string */
+  howToOrder?: string;
+  /** Example order code, e.g. "TA4460.DA.626" */
+  orderCodeExample?: string;
+  /** Single/Double Action or other variants merged into one page */
+  variants?: ProductVariant[];
+  /** URL path to a technical drawing or diagram image */
+  diagram?: string;
   resourceHref?: string;
+  sourceOldUrl?: string;
   badge?: string;
   inquirySubject: string;
   relatedSlugs: string[];
   updatedAt?: string;
 };
 
+export type CatalogRouteGroup = {
+  section: CatalogSectionSlug;
+  familySlug: string;
+  familyTitle: string;
+  slug: string;
+  title: string;
+  description: string;
+  shortDescription?: string;
+  image: string;
+  imageAlt: string;
+  eyebrow?: string;
+  keywords: string[];
+};
+
 export type HomeHeroSlide = {
   productSlug: string;
   label: string;
   title: string;
+  description?: string;
+  href?: string;
   image: string;
   imageAlt: string;
 };

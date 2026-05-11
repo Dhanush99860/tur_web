@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(json|js|ts|env|config|md\\)$\")",
+      "WebFetch(domain:www.tur.com.co)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const {products} = require\\('./src/content/catalog/products.ts'\\); console.log\\('total:', products.length\\)\")",
+      "Bash(node --loader ts-node/esm -e \"import\\('./src/content/catalog/products.ts'\\).then\\(m => console.log\\('total', m.products.length\\)\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(Get-Content \"C:\\\\Users\\\\dha\\\\.claude\\\\projects\\\\f--tur\\\\7fbcf1b0-417d-41ad-bc73-7f6c472b0f71.jsonl\")",
+      "Bash(Select-Object -Last 100)",
+      "PowerShell($lines = Get-Content \"C:\\\\Users\\\\dha\\\\.claude\\\\projects\\\\f--tur\\\\7fbcf1b0-417d-41ad-bc73-7f6c472b0f71.jsonl\" -Tail 50; $lines | ForEach-Object { $_ | ConvertFrom-Json | Select-Object -ExpandProperty content -ErrorAction SilentlyContinue } | Where-Object { $_ } | Select-Object -Last 20)",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\dha\\\\.claude\\\\projects\\\\f--tur\\\\7fbcf1b0-417d-41ad-bc73-7f6c472b0f71.jsonl\" -Raw; $content.Length)",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\dha\\\\.claude\\\\projects\\\\f--tur\\\\7fbcf1b0-417d-41ad-bc73-7f6c472b0f71.jsonl\" -Raw; $lastChunk = $content.Substring\\($content.Length - 8000\\); $lastChunk)",
+      "Bash(npx next *)",
+      "Bash(npm run *)",
+      "Bash(git checkout *)"
+    ]
+  }
+}

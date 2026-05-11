@@ -18,11 +18,20 @@ export const homeFeaturedProductSlugs = [
 
 export const homeCarouselProductSlugs = [
   "hang-the-door",
+  "control-the-door",
+  "secure-the-door",
+  "furnish-the-door",
   "cylinders",
   "glass-hinge-glass-clip",
+  "tg-pf103",
+  "pull-handle",
   "electromagnetic-locks",
   "door-bottom-seals",
   "tsw150-automatic-door-operator",
+  "sliding-doors",
+  "prismatic-sliding-door-cmw",
+  "ggg-all-glass-revolving-door",
+  "turnstile-systems",
 ] as const;
 
 export const homeSpotlightProductSlug = "furnish-the-door";
@@ -41,120 +50,120 @@ export const homeSpotlightImages = [
 
 export const homeResourceCards: ResourceCard[] = [
   {
-    title: "Company Profile",
+    title: "TUR Company Profile",
     category: "Downloads",
     description:
-      "Registrations, product verticals, technical services, partner brands and company background in one document.",
+      "Partner brands, product verticals, technical services, certifications and regional registrations — consolidated in one reference document for project teams and specifiers.",
     href: "/company_profile.pdf",
-    ctaLabel: "Open Company Profile",
-    image: "/tur/slider-2.webp",
-    imageAlt: "TUR company profile document cover",
+    ctaLabel: "Download Profile PDF",
+    image: "/tur/project-2.jpg",
+    imageAlt: "TUR architectural hardware — company profile reference",
   },
   {
-    title: "About TUR & Technical Services",
-    category: "Company",
+    title: "Platform, Heritage & Technical Services",
+    category: "About TUR",
     description:
-      "Heritage, regional experience, technical coordination and the wider platform behind TUR's project work.",
+      "30+ years of regional delivery. Hardware specification, scheduling, shop drawings, master keying and project-led technical coordination across commercial, hospitality and institutional work.",
     href: "/about",
-    ctaLabel: "Read About TUR",
-    image: "/tur/slider-2.webp",
-    imageAlt: "About TUR and technical services overview",
+    ctaLabel: "Explore the Platform",
+    image: "/tur/project-a.jpg",
+    imageAlt: "TUR heritage and regional delivery platform",
   },
   {
-    title: "Start Project Inquiry",
-    category: "Contact",
+    title: "Start a Project Conversation",
+    category: "Inquire",
     description:
-      "Reach TUR for product selection, catalog requests, technical clarification and project-specific support.",
+      "Reach TUR for hardware selection, family routing, catalog access, technical clarification and project-specific support from the first conversation through to delivery.",
     href: "/contact",
     ctaLabel: "Contact TUR",
-    image: "/tur/slider-2.webp",
-    imageAlt: "Project inquiry and technical coordination route",
+    image: "/tur/project-c.jpg",
+    imageAlt: "Project inquiry and technical coordination with TUR",
   },
 ];
 
 export const homeStoryCards: StoryCard[] = [
   {
     eyebrow: "Heritage",
-    title: "Since 1670 heritage through James Gibbons Format",
+    title: "Since 1670, through James Gibbons Format.",
     description:
-      "A long-standing heritage narrative anchored through James Gibbons Format and carried into TUR's architectural hardware platform.",
-    image: "/tur/slider-2.webp",
-    imageAlt: "Heritage and legacy visual",
+      "TUR's hardware platform is rooted in the James Gibbons Format legacy — one of the oldest established names in architectural hardware, founded in 1670. This heritage informs every product family, specification route and brand partnership carried into TUR's offer.",
+    image: "/tur/format-lockset.jpg",
+    imageAlt: "Format UK branded lockset — architectural hardware heritage since 1670",
   },
   {
     eyebrow: "Regional Experience",
-    title: "30+ years of project experience across the Middle East and South Asia",
+    title: "30+ years of project delivery across the region.",
     description:
-      "Regional delivery experience across specification, supply and coordination for commercial, hospitality, healthcare and institutional work.",
+      "Three decades of hardware specification, supply and coordination across commercial, hospitality, healthcare and institutional projects throughout the Middle East and South Asia — from first inquiry to final commissioning.",
     image: "/tur/project-a.jpg",
-    imageAlt: "Regional experience visual",
+    imageAlt: "Regional project delivery — architectural hardware specification across the Middle East",
   },
   {
     eyebrow: "Technical Services",
-    title: "Scheduling, shop drawings, master keying and installation support",
+    title: "From scheduling to master keying and installation.",
     description:
-      "Technical services include estimation, scheduling, shop drawings, master keying, installation support and troubleshooting.",
+      "TUR's technical services extend across the full project cycle — estimation, scheduling, shop drawings, master keying, installation support and on-site troubleshooting — so that the hardware package is coordinated from specification through to handover.",
     image: "/tur/mc-2.jpg",
-    imageAlt: "Project collaboration visual",
+    imageAlt: "Technical hardware coordination and project services — TUR",
   },
   {
     eyebrow: "Global Presence",
-    title: "A broader platform across Europe, the Middle East and South Asia",
+    title: "A broader platform across three regions.",
     description:
-      "Registrations, partner relationships and regional presence reinforce a broader platform for project delivery and technical support.",
+      "Registrations, manufacturing partnerships and project experience across Europe, the Middle East and South Asia give TUR a reach that extends well beyond a single market — supporting international specifications, procurement and coordinated project delivery.",
     image: "/tur/project-c.jpg",
-    imageAlt: "Global presence visual",
+    imageAlt: "Global presence — TUR platform across Europe, Middle East and South Asia",
   },
 ];
 
 export const homeCollectionTabs: CollectionTab[] = [
   {
+    label: "Door Hardware",
+    href: "/door-hardware",
+    description:
+      "The full route into architectural hardware — hanging, controlling, securing, furnishing, glass systems and sealing in one organised section.",
+    image: "/tur/format-lockset.jpg",
+    imageAlt: "Format UK architectural lockset — TUR Door Hardware section",
+  },
+  {
     label: "Automatic Operators",
     href: "/automatic-operators",
     description:
-      "Sliding, swing and controlled entrance systems for coordinated circulation.",
-    image: "/tur/slider-3.webp",
-    imageAlt: "Automatic operators category visual",
+      "Sliding, swing, revolving and controlled entrance systems for commercial, healthcare, hospitality and high-traffic project environments.",
+    image: "/tur/sliding-b.jpg",
+    imageAlt: "Automatic sliding entrance system — TUR Automatic Operators",
   },
   {
     label: "Access Control",
     href: "/door-hardware/access-control",
     description:
-      "Locking, release and E-ACCESS hardware for secure, managed openings.",
-    image: "/tur/slider-5.webp",
-    imageAlt: "Access control category visual",
+      "Electromagnetic locks, electric strikes and E-ACCESS systems for coordinated secure entry — integrated with the broader hardware package.",
+    image: "/tur/cat-access-control.jpg",
+    imageAlt: "G·U access control — secure entry systems and turnstiles",
   },
   {
     label: "Glass Hardware",
     href: "/door-hardware/glass-hardware",
     description:
-      "Frameless fittings, patch hardware and pull handles for architectural glass.",
-    image: "/tur/project-3.jpg",
-    imageAlt: "Glass hardware category visual",
-  },
-  {
-    label: "Sealing Systems",
-    href: "/door-hardware/sealing-systems",
-    description:
-      "Threshold, perimeter and weather solutions for opening performance.",
-    image: "/tur/sliding-a.jpg",
-    imageAlt: "Sealing systems category visual",
+      "Frameless glass fittings, patch hardware, hinges and pull handles for all-glass architectural openings and storefront conditions.",
+    image: "/tur/cat-glass-hardware.jpg",
+    imageAlt: "Glass hinges and clip hardware for frameless architectural applications",
   },
   {
     label: "European Ironmongery",
     href: "/door-hardware/european-ironmongery",
     description:
-      "Premium ironmongery families for finish-led architectural projects.",
-    image: "/tur/mc-1.jpg",
-    imageAlt: "European ironmongery category visual",
+      "Premium lever handles, cylinders and coordinated ironmongery packages for finish-led specification and architectural door sets.",
+    image: "/tur/mc-2.jpg",
+    imageAlt: "European ironmongery — premium lever handles and door furnishing",
   },
   {
-    label: "American Standard",
-    href: "/door-hardware/american-standard",
+    label: "Sealing Systems",
+    href: "/door-hardware/sealing-systems",
     description:
-      "Foundational families for hanging, controlling and securing the door.",
-    image: "/tur/project-1.jpg",
-    imageAlt: "American Standard category visual",
+      "Threshold, bottom and perimeter seals for entrance performance, acoustic control and architectural detailing across the full door set.",
+    image: "/tur/cat-sealing-systems.jpg",
+    imageAlt: "Door bottom seal and threshold system for architectural openings",
   },
 ];
 
