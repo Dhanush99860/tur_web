@@ -208,13 +208,13 @@ const legacyDoorHardwareProductIdMap: Record<string, string> = {
   "107": "/products/d-shape-pull-handle",
   "106": "/products/45-h-shape-pull-handle",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Hang The Door products â”€â”€
+  // Door Hardware / European Ironmongery - Hang The Door products
   "141": "/products/te4100-series",
   "131": "/products/rising-hinges",
   "130": "/products/3d-adjustable-concealed-hinges-european",
   "129": "/products/heavy-duty-double-action-spring-hinge",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Control The Door products â”€â”€
+  // Door Hardware / European Ironmongery - Control The Door products
   "263": "/products/door-closer-rack-pinion-standard-arm-project-series",
   "262": "/products/door-closer-rack-pinion-standard-arm-european",
   "260": "/products/door-closer-rack-pinion-track-arm-european",
@@ -235,7 +235,7 @@ const legacyDoorHardwareProductIdMap: Record<string, string> = {
   "134": "/products/floor-spring-te7830",
   "133": "/products/floor-spring-te7850",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Secure The Door products â”€â”€
+  // Door Hardware / European Ironmongery - Secure The Door products
   "267": "/products/te1400-series-mortise-sash-lock-premium",
   "266": "/products/te1400-series-privacy-lock",
   "264": "/products/te1400-series-latch-lock",
@@ -256,11 +256,11 @@ const legacyDoorHardwareProductIdMap: Record<string, string> = {
   "147": "/products/narrow-stile-sash-lock",
   "146": "/products/narrow-stile-deadbolt-lock",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Cylinders products â”€â”€
+  // Door Hardware / European Ironmongery - Cylinders products
   "168": "/products/te3600-series",
   "167": "/products/te3700-series",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Furnish The Door products â”€â”€
+  // Door Hardware / European Ironmongery - Furnish The Door products
   "193": "/products/pull-plates-european",
   "192": "/products/h-shape-pull-handle-european",
   "191": "/products/45-h-shape-pull-handle-european",
@@ -269,13 +269,13 @@ const legacyDoorHardwareProductIdMap: Record<string, string> = {
   "188": "/products/d-shape-pull-handle-european",
   "187": "/products/special-handles",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Bolt The Door products â”€â”€
+  // Door Hardware / European Ironmongery - Bolt The Door products
   "197": "/products/lever-action-flush-bolt-european",
   "196": "/products/lever-action-flush-bolt-european-variant",
   "195": "/products/automatic-flush-bolt-for-wood-doors-european",
   "194": "/products/dust-proof-strike-european",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Ancillary Products â”€â”€
+  // Door Hardware / European Ironmongery - Ancillary Products
   "215": "/products/door-stop-european",
   "214": "/products/thumb-turn-indicator",
   "213": "/products/door-guard",
@@ -294,7 +294,7 @@ const legacyDoorHardwareProductIdMap: Record<string, string> = {
   "200": "/products/sign-plates",
   "199": "/products/special-sign-plates",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Emergency Exits â”€â”€
+  // Door Hardware / European Ironmongery - Emergency Exits
   "230": "/products/te9800-series-premium",
   "229": "/products/narrow-stile-surface-vertical-rod-exit-device-european",
   "228": "/products/narrow-stile-concealed-vertical-rod-exit-device-european",
@@ -311,7 +311,7 @@ const legacyDoorHardwareProductIdMap: Record<string, string> = {
   "217": "/products/escutcheon-lever-trim-european-4",
   "216": "/products/escutcheon-thumbpiece-trim-european",
 
-  // â”€â”€ Door Hardware / European Ironmongery â€” Furnish The Door Lever Handle products â”€â”€
+  // Door Hardware / European Ironmongery - Furnish The Door Lever Handle products
   "186": "/products/lever-handle-te1910-968",
   "185": "/products/lever-handle-te1910-967",
   "184": "/products/lever-handle-te1910-966",
@@ -330,6 +330,163 @@ const legacyDoorHardwareProductIdMap: Record<string, string> = {
   "171": "/products/knob-handle-te1920-910",
   "170": "/products/knob-handle-te1920-914",
   "169": "/products/knob-handle-te1920-912",
+
+  // Door Hardware / Glass Hardware - Glass Hinge & Glass Clip products
+  "348": "/products/tg-gh101",
+  "347": "/products/tg-gh102",
+  "346": "/products/tg-gh103",
+  "345": "/products/tg-gh104",
+  "344": "/products/tg-gh105",
+  "343": "/products/tg-gh106",
+  "342": "/products/tg-gh201",
+  "341": "/products/tg-gh202",
+  "340": "/products/tg-gh203",
+  "339": "/products/tg-gh204",
+  "338": "/products/tg-gh205",
+  "337": "/products/tg-gh206",
+  "336": "/products/tg-gh301",
+  "335": "/products/tg-gh302",
+  "334": "/products/tg-gh303",
+  "333": "/products/tg-gh304",
+  "331": "/products/tg-gh306",
+
+  // Door Hardware / Glass Hardware - Bathroom Handle & Glass Knob products
+  "385": "/products/tg-pf103",
+  "370": "/products/tg-bh101",
+  "369": "/products/tg-bh102",
+  "368": "/products/tg-bh105",
+  "363": "/products/tg-bh106",
+  "362": "/products/tg-gk102-tg-gk102-h",
+  "361": "/products/tg-gk103-tg-gk103-h",
+  "360": "/products/tg-gk106-tg-gk106-h",
+  "359": "/products/tg-gk107-tg-gk107-h",
+
+  // Door Hardware / Glass Hardware - Patch Fitting products
+  "387": "/products/tg-pf101",
+  "386": "/products/tg-pf102",
+  "384": "/products/tg-pf103a",
+  "383": "/products/tg-pf104",
+  "382": "/products/tg-pf105s",
+  "381": "/products/tg-pf301",
+  "380": "/products/tg-pf302",
+  "378": "/products/tg-pf303a",
+  "377": "/products/tg-pf304",
+  "375": "/products/tg-pf308",
+  "374": "/products/tg-pf30k",
+  "373": "/products/tg-fs201",
+  "372": "/products/tg-pf103",
+  "371": "/products/tg-pf303",
+
+  // Door Hardware / Glass Hardware - Pull Handle products
+  "397": "/products/tg-ph001",
+  "396": "/products/tg-ph002",
+  "395": "/products/tg-ph003",
+  "394": "/products/tg-ph006",
+  "393": "/products/tg-ph007",
+  "392": "/products/tg-ph009",
+  "391": "/products/tg-ph019",
+  "390": "/products/tg-ph020",
+  "389": "/products/tg-ph023",
+  "388": "/products/tg-ph024",
+
+  // Door Hardware / Glass Hardware - Lipseal products
+  "405": "/products/tg-ls101",
+  "404": "/products/tg-ls102",
+  "403": "/products/tg-ls103",
+  "402": "/products/tg-ls104",
+  "401": "/products/tg-ls105",
+  "400": "/products/tg-ls106",
+  "399": "/products/tg-ls107",
+  "398": "/products/tg-ls108",
+  // ── Access Control products ──
+  "408": "/products/tu-300",
+  "407": "/products/tu-600-electromagnetic-lock",
+  "406": "/products/tu-800",
+  "241": "/products/tu-1200",
+  "240": "/products/tu-d600",
+  "239": "/products/tu-d800",
+  "238": "/products/tu-d1200",
+  "430": "/products/tu-1296",
+  "242": "/products/tu-1297",
+  "410": "/products/tu-600-armature-mounting-accessory",
+  "409": "/products/tu-810-armature-mounting-accessory",
+  "412": "/products/tu-l800",
+  "411": "/products/tu-pbh-350",
+  "415": "/products/easiprox",
+  "414": "/products/easiprox-slim",
+  "413": "/products/e1196",
+  "416": "/products/tu-dg-750",
+  "418": "/products/tu-rts-600",
+  "417": "/products/tu-rts-500",
+  "421": "/products/tu-d900f",
+  "420": "/products/tu-d900w",
+  "419": "/products/tu-d990",
+  "426": "/products/tu-dl-400",
+  "425": "/products/tu-dl-417st",
+  "424": "/products/tu-2071",
+  "423": "/products/tu-2071-ar",
+  "422": "/products/tu-2031",
+  // ── Sealing Systems products ──
+  "273": "/products/door-bottom-seals-ts8si",
+  "272": "/products/door-bottom-seals-ts70",
+  "271": "/products/door-bottom-seals-ts5a",
+  "270": "/products/door-bottom-seals-ts17b",
+  "268": "/products/door-bottom-seals-ts99si",
+  "276": "/products/threshold-plate-seals-ts115",
+  "275": "/products/threshold-plate-seals-ts117si",
+  "274": "/products/threshold-plate-seals-ts111si",
+  "301": "/products/threshold-plates-ts19",
+  "281": "/products/threshold-plates-ts18",
+  "279": "/products/threshold-plates-ts27",
+  "278": "/products/threshold-plates-ts28",
+  "277": "/products/threshold-plates-ts77",
+  "282": "/products/intumescent-seals-ts114",
+  "289": "/products/door-frame-or-perimeter-seals-ts120",
+  "288": "/products/door-frame-or-perimeter-seals-ts69",
+  "287": "/products/door-frame-or-perimeter-seals-ts73",
+  "286": "/products/door-frame-or-perimeter-seals-ts124",
+  "285": "/products/door-frame-or-perimeter-seals-ts56",
+  "283": "/products/door-frame-or-perimeter-seals-ts78si",
+  "290": "/products/astragals-ts16si",
+  "291": "/products/magnetic-astragals-ts65",
+  "292": "/products/self-adhesive-seals-ts48b",
+  "296": "/products/brush-strip-seals-ts2a",
+  "295": "/products/brush-strip-seals-ts2b",
+  "294": "/products/brush-strip-seals-ts41",
+  "293": "/products/brush-strip-seals-ts74",
+  "299": "/products/complementary-products-ts62",
+  "298": "/products/complementary-products-ts62bw",
+  "300": "/products/weather-stripping-ts600-series",
+};
+
+const legacyDoorHardwareListingIdMap: Record<string, string> = {
+  "30": "/door-hardware/glass-hardware/glass-hinge-glass-clip",
+  "50": "/door-hardware/glass-hardware/bathroom-handle-glass-knob",
+  "51": "/door-hardware/glass-hardware/patch-fitting",
+  "52": "/door-hardware/glass-hardware/pull-handle",
+  "53": "/door-hardware/glass-hardware/lipseal",
+  // ── Access Control route group listings ──
+  "31": "/door-hardware/access-control/electromagnetic-locks",
+  "32": "/door-hardware/access-control/electric-strikes",
+  "63": "/door-hardware/access-control/armature-mounting-accessories",
+  "64": "/door-hardware/access-control/electromechanical-locking-devices",
+  "65": "/door-hardware/access-control/e-access",
+  "66": "/door-hardware/access-control/digital-keypad-system",
+  "67": "/door-hardware/access-control/infrared-wireless-exit-devices",
+  "68": "/door-hardware/access-control/electromagnetic-door-holders",
+  "69": "/door-hardware/access-control/access-control-accessories",
+  // ── Sealing Systems route group listings ──
+  "38": "/door-hardware/sealing-systems/door-bottom-seals",
+  "39": "/door-hardware/sealing-systems/threshold-plate-seals",
+  "40": "/door-hardware/sealing-systems/threshold-plates",
+  "41": "/door-hardware/sealing-systems/intumescent-seals",
+  "42": "/door-hardware/sealing-systems/door-frame-or-perimeter-seals",
+  "43": "/door-hardware/sealing-systems/astragals",
+  "44": "/door-hardware/sealing-systems/magnetic-astragals",
+  "45": "/door-hardware/sealing-systems/self-adhesive-seals",
+  "46": "/door-hardware/sealing-systems/brush-strip-seals",
+  "47": "/door-hardware/sealing-systems/complementary-products",
+  "48": "/door-hardware/sealing-systems/weather-stripping",
 };
 
 const legacyAutomaticOperatorProductIdMap: Record<string, string> = {
@@ -386,6 +543,14 @@ export function resolveLegacyProductRedirect(
   }
 
   const legacyId = searchParams.get("id");
+  if (
+    legacyId &&
+    normalizedPathname === "/door_hardware/sub/products" &&
+    legacyDoorHardwareListingIdMap[legacyId]
+  ) {
+    return legacyDoorHardwareListingIdMap[legacyId];
+  }
+
   const scopedProductIdMap = normalizedPathname.startsWith("/automatic_operators")
     ? legacyAutomaticOperatorProductIdMap
     : legacyDoorHardwareProductIdMap;

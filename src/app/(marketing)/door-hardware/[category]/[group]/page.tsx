@@ -53,7 +53,7 @@ export default async function DoorHardwareRouteGroupPage({ params }: RouteGroupP
     (p) =>
       p.section === "door-hardware" &&
       p.familySlug === category &&
-      p.routeGroupSlug === groupSlug &&
+      (p.routeGroupSlug === groupSlug || p.additionalRouteGroupSlugs?.includes(groupSlug)) &&
       !p.isRouteGroup,
   );
 

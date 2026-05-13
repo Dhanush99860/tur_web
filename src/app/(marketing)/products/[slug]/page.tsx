@@ -24,6 +24,16 @@ const routeGroupAliasRedirects: Record<string, string> = {
   "euro-secure-the-door": "/door-hardware/european-ironmongery/secure-the-door",
   "euro-ancillary-products": "/door-hardware/european-ironmongery/ancillary-products",
   "euro-emergency-exits": "/door-hardware/european-ironmongery/emergency-exits",
+  "bolt-the-door": "/door-hardware/european-ironmongery/bolt-the-door",
+  "furnish-the-door": "/door-hardware/european-ironmongery/furnish-the-door",
+  "cylinders": "/door-hardware/european-ironmongery/cylinders",
+  "furnish-the-door-lever-handle":
+    "/door-hardware/european-ironmongery/furnish-the-door-lever-handle",
+  "glass-hinge-glass-clip": "/door-hardware/glass-hardware/glass-hinge-glass-clip",
+  "bathroom-handle-glass-knob": "/door-hardware/glass-hardware/bathroom-handle-glass-knob",
+  "patch-fitting": "/door-hardware/glass-hardware/patch-fitting",
+  "pull-handle": "/door-hardware/glass-hardware/pull-handle",
+  "lipseal": "/door-hardware/glass-hardware/lipseal",
 };
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {

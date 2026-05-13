@@ -299,6 +299,8 @@ export type Product = {
   routeGroupSlug?: string;
   /** Display title of the route group (e.g. "Hang The Door") */
   routeGroupTitle?: string;
+  /** Additional route group slugs this product also appears under (canonical route remains primary) */
+  additionalRouteGroupSlugs?: string[];
   /** True when this record IS a route group listing page, not a real product */
   isRouteGroup?: boolean;
   /** True when this is an option/accessory-only page, not a stand-alone product */

@@ -14,7 +14,10 @@
       "PowerShell($content = Get-Content \"C:\\\\Users\\\\dha\\\\.claude\\\\projects\\\\f--tur\\\\7fbcf1b0-417d-41ad-bc73-7f6c472b0f71.jsonl\" -Raw; $lastChunk = $content.Substring\\($content.Length - 8000\\); $lastChunk)",
       "Bash(npx next *)",
       "Bash(npm run *)",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(Get-Content -Path \"f:\\\\tur\\\\src\\\\content\\\\catalog\\\\route-groups.ts\")",
+      "Bash(Measure-Object -Line)",
+      "WebFetch(domain:www.turgroup.com)"
     ]
   }
 }
