@@ -20,6 +20,10 @@ type AmericanStandardProductInput = Omit<
 > & {
   imageFilename: string;
   galleryFilenames?: string[];
+  /** Override image path instead of deriving it from imageFilename */
+  imagePath?: string;
+  /** Override gallery paths instead of deriving them from imageFilename/galleryFilenames */
+  galleryPaths?: string[];
 };
 
 function oldProductImage(filename: string) {
@@ -29,18 +33,22 @@ function oldProductImage(filename: string) {
 function defineAmericanStandardProduct({
   imageFilename,
   galleryFilenames = [],
+  imagePath,
+  galleryPaths,
   ...input
 }: AmericanStandardProductInput): Product {
+  const resolvedImage = imagePath ?? oldProductImage(imageFilename);
+  const resolvedGallery = galleryPaths ?? gallery(
+    imagePath ?? oldProductImage(imageFilename),
+    ...galleryFilenames.map((filename) => oldProductImage(filename)),
+  );
   return defineProduct({
     section: "door-hardware",
     familySlug: "american-standard",
     familyTitle: "American Standard",
     category: "American Standard",
-    image: oldProductImage(imageFilename),
-    gallery: gallery(
-      oldProductImage(imageFilename),
-      ...galleryFilenames.map((filename) => oldProductImage(filename)),
-    ),
+    image: resolvedImage,
+    gallery: resolvedGallery,
     ...input,
   });
 }
@@ -121,6 +129,10 @@ type EuropeanIronmongeryProductInput = Pick<
 
 function oldDoorHardwareProductUrl(id: number) {
   return `https://www.tur.com.co/door_hardware/sub/pro?id=${id}`;
+}
+
+function secureDoorImage(filename: string) {
+  return `/tur/american-standard/secure-the-door/${filename}`;
 }
 
 function defineEuropeanIronmongeryProduct({
@@ -1635,7 +1647,7 @@ export const products: Product[] = [
     description:
       "ANSI-grade standard weight spring hinges for single-action and double-action door applications. Available in radius-corner and square-corner configurations.",
     shortDescription:
-      "ANSI spring hinges for single and double action — standard weight.",
+      "Single Action (TA4410, TA4420) and Double Action (TA4460) — both variants on one product page.",
     overview:
       "The TA4400 series spring hinge brings controlled self-closing to door sets without a surface-mounted closer. Available in single-action (SA) and double-action (DA) configurations, the TA4460 model covers 6\" leaf width in US26D/626 and US32D/630 finishes. The Radius Corner (RC) option adapts the hinge for radius-prepared mortises.",
     image: oldProductImage("default-90099920210428.jpg"),
@@ -1645,9 +1657,8 @@ export const products: Product[] = [
       oldProductImage("default-324668989210429.jpg"),
     ),
     features: [
-      "Double action (DA) for bi-directional swing — ideal for kitchen and traffic doors.",
-      "Single action (SA) for standard single-direction self-closing applications.",
-      "6\" leaf height suits most commercial door sets in the American Standard range.",
+      "Single Action (SA): TA4410 (4½\" × 4\") and TA4420 (4½\" × 4½\") — standard one-way self-closing.",
+      "Double Action (DA): TA4460 (6\") — bi-directional swing for kitchen and service routes.",
       "US26D/626 (Satin Chrome) and US32D/630 (Satin Stainless) finish options.",
       "RC – Radius Corner option available for radius-prepared mortises.",
     ],
@@ -1687,6 +1698,22 @@ export const products: Product[] = [
         options: ["RC – Radius Corner"],
       },
     ],
+    technicalDrawings: [
+      {
+        title: "Single Action Drawing",
+        variant: "TA4410 / TA4420",
+        image: "/tur/drawings/spring-hinge-sa.png",
+        alt: "Single action spring hinge dimensional drawing for TA4410 and TA4420 with height, width and thickness dimensions",
+        caption: "Single Action configuration — TA4410 / TA4420",
+      },
+      {
+        title: "Double Action Drawing",
+        variant: "TA4460",
+        image: "/tur/drawings/spring-hinge-da.png",
+        alt: "Double action spring hinge dimensional drawing for TA4460 with hinge height, barrel diameter and door preparation section",
+        caption: "Double Action configuration — TA4460",
+      },
+    ],
     badge: "ANSI",
     inquirySubject: "Spring Hinge Standard Weight Inquiry",
     relatedSlugs: [
@@ -1713,12 +1740,16 @@ export const products: Product[] = [
     image: oldProductImage("default-2108036263210429.jpg"),
     imageAlt: "ANSI full mortise standard weight butt hinge — commercial door hardware",
     gallery: gallery(oldProductImage("default-2108036263210429.jpg")),
+    specs: [
+      { label: "Series", value: "TA4000 Standard Duty" },
+      { label: "Type", value: "Standard Weight, 5 Knuckle, 2 ball bearing hinges, Steel" },
+    ],
     features: [
       "Full mortise profile — recessed into both leaf and frame for a flush finish.",
       "Standard weight suits the majority of commercial and institutional openings.",
       "ANSI/BHMA grade — coordinated with American Standard lock and closer schedules.",
       "Available in square corner (standard) and radius corner (RC) options.",
-      "Broad range of sizes from 3½\" to 5\" for different door weights and heights.",
+      "Broad range of sizes from 4½\" to 5\" for different door weights and heights.",
     ],
     applications: [
       "Commercial office door sets",
@@ -1726,7 +1757,7 @@ export const products: Product[] = [
       "Education and institutional buildings",
       "Hotel guestroom and back-of-house doors",
     ],
-    finishOptions: ["US26D / 626", "US32D / 630", "US3 / 605", "US10B / 613"],
+    finishOptions: ["US26D / 626", "US32D / 630", "US3 / 605", "US4 / 606", "US10 / 629", "US15A / 625"],
     modelRows: [
       { modelNo: "TA4010", inches: '4-1/2" x 4"', mm: "114 x 102", note: "thickness 0.134 / 3.4 mm" },
       { modelNo: "TA4020", inches: '4-1/2" x 4-1/2"', mm: "114 x 114", note: "thickness 0.134 / 3.4 mm" },
@@ -1734,7 +1765,56 @@ export const products: Product[] = [
       { modelNo: "TA4072", inches: '5" x 4-1/2"', mm: "127 x 114", note: "thickness 0.146 / 3.7 mm" },
       { modelNo: "TA4074", inches: '5" x 5"', mm: "127 x 127", note: "thickness 0.146 / 3.7 mm" },
     ],
-    howToOrder: "Brand Identity · Model No · Ball Bearing · Tip type · Pin type · Finish",
+    technicalDrawings: [
+      {
+        title: "Technical Drawing",
+        image: "/tur/drawings/full-mortise-sw-drawing.png",
+        alt: "TA4000 Standard Duty full mortise hinge technical drawing showing hinge dimensions and screw layout",
+        caption: "TA4000 Standard Duty full mortise hinge dimensional drawing.",
+      },
+    ],
+    availableOptions: [
+      "NRP — Non-Removable Pin",
+      "ETW — Electric Through Wire",
+      "PIC — Plug-In Connector",
+      "RC — Radius Corner",
+      "Stamp for fire",
+      "SS316 grade available upon request",
+    ],
+    howToOrderTable: {
+      columns: [
+        {
+          label: "Brand Identity",
+          values: ["TA"],
+        },
+        {
+          label: "Model No.",
+          values: ["4010", "4020", "4070", "4072", "4074"],
+        },
+        {
+          label: "Ball Bearing",
+          values: ["2BB"],
+        },
+        {
+          label: "Tip Type",
+          values: ["Flat Tip", "BT – Button Tip", "HT – Hospital Tip"],
+        },
+        {
+          label: "Pin Type",
+          values: [
+            "Removable Pin",
+            "NRP – Non-Removable Pin",
+            "ET – Electric Through Wire",
+            "PIC – Plug-In Connector",
+            "RC – Radius Corner",
+          ],
+        },
+        {
+          label: "Finish",
+          values: ["630", "629", "626", "625", "606", "605"],
+        },
+      ],
+    },
     orderCodeExample: "TA4010.2BB.NRP.630",
     badge: "ANSI",
     inquirySubject: "Full Mortise Hinges Standard Weight Inquiry",
@@ -1758,16 +1838,24 @@ export const products: Product[] = [
     shortDescription:
       "Full-length continuous hinges for high-traffic, heavy-use door openings.",
     overview:
-      "Continuous hinges run the full height of the door, distributing load evenly and delivering exceptional durability where butt hinges would wear prematurely. Suited to high-traffic commercial doors, fire-rated assemblies and exterior applications. Available in standard and heavy-duty profiles to match door weight and project requirements.",
+      "The TA4500 series continuous hinge runs the full height of the door — distributing load evenly and eliminating the point stress that causes standard butt hinges to wear prematurely. Full mortise pin and barrel design for doors up to 600 lbs. Non-handed, with a 1/8\" inset and 48\" maximum door width. Accepts bevel or square edge doors. Available in aluminum, cold rolled steel and Type 304 stainless steel with fire ratings up to 3 hours.",
     image: oldProductImage("default-818184344210428.jpg"),
     imageAlt: "Full-length continuous hinge — high-traffic door application",
     gallery: gallery(oldProductImage("default-818184344210428.jpg")),
+    specs: [
+      { label: "Type", value: "Full Mortise Pin & Barrel Continuous Hinge" },
+      { label: "Max Door Weight", value: "600 lbs" },
+      { label: "Inset", value: '1/8"' },
+      { label: "Max Door Width", value: '48"' },
+      { label: "Door Edge", value: "Bevel or square edge" },
+      { label: "Handed", value: "Non-handed" },
+    ],
     features: [
       "Full door height coverage — continuous load distribution eliminates point stress.",
-      "Heavy duty option for exterior, fire-rated and high-abuse applications.",
-      "Available in standard and heavy profiles for varied door weights.",
-      "Clean architectural appearance when correctly surface-fitted.",
-      "Suitable for aluminum, steel and wood-core door assemblies.",
+      "Fire-rated configurations (941 Steel, 951 SS304) achieve up to 3 hours.",
+      "Non-handed — fits any door without ordering left- or right-hand variants.",
+      "Aluminum, cold rolled steel and Type 304 stainless steel material options.",
+      "Suitable for bevel or square edge door profiles.",
     ],
     applications: [
       "High-traffic commercial entrances",
@@ -1775,14 +1863,59 @@ export const products: Product[] = [
       "Fire-rated and smoke-control assemblies",
       "School and institutional doors with high usage",
     ],
-    finishOptions: ["US26D / 626", "US32D / 630", "US3 / 605"],
+    finishOptions: ["US28 / 628 (Aluminum)", "USP / 600 (Steel)", "US32D / 630 (SS304)"],
     modelRows: [
       { modelNo: "TA4510", note: "6'8\" door height" },
       { modelNo: "TA4520", note: "7'2\" door height" },
       { modelNo: "TA4530", note: "8' door height" },
       { modelNo: "TA4540", note: "10' door height" },
     ],
-    howToOrder: "Brand Identity · Model No · Type · Material · Finish",
+    technicalDrawings: [
+      {
+        title: "Technical Drawing",
+        image: "/tur/drawings/continuous-hinges-drawing.png",
+        alt: "TA4500 continuous hinge technical drawing showing full mortise pin and barrel hinge installation on a non-beveled door",
+        caption: "TA4500 continuous hinge engineering drawing — shown on non-beveled door.",
+      },
+    ],
+    comparisonSpecs: {
+      title: "Material & Fire Rating",
+      columns: ["Fire Rating", "Finish"],
+      rows: [
+        { label: "931 – Aluminum", values: ["Non Rated", "US28"] },
+        { label: "941 – Cold Rolled Steel", values: ["Up to 3 hours", "USP"] },
+        { label: "951 – 14 Gauge SS304", values: ["Up to 3 hours", "US32D"] },
+      ],
+    },
+    availableOptions: ["US26D", "RC"],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No.", values: ["4510", "4520", "4530", "4540"] },
+        {
+          label: "Type",
+          values: [
+            "FM – Full Mortise",
+            "FW – Full Wrap",
+            "FWE – Full Wrap Edge Guard",
+            "HWE – Half Wrap Edge",
+            "HM – Half Mortise",
+            "HMG – Half Mortise With Guard Pin",
+            "SC – Swing Clear",
+            "SM – Surface Mount",
+          ],
+        },
+        {
+          label: "Material",
+          values: [
+            "931 – Aluminum",
+            "941 – Cold Rolled Steel",
+            "951 – 14 Gauge SS304",
+          ],
+        },
+        { label: "Finish", values: ["628", "600", "630"] },
+      ],
+    },
     orderCodeExample: "TA4510.FM.931.628",
     badge: "ANSI",
     inquirySubject: "Continuous Hinges Inquiry",
@@ -1802,18 +1935,22 @@ export const products: Product[] = [
     routeGroupTitle: "Hang The Door",
     category: "American Standard",
     description:
-      "Full mortise concealed bearing hinges for heavy doors, high-frequency openings and applications where smooth, quiet, long-life operation is required.",
+      "Concealed bearing hinges for smooth, quiet, long-life operation in commercial and institutional door sets.",
     shortDescription:
-      "Concealed ball-bearing hinges for heavy, high-frequency and quiet-close door sets.",
+      "ANSI concealed bearing hinges — smooth, quiet operation for commercial door sets.",
     overview:
-      "Concealed bearing hinges incorporate recessed ball bearings between the knuckles, eliminating metal-on-metal contact and delivering quiet, smooth operation over extended service life. Suited to heavier commercial doors, hotel entrances and institutional applications with high cycle counts.",
+      "The TA4300 series concealed bearing hinge incorporates ball bearings between the knuckles, eliminating metal-on-metal contact for smooth and quiet operation. Standard weight, 3-knuckle, stainless steel construction. Available in a range of sizes with 2BB and 4BB configurations.",
     image: oldProductImage("default-290636525201018.jpg"),
-    imageAlt: "Full mortise concealed bearing hinge — heavy duty door hardware",
+    imageAlt: "TA4300 concealed bearing hinge — American Standard door hardware",
     gallery: gallery(oldProductImage("default-290636525201018.jpg")),
+    specs: [
+      { label: "Series", value: "TA4300" },
+      { label: "Type", value: "Standard Weight, Concealed Bearing, 3 Knuckle Hinges, Stainless Steel" },
+    ],
     features: [
       "Concealed ball-bearing knuckles for quiet, smooth, long-life operation.",
       "Full mortise profile — flush-set for a clean architectural finish.",
-      "Suited to heavier doors up to 200 lb / 90 kg per pair.",
+      "2BB and 4BB ball bearing configurations available.",
       "Reduced maintenance requirements compared to standard butt hinges.",
       "Coordinates with American Standard lock, closer and trim schedules.",
     ],
@@ -1823,15 +1960,51 @@ export const products: Product[] = [
       "Institutional public-facing doors with high usage",
       "Exterior doors in commercial buildings",
     ],
-    finishOptions: ["US26D / 626", "US32D / 630", "US3 / 605", "US10B / 613"],
+    finishOptions: ["US15A / 625", "US26D / 626", "US10B / 613"],
     modelRows: [
       { modelNo: "TA4310", inches: '4-1/2" x 4"', mm: "114 x 102", note: "thickness 0.134 / 3.4 mm" },
       { modelNo: "TA4320", inches: '4-1/2" x 4-1/2"', mm: "114 x 114", note: "thickness 0.134 / 3.4 mm" },
+      // TODO: Old TUR page shows TA4330 metric size as 102 × 102 mm; conflicts with 5" × 4" inch size — verify before final catalogue sign-off
       { modelNo: "TA4330", inches: '5" x 4"', mm: "127 x 102", note: "thickness 0.146 / 3.7 mm" },
       { modelNo: "TA4340", inches: '5" x 4-1/2"', mm: "127 x 114", note: "thickness 0.146 / 3.7 mm" },
+      // TODO: Verify TA4350 specs from old TUR page
+      { modelNo: "TA4350", inches: '5" x 5"', mm: "127 x 127", note: "thickness 0.146 / 3.7 mm" },
     ],
-    howToOrder: "Brand Identity · Model No · Ball Bearing · Tip type · Pin type · Finish",
-    orderCodeExample: "TA4310.2BB.NRP.630",
+    technicalDrawings: [
+      {
+        title: "Technical Drawing",
+        image: "/tur/drawings/concealed-bearing-hinges-drawing.png",
+        alt: "TA4300 concealed bearing hinge technical drawing showing hinge dimensions, knuckle section and screw layout",
+        caption: "TA4300 concealed bearing hinge dimensional drawing.",
+      },
+    ],
+    availableOptions: [
+      "NRP — Non-Removable Pin",
+      "ETW — Electric Through Wire",
+      "PIC — Plug-In Connector",
+      "RC — Radius Corner",
+      "HT — Hospital Tip",
+    ],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No.", values: ["4310", "4320", "4330", "4340", "4350"] },
+        { label: "Ball Bearing", values: ["2BB", "4BB"] },
+        { label: "Tip Type", values: ["Flat Tip", "BT – Button Tip", "HT – Hospital Tip"] },
+        {
+          label: "Pin Type",
+          values: [
+            "Removable Pin",
+            "NRP – Non-Removable Pin",
+            "ETW – Electric Through Wire",
+            "PIC – Plug-In Connector",
+            "RC – Radius Corner",
+          ],
+        },
+        { label: "Finish", values: ["625", "626", "613"] },
+      ],
+    },
+    orderCodeExample: "TA4310.2BB.NRP.626",
     badge: "ANSI",
     inquirySubject: "Concealed Bearing Hinges Inquiry",
     relatedSlugs: [
@@ -1873,7 +2046,11 @@ export const products: Product[] = [
       "High-frequency institutional corridors",
       "Hospital ward and operating theatre doors",
     ],
-    finishOptions: ["US26D / 626", "US32D / 630", "US3 / 605", "US10B / 613"],
+    specs: [
+      { label: "Series", value: "TA4000 Heavy Duty" },
+      { label: "Type", value: "Heavy Weight, 5 Knuckle, 4 ball bearing hinges, Stainless Steel" },
+    ],
+    finishOptions: ["US26D / 626", "US32D / 630", "US3 / 605", "US4 / 606", "US10 / 629", "US15A / 625"],
     modelRows: [
       { modelNo: "TA4030", inches: '4-1/2" x 4"', mm: "114 x 102", note: "thickness 0.180 / 4.6 mm" },
       { modelNo: "TA4040", inches: '4-1/2" x 4-1/2"', mm: "114 x 114", note: "thickness 0.180 / 4.6 mm" },
@@ -1883,7 +2060,42 @@ export const products: Product[] = [
       { modelNo: "TA4082", inches: '5" x 4-1/2"', mm: "127 x 114", note: "thickness 0.190 / 4.8 mm" },
       { modelNo: "TA4084", inches: '5" x 5"', mm: "127 x 127", note: "thickness 0.190 / 4.8 mm" },
     ],
-    howToOrder: "Brand Identity · Model No · Ball Bearing · Tip type · Pin type · Finish",
+    technicalDrawings: [
+      {
+        title: "Technical Drawing",
+        image: "/tur/drawings/full-mortise-hw-drawing.png",
+        alt: "TA4000 Heavy Duty full mortise hinge technical drawing showing hinge height, width, thickness and screw layout",
+        caption: "TA4000 Heavy Duty full mortise hinge dimensional drawing.",
+      },
+    ],
+    availableOptions: [
+      "NRP — Non-Removable Pin",
+      "ETW — Electric Through Wire",
+      "PIC — Plug-In Connector",
+      "RC — Radius Corner",
+      "HT — Hospital Tip",
+      "Stamp for fire",
+      "SS316 grade available upon request",
+    ],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No.", values: ["4030", "4040", "4050", "4060", "4080", "4082", "4084"] },
+        { label: "Ball Bearing", values: ["4BB"] },
+        { label: "Tip Type", values: ["Flat Tip", "BT – Button Tip", "HT – Hospital Tip"] },
+        {
+          label: "Pin Type",
+          values: [
+            "Removable Pin",
+            "NRP – Non-Removable Pin",
+            "ET – Electric Through Wire",
+            "PIC – Plug-In Connector",
+            "RC – Radius Corner",
+          ],
+        },
+        { label: "Finish", values: ["630", "629", "626", "625", "606", "605"] },
+      ],
+    },
     orderCodeExample: "TA4030.4BB.NRP.630",
     badge: "ANSI",
     inquirySubject: "Full Mortise Hinges Heavy Weight Inquiry",
@@ -1911,6 +2123,14 @@ export const products: Product[] = [
     image: oldProductImage("default-972509753210428.jpg"),
     imageAlt: "Electric Through Wire ETW hinge — concealed wiring for electrified door hardware",
     gallery: gallery(oldProductImage("default-972509753210428.jpg")),
+    specs: [
+      { label: "Specify", value: "ETW hinge and number of wires required" },
+      { label: "Wire Configurations", value: "2 × 18 AWG, 4 × 28 AWG, 8 × 28 AWG, 12 × 28 AWG" },
+      { label: "Standard Length", value: '12" × 48"' },
+      { label: "Custom Lengths", value: "Other wire lengths available by order" },
+      { label: "Installation", value: "Centre hinge location" },
+      { label: "Packaging", value: "One per box" },
+    ],
     features: [
       "Routes low-voltage wires through the hinge barrel — no exposed door-edge cabling.",
       "Wire options: 2 × 18 AWG, 4 × 28 AWG, 8 × 28 AWG, 12 × 28 AWG.",
@@ -1924,14 +2144,15 @@ export const products: Product[] = [
       "Push pad monitoring",
       "Latchbolt monitoring",
       "Electrically locked / unlocked functions",
-      "Card readers and request-to-exit functions",
+      "Card readers",
+      "Request-to-exit functions",
     ],
-    finishOptions: ["Matches parent hinge finish"],
+    finishOptions: ["Specify with compatible hinge"],
     inquirySubject: "Electric Through Wire ETW Inquiry",
     relatedSlugs: [
       "full-mortise-hinges-standard-weight",
       "concealed-bearing-hinges",
-      "electromagnetic-locks",
+      "full-mortise-hinges-heavy-weight",
     ],
   }),
   defineProduct({
@@ -1944,19 +2165,25 @@ export const products: Product[] = [
     routeGroupTitle: "Hang The Door",
     category: "American Standard",
     description:
-      "TA4200 series detention-grade full mortise hinges engineered for high-security and correctional environments requiring tamper-resistant, anti-removal stud construction.",
+      "High-security detention hinges with tamper-resistant shear stud construction for correctional and secure institutional applications.",
     shortDescription:
-      "High-security detention hinges with tamper-resistant shear stud for correctional applications.",
+      "TA4200 full mortise detention hinges — shear-resistant stud, sloped tips, C32D Cast Stainless Steel.",
     overview:
-      "The TA4200 Detention series provides a shear-resistant stud design that prevents the hinge from being removed or tampered with from the secure side. Designed specifically for correctional facilities, secure institutional environments and any opening where forced removal of hardware is a primary security concern.",
+      "The TA4200 Detention series is a full mortise butt hinge with shear-resistant stud and sloped tips. The stud design prevents the hinge from being removed or tampered with from the secure side. Designed for correctional facilities, secure institutional environments and any opening where forced removal of hardware is a primary security concern.",
     image: oldProductImage("default-724895670210428.jpg"),
     imageAlt: "TA4200 detention hinge — high-security tamper-resistant door hardware",
     gallery: gallery(oldProductImage("default-724895670210428.jpg")),
+    specs: [
+      { label: "Series", value: "TA4200 Heavy Duty" },
+      { label: "Type", value: "Heavy Weight, 5 Knuckle, 4 ball bearing hinges, Stainless Steel" },
+      { label: "Product Note", value: "Full mortise butt hinge with shear-resistant stud and sloped tips" },
+      { label: "Standard Finish", value: "C32D – Cast Stainless Steel" },
+    ],
     features: [
       "Shear-resistant stud construction prevents hinge removal from secure side.",
-      "TA4200 series — designed for correctional and high-security institutional applications.",
+      "Sloped tips — tamper-deterrent profile.",
       "Full mortise profile for flush installation into door and frame.",
-      "C32D finish standard; suitable for demanding institutional environments.",
+      "C32D Cast Stainless Steel finish standard for demanding institutional environments.",
     ],
     applications: [
       "Correctional facilities and detention centres",
@@ -1964,12 +2191,28 @@ export const products: Product[] = [
       "High-security government buildings",
       "Mental health and behavioural health facilities",
     ],
-    finishOptions: ["C32D"],
+    finishOptions: ["C32D – Cast Stainless Steel"],
     modelRows: [
-      { modelNo: "TA4210", inches: '4-1/2" x 4"', mm: "114 x 102", note: "shear stud / C32D" },
-      { modelNo: "TA4220", inches: '4-1/2" x 4-1/2"', mm: "114 x 114", note: "shear stud / C32D" },
+      { modelNo: "TA4210", inches: '4-1/2" x 4"', mm: "114 x 102", note: "thickness 0.190 / 4.8 mm" },
+      { modelNo: "TA4220", inches: '4-1/2" x 4-1/2"', mm: "114 x 114", note: "thickness 0.190 / 4.8 mm" },
     ],
-    howToOrder: "Brand Identity · Model No · Finish",
+    technicalDrawings: [
+      {
+        title: "Technical Drawing",
+        image: "/tur/drawings/detention-hinges-drawing.png",
+        alt: "TA4200 detention hinge technical drawing showing hinge dimensions, shear-resistant stud detail and screw layout",
+        caption: "TA4200 detention hinge dimensional drawing.",
+      },
+    ],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No.", values: ["4210", "4220"] },
+        { label: "Tip Type", values: ["ST – Sloped Tip"] },
+        { label: "Pin Type", values: ["Removable Pin", "SR – Shear Resistant Stud"] },
+        { label: "Finish", values: ["C32D – Cast Stainless Steel"] },
+      ],
+    },
     orderCodeExample: "TA4210.C32D",
     badge: "ANSI",
     inquirySubject: "Detention Hinges Inquiry",
@@ -1993,17 +2236,24 @@ export const products: Product[] = [
     shortDescription:
       "3D adjustable concealed hinges for post-installation door alignment in premium applications.",
     overview:
-      "The TA4600 series concealed hinge allows height, lateral and compression adjustment after the door is hung — eliminating the need for mortise recutting to correct alignment. ANSI/BHMA A156.17 certified. Available in four load ratings (40 / 60 / 80 / 120 kg) to cover the full range of commercial door weights.",
-    // TODO: Old TUR page id=2 exposes only a generic placeholder image; verify against catalogue screenshots when available.
+      "The TA4600 series concealed hinge allows height, lateral and compression adjustment after the door is hung — eliminating the need for mortise recutting to correct alignment. Up to 120 kg / 2 pcs. Designed for wood doors and frames, concealed installation, easy adjustment and 180° opening. ANSI/BHMA A156.17 certified. Available in four load ratings (40 / 60 / 80 / 120 kg).",
+    // TODO: Old TUR page image appears unavailable/broken; replace placeholder when exact 3D adjustable concealed hinge image is found.
     image: oldProductImage("placeholder-door-hardware.svg"),
     imageAlt: "TA4600 3D adjustable concealed hinge — premium door alignment hardware",
     gallery: gallery(oldProductImage("placeholder-door-hardware.svg")),
+    specs: [
+      { label: "Certification", value: "ANSI/BHMA A156.17" },
+      { label: "Load Capacity", value: "Up to 120 kg / 2 pcs" },
+      { label: "Door Type", value: "Wood doors and frames" },
+      { label: "Installation", value: "Concealed" },
+      { label: "Opening Angle", value: "180°" },
+    ],
     features: [
       "Three-axis adjustment (height, lateral, compression) after installation.",
       "Concealed barrel — invisible from face of door for a clean architectural finish.",
       "ANSI/BHMA A156.17 certified.",
       "Four load ratings: 40 kg, 60 kg, 80 kg and 120 kg per hinge.",
-      "Eliminates mortise recutting to correct door sag or misalignment over time.",
+      "Designed for wood doors and frames with 180° opening capability.",
     ],
     applications: [
       "Premium hotel guestroom and suite doors",
@@ -2011,15 +2261,24 @@ export const products: Product[] = [
       "High-specification residential common areas",
       "Institutional doors with precise alignment requirements",
     ],
-    finishOptions: ["US26D / 626", "US32D / 630", "US3 / 605"],
+    finishOptions: ["630", "629", "604", "606", "625", "626", "612", "613"],
     modelRows: [
-      { modelNo: "TA4610", note: "max 40 kg door weight" },
-      { modelNo: "TA4620", note: "max 60 kg door weight" },
-      { modelNo: "TA4630", note: "max 80 kg door weight" },
-      { modelNo: "TA4640", note: "max 120 kg door weight" },
+      { modelNo: "TA4610", note: "40 kg" },
+      { modelNo: "TA4620", note: "60 kg" },
+      { modelNo: "TA4630", note: "80 kg" },
+      { modelNo: "TA4640", note: "120 kg" },
     ],
-    howToOrder: "Brand Identity · Model No · Finish",
-    orderCodeExample: "TA4620.626",
+    availableOptions: ["US26D", "RC"],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No.", values: ["4610", "4620", "4630", "4640"] },
+        { label: "Type", values: ["3D"] },
+        { label: "Size", values: ["40 kg", "60 kg", "80 kg", "120 kg"] },
+        { label: "Finish", values: ["630", "629", "604", "606", "625", "626", "612", "613"] },
+      ],
+    },
+    orderCodeExample: "TA4620.3D.626",
     badge: "ANSI",
     inquirySubject: "3D Adjustable Concealed Hinge Inquiry",
     relatedSlugs: [
@@ -2152,23 +2411,38 @@ export const products: Product[] = [
     ],
     applications: ["Light commercial entrances", "Residential doors", "Wood and hollow metal door sets"],
     finishOptions: ["Painted Aluminum (AL)", "Bronze (DU)", "Brass (PB)"],
+    comparisonSpecs: {
+      title: "Applicable Door Width and Weight",
+      columns: ["Door Width", "Door Weight"],
+      rows: [
+        { label: "TA7303 / TA7304", values: ['800–1100 mm (32"–42")', "40–80 kg"] },
+      ],
+    },
     specs: [
       { label: "Series", value: "7300 Series" },
       { label: "Grade", value: "Grade 2" },
       { label: "Model", value: "TA7303 / TA7304" },
-      { label: "Power size", value: "Size 3" },
-      { label: "Door width", value: "800 – 1100 mm (32\" – 42\")" },
-      { label: "Door weight", value: "40 – 80 kg" },
-      { label: "Closer body", value: "Cast aluminium" },
+      { label: "Power Size", value: "Size 3" },
+      { label: "Application", value: "Wood and hollow metal doors and frames — light commercial and residential" },
+      { label: "Closer Body", value: "Cast Aluminium" },
       { label: "Arm", value: "Steel" },
-      { label: "Valve adjustment", value: "Dual valve — closing and latch speed" },
-      { label: "Installation", value: "Regular arm, top jamb, parallel mount" },
+      { label: "Valve Adjustment", value: "Dual valve — closing and latch speed" },
+      { label: "Installation", value: "Tri-packed: regular arm, top jamb and parallel mount" },
       { label: "Handing", value: "Non-handed" },
       { label: "Certification", value: "UL and cUL Listed; BHMA Certified ANSI A156.4" },
-      { label: "Regular arm 120° — closer position (Dim A)", value: "5-15/16\" (151 mm)" },
-      { label: "Regular arm 120° — arm shoe (Dim B)", value: "12\" (305 mm)" },
-      { label: "Regular arm 180° — closer position (Dim A)", value: "4-1/2\" (114 mm)" },
-      { label: "Regular arm 180° — arm shoe (Dim B)", value: "10\" (254 mm)" },
+      { label: "Regular Arm (120°) — Closer position (Dim A)", value: '5-15/16" (151 mm)' },
+      { label: "Regular Arm (120°) — Arm shoe (Dim B)", value: '12" (305 mm)' },
+      { label: "Regular Arm (180°) — Closer position (Dim A)", value: '4-1/2" (114 mm)' },
+      { label: "Regular Arm (180°) — Arm shoe (Dim B)", value: '10" (254 mm)' },
+      { label: "Parallel Arm", value: "Closer mounted on door; bracket on frame soffit" },
+    ],
+    technicalDrawings: [
+      {
+        title: "Technical Drawing",
+        image: "/tur/drawings/medium-duty-closer-drawing.png",
+        alt: "7300 Series medium duty door closer technical drawing showing closer body and arm dimensions",
+        caption: "7300 Series medium duty closer dimensional drawing.",
+      },
     ],
     inquirySubject: "Medium Duty Closer Inquiry",
     relatedSlugs: ["medium-heavy-duty-closer", "heavy-duty-closer", "concealed-door-closer"],
@@ -2196,15 +2470,24 @@ export const products: Product[] = [
       "ANSI Grade 1 — for educational, healthcare, main entrances and high-traffic applications.",
       "7000 Series TA7016 — cast iron closer body; steel arm; plastic cover (steel cover optional).",
       "Three-valve adjustment: closing speed, latch speed and backcheck.",
-      "Adjustable spring power size 1–6.",
+      "Adjustable spring power size 1–6, covering doors 800–1500 mm wide at 15–150 kg.",
       "Standard features: DA delayed action, BC backcheck.",
-      "Arm options: track arm, hold open, cushion stop, cushion stop & hold, heavy duty arm, extended rod & shoe.",
+      "Arm options: regular arm, track arm, hold open, cushion stop, cushion stop & hold, heavy duty arm, extended rod & shoe.",
       "Drop plate accessory available.",
-      "Tri-packed: regular, top jamb and parallel mount.",
+      "Tri-packed: regular arm, top jamb and parallel mount.",
       "Non-handed.",
     ],
     applications: ["Educational facilities", "Healthcare buildings", "Main commercial entrances", "High-traffic institutional applications"],
     finishOptions: ["Painted Aluminum (AL)", "Bronze (DU)"],
+    comparisonSpecs: {
+      title: "Applicable Door Width and Weight",
+      columns: ["TA7016 — Power Size 1–6"],
+      rows: [
+        { label: "Door Width (mm)", values: ["800 – 1500"] },
+        { label: "Door Weight (kg)", values: ["15 – 150"] },
+        // TODO: Per-power-size breakdown (Size 1 vs 2 vs ... vs 6) not retrievable from old site (JS-rendered). Verify with TUR and expand columns.
+      ],
+    },
     specs: [
       { label: "Series", value: "7000 Series" },
       { label: "Grade", value: "Grade 1" },
@@ -2212,20 +2495,122 @@ export const products: Product[] = [
       { label: "Power size", value: "Size 1 – 6 (adjustable)" },
       { label: "Door width", value: "800 – 1500 mm (32\" – 60\")" },
       { label: "Door weight", value: "15 – 150 kg" },
+      { label: "Closing speed", value: "Adjustable (valve-controlled)" },
+      { label: "Latch speed", value: "Adjustable (valve-controlled)" },
+      { label: "Backcheck", value: "Adjustable (valve-controlled)" },
       { label: "Closer body — length", value: "328 mm" },
       { label: "Closer body — width", value: "55 mm" },
+      { label: "Closer body — height", value: "75 mm" },
       { label: "Closer body — horizontal mounting", value: "305 mm" },
       { label: "Closer body — vertical mounting", value: "19 mm" },
-      { label: "Closer body — height", value: "75 mm" },
+      // TODO: Installation dimension tables (regular arm Dim A/B, parallel arm, top jamb) not retrievable from JS-rendered old site. Verify with TUR.
       { label: "Maximum opening angle", value: "180°" },
       { label: "Closer body material", value: "Cast iron" },
       { label: "Arm", value: "Steel" },
       { label: "Cover", value: "Plastic (standard) / Metal (optional)" },
       { label: "Standard features", value: "DA delayed action, BC backcheck" },
-      { label: "Installation", value: "Regular, top jamb and parallel mount" },
+      { label: "Installation", value: "Regular arm, top jamb and parallel mount (tri-packed)" },
       { label: "Handing", value: "Non-handed" },
     ],
-    howToOrder: "Brand Identity · Model No · Power Size · Arm Type · Features · Mounting · Plate Options · Cover Type · Finish",
+    technicalDrawings: [
+      {
+        title: "Regular Arm Installation",
+        variant: "Regular Arm Installation",
+        image: "/tur/drawings/medium-heavy-duty-closer-regular-arm.png",
+        alt: "TA7016 regular arm installation diagram showing closer body face-mounted on door frame face",
+        caption: "Closer body face-mounted on door; arm articulates on frame face.",
+      },
+      {
+        title: "Parallel Arm Installation",
+        variant: "Parallel Arm Installation",
+        image: "/tur/drawings/medium-heavy-duty-closer-parallel-arm.png",
+        alt: "TA7016 parallel arm installation diagram showing closer body face-mounted on door with arm running parallel",
+        caption: "Closer body face-mounted on door; arm runs parallel to door face.",
+      },
+      {
+        title: "Top Jamb Installation",
+        variant: "Top Jamb Installation",
+        image: "/tur/drawings/medium-heavy-duty-closer-top-jamb.png",
+        alt: "TA7016 top jamb installation diagram showing closer body mounted on frame top rail",
+        caption: "Closer body mounted on frame top; arm articulates on door top rail.",
+      },
+      {
+        title: "Power Adjustment Chart",
+        variant: "Power Adjustment Chart",
+        image: "/tur/drawings/medium-heavy-duty-closer-power-chart.png",
+        alt: "TA7016 power adjustment chart showing minimum door width per spring size requirement",
+        caption: "Minimum door width (mm) required per full-power spring size.",
+      },
+    ],
+    accessories: [
+      { label: "Closer body (cast iron)", status: "Standard" },
+      { label: "Steel arm", status: "Standard" },
+      { label: "Plastic cover", status: "Standard" },
+      { label: "Regular arm mounting template", status: "Standard" },
+      { label: "Top jamb mounting template", status: "Standard" },
+      { label: "Parallel arm mounting template", status: "Standard" },
+      { label: "Steel cover", status: "Optional" },
+      { label: "Drop plate", status: "Optional" },
+      { label: "Track arm", status: "Optional" },
+      { label: "Hold open arm", status: "Optional" },
+      { label: "Cushion stop arm", status: "Optional" },
+      { label: "Cushion stop & hold open arm", status: "Optional" },
+      { label: "Heavy duty arm", status: "Optional" },
+      { label: "Extended rod & shoe", status: "Optional" },
+      // TODO: Verify full accessories list and Standard/Optional status against TUR catalog (old site JS-rendered, values not retrievable).
+    ],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TE"] },
+        { label: "Model No", values: ["7016"] },
+        {
+          label: "Arm Type",
+          values: [
+            "RA — Regular Arm",
+            "PA — Parallel Arm",
+            "TJ — Top Jamb",
+            "TA — Track Arm",
+            "HO — Hold Open",
+            "CS — Cushion Stop",
+            "CSHO — Cushion Stop & Hold Open",
+            "HD — Heavy Duty Arm",
+          ],
+        },
+        {
+          label: "Functions",
+          values: [
+            "BC — Backcheck",
+            "DA — Delayed Action",
+            "BCDA — BC + Delayed Action",
+            "HO — Hold Open",
+          ],
+        },
+        {
+          label: "Plate Options",
+          values: [
+            "DP — Drop Plate",
+            // TODO: verify additional plate option codes from TUR catalog
+          ],
+        },
+        {
+          label: "Cover Type",
+          values: [
+            "PC — Plastic Cover",
+            "SSC — Steel Square Cover",
+            "SRC — Steel Round Cover",
+            // TODO: verify cover type codes from TUR catalog
+          ],
+        },
+        {
+          label: "Finish",
+          values: [
+            "AL — Painted Aluminum",
+            "DU — Bronze",
+            // TODO: verify additional finish codes (e.g. 630) from TUR catalog
+          ],
+        },
+      ],
+    },
     orderCodeExample: "TE7016.RA.BC.PS.DP.SSC.630",
     inquirySubject: "Medium / Heavy Duty Closer Inquiry",
     relatedSlugs: ["medium-duty-closer", "heavy-duty-closer", "extra-heavy-duty-closer"],
@@ -2252,29 +2637,156 @@ export const products: Product[] = [
       "ANSI Grade 1 — for schools, hospitals and high-traffic applications.",
       "TA7116 — cast aluminium closer body; steel arm; plastic cover (steel cover optional).",
       "Three-valve adjustment: closing speed, latch speed and backcheck.",
-      "Adjustable spring power size 1–6.",
+      "Adjustable spring power size 1–6, covering doors 900–1500 mm wide at 15–150 kg.",
       "Standard features: DA delayed action, BC backcheck.",
-      "Arm options: track arm, hold open, cushion stop (optional).",
+      "Arm options: standard arm, parallel arm, track arm, hold open, cushion stop, cushion stop & hold open.",
       "Tri-packed: regular arm, top jamb and parallel mount.",
       "Non-handed.",
     ],
-    applications: ["Schools and educational facilities", "Hospitals and healthcare buildings", "High-traffic commercial applications"],
-    finishOptions: ["Painted Aluminum (AL)", "Bronze (DU)"],
-    specs: [
-      { label: "Grade", value: "Grade 1" },
-      { label: "Model", value: "TA7116" },
-      { label: "Power size", value: "Size 1 – 6 (adjustable)" },
-      { label: "Door width", value: "800 – 1500 mm (32\" – 60\")" },
-      { label: "Door weight", value: "15 – 150 kg" },
-      { label: "Closer body", value: "Cast aluminium" },
-      { label: "Arm", value: "Steel" },
-      { label: "Cover", value: "Plastic (standard) / Steel (optional, US32D / US26D)" },
-      { label: "Standard features", value: "DA delayed action, BC backcheck" },
-      { label: "Installation", value: "Regular arm, top jamb, parallel mount" },
-      { label: "Handing", value: "Non-handed" },
+    applications: [
+      "Schools and educational facilities",
+      "Hospitals and healthcare buildings",
+      "High-traffic commercial applications",
     ],
+    finishOptions: ["Painted Aluminum (AL)", "Bronze (DU)"],
+    comparisonSpecs: {
+      title: "Applicable Door Width and Weight",
+      // TODO: Verify per-power-size breakdown from old TUR Heavy Duty Closer page before final catalogue sign-off.
+      columns: ["TA7116 (Power Size 1–6)"],
+      rows: [
+        { label: "Door Width (mm)", values: ["900 – 1500"] },
+        { label: "Door Weight (kg)", values: ["15 – 150"] },
+      ],
+    },
+    technicalDrawings: [
+      {
+        title: "TA7116 Closer Dimensional Drawing",
+        image: "/tur/drawings/heavy-duty-closer-drawing.jpg",
+        alt: "Heavy duty door closer technical drawing showing closer body and arm dimensions",
+        caption: "Heavy duty closer dimensional drawing.",
+      },
+    ],
+    installationDetails: [
+      {
+        title: "Regular Arm Installation",
+        description: "Closer mounted on door face. Arm jamb bracket on frame face.",
+        image: "/tur/drawings/heavy-duty-closer-regular-arm.png",
+        alt: "Heavy duty closer regular arm installation diagram showing closer mounted on door and arm jamb bracket on frame face",
+      },
+      {
+        title: "Parallel Arm Installation",
+        description: "Closer mounted on door face. Bracket on frame soffit.",
+        image: "/tur/drawings/heavy-duty-closer-parallel-arm.png",
+        alt: "Heavy duty closer parallel arm installation diagram showing closer mounted on door and bracket on frame soffit",
+      },
+      {
+        title: "Top Jamb Installation",
+        description: "Closer mounted on frame face. Arm jamb bracket on door top rail.",
+        image: "/tur/drawings/heavy-duty-closer-top-jamb.png",
+        alt: "Heavy duty closer top jamb installation diagram showing closer mounted on frame face and arm bracket on door top rail",
+      },
+      {
+        title: "Power Adjustment Chart",
+        // TODO: Verify Heavy Duty Closer power adjustment chart values from old TUR page before final catalogue sign-off.
+        image: "/tur/drawings/heavy-duty-closer-power-chart.png",
+        alt: "TA7116 power adjustment chart showing minimum door width per spring size requirement",
+      },
+    ],
+    specs: [
+      { label: "Model number", value: "TA7116" },
+      { label: "Adjustable spring power", value: "1 – 6" },
+      { label: "Door width (mm)", value: "900 – 1500" },
+      { label: "Door weight (kg)", value: "15 – 150" },
+      // TODO: Add closer body dimension rows (length, width, height, horizontal/vertical mounting) after verifying TA7116 specs from old TUR catalog
+      { label: "Closing speed", value: "Adjustable" },
+      { label: "Latching speed", value: "Adjustable" },
+      { label: "Adjustable closing speed", value: "Standard" },
+      { label: "Adjustable backcheck", value: "Standard" },
+      { label: "Delayed action", value: "Standard" },
+      { label: "Non-handed", value: "Yes" },
+      { label: "Cover", value: "Plastic (standard) / Steel cover US32D or US26D (optional)" },
+      { label: "Arm", value: "Steel" },
+      { label: "Closer body material", value: "Cast aluminium" },
+      { label: "Installation", value: "Regular arm, top jamb and parallel mount (tri-packed)" },
+      { label: "Grade", value: "Grade 1" },
+    ],
+    accessories: [
+      { label: "Plastic cover", status: "Standard" },
+      { label: "Metal cover", status: "Optional" },
+      { label: "Standard arm", status: "Standard" },
+      { label: "Parallel regular arm", status: "Optional" },
+      { label: "Hold open arm", status: "Optional" },
+      { label: "PA shoe / accessories set", status: "Optional" },
+      { label: "Cushion end stop arm", status: "Optional" },
+      { label: "Cushion end stop hold-open arm", status: "Optional" },
+      { label: "Drop plate", status: "Optional" },
+      { label: "PA bracket", status: "Optional" },
+      { label: "Screw pack", status: "Standard" },
+      // TODO: Verify full accessories list and Standard/Optional status against old TUR Heavy Duty Closer page.
+    ],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TE"] },
+        { label: "Model No.", values: ["7116"] },
+        { label: "Power Size", values: ["1", "2", "3", "4", "5", "6"] },
+        {
+          label: "Arm Type",
+          values: [
+            "RA — Regular Arm",
+            "PA — Parallel Arm",
+            "TJ — Top Jamb",
+            "TA — Track Arm",
+            "HO — Hold Open",
+            "CS — Cushion Stop",
+            "CSHO — Cushion Stop & Hold Open",
+          ],
+        },
+        {
+          label: "Functions",
+          values: [
+            "BC — Backcheck",
+            "DA — Delayed Action",
+            "BCDA — BC + Delayed Action",
+            "HO — Hold Open",
+          ],
+        },
+        {
+          label: "Mounting",
+          values: [
+            // TODO: Verify Mounting column codes from old TUR Heavy Duty Closer page
+            "STD — Standard",
+            "TJ — Top Jamb",
+            "PA — Parallel Arm",
+          ],
+        },
+        {
+          label: "Hold-open",
+          values: [
+            // TODO: Verify Hold-open column codes from old TUR Heavy Duty Closer page
+            "PS — Power Stop",
+          ],
+        },
+        {
+          label: "Cover Type",
+          values: [
+            "PC — Plastic Cover",
+            "SSC — Steel Square Cover",
+            "SRC — Steel Round Cover",
+          ],
+        },
+        {
+          label: "Finish",
+          values: [
+            "AL — Painted Aluminum",
+            "DU — Bronze",
+          ],
+        },
+      ],
+    },
+    // TODO: Verify Heavy Duty Closer order-code example from old TUR page.
+    orderCodeExample: "TE7116.RA.BC.PS.DP.SSC.AL",
     inquirySubject: "Heavy Duty Closer Inquiry",
-    relatedSlugs: ["medium-heavy-duty-closer", "extra-heavy-duty-closer", "concealed-door-closer"],
+    relatedSlugs: ["medium-duty-closer", "medium-heavy-duty-closer", "extra-heavy-duty-closer", "concealed-door-closer"],
   }),
   defineProduct({
     slug: "extra-heavy-duty-closer",
@@ -2286,41 +2798,176 @@ export const products: Product[] = [
     routeGroupTitle: "Control The Door",
     category: "American Standard",
     description:
-      "Grade 1 ANSI door closer for educational, healthcare, main entrances and high-traffic applications requiring maximum door control — TA7016, cast iron body, adjustable power sizes 1–6.",
+      "Grade 1 ANSI door closer for educational, healthcare, main entrances and high-traffic applications requiring maximum door control — 7000 Series TA7016, cast iron body, adjustable power sizes 1–6, tri-packed for regular, top jamb and parallel mount.",
     shortDescription:
-      "Grade 1, TA7016 extra heavy duty door closer for maximum-control commercial applications.",
+      "Grade 1, 7000 Series TA7016 extra heavy duty closer for maximum door control in educational, healthcare and high-traffic applications.",
     overview:
-      "The TA7016 extra heavy duty closer is designed for installation on wood and hollow metal doors and frames in educational, healthcare, main entrance and high-traffic applications where maximum control of the door is required. Cast iron body, steel arm, plastic cover (steel cover optional). Three-valve adjustment for closing speed, latch speed and backcheck. Standard features include DA delayed action and BC backcheck.",
+      "The 7000 Series TA7016 extra heavy duty closer is designed for installation on wood and hollow metal doors and frames in educational, healthcare, main entrance and high-traffic applications where maximum control of the door is required. Cast iron body, steel arm, plastic cover (steel cover optional). Three-valve adjustment for closing speed, latch speed and backcheck. Standard features include DA delayed action and BC backcheck. Tri-packed for regular, top jamb and parallel mount.",
     image: oldProductImage("default-807483303210428.jpg"),
-    imageAlt: "TA7016 extra heavy duty door closer — ANSI Grade 1",
+    imageAlt: "TA7016 extra heavy duty door closer — ANSI Grade 1, 7000 Series",
     gallery: gallery(oldProductImage("default-807483303210428.jpg")),
     features: [
       "ANSI Grade 1 — for educational, healthcare, main entrances and maximum-control applications.",
-      "TA7016 — cast iron closer body; steel arm; plastic cover (steel cover optional).",
+      "7000 Series TA7016 — cast iron closer body; steel arm; plastic cover (steel cover optional).",
       "Three-valve adjustment: closing speed, latch speed and backcheck.",
-      "Adjustable spring power size 1–6.",
+      "Adjustable spring power size 1–6, covering doors 900–1500 mm wide at 15–150 kg.",
       "Standard features: DA delayed action, BC backcheck.",
       "Arm options: track arm, hold open, cushion stop, cushion stop & hold, heavy duty arm, extended rod & shoe.",
-      "Tri-packed: regular, top jamb and parallel mount.",
+      "Tri-packed: regular arm, top jamb and parallel mount.",
       "Non-handed.",
     ],
-    applications: ["Educational facilities", "Healthcare buildings", "Main commercial entrances", "Maximum-control high-traffic applications"],
-    finishOptions: ["Painted Aluminum (AL)", "Bronze (DU)"],
-    specs: [
-      { label: "Grade", value: "Grade 1" },
-      { label: "Model", value: "TA7016" },
-      { label: "Power size", value: "Size 1 – 6 (adjustable)" },
-      { label: "Door width", value: "800 – 1500 mm (32\" – 60\")" },
-      { label: "Door weight", value: "15 – 150 kg" },
-      { label: "Closer body", value: "Cast iron" },
-      { label: "Arm", value: "Steel" },
-      { label: "Cover", value: "Plastic (standard) / Steel (optional, US32D / US26 / US3)" },
-      { label: "Standard features", value: "DA delayed action, BC backcheck" },
-      { label: "Installation", value: "Regular, top jamb and parallel mount" },
-      { label: "Handing", value: "Non-handed" },
+    applications: [
+      "Educational facilities",
+      "Healthcare buildings",
+      "Main commercial entrances",
+      "Maximum-control high-traffic applications",
     ],
+    finishOptions: ["Painted Aluminum (AL)", "Bronze (DU)"],
+    comparisonSpecs: {
+      title: "Applicable Door Width and Weight",
+      // TODO: Verify per-power-size breakdown from old TUR Extra Heavy Duty Closer page before final catalogue sign-off.
+      columns: ["TA7016 (Power Size 1–6)"],
+      rows: [
+        { label: "Door Width (mm)", values: ["900 – 1500"] },
+        { label: "Door Width (inches)", values: ["32\" – 60\""] },
+        { label: "Door Weight (kg)", values: ["15 – 150"] },
+      ],
+    },
+    technicalDrawings: [
+      {
+        title: "TA7016 Closer Dimensional Drawing",
+        image: "/tur/drawings/extra-heavy-duty-closer-drawing.jpg",
+        alt: "Extra heavy duty door closer technical drawing showing closer body and arm dimensions",
+        caption: "Extra heavy duty closer dimensional drawing.",
+      },
+    ],
+    installationDetails: [
+      {
+        title: "Regular Arm Installation",
+        description: "Closer mounted on door face. Arm jamb bracket on frame face.",
+        image: "/tur/drawings/extra-heavy-duty-closer-regular-arm.png",
+        alt: "Extra heavy duty closer regular arm installation diagram showing closer mounted on door and arm jamb bracket on frame face",
+      },
+      {
+        title: "Parallel Arm Installation",
+        description: "Closer mounted on door face. Bracket on frame soffit.",
+        image: "/tur/drawings/extra-heavy-duty-closer-parallel-arm.png",
+        alt: "Extra heavy duty closer parallel arm installation diagram showing closer mounted on door and bracket on frame soffit",
+      },
+      {
+        title: "Top Jamb Installation",
+        description: "Closer mounted on frame face. Arm jamb bracket on door top rail.",
+        image: "/tur/drawings/extra-heavy-duty-closer-top-jamb.png",
+        alt: "Extra heavy duty closer top jamb installation diagram showing closer mounted on frame face and arm bracket on door top rail",
+      },
+      {
+        title: "Power Adjustment Chart",
+        // TODO: Verify Extra Heavy Duty Closer power adjustment chart values from old TUR page before final catalogue sign-off.
+        image: "/tur/drawings/extra-heavy-duty-closer-power-chart.png",
+        alt: "TA7016 power adjustment chart showing minimum door width per spring size requirement",
+      },
+    ],
+    specs: [
+      { label: "Model number", value: "TA7016" },
+      { label: "Adjustable spring power", value: "1 – 6" },
+      { label: "Door width (mm)", value: "900 – 1500" },
+      { label: "Door weight (kg)", value: "15 – 150" },
+      { label: "Closer body — length (mm)", value: "323" },
+      { label: "Closer body — width (mm)", value: "95" },
+      { label: "Closer body — horizontal mounting (mm)", value: "303" },
+      { label: "Closer body — vertical mounting (mm)", value: "19" },
+      { label: "Closer body — height (mm)", value: "75" },
+      { label: "Closing speed", value: "Adjustable" },
+      { label: "Latching speed", value: "Adjustable" },
+      { label: "Maximum opening angle", value: "180°" },
+      { label: "Adjustable backcheck", value: "Standard" },
+      { label: "Delayed action", value: "Standard" },
+      { label: "Non-handed", value: "Yes" },
+      { label: "Cover", value: "Plastic (standard) / Steel cover US32D / US26 / US3 (optional)" },
+      { label: "Arm", value: "Steel" },
+      { label: "Closer body material", value: "Cast iron" },
+      { label: "Installation", value: "Regular arm, top jamb and parallel mount (tri-packed)" },
+      { label: "Grade", value: "Grade 1" },
+    ],
+    accessories: [
+      { label: "Plastic cover", status: "Standard" },
+      { label: "Metal cover", status: "Optional" },
+      { label: "Standard arm", status: "Standard" },
+      { label: "Parallel regular arm", status: "Optional" },
+      { label: "Hold open arm", status: "Optional" },
+      { label: "PA shoe / accessories set", status: "Optional" },
+      { label: "Cushion end stop arm", status: "Optional" },
+      { label: "Cushion end stop hold-open arm", status: "Optional" },
+      { label: "Drop plate", status: "Optional" },
+      { label: "PA bracket", status: "Optional" },
+      { label: "Screw pack", status: "Standard" },
+      // TODO: Verify full accessories list and Standard/Optional status against old TUR Extra Heavy Duty Closer page.
+    ],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No.", values: ["7016"] },
+        { label: "Power Size", values: ["1", "2", "3", "4", "5", "6"] },
+        {
+          label: "Arm Type",
+          values: [
+            "RA — Regular Arm",
+            "PA — Parallel Arm",
+            "TJ — Top Jamb",
+            "TA — Track Arm",
+            "HO — Hold Open",
+            "CS — Cushion Stop",
+            "CSHO — Cushion Stop & Hold Open",
+            "HD — Heavy Duty Arm",
+          ],
+        },
+        {
+          label: "Functions",
+          values: [
+            "BC — Backcheck",
+            "DA — Delayed Action",
+            "BCDA — BC + Delayed Action",
+            "HO — Hold Open",
+          ],
+        },
+        {
+          label: "Mounting",
+          values: [
+            // TODO: Verify Mounting column codes from old TUR Extra Heavy Duty Closer page
+            "STD — Standard",
+            "TJ — Top Jamb",
+            "PA — Parallel Arm",
+          ],
+        },
+        {
+          label: "Hold-open",
+          values: [
+            // TODO: Verify Hold-open column codes from old TUR Extra Heavy Duty Closer page
+            "PS — Power Stop",
+          ],
+        },
+        {
+          label: "Cover Type",
+          values: [
+            "PC — Plastic Cover",
+            "SSC — Steel Square Cover",
+            "SRC — Steel Round Cover",
+          ],
+        },
+        {
+          label: "Finish",
+          values: [
+            "AL — Painted Aluminum",
+            "DU — Bronze",
+            "630 — Satin Stainless",
+          ],
+        },
+      ],
+    },
+    // TODO: Verify Extra Heavy Duty Closer order-code example from old TUR page.
+    orderCodeExample: "TA7016.RA.BC.PS.DP.SSC.630",
     inquirySubject: "Extra Heavy Duty Closer Inquiry",
-    relatedSlugs: ["heavy-duty-closer", "medium-heavy-duty-closer", "concealed-door-closer"],
+    relatedSlugs: ["medium-duty-closer", "medium-heavy-duty-closer", "heavy-duty-closer", "concealed-door-closer"],
   }),
   defineProduct({
     slug: "concealed-door-closer",
@@ -2332,24 +2979,37 @@ export const products: Product[] = [
     routeGroupTitle: "Control The Door",
     category: "American Standard",
     description:
-      "Concealed door closer — 7900 Series TA7903, fixed spring force 3#, dual valve speed adjustment, aluminium casting cylinder; maximum door width 950 mm and weight 65 kg.",
+      "7900 Series TA7903 concealed door closer — fixed spring force 3#, sliding track arm with optional hold open, dual valve closing and latching speed adjustment, aluminium casting cylinder; maximum door width 950 mm, maximum door weight 65 kg.",
     shortDescription:
-      "7900 Series TA7903 concealed door closer with fixed spring force and dual valve speed control.",
+      "7900 Series TA7903 concealed door closer with fixed spring force 3# and dual valve speed control.",
     overview:
-      "The 7900 Series concealed door closer (TA7903) provides automatic closing in a concealed format for clean architectural door sets. Fixed spring force of 3#, dual valve adjustment for closing and latching speed, aluminium casting cylinder and aluminium sliding track. Non-handed. Maximum door width 950 mm, maximum door weight 65 kg.",
+      "The TA7903 concealed closer uses a fixed spring force 3 mechanism with sliding track arm and optional hold open. It includes dual valves for closing and latching speed adjustment, supports doors up to 950 mm wide and 65 kg, and uses an aluminium casting cylinder with aluminium sliding track. Non-handed.",
     image: oldProductImage("default-1231222157210428.jpg"),
     imageAlt: "TA7903 concealed door closer — 7900 Series, clean architectural format",
     gallery: gallery(oldProductImage("default-1231222157210428.jpg")),
     features: [
       "7900 Series TA7903 — concealed format for clean architectural door sets.",
-      "Fixed spring force: 3#.",
+      "Fixed spring force 3# with sliding track arm; hold open optional.",
       "Dual valve adjustment: closing speed and latching speed.",
-      "Aluminium casting cylinder; aluminium sliding track.",
-      "Sliding track arm; hold open optional.",
+      "Aluminium casting cylinder with aluminium sliding track.",
+      "Maximum door width 950 mm; maximum door weight 65 kg.",
       "Non-handed.",
     ],
-    applications: ["Architectural door sets requiring concealed hardware", "Hospitality guestrooms and suites", "Commercial and institutional doors up to 950 mm wide"],
-    finishOptions: ["Silver Painted (standard)"],
+    applications: [
+      "Architectural door sets requiring concealed hardware",
+      "Hospitality guestrooms and suites",
+      "Commercial and institutional doors up to 950 mm wide",
+    ],
+    finishOptions: ["Silver Painted (standard)", "Other finishes upon request"],
+    comparisonSpecs: {
+      title: "Dimension",
+      columns: ["TA7903"],
+      rows: [
+        { label: "Spring Force", values: ["3# (fixed)"] },
+        { label: "Max. Door Width", values: ["950 mm"] },
+        { label: "Max. Door Weight", values: ["65 kg"] },
+      ],
+    },
     specs: [
       { label: "Series", value: "7900 Series" },
       { label: "Model", value: "TA7903" },
@@ -2361,9 +3021,52 @@ export const products: Product[] = [
       { label: "Arm", value: "Sliding track arm; hold open optional" },
       { label: "Valve adjustment", value: "Dual valve — closing and latching speed" },
       { label: "Handing", value: "Non-handed" },
+      { label: "Standard finish", value: "Silver painted" },
+      { label: "Other finishes", value: "Upon request" },
     ],
+    technicalDrawings: [
+      {
+        title: "TA7903 Concealed Closer Dimensional Drawing",
+        image: "/tur/drawings/concealed-door-closer-drawing.png",
+        alt: "TA7903 concealed door closer technical drawing showing closer body, sliding track and installation dimensions",
+        caption: "TA7903 concealed door closer dimensional drawing.",
+      },
+    ],
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No.", values: ["70", "71", "72", "73", "79"] },
+        { label: "Power Size", values: ["16", "04", "03"] },
+        {
+          label: "Arm Type",
+          values: ["RA", "PA", "TA", "CS", "HO", "CS-HO"],
+        },
+        {
+          label: "Features",
+          values: ["— (None)", "BC", "DA"],
+        },
+        {
+          label: "Mounting",
+          values: ["— (None)", "PS", "PL"],
+        },
+        {
+          label: "Plate Options",
+          values: ["— (None)", "PS", "DPPS", "DPPA"],
+        },
+        {
+          label: "Cover Type",
+          values: ["— (None)", "SSC", "PLC", "STC"],
+        },
+        {
+          label: "Finish",
+          values: ["630", "605", "606", "625", "612", "613"],
+        },
+      ],
+    },
+    // TODO: Verify Concealed Door Closer order-code example from old TUR page.
+    orderCodeExample: "TA7903.RA.630",
     inquirySubject: "Concealed Door Closer Inquiry",
-    relatedSlugs: ["medium-duty-closer", "medium-heavy-duty-closer", "heavy-duty-closer"],
+    relatedSlugs: ["medium-duty-closer", "medium-heavy-duty-closer", "heavy-duty-closer", "extra-heavy-duty-closer"],
   }),
 
   // ── American Standard / Secure The Door products ───────────────────────────
@@ -2372,14 +3075,15 @@ export const products: Product[] = [
     title: "TA2100 Series Deadlock",
     routeGroupSlug: "secure-the-door",
     routeGroupTitle: "Secure The Door",
+    imagePath: secureDoorImage("ta2100-series-deadlock/ta2100-series-deadlock-main.jpg"),
+    imageFilename: "default-532937896201018.jpg",
+    imageAlt: "TA2100 Series deadlock product image",
     description:
       "TA2100 Series deadlock for locking applications where no latch is required, including suite entry, washrooms and change rooms.",
     shortDescription:
       "Deadlock series for suite entry, washrooms and change rooms where no latch is required.",
     overview:
-      "The 2100 Series is designed for locking where no latch is required. The old TUR page identifies suite entry, washrooms and change rooms as typical applications, with 560 2-1/8 in bore and 560N 1-1/2 in bore preparations.",
-    imageFilename: "default-532937896201018.jpg",
-    imageAlt: "TA2100 Series deadlock product image",
+      "The 2100 Series is designed for locking where no latch is required. Ideal for suite entry, washrooms and change rooms. Available with 560 (2-1/8 in) and 560N (1-1/2 in) bore preparations.",
     features: [
       "Hardened steel roller for attack resistance.",
       "Corrosion resistant deadlock construction.",
@@ -2390,11 +3094,14 @@ export const products: Product[] = [
     finishOptions: ["US32D", "US3", "US10B"],
     specs: [
       { label: "Series", value: "TA2100 Series" },
-      { label: "Bore", value: "560 2-1/8 in bore; 560N 1-1/2 in bore" },
+      { label: "Bore", value: "560 (2-1/8 in) and 560N (1-1/2 in) preparations" },
       { label: "Backset", value: "2-3/4 in (70 mm) and 2-3/8 in (60 mm)" },
       { label: "Bolt", value: "1 in (25 mm) throw deadbolt" },
-      { label: "Handing", value: "Non-handed; note on old page: handed item" },
+      { label: "Handing", value: "Non-handed" },
+      { label: "Handing note", value: "Some functions may require handed specification. Verify handing before final scheduling." },
+      { label: "Finishes", value: "US32D, US3, US10B" },
     ],
+    modelSectionTitle: "TA2100 Series Standard Functions",
     modelRows: [
       { modelNo: "TA2110", note: "Cylinder by thumb turn" },
       { modelNo: "TA2120", note: "Double cylinder" },
@@ -2402,6 +3109,21 @@ export const products: Product[] = [
       { modelNo: "TA2110 LIC", note: "Cylinder by thumb turn, less SFIC core" },
       { modelNo: "TA2120 LIC", note: "Double cylinder, less SFIC core" },
     ],
+    detailImages: [
+      {
+        title: "TA2110",
+        image: secureDoorImage("ta2100-series-deadlock/ta2100-series-deadlock-ta2110.png"),
+        alt: "TA2110 cylinder by thumb turn deadlock function",
+        caption: "TA2110 — Cylinder by thumb turn",
+      },
+      {
+        title: "TA2140",
+        image: secureDoorImage("ta2100-series-deadlock/ta2100-series-deadlock-ta2140.png"),
+        alt: "TA2140 thumb turn only deadlock function",
+        caption: "TA2140 — Thumb turn only",
+      },
+    ],
+    sourceOldUrl: oldDoorHardwareProductUrl(74),
     inquirySubject: "TA2100 Series Deadlock Inquiry",
     relatedSlugs: ["ta1000-series-mortise-lockset-grade-1", "deadlatch-locks", "cylindrical-locksets"],
   }),
@@ -2410,31 +3132,73 @@ export const products: Product[] = [
     title: "TA1200 Series Standard Lever Designs",
     routeGroupSlug: "secure-the-door",
     routeGroupTitle: "Secure The Door",
-    description:
-      "TA1200 Series standard lever design ordering matrix for glass patch locks with passage, office, classroom, storeroom and dormitory functions.",
-    shortDescription:
-      "TA1200 glass patch lock ordering matrix with standard lever design options.",
-    overview:
-      "The old TUR page provides the TA1200 ordering structure for glass patch locks, including functions, rose or escutcheon trim, cylinder choices, lever designs, door leaf configuration, options and finish codes.",
+    imagePath: secureDoorImage("ta1200-series-standard-lever-designs/ta1200-standard-lever-designs-main.jpg"),
     imageFilename: "default-877300205201018.jpg",
     imageAlt: "TA1200 Series standard lever design product image",
+    description:
+      "TA1200 Series standard lever design ordering matrix for glass patch locks with passage, office, classroom, storeroom, corridor and dormitory functions.",
+    shortDescription:
+      "TA1200 glass patch lock ordering matrix — lever design options SS, GS, TS, DS, GE, SE and QS for single and double glass doors.",
+    overview:
+      "The TA1200 Series ordering structure covers glass patch locks with function choices, rose or escutcheon trim, cylinder selections (W, M, L, IC), seven lever design codes, door leaf configuration, options and finish codes. Use this page as a specification and ordering reference alongside the TA1200 Glass Patch Locksets page.",
     features: [
-      "Glass patch lock ordering structure for single and double door leaves.",
-      "Function choices include passage, office, classroom, storeroom, corridor, dormitory and deadbolt combinations.",
-      "Cylinder choices include without cylinder, mortise cylinder, less IC core and with SFIC.",
-      "Lever design options listed as SS, TS, QS, GS and DS.",
+      "Seven lever design options: SS, GS, TS, DS, GE, SE and QS.",
+      "Function choices: 01 Passage, 04 Office, 05 Classroom, 07 Storeroom, 13 Corridor and 21 Dormitory.",
+      "Cylinder choices: W (without), M (mortise), L (less IC core) and IC (with SFIC).",
+      "Trim options: On Rose (R), Escutcheon Plate (E) or Deadbolt-only (DE).",
+      "Single door (SD) and double door (DD) configurations.",
+      "Antimicrobial option available.",
     ],
-    applications: ["Glass patch locksets", "Single glass doors", "Double glass doors"],
-    finishOptions: ["630", "629", "626", "625", "606", "605"],
+    applications: ["Glass patch locksets", "Single glass doors", "Double glass doors", "Office and classroom entries"],
+    finishOptions: ["630", "629", "626", "625", "600"],
+    featureLists: [
+      {
+        title: "Lever Designs",
+        items: ["SS", "GS", "TS", "DS", "GE", "SE", "QS"],
+        image: secureDoorImage("ta1200-series-standard-lever-designs/ta1200-standard-lever-designs-lever-options.png"),
+        imageAlt: "TA1200 Series standard lever design options showing SS, GS, TS, DS, GE, SE and QS lever designs.",
+        caption: "TA1200 Series standard lever design options.",
+      },
+    ],
     specs: [
-      { label: "Model", value: "TA12 - Glass Patch Locks" },
-      { label: "Trim", value: "R - On Rose; E - Escutcheon Plate; DB - Only for Deadbolt Lock" },
-      { label: "Door leaf", value: "SD - Single Door; DD - Double Door" },
-      { label: "Options", value: "None; Antimicrobial" },
+      { label: "Model", value: "TA12 — Glass Patch Locks" },
+      { label: "Function options", value: "01 Passage · 04 Office · 05 Classroom · 07 Storeroom · 13 Corridor · 21 Dormitory" },
+      { label: "Trim", value: "R — On Rose · E — Escutcheon Plate · DE — Only for Deadbolt Lock" },
+      { label: "Cylinder", value: "W · M · L · IC" },
+      { label: "Lever designs", value: "SS · GS · TS · DS · GE · SE · QS" },
+      { label: "Door leaf", value: "SD — Single Door · DD — Double Door" },
+      { label: "Options", value: "None · Antimicrobial" },
     ],
-    howToOrder:
-      "Brand Identity · Model No · Function · On Rose/Esc · Cylinder · Lever Designs · Door Leaf · Options · Finish",
+    technicalDrawings: [
+      {
+        title: "Standard Mortise Cylinder",
+        image: secureDoorImage("ta1200-series-standard-lever-designs/ta1200-standard-mortise-cylinder-1.png"),
+        alt: "Standard mortise cylinder technical drawing for TA1200 Series locksets",
+        caption: "Standard mortise cylinder details for TA1200 Series locksets.",
+      },
+    ],
+    technicalDrawingsSectionTitle: "Standard Mortise Cylinders",
+    howToOrderTable: {
+      columns: [
+        { label: "Brand Identity", values: ["TA"] },
+        { label: "Model No", values: ["12 — Glass Patch Locks"] },
+        { label: "Function", values: ["01 — Passage", "04 — Office", "05 — Classroom", "07 — Storeroom", "13 — Corridor", "21 — Dormitory"] },
+        { label: "On Rose / Esc", values: ["R — On Rose", "E — Escutcheon Plate", "DE — Only for Deadbolt Lock"] },
+        { label: "Cylinder", values: ["W", "M", "L", "IC"] },
+        { label: "Lever Designs", values: ["SS", "TS", "QS", "GS", "DS"] },
+        { label: "Door Leaf", values: ["SD — Single Door", "DD — Double Door"] },
+        { label: "Options", values: ["— (None)", "Antimicrobial"] },
+        { label: "Finish", values: ["630", "629", "626", "625", "600"] },
+      ],
+    },
     orderCodeExample: "TA1205.R.W.TS.SD.630",
+    cylinderLegend: [
+      { label: "W", value: "Without cylinder" },
+      { label: "M", value: "Mortise cylinder" },
+      { label: "L", value: "Less IC core" },
+      { label: "IC", value: "With SFIC" },
+    ],
+    sourceOldUrl: oldDoorHardwareProductUrl(73),
     inquirySubject: "TA1200 Series Standard Lever Designs Inquiry",
     relatedSlugs: ["ta1200-series-glass-patch-locksets", "mortise-locksets", "designer-lever-styles"],
   }),
@@ -2443,34 +3207,68 @@ export const products: Product[] = [
     title: "TA1200 Series Glass Patch Locksets",
     routeGroupSlug: "secure-the-door",
     routeGroupTitle: "Secure The Door",
-    description:
-      "Merged TA1200 Series glass patch lockset page covering both old TUR entries: the 4.5 in cover lockset and the ANSI mortise lock kit with solid stainless steel lever trim.",
-    shortDescription:
-      "TA1200 glass patch locksets for 10 to 12 mm tempered glass doors.",
-    overview:
-      "The old TUR listing contains two TA1200 Series Glass Patch Locksets entries. They are related variants rather than separate canonical products, so both old pages are consolidated here under one product.",
+    imagePath: secureDoorImage("ta1200-series-glass-patch-locksets/ta1200-glass-patch-locksets-main.jpg"),
+    galleryPaths: [
+      secureDoorImage("ta1200-series-glass-patch-locksets/ta1200-glass-patch-locksets-main.jpg"),
+      secureDoorImage("ta1200-series-glass-patch-locksets/ta1200-glass-patch-locksets-mortise-kit.jpg"),
+    ],
     imageFilename: "default-1861186899201018.jpg",
-    galleryFilenames: ["default-644146679201018.jpg"],
     imageAlt: "TA1200 Series glass patch lockset product image",
+    description:
+      "TA1200 Series glass patch locksets for 10–12 mm tempered glass doors, available in two variants: the 4.5 in cover lockset (old id=72) and the ANSI mortise lock kit with solid stainless steel 304 lever handle and rose trim (old id=71).",
+    shortDescription:
+      "TA1200 glass patch locksets for 10–12 mm tempered glass doors — 4.5 in cover variant and ANSI mortise lock kit with stainless steel lever trim.",
+    overview:
+      "Two old TUR catalogue entries are consolidated here under one canonical page. The 4.5 in cover variant (old id=72) uses a superior aluminium alloy body with stainless steel 304 cover, available with or without pull handle. The ANSI mortise lock kit variant (old id=71) provides solid stainless steel 304 lever handle and rose trim across four function options. Both variants suit 10–12 mm tempered glass doors and are available in LH and RH configurations.",
     features: [
+      "Two variants: 4.5 in cover (old id=72) and ANSI mortise lock kit with solid stainless steel 304 lever handle (old id=71).",
       "Superior aluminium alloy body with stainless steel 304 cover.",
       "Suitable for 10 to 12 mm tempered glass doors.",
-      "Cylinder lengths: 25 mm and 27 mm.",
-      "Housing lengths for IC core: 35 mm and 38 mm.",
-      "Handed door direction: LH or RH.",
+      "Cylinder lengths: 25 mm and 27 mm; IC core housing: 35 mm and 38 mm.",
+      "Handed door direction: LH (Left Hand) and RH (Right Hand).",
+      "Finishes: US32D, US32, US3, US4, Dark Bronze.",
     ],
     applications: ["Tempered glass doors", "Glass patch locksets", "Commercial glass openings"],
     finishOptions: ["US32D", "US32", "US3", "US4", "Dark Bronze"],
+    featureLists: [
+      {
+        title: "Door Direction",
+        items: ["LH — Left Hand", "RH — Right Hand"],
+        // TODO: place ta1200-glass-patch-locksets-door-direction.jpg in /public/tur/american-standard/secure-the-door/ta1200-series-glass-patch-locksets/
+        image: secureDoorImage("ta1200-series-glass-patch-locksets/ta1200-glass-patch-locksets-door-direction.jpg"),
+        imageAlt: "TA1200 glass patch lockset handed door direction diagram showing LH and RH configurations.",
+        caption: "TA1200 glass patch lockset handed door direction reference.",
+      },
+    ],
+    detailImages: [
+      {
+        title: "4.5 in Cover Variant",
+        image: secureDoorImage("ta1200-series-glass-patch-locksets/ta1200-glass-patch-locksets-main.jpg"),
+        alt: "TA1200 Series 4.5 in cover glass patch lockset — old id=72",
+        caption: "4.5 in Cover Variant — old id=72",
+      },
+      {
+        title: "ANSI Mortise Lock Kit Variant",
+        // TODO: replace with a distinct mortise-kit photo if available
+        image: secureDoorImage("ta1200-series-glass-patch-locksets/ta1200-glass-patch-locksets-mortise-kit.jpg"),
+        alt: "TA1200 Series ANSI mortise lock kit glass patch lockset — old id=71",
+        caption: "ANSI Mortise Lock Kit Variant — old id=71",
+      },
+    ],
     variants: [
       {
         key: "standard-cover",
         label: "4.5 in Cover Variant",
         description:
-          "Old product id 72. Cover size 4.5 in x 10 in with pull handle or 4.5 in x 7.1 in without pull handle.",
-        options: [
-          "Materials: superior aluminium alloy body, stainless steel 304 cover.",
-          "Cover size: 4.5 in x 10 in with pull handle; 4.5 in x 7.1 in without pull handle.",
-          "Suitable door: 10 to 12 mm tempered glass.",
+          "Old product id=72. Superior aluminium alloy body with stainless steel 304 cover. Available with pull handle (4.5 in × 10 in) or without pull handle (4.5 in × 7.1 in).",
+        specs: [
+          { label: "Materials", value: "Superior aluminium alloy body; stainless steel 304 cover" },
+          { label: "Cover size — with pull handle", value: "4.5 in × 10 in (114 mm × 254 mm)" },
+          { label: "Cover size — without pull handle", value: "4.5 in × 7.1 in (114 mm × 180 mm)" },
+          { label: "Cylinder length", value: "25 mm, 27 mm" },
+          { label: "Housing length for IC core", value: "35 mm, 38 mm" },
+          { label: "Suitable door", value: "10 to 12 mm tempered glass" },
+          { label: "Door direction", value: "LH (Left Hand), RH (Right Hand)" },
         ],
         finishOptions: ["US32D", "US32", "US3", "US4", "Dark Bronze"],
       },
@@ -2478,15 +3276,20 @@ export const products: Product[] = [
         key: "mortise-lock-kit",
         label: "ANSI Mortise Lock Kit Variant",
         description:
-          "Old product id 71. TA1200 ANSI mortise lock kit with solid stainless steel 304 lever handle and rose trim.",
-        options: [
-          "Functions: Storeroom (F07), Classroom (F05), Office (F04), Passage (F01).",
-          "Cover size: 6 in x 10 in.",
-          "Suitable door: 10 to 12 mm tempered glass.",
+          "Old product id=71. TA1200 ANSI mortise lock kit with solid stainless steel 304 lever handle and rose trim.",
+        specs: [
+          { label: "Material / trim", value: "Solid stainless steel 304 lever handle; rose trim; aluminium alloy body" },
+          { label: "Cover size", value: "6 in × 10 in (152 mm × 254 mm)" },
+          { label: "Function options", value: "F07 Storeroom · F05 Classroom · F04 Office · F01 Passage" },
+          { label: "Cylinder length", value: "25 mm, 27 mm" },
+          { label: "Housing length for IC core", value: "35 mm, 38 mm" },
+          { label: "Suitable door", value: "10 to 12 mm tempered glass" },
+          { label: "Door direction", value: "LH (Left Hand), RH (Right Hand)" },
         ],
         finishOptions: ["US32D", "US32", "US3", "US4", "Dark Bronze"],
       },
     ],
+    sourceOldUrl: oldDoorHardwareProductUrl(72),
     inquirySubject: "TA1200 Series Glass Patch Locksets Inquiry",
     relatedSlugs: ["ta1200-series-standard-lever-designs", "mortise-locksets", "escutcheon-plates"],
   }),
@@ -2495,35 +3298,58 @@ export const products: Product[] = [
     title: "TA1000 Series Mortise Lockset Grade 1",
     routeGroupSlug: "secure-the-door",
     routeGroupTitle: "Secure The Door",
+    imagePath: secureDoorImage("ta1000-series-mortise-lockset-grade-1/ta1000-mortise-lockset-grade-1-main.jpg"),
+    imageFilename: "default-890121905210429.jpg",
+    imageAlt: "TA1000 Series Mortise Lockset Grade 1 annotated product image",
     description:
       "TA1000 Series Grade 1 extra heavy duty mortise lockset with stainless steel latchbolt/deadbolt and high-strength internal steel alloy components.",
     shortDescription:
       "Grade 1 extra heavy duty TA1000 mortise lockset with stainless steel bolt components.",
     overview:
-      "The TA1000 Series Mortise Lockset Grade 1 is presented by the old TUR page as an extra heavy duty mortise lockset. The lock case and internal components are corrosion treated, with reversible lockcase handling and high-strength cylinder retention.",
-    imageFilename: "default-890121905210429.jpg",
-    imageAlt: "TA1000 Series Mortise Lockset Grade 1 product image",
+      "The TA1000 Series Mortise Lockset Grade 1 is an extra heavy duty mortise lockset. The lock case and internal components are corrosion treated, with reversible lockcase handling and high-strength cylinder retention. Conforms to ANSI A115.1 preparation and features break-away spindles to prevent forced entry.",
     features: [
       "Latchbolt and deadbolt fabricated from stainless steel.",
       "Internal parts fabricated from high-strength steel alloy.",
       "Mortise lock case and internal components treated for corrosion resistance.",
       "Lockcase can be reversed without disassembling the lock body.",
+      "High-strength steel alloy cylinder retainer.",
       "Two-piece anti-friction latchbolt reduces wear and tear.",
       "Hub blocking plate guards against spindle manipulation.",
     ],
     applications: ["Extra heavy duty commercial openings", "Institutional locksets", "High-traffic secure doors"],
     finishOptions: ["US32D / 630", "US15 / 619", "Other finishes by extended lead time"],
     specs: [
-      { label: "Case size", value: '4-5/16 in x 6 in x 1 in (110 mm x 152 mm x 25 mm)' },
-      { label: "Armour front", value: '1-1/4 in x 8 in (32 mm x 203 mm)' },
+      { label: "Case size", value: '4-5/16 in × 6 in × 1 in (110 mm × 152 mm × 25 mm)' },
+      { label: "Armour front", value: '1-1/4 in × 8 in (32 mm × 203 mm)' },
       { label: "Backset", value: "2-3/4 in (70 mm) only" },
       { label: "Preparation", value: "Conforms to ANSI A115.1" },
       { label: "Door range", value: "1-3/4 in (44 mm); specify other thickness if required" },
+      { label: "Bevelled doors", value: "Field adjusting tabs on case" },
       { label: "Deadbolt", value: "1 in (25 mm) throw, stainless steel" },
       { label: "Latchbolt", value: "3/4 in (19 mm) throw with anti-friction tongue, stainless steel" },
-      { label: "Cylinder", value: "6 pin cylinder standard with two keys, C keyway" },
+      { label: "Deadlocking", value: "Non-handed, stainless steel" },
+      { label: "Through bolts", value: "Through bolted trim aligns with mortise lock case" },
+      { label: "Stop works", value: "Incorporated into thumbturn" },
+      { label: "Strike", value: '1-1/4 in × 4-7/8 in curved lip, square corner. Extended lip strikes available.' },
+      { label: "Spindles", value: "Break-away under excessive torque, preventing forced entry or lock damage" },
+      { label: "Cylinder", value: 'Six pin cylinder standard, with two keys, "C" keyway' },
       { label: "IC core", value: "Interchangeable Core (IC) available" },
+      { label: "Cam", value: "All cylinder functions use standard butterfly style cam" },
+      { label: "Cylinder collar", value: "Compression ring and collar supplied standard" },
+      { label: "Fasteners", value: "Concealed under rose or escutcheon" },
+      { label: "Standard finishes", value: "Standard levers US32D / 630. Designer levers US32D / 630 and US15 / 619" },
+      { label: "Other finishes", value: "Available; extended lead time required" },
     ],
+    // TODO: place ta1000-mortise-lockset-grade-1-technical-drawing.jpg in /public/tur/american-standard/secure-the-door/ta1000-series-mortise-lockset-grade-1/
+    technicalDrawings: [
+      {
+        title: "Technical Drawing",
+        image: secureDoorImage("ta1000-series-mortise-lockset-grade-1/ta1000-mortise-lockset-grade-1-technical-drawing.png"),
+        alt: "TA1000 Series Mortise Lockset Grade 1 technical drawing showing case size, backset, armour front and lock body dimensions",
+        caption: "TA1000 Series Mortise Lockset Grade 1 dimensional drawing.",
+      },
+    ],
+    sourceOldUrl: oldDoorHardwareProductUrl(70),
     inquirySubject: "TA1000 Series Mortise Lockset Grade 1 Inquiry",
     relatedSlugs: ["mortise-locksets", "designer-lever-styles", "ta2100-series-deadlock"],
   }),
@@ -2533,23 +3359,34 @@ export const products: Product[] = [
     routeGroupSlug: "secure-the-door",
     routeGroupTitle: "Secure The Door",
     description:
-      "TA1000 Series anti-ligature door hardware solutions including anti-ligature knob, thumbturn, lever, hospital tip hinge options and anti-microbial coating.",
+      "TA1000 Series anti-ligature door hardware for healthcare and detention environments — anti-ligature knob, thumbturn and lever, hospital tip hinge, anti-microbial coating, coin turn cylinder, tactile warning, lead-lined and Torx security options.",
     shortDescription:
-      "Anti-ligature knobs, levers, thumbturns and related TA1000 safety options.",
+      "Ligature-resistant knobs, levers and thumbturns with safety accessories for healthcare and secure environments.",
     overview:
-      "The old TUR page positions anti-ligature knobs, levers and thumbturns with hospital tip hinges as patient-protection hardware for hospitals, behavioral health centers and detention environments.",
+      "The TA1000 Series Anti-ligature Solutions provide a comprehensive range of patient-protection hardware engineered for hospitals, behavioral health centers and detention facilities. Products include the AK1 anti-ligature knob and AL1 lever — both with recessed trims, sloped surfaces and concealed tamper-proof fasteners — along with an anti-ligature thumbturn, hospital tip hinge option and anti-microbial coating. Supporting accessories include coin turn cylinder emergency override, handicap thumb turn, tactile warning surface, lead-lined case cover and Torx security fasteners.",
+    imagePath: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-anti-ligature-main.jpg"),
     imageFilename: "default-938817670201018.jpg",
-    imageAlt: "TA1000 Series anti-ligature solution product image",
+    imageAlt: "TA1000 Series anti-ligature door hardware solutions",
     features: [
-      "AK1 anti-ligature knob with recessed trim, sloped surface and concealed fastening hardware.",
-      "Anti-ligature thumbturn with recessed trim and sloped surface.",
-      "AL1 anti-ligature lever with integrated clutch for excessive-force rotation.",
-      "Hospital tip door hinge option with ligature-resistant sloped tip.",
-      "Solid stainless steel construction with recessed tamper-proof screws.",
-      "Anti-microbial coating available on levers, knobs, turns and cylinder rings.",
+      "AK1 anti-ligature knob: recessed trim, sloped surface and concealed tamper-proof fasteners.",
+      "Anti-ligature thumbturn: recessed trim and sloped surface for ligature resistance.",
+      "AL1 anti-ligature lever: integrated clutch disengages under excessive rotational force.",
+      "Hospital tip door hinge: sloped ligature-resistant tip for patient safety.",
+      "Anti-microbial coating available on levers, knobs, thumbturns and cylinder rings.",
+      "Solid stainless steel construction throughout.",
+      "Coin turn cylinder (CT) for emergency override.",
+      "Handicap thumb turn available for rose trim.",
+      "Tactile warning peened surface on stainless steel and 26D finish levers.",
+      "Lead-lined (LL) option: 1/8 in thick lead plate on case cover.",
+      "Torx security fasteners for reduced tampering.",
     ],
-    applications: ["Hospitals", "Behavioral health centers", "Jails and detention centers", "Patient rooms"],
-    finishOptions: ["Stainless Steel", "Anti-microbial coating available"],
+    applications: [
+      "Hospitals and patient rooms",
+      "Behavioral health and psychiatric facilities",
+      "Jails and detention centers",
+      "Secure residential care environments",
+    ],
+    finishOptions: ["Stainless Steel (32D / 630)", "Anti-microbial coating available"],
     specs: [
       { label: "Coin turn cylinder (CT)", value: "For emergency override" },
       { label: "Handicap thumb turn", value: "Available for rose trim" },
@@ -2557,8 +3394,119 @@ export const products: Product[] = [
       { label: "Lead lined (LL)", value: "1/8 in thick lead plate installed on case cover" },
       { label: "Torx security", value: "Security fasteners for reduced tampering" },
     ],
+    solutionComponents: [
+      {
+        title: "Anti-ligature Knob (AK1)",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-anti-ligature-knob.jpg"),
+        imageAlt: "AK1 anti-ligature knob with recessed trim",
+        bullets: [
+          "Recessed trim with sloped surface",
+          "Concealed tamper-proof fastening hardware",
+          "Solid stainless steel construction",
+          "Designed to eliminate ligature attachment points",
+        ],
+      },
+      {
+        title: "Anti-ligature Thumbturn",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-anti-ligature-thumbturn.jpg"),
+        imageAlt: "Anti-ligature thumbturn with recessed trim",
+        bullets: [
+          "Recessed trim with sloped surface",
+          "No projecting edges or attachment points",
+          "Stainless steel construction",
+          "Compatible with TA1000 mortise locksets",
+        ],
+      },
+      {
+        title: "Anti-ligature Lever (AL1)",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-anti-ligature-lever.jpg"),
+        imageAlt: "AL1 anti-ligature lever",
+        bullets: [
+          "Integrated clutch mechanism",
+          "Disengages under excessive rotational force",
+          "Reduces ligature risk while maintaining function",
+          "Solid stainless steel",
+        ],
+      },
+      {
+        title: "Hospital Tip Door Hinge",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-hospital-tip-door-hinge.jpg"),
+        imageAlt: "Hospital tip door hinge with sloped ligature-resistant tip",
+        bullets: [
+          "Sloped ligature-resistant tip design",
+          "Replaces standard square hinge tip",
+          "Specified for patient-safety environments",
+          "Coordinates with TA1000 hardware package",
+        ],
+      },
+      {
+        title: "Anti-microbial Coating",
+        bullets: [
+          "Available on levers, knobs, thumbturns and cylinder rings",
+          "Inhibits growth of bacteria on hardware surfaces",
+          "Suitable for high-hygiene healthcare environments",
+          "Factory-applied coating option",
+        ],
+      },
+      {
+        title: "Coin Turn Cylinder (CT)",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-coin-turn-cylinder-ct.jpg"),
+        imageAlt: "Coin turn cylinder for emergency override",
+        bullets: [
+          "Emergency override from outside",
+          "Operated with standard coin or flat tool",
+          "Used in patient room and restroom applications",
+          "Mounts in standard cylinder prep",
+        ],
+      },
+      {
+        title: "Handicap Thumb Turn",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-handicap-thumb-turn.jpg"),
+        imageAlt: "Handicap thumb turn for rose trim",
+        bullets: [
+          "Available for rose trim",
+          "Larger turn format for reduced dexterity users",
+          "ADA-coordinated design",
+          "Integrates with TA1000 rose assembly",
+        ],
+      },
+      {
+        title: "Tactile Warning",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-tactile-warning.jpg"),
+        imageAlt: "Tactile warning peened surface on lever",
+        bullets: [
+          "Peened surface applied to lever, knob or turn",
+          "Available on stainless steel and 26D finish",
+          "Provides tactile indication of room status or hazard",
+          "Factory-applied surface treatment",
+        ],
+      },
+      {
+        title: "Lead Lined (LL)",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-lead-lined-ll.jpg"),
+        imageAlt: "Lead-lined lockset case cover option",
+        bullets: [
+          "1/8 in thick lead plate on case cover",
+          "Specified for radiology and X-ray room doors",
+          "Coordinates with lead-lined door construction",
+          "Factory-installed option",
+        ],
+      },
+      {
+        title: "Torx Security",
+        image: secureDoorImage("ta1000-series-anti-ligature-solutions/ta1000-torx-security.jpg"),
+        imageAlt: "Torx security fasteners for reduced tampering",
+        bullets: [
+          "Torx-drive fasteners replace standard Phillips/slotted screws",
+          "Requires Torx driver for removal — deters casual tampering",
+          "Available across anti-ligature trim components",
+          "Recommended for detention and behavioral health installations",
+        ],
+      },
+    ],
+    sourceOldUrl: oldDoorHardwareProductUrl(69),
     inquirySubject: "TA1000 Series Anti-ligature Solutions Inquiry",
-    relatedSlugs: ["hospital-tip-ht", "ta1000-series-mortise-lockset-grade-1", "mortise-locksets"],
+    relatedSlugs: ["ta1000-series-mortise-lockset-grade-1", "mortise-locksets", "escutcheon-plates"],
   }),
   defineAmericanStandardProduct({
     slug: "ta1000-commercial-lever-styles",
@@ -2590,6 +3538,7 @@ export const products: Product[] = [
       { modelNo: "LD19" },
       { modelNo: "BK" },
     ],
+    sourceOldUrl: oldDoorHardwareProductUrl(68),
     inquirySubject: "TA1000 Commercial Lever Styles Inquiry",
     relatedSlugs: ["mortise-locksets", "designer-lever-styles", "ta1000-series-mortise-lockset-grade-1"],
   }),
@@ -2618,6 +3567,7 @@ export const products: Product[] = [
       { modelNo: "ER2", note: "3/8 in projection; red/white indicator with coin turn" },
       { modelNo: "ER3", note: "Blank / Do Not Disturb; thumb turn actuation for rose turn only" },
     ],
+    sourceOldUrl: oldDoorHardwareProductUrl(67),
     inquirySubject: "Occupied Indicators Inquiry",
     relatedSlugs: ["mortise-locksets", "escutcheon-plates", "ta1000-series-mortise-lockset-grade-1"],
   }),
@@ -2645,6 +3595,7 @@ export const products: Product[] = [
     howToOrder:
       "Brand Identity · Model No · Function · On Rose/Esc · Cylinder · Commercial Levers · Design Levers · Options · Finish",
     orderCodeExample: "TA1001.R.W.LD01.630",
+    sourceOldUrl: oldDoorHardwareProductUrl(66),
     inquirySubject: "Mortise Locksets Inquiry",
     relatedSlugs: ["ta1000-series-mortise-lockset-grade-1", "designer-lever-styles", "occupied-indicators"],
   }),
@@ -2667,6 +3618,7 @@ export const products: Product[] = [
     specs: [
       { label: "ESC1 Outside", value: '1-3/4 in (44 mm) wide x 7-15/16 in (202 mm) high x 7/16 in (11 mm) thick' },
     ],
+    sourceOldUrl: oldDoorHardwareProductUrl(65),
     inquirySubject: "Escutcheon Plates Inquiry",
     relatedSlugs: ["mortise-locksets", "designer-lever-styles", "ta1000-series-mortise-lockset-grade-1"],
   }),
@@ -2704,6 +3656,7 @@ export const products: Product[] = [
       { modelNo: "L422" },
       { modelNo: "L423" },
     ],
+    sourceOldUrl: oldDoorHardwareProductUrl(64),
     inquirySubject: "Designer Lever Styles Inquiry",
     relatedSlugs: ["mortise-locksets", "ta1000-commercial-lever-styles", "escutcheon-plates"],
   }),
@@ -2741,6 +3694,7 @@ export const products: Product[] = [
       { label: "Cylinder", value: "Accepts standard 1-5/32 in diameter mortise cylinder" },
       { label: "Faceplate finish", value: "US28" },
     ],
+    sourceOldUrl: oldDoorHardwareProductUrl(63),
     inquirySubject: "Deadlatch Locks Inquiry",
     relatedSlugs: ["ta2100-series-deadlock", "mortise-locksets", "cylindrical-locksets"],
   }),
@@ -2782,6 +3736,7 @@ export const products: Product[] = [
     howToOrder:
       "Brand Identity · Model No · Function · Type · Cylinder · Options · Finish",
     orderCodeExample: "TA2075.KK.W.630",
+    sourceOldUrl: oldDoorHardwareProductUrl(62),
     inquirySubject: "Cylindrical Locksets Inquiry",
     relatedSlugs: ["mortise-locksets", "ta2100-series-deadlock", "deadlatch-locks"],
   }),

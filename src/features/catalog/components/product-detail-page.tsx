@@ -1,11 +1,18 @@
 import Image from "next/image";
 import type {
   BreadcrumbItem,
+  HowToOrderTable,
   Product,
+  ProductAccessory,
   ProductComparisonSpec,
+  ProductDetailImage,
+  ProductFeatureList,
+  ProductInstallationDetail,
   ProductModelRow,
+  ProductSolutionComponent,
   ProductSpec,
   ProductVariant,
+  TechnicalDrawing,
 } from "@/types";
 import { createInquiryHref } from "@/content/site/site-config";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
@@ -185,6 +192,14 @@ function VariantSection({ variant }: { variant: ProductVariant }) {
       </div>
 
       <div className="flex flex-col gap-4 p-5">
+        {variant.specs && variant.specs.length > 0 ? (
+          <div>
+            <p className="mb-2 text-[9.5px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
+              Specifications
+            </p>
+            <SpecTable specs={variant.specs} />
+          </div>
+        ) : null}
         {variant.modelRows && variant.modelRows.length > 0 ? (
           <div>
             <p className="mb-2 text-[9.5px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
@@ -256,6 +271,274 @@ function VariantSection({ variant }: { variant: ProductVariant }) {
   );
 }
 
+// ── Technical drawings (multi-variant or single) ─────────────────────────────
+function TechnicalDrawingsSection({ drawings }: { drawings: TechnicalDrawing[] }) {
+  return (
+    <div className={`grid gap-5${drawings.length > 1 ? " md:grid-cols-2" : ""}`}>
+      {drawings.map((drawing, i) => (
+        <div
+          key={drawing.variant ?? `drawing-${i}`}
+          className="overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="flex items-center justify-center bg-white p-6 sm:p-8">
+            <Image
+              src={drawing.image}
+              alt={drawing.alt}
+              width={600}
+              height={400}
+              className="h-auto max-h-[22rem] w-full object-contain"
+            />
+          </div>
+          <div className="border-t border-[var(--border)] px-5 py-3.5">
+            {drawing.variant ? (
+              <p className="text-[9px] font-bold uppercase tracking-[0.26em] text-[var(--accent)]">
+                {drawing.variant}
+              </p>
+            ) : null}
+            <p className={`${drawing.variant ? "mt-1 " : ""}text-[13px] font-medium leading-snug text-[var(--foreground)]`}>
+              {drawing.caption}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Feature list section (lever designs, code lists, etc.) ───────────────────
+function FeatureListSection({ list }: { list: ProductFeatureList }) {
+  return (
+    <div className={list.image ? "grid gap-5 lg:grid-cols-[1fr_0.9fr]" : ""}>
+      <div className="card-panel p-6">
+        <div className="flex flex-wrap gap-2">
+          {list.items.map((item) => (
+            <span
+              key={item}
+              className="rounded-full border border-[var(--border)] bg-[var(--panel)] px-3 py-1.5 font-mono text-[12px] font-semibold tracking-wide text-[var(--foreground)]"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+      {list.image ? (
+        <div className="overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)]">
+          <div className="flex items-center justify-center bg-white p-6 sm:p-8">
+            <Image
+              src={list.image}
+              alt={list.imageAlt ?? list.title}
+              width={600}
+              height={400}
+              className="h-auto max-h-[20rem] w-full object-contain"
+            />
+          </div>
+          {list.caption ? (
+            <div className="border-t border-[var(--border)] px-5 py-3.5">
+              <p className="text-[13px] leading-snug text-[var(--muted-foreground)]">
+                {list.caption}
+              </p>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// ── Solution component cards (image + bullets) ───────────────────────────────
+function SolutionComponentCard({ item }: { item: ProductSolutionComponent }) {
+  return (
+    <div className="card-panel overflow-hidden p-0">
+      {item.image ? (
+        <div className="flex items-center justify-center bg-white p-6">
+          <Image
+            src={item.image}
+            alt={item.imageAlt ?? item.title}
+            width={400}
+            height={300}
+            className="h-auto max-h-[12rem] w-full object-contain"
+          />
+        </div>
+      ) : null}
+      <div className={`p-5${item.image ? " border-t border-[var(--border)]" : ""}`}>
+        <p className="eyebrow">{item.title}</p>
+        {item.bullets.length > 0 ? (
+          <ul className="mt-3 flex flex-col gap-2">
+            {item.bullets.map((b, i) => (
+              <li key={i} className="flex items-start gap-2 text-[12.5px] leading-[1.65] text-[var(--muted-foreground)]">
+                <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)] opacity-60" />
+                {b}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+// ── Product detail images (views / function images) ──────────────────────────
+function DetailImagesSection({ images }: { images: ProductDetailImage[] }) {
+  return (
+    <div className={`grid gap-5${images.length > 1 ? " sm:grid-cols-2" : ""}`}>
+      {images.map((img, i) => (
+        <div
+          key={`detail-img-${i}`}
+          className="overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)]"
+        >
+          <div className="flex items-center justify-center bg-white p-6 sm:p-8">
+            <Image
+              src={img.image}
+              alt={img.alt}
+              width={600}
+              height={400}
+              className="h-auto max-h-[22rem] w-full object-contain"
+            />
+          </div>
+          <div className="border-t border-[var(--border)] px-5 py-3.5">
+            <p className="text-[9px] font-bold uppercase tracking-[0.26em] text-[var(--accent)]">
+              {img.title}
+            </p>
+            <p className="mt-1 text-[13px] font-medium leading-snug text-[var(--foreground)]">
+              {img.caption}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Available options list ────────────────────────────────────────────────────
+function AvailableOptionsBlock({ options }: { options: string[] }) {
+  return (
+    <div className="card-panel p-5">
+      <p className="eyebrow">Available Options</p>
+      <ul className="mt-3 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+        {options.map((opt) => (
+          <li key={opt} className="flex items-center gap-2 text-[12.5px] leading-[1.6] text-[var(--muted-foreground)]">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)] opacity-60" />
+            {opt}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// ── Accessories table ─────────────────────────────────────────────────────────
+function AccessoriesBlock({ accessories }: { accessories: ProductAccessory[] }) {
+  return (
+    <div className="card-panel p-5">
+      <p className="eyebrow">Accessories</p>
+      <div className="mt-4 overflow-hidden rounded-[0.75rem] border border-[var(--border)]">
+        <table className="w-full text-[13px]">
+          <thead>
+            <tr className="border-b border-[var(--border)] bg-[var(--panel)]">
+              <th className="px-4 py-2.5 text-left font-bold uppercase tracking-[0.1em] text-[var(--muted-foreground)]">
+                Accessory
+              </th>
+              <th className="w-[10rem] px-4 py-2.5 text-left font-bold uppercase tracking-[0.1em] text-[var(--muted-foreground)]">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[var(--border)]">
+            {accessories.map((acc) => (
+              <tr key={acc.label} className="group">
+                <td className="px-4 py-3 leading-snug text-[var(--foreground)]">
+                  {acc.label}
+                  {acc.note ? (
+                    <span className="ml-2 text-[11px] text-[var(--muted-foreground)]">
+                      ({acc.note})
+                    </span>
+                  ) : null}
+                </td>
+                <td className="px-4 py-3 leading-snug">
+                  <span
+                    className={`inline-flex rounded-full px-2.5 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.12em] ${
+                      acc.status === "Standard"
+                        ? "bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--accent)]"
+                        : "bg-[var(--panel)] text-[var(--muted-foreground)]"
+                    }`}
+                  >
+                    {acc.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ── Structured how-to-order table ─────────────────────────────────────────────
+function HowToOrderTableBlock({
+  table,
+  orderCodeExample,
+}: {
+  table: HowToOrderTable;
+  orderCodeExample?: string;
+}) {
+  return (
+    <div className="card-panel p-5">
+      <p className="eyebrow">How to Order</p>
+      <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-6">
+        {table.columns.map((col) => (
+          <div key={col.label}>
+            <p className="mb-2 text-[9.5px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
+              {col.label}
+            </p>
+            <ul className="flex flex-col gap-1">
+              {col.values.map((val) => (
+                <li key={val} className="text-[12px] leading-[1.5] text-[var(--muted-foreground)]">
+                  {val}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      {orderCodeExample ? (
+        <div className="mt-4 flex items-center gap-3 border-t border-[var(--border)] pt-4">
+          <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
+            Example:
+          </span>
+          <code className="rounded-[0.5rem] border border-[var(--border)] bg-[var(--panel)] px-3 py-1.5 font-mono text-[13px] font-semibold tracking-wide text-[var(--foreground)]">
+            {orderCodeExample}
+          </code>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// ── Individual installation section (Regular Arm / Parallel Arm / Top Jamb / etc.) ──
+function InstallationDetailSection({ item }: { item: ProductInstallationDetail }) {
+  return (
+    <div>
+      {item.description ? (
+        <p className="mb-4 text-[13.5px] leading-[1.78] text-[var(--muted-foreground)]">
+          {item.description}
+        </p>
+      ) : null}
+      <div className="overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)]">
+        <div className="flex items-center justify-center bg-white p-6 sm:p-8">
+          <Image
+            src={item.image}
+            alt={item.alt}
+            width={960}
+            height={540}
+            className="h-auto max-h-[36rem] w-full object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 type ProductDetailPageProps = {
   breadcrumbs: BreadcrumbItem[];
@@ -273,6 +556,15 @@ export function ProductDetailPage({
   const hasModelRows = product.modelRows && product.modelRows.length > 0;
   const hasHowToOrder = !!(product.howToOrder ?? product.orderCodeExample);
   const hasDiagram = !!product.diagram;
+  const hasTechnicalDrawings = !!product.technicalDrawings && product.technicalDrawings.length > 0;
+  const hasHowToOrderTable = !!product.howToOrderTable;
+  const hasAvailableOptions = !!product.availableOptions && product.availableOptions.length > 0;
+  const hasAccessories = !!product.accessories && product.accessories.length > 0;
+  const hasInstallationDetails = !!product.installationDetails && product.installationDetails.length > 0;
+  const hasDetailImages = !!product.detailImages && product.detailImages.length > 0;
+  const hasFeatureLists = !!product.featureLists && product.featureLists.length > 0;
+  const hasSolutionComponents = !!product.solutionComponents && product.solutionComponents.length > 0;
+  const hasCylinderLegend = !!product.cylinderLegend && product.cylinderLegend.length > 0;
 
   return (
     <>
@@ -382,17 +674,51 @@ export function ProductDetailPage({
           </section>
         </PageContainer>
 
+        {/* ── Feature Lists (lever designs, code option lists, etc.) ── */}
+        {hasFeatureLists ? (
+          <>
+            {product.featureLists!.map((fl, i) => (
+              <PageContainer key={`fl-${i}`} className="section-shell pt-0">
+                <section>
+                  <p className="eyebrow mb-4">{fl.title}</p>
+                  <FeatureListSection list={fl} />
+                </section>
+              </PageContainer>
+            ))}
+          </>
+        ) : null}
+
+        {/* ── Solution Components (image + bullets grid) ── */}
+        {hasSolutionComponents ? (
+          <PageContainer className="section-shell pt-0">
+            <section>
+              <p className="eyebrow mb-4">Solution Components</p>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {product.solutionComponents!.map((item) => (
+                  <SolutionComponentCard key={item.title} item={item} />
+                ))}
+              </div>
+            </section>
+          </PageContainer>
+        ) : null}
+
         {/* ── Technical Specifications ── */}
-        {(hasSpecs || product.comparisonSpecs) ? (
+        {/* comparisonSpecs renders here for variant/no-model-rows products. specs only renders here when installationDetails is absent; otherwise specs move to the Product Description section below. */}
+        {((hasSpecs && !hasInstallationDetails) || (product.comparisonSpecs && (hasVariants || !hasModelRows))) ? (
           <PageContainer className="section-shell pt-0">
             <section>
               <p className="eyebrow mb-4">Technical Details</p>
-              {product.comparisonSpecs ? (
-                <div className={hasSpecs ? "mb-5" : ""}>
+              {product.comparisonSpecs && (hasVariants || !hasModelRows) ? (
+                <div className={hasSpecs && !hasInstallationDetails ? "mb-5" : ""}>
+                  {product.comparisonSpecs.title ? (
+                    <p className="mb-2 text-[9.5px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
+                      {product.comparisonSpecs.title}
+                    </p>
+                  ) : null}
                   <ComparisonSpecTable data={product.comparisonSpecs} />
                 </div>
               ) : null}
-              {hasSpecs ? <SpecTable specs={product.specs!} /> : null}
+              {hasSpecs && !hasInstallationDetails ? <SpecTable specs={product.specs!} /> : null}
             </section>
           </PageContainer>
         ) : null}
@@ -401,9 +727,36 @@ export function ProductDetailPage({
         {!hasVariants && hasModelRows ? (
           <PageContainer className="section-shell pt-0">
             <section>
-              <p className="eyebrow mb-4">Model Numbers</p>
+              <p className="eyebrow mb-4">{product.modelSectionTitle ?? "Model Numbers"}</p>
               <ModelTable rows={product.modelRows!} />
-              {hasHowToOrder ? (
+              {hasTechnicalDrawings ? (
+                <div className="mt-6">
+                  <p className="eyebrow mb-3">Technical Drawing</p>
+                  <TechnicalDrawingsSection drawings={product.technicalDrawings!} />
+                </div>
+              ) : null}
+              {product.comparisonSpecs && !hasVariants ? (
+                <div className="mt-5">
+                  {product.comparisonSpecs.title ? (
+                    <p className="eyebrow mb-3">{product.comparisonSpecs.title}</p>
+                  ) : null}
+                  <ComparisonSpecTable data={product.comparisonSpecs} />
+                </div>
+              ) : null}
+              {hasAvailableOptions ? (
+                <div className="mt-5">
+                  <AvailableOptionsBlock options={product.availableOptions!} />
+                </div>
+              ) : null}
+              {hasHowToOrderTable ? (
+                <div className="mt-5">
+                  <HowToOrderTableBlock
+                    table={product.howToOrderTable!}
+                    orderCodeExample={product.orderCodeExample}
+                  />
+                </div>
+              ) : null}
+              {hasHowToOrder && !hasHowToOrderTable ? (
                 <div className="mt-5">
                   <HowToOrderBlock
                     howToOrder={product.howToOrder}
@@ -411,6 +764,16 @@ export function ProductDetailPage({
                   />
                 </div>
               ) : null}
+            </section>
+          </PageContainer>
+        ) : null}
+
+        {/* ── Product Views (detail images / function images) ── */}
+        {hasDetailImages ? (
+          <PageContainer className="section-shell pt-0">
+            <section>
+              <p className="eyebrow mb-4">Product Views</p>
+              <DetailImagesSection images={product.detailImages!} />
             </section>
           </PageContainer>
         ) : null}
@@ -425,6 +788,82 @@ export function ProductDetailPage({
                   <VariantSection key={variant.key} variant={variant} />
                 ))}
               </div>
+            </section>
+          </PageContainer>
+        ) : null}
+
+        {/* ── Technical Drawings — standalone section for variant products or products without model rows ── */}
+        {hasTechnicalDrawings && (hasVariants || !hasModelRows) ? (
+          <PageContainer className="section-shell pt-0">
+            <section>
+              <p className="eyebrow mb-4">
+                {product.technicalDrawingsSectionTitle ??
+                  (product.technicalDrawings!.length === 1 ? "Technical Drawing" : "Technical Drawings")}
+              </p>
+              <TechnicalDrawingsSection drawings={product.technicalDrawings!} />
+            </section>
+          </PageContainer>
+        ) : null}
+
+        {/* ── Installation Details — individual sections for Regular Arm / Parallel Arm / Top Jamb / Power Chart etc. ── */}
+        {hasInstallationDetails ? (
+          <>
+            {product.installationDetails!.map((item, i) => (
+              <PageContainer key={`install-${i}`} className="section-shell pt-0">
+                <section>
+                  <p className="eyebrow mb-4">{item.title}</p>
+                  <InstallationDetailSection item={item} />
+                </section>
+              </PageContainer>
+            ))}
+          </>
+        ) : null}
+
+        {/* ── Product Description — specs table for products that use installationDetails ── */}
+        {hasInstallationDetails && hasSpecs ? (
+          <PageContainer className="section-shell pt-0">
+            <section>
+              <p className="eyebrow mb-4">Product Description</p>
+              <SpecTable specs={product.specs!} />
+            </section>
+          </PageContainer>
+        ) : null}
+
+        {/* ── Options & Ordering — for products without model rows (e.g. closers) ── */}
+        {!hasVariants && !hasModelRows && (hasAvailableOptions || hasAccessories || hasHowToOrderTable || (hasHowToOrder && !hasHowToOrderTable)) ? (
+          <PageContainer className="section-shell pt-0">
+            <section>
+              <p className="eyebrow mb-4">Options &amp; Ordering</p>
+              <div className="flex flex-col gap-5">
+                {hasAvailableOptions ? (
+                  <AvailableOptionsBlock options={product.availableOptions!} />
+                ) : null}
+                {hasAccessories ? (
+                  <AccessoriesBlock accessories={product.accessories!} />
+                ) : null}
+                {hasHowToOrderTable ? (
+                  <HowToOrderTableBlock
+                    table={product.howToOrderTable!}
+                    orderCodeExample={product.orderCodeExample}
+                  />
+                ) : null}
+                {hasHowToOrder && !hasHowToOrderTable ? (
+                  <HowToOrderBlock
+                    howToOrder={product.howToOrder}
+                    orderCodeExample={product.orderCodeExample}
+                  />
+                ) : null}
+              </div>
+            </section>
+          </PageContainer>
+        ) : null}
+
+        {/* ── Cylinder Legend ── */}
+        {hasCylinderLegend ? (
+          <PageContainer className="section-shell pt-0">
+            <section>
+              <p className="eyebrow mb-4">Cylinder</p>
+              <SpecTable specs={product.cylinderLegend!} />
             </section>
           </PageContainer>
         ) : null}

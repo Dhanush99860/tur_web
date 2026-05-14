@@ -136,7 +136,11 @@ export function CatalogRouteGroupPage({
               </h2>
             </div>
             <p className="text-[12.5px] text-[var(--muted-foreground)]">
-              {coreProducts.length} product{coreProducts.length !== 1 ? "s" : ""}
+              {optionProducts.length > 0
+                ? `${coreProducts.length} core product${coreProducts.length !== 1 ? "s" : ""} · ${optionProducts.length} option${optionProducts.length !== 1 ? "s" : ""}`
+                : group.legacyEntryCount != null
+                  ? `${coreProducts.length} product page${coreProducts.length !== 1 ? "s" : ""} · ${group.legacyEntryCount} legacy catalogue ${group.legacyEntryCount !== 1 ? "entries" : "entry"}`
+                  : `${coreProducts.length} product${coreProducts.length !== 1 ? "s" : ""}`}
             </p>
           </div>
 

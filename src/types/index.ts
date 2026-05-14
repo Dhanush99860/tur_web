@@ -262,6 +262,7 @@ export type ProductSpec = {
 };
 
 export type ProductComparisonSpec = {
+  title?: string;
   columns: string[];
   rows: {
     label: string;
@@ -286,6 +287,59 @@ export type ProductVariant = {
   howToOrder?: string;
   orderCodeExample?: string;
   options?: string[];
+  specs?: ProductSpec[];
+};
+
+export type TechnicalDrawing = {
+  title: string;
+  variant?: string;
+  image: string;
+  alt: string;
+  caption: string;
+};
+
+export type HowToOrderColumn = {
+  label: string;
+  values: string[];
+};
+
+export type HowToOrderTable = {
+  columns: HowToOrderColumn[];
+};
+
+export type ProductAccessory = {
+  label: string;
+  status: "Standard" | "Optional";
+  note?: string;
+};
+
+export type ProductInstallationDetail = {
+  title: string;
+  description?: string;
+  image: string;
+  alt: string;
+};
+
+export type ProductDetailImage = {
+  title: string;
+  image: string;
+  alt: string;
+  caption: string;
+};
+
+export type ProductFeatureList = {
+  title: string;
+  items: string[];
+  image?: string;
+  imageAlt?: string;
+  caption?: string;
+};
+
+export type ProductSolutionComponent = {
+  title: string;
+  image?: string;
+  imageAlt?: string;
+  bullets: string[];
 };
 
 export type Product = {
@@ -331,6 +385,28 @@ export type Product = {
   variants?: ProductVariant[];
   /** URL path to a technical drawing or diagram image */
   diagram?: string;
+  /** Per-variant technical drawings with captions, rendered after the Variants section */
+  technicalDrawings?: TechnicalDrawing[];
+  /** Structured column-based how-to-order reference table */
+  howToOrderTable?: HowToOrderTable;
+  /** Available factory options, e.g. NRP, ETW, PIC, RC */
+  availableOptions?: string[];
+  /** Accessories with Standard / Optional status */
+  accessories?: ProductAccessory[];
+  /** Ordered installation method sections — each rendered with its own heading, description, and diagram */
+  installationDetails?: ProductInstallationDetail[];
+  /** Product view / function images rendered as a labelled image grid */
+  detailImages?: ProductDetailImage[];
+  /** Override the "Model Numbers" section heading (e.g. "TA2100 Series Standard Functions") */
+  modelSectionTitle?: string;
+  /** Feature lists with optional image, rendered between Overview and Technical Details */
+  featureLists?: ProductFeatureList[];
+  /** Solution component cards (image + bullets), rendered after featureLists */
+  solutionComponents?: ProductSolutionComponent[];
+  /** Cylinder / code legend rendered after the How To Order section */
+  cylinderLegend?: ProductSpec[];
+  /** Override the default "Technical Drawing(s)" section heading */
+  technicalDrawingsSectionTitle?: string;
   resourceHref?: string;
   sourceOldUrl?: string;
   badge?: string;
@@ -351,6 +427,7 @@ export type CatalogRouteGroup = {
   imageAlt: string;
   eyebrow?: string;
   keywords: string[];
+  legacyEntryCount?: number;
 };
 
 export type HomeHeroSlide = {

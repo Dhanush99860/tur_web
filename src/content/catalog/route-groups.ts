@@ -59,6 +59,7 @@ export const routeGroups: CatalogRouteGroup[] = [
     image: "/tur/european-lockset.jpg",
     imageAlt: "American Standard mortise lockset and cylinder — door security hardware",
     eyebrow: "American Standard · Security Hardware",
+    legacyEntryCount: 13,
     keywords: [
       "mortise locks",
       "deadbolts",
