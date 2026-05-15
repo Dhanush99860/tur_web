@@ -305,8 +305,49 @@ function TechnicalDrawingsSection({ drawings }: { drawings: TechnicalDrawing[] }
   );
 }
 
-// ── Feature list section (lever designs, code lists, etc.) ───────────────────
+// ── Feature list section (lever designs, code lists, image-only, etc.) ────────
 function FeatureListSection({ list }: { list: ProductFeatureList }) {
+  // Image-only variant (no items) — renders the image full-width with caption
+  if (list.items.length === 0 && list.image) {
+    return (
+      <div className="overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)]">
+        <div className="flex items-center justify-center bg-white p-6 sm:p-8">
+          <Image
+            src={list.image}
+            alt={list.imageAlt ?? list.title}
+            width={800}
+            height={500}
+            className="h-auto max-h-[24rem] w-full object-contain"
+          />
+        </div>
+        {list.caption ? (
+          <div className="border-t border-[var(--border)] px-5 py-3.5">
+            <p className="text-[13px] leading-snug text-[var(--muted-foreground)]">
+              {list.caption}
+            </p>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+
+  // Bullet/paragraph list variant — renders items as prose bullets
+  if (list.items.length > 0 && !list.image) {
+    return (
+      <div className="card-panel p-6">
+        <ul className="flex flex-col gap-2.5">
+          {list.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-[13px] leading-[1.75] text-[var(--muted-foreground)]">
+              <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)] opacity-70" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  // Default: code-pill list with optional image aside
   return (
     <div className={list.image ? "grid gap-5 lg:grid-cols-[1fr_0.9fr]" : ""}>
       <div className="card-panel p-6">
@@ -511,6 +552,11 @@ function HowToOrderTableBlock({
           </code>
         </div>
       ) : null}
+      {table.note ? (
+        <p className="mt-3 text-[12px] italic leading-[1.65] text-[var(--muted-foreground)]">
+          {table.note}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -565,6 +611,7 @@ export function ProductDetailPage({
   const hasFeatureLists = !!product.featureLists && product.featureLists.length > 0;
   const hasSolutionComponents = !!product.solutionComponents && product.solutionComponents.length > 0;
   const hasCylinderLegend = !!product.cylinderLegend && product.cylinderLegend.length > 0;
+  const hasPostSpecsFeatureLists = !!product.postSpecsFeatureLists && product.postSpecsFeatureLists.length > 0;
 
   return (
     <>
@@ -673,6 +720,20 @@ export function ProductDetailPage({
             </div>
           </section>
         </PageContainer>
+
+        {/* ── Product Brief ── */}
+        {product.productBrief ? (
+          <PageContainer className="section-shell pt-0">
+            <section>
+              <p className="eyebrow mb-4">Product Brief</p>
+              <div className="card-panel p-6">
+                <p className="text-[13.5px] leading-[1.78] text-[var(--muted-foreground)]">
+                  {product.productBrief}
+                </p>
+              </div>
+            </section>
+          </PageContainer>
+        ) : null}
 
         {/* ── Feature Lists (lever designs, code option lists, etc.) ── */}
         {hasFeatureLists ? (
@@ -803,6 +864,20 @@ export function ProductDetailPage({
               <TechnicalDrawingsSection drawings={product.technicalDrawings!} />
             </section>
           </PageContainer>
+        ) : null}
+
+        {/* ── Post-specs feature lists (Standard Mortise Cylinders, Certifications, Strike Plate, etc.) ── */}
+        {hasPostSpecsFeatureLists ? (
+          <>
+            {product.postSpecsFeatureLists!.map((fl, i) => (
+              <PageContainer key={`psfl-${i}`} className="section-shell pt-0">
+                <section>
+                  <p className="eyebrow mb-4">{fl.title}</p>
+                  <FeatureListSection list={fl} />
+                </section>
+              </PageContainer>
+            ))}
+          </>
         ) : null}
 
         {/* ── Installation Details — individual sections for Regular Arm / Parallel Arm / Top Jamb / Power Chart etc. ── */}

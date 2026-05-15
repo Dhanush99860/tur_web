@@ -305,6 +305,7 @@ export type HowToOrderColumn = {
 
 export type HowToOrderTable = {
   columns: HowToOrderColumn[];
+  note?: string;
 };
 
 export type ProductAccessory = {
@@ -399,10 +400,14 @@ export type Product = {
   detailImages?: ProductDetailImage[];
   /** Override the "Model Numbers" section heading (e.g. "TA2100 Series Standard Functions") */
   modelSectionTitle?: string;
+  /** Short product brief paragraph, rendered as its own section after the overview panel */
+  productBrief?: string;
   /** Feature lists with optional image, rendered between Overview and Technical Details */
   featureLists?: ProductFeatureList[];
   /** Solution component cards (image + bullets), rendered after featureLists */
   solutionComponents?: ProductSolutionComponent[];
+  /** Feature-list sections rendered after Technical Details and Technical Drawings (e.g. Standard Mortise Cylinders, Certifications, Strike Plate) */
+  postSpecsFeatureLists?: ProductFeatureList[];
   /** Cylinder / code legend rendered after the How To Order section */
   cylinderLegend?: ProductSpec[];
   /** Override the default "Technical Drawing(s)" section heading */

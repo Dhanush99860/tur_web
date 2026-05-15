@@ -33,7 +33,17 @@
       "Bash(curl -sL \"https://tur.com.co/wp-content/uploads/2020/02/Drawing-of-the-Lock.jpg\" -o \"f:/tur/public/tur/american-standard/secure-the-door/mortise-locksets/drawing-of-the-lock.jpg\")",
       "Bash(curl -sL \"https://tur.com.co/wp-content/uploads/2020/02/Drawing-of-the-Strikes.jpg\" -o \"f:/tur/public/tur/american-standard/secure-the-door/mortise-locksets/drawing-of-the-strikes.jpg\")",
       "Bash(curl -sL \"https://tur.com.co/wp-content/uploads/2020/02/For-locks-with-deadbolt-functions.jpg\" -o \"f:/tur/public/tur/american-standard/secure-the-door/mortise-locksets/lock-with-deadbolt.jpg\")",
-      "Bash(curl -sL \"https://tur.com.co/wp-content/uploads/2020/02/For-locks-without-deadbolt-functions.jpg\" -o \"f:/tur/public/tur/american-standard/secure-the-door/mortise-locksets/strikes-without-deadbolt.jpg\")"
+      "Bash(curl -sL \"https://tur.com.co/wp-content/uploads/2020/02/For-locks-without-deadbolt-functions.jpg\" -o \"f:/tur/public/tur/american-standard/secure-the-door/mortise-locksets/strikes-without-deadbolt.jpg\")",
+      "Bash(rm \"f:/tur/public/tur/american-standard/secure-the-door/mortise-locksets/drawing-of-the-lock.jpg\" \\\\ *)",
+      "Bash(curl -sL https://www.tur.com.co/admin/uploads/products/default-689318416210428.jpg -o f:/tur/public/tur/american-standard/secure-the-door/cylindrical-locksets/cylindrical-locksets-main.jpg)",
+      "Bash(python3 -c ' *)",
+      "Bash(210429\" | Select-Object -First 50)",
+      "PowerShell(Get-ChildItem \"f:\\\\tur\\\\public\\\\TUR Website Images\\\\products\\\\\" | Where-Object { $_.Name -match \"210428|210429\" } | Select-Object Name | Select-Object -First 40)",
+      "PowerShell(dir \"f:\\\\tur\\\\public\\\\TUR Website Images\\\\products\" | Where-Object { $_.Name -match \"210428|210429\" } | Select-Object Name | Format-Table -AutoSize)",
+      "WebFetch(domain:tur.com.my)"
+    ],
+    "additionalDirectories": [
+      "f:\\tur\\public\\tur\\american-standard\\secure-the-door\\mortise-locksets"
     ]
   }
 }
