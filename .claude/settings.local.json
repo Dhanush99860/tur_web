@@ -40,7 +40,11 @@
       "Bash(210429\" | Select-Object -First 50)",
       "PowerShell(Get-ChildItem \"f:\\\\tur\\\\public\\\\TUR Website Images\\\\products\\\\\" | Where-Object { $_.Name -match \"210428|210429\" } | Select-Object Name | Select-Object -First 40)",
       "PowerShell(dir \"f:\\\\tur\\\\public\\\\TUR Website Images\\\\products\" | Where-Object { $_.Name -match \"210428|210429\" } | Select-Object Name | Format-Table -AutoSize)",
-      "WebFetch(domain:tur.com.my)"
+      "WebFetch(domain:tur.com.my)",
+      "Bash(TG\\\\.\" -i | head -40)",
+      "Bash(grep -c \"defineThinGlassHardwareProduct\" src/content/catalog/products.ts)",
+      "Bash(echo \"thin count: $?\")",
+      "Bash(npx tsx *)"
     ],
     "additionalDirectories": [
       "f:\\tur\\public\\tur\\american-standard\\secure-the-door\\mortise-locksets"

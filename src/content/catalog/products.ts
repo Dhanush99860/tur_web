@@ -125,6 +125,8 @@ type EuropeanIronmongeryProductInput = Pick<
     id: number;
     imageFilename: string;
     galleryFilenames?: string[];
+    /** Override image path instead of deriving it from imageFilename */
+    imagePath?: string;
   };
 
 function oldDoorHardwareProductUrl(id: number) {
@@ -151,14 +153,20 @@ function furnishTheDoorImage(filename: string) {
   return `/tur/american-standard/furnish-the-door/${filename}`;
 }
 
+function europeanIronmongeryImage(filename: string) {
+  return `/tur/european-ironmongery/${filename}`;
+}
+
 function defineEuropeanIronmongeryProduct({
   id,
   imageFilename,
+  imagePath,
   galleryFilenames = [],
   ...input
 }: EuropeanIronmongeryProductInput): Product {
   const fallbackDescription =
     `${input.title} migrated from the old TUR European Ironmongery catalogue.`;
+  const resolvedImage = imagePath ?? oldProductImage(imageFilename);
 
   return defineProduct({
     section: "door-hardware",
@@ -168,9 +176,9 @@ function defineEuropeanIronmongeryProduct({
     description: input.description ?? fallbackDescription,
     shortDescription: input.shortDescription ?? fallbackDescription,
     overview: input.overview ?? input.description ?? fallbackDescription,
-    image: oldProductImage(imageFilename),
+    image: resolvedImage,
     gallery: gallery(
-      oldProductImage(imageFilename),
+      resolvedImage,
       ...galleryFilenames.map((filename) => oldProductImage(filename)),
     ),
     features: input.features ?? [],
@@ -191,6 +199,8 @@ function defineThinEuropeanIronmongeryProduct(
     | "routeGroupSlug"
     | "routeGroupTitle"
     | "imageFilename"
+    | "imagePath"
+    | "detailImages"
     | "imageAlt"
     | "inquirySubject"
   > & {
@@ -243,63 +253,171 @@ const glassRoute = {
   },
 };
 
-type GlassHardwareProductInput = Pick<
-  ProductInput,
-  "slug" | "title" | "routeGroupSlug" | "routeGroupTitle" | "category" | "imageAlt" | "inquirySubject"
-> &
-  Partial<
-    Omit<
-      ProductInput,
-      | "slug"
-      | "title"
-      | "section"
-      | "familySlug"
-      | "familyTitle"
-      | "routeGroupSlug"
-      | "routeGroupTitle"
-      | "category"
-      | "image"
-      | "imageAlt"
-      | "gallery"
-      | "inquirySubject"
-    >
-  > & {
-    id: number;
-    legacyName: string;
-    imageFilename: string;
-  };
-
 function oldDoorHardwareProductUrlWithName(id: number, legacyName: string) {
   return `https://www.tur.com.co/door_hardware/sub/pro?id=${id}&n=${legacyName}`;
 }
 
-function defineThinGlassHardwareProduct({
-  id,
-  legacyName,
-  imageFilename,
-  ...input
-}: GlassHardwareProductInput): Product {
-  // TODO: Verify screenshot/table content from the legacy TUR page before indexing these thin Glass Hardware pages.
-  const note =
-    input.description ??
-    `The legacy TUR page for ${input.title} exposes only title/image content in HTML; screenshot/table verification is required before indexing.`;
+function defineGlassHardwareProduct(input: {
+  id: number;
+  legacyName: string;
+  slug: string;
+  title: string;
+  modelNo: string;
+  imageFilename: string;
+  imagePath?: string;
+  detailImages?: Product["detailImages"];
+  subcategory: keyof typeof glassRoute;
+  material?: string;
+  glassThickness?: string;
+  features?: string[];
+  applications?: string[];
+  finishOptions?: string[];
+  specs?: Array<{ label: string; value: string }>;
+  howToOrder?: string;
+  orderCodeExample?: string;
+  relatedSlugs?: string[];
+  additionalRouteGroupSlugs?: string[];
+  variants?: Array<{ key: string; label: string }>;
+  inquirySubject?: string;
+  imageAlt?: string;
+}): Product {
+  const route = glassRoute[input.subcategory];
+  const mat = input.material ?? "Stainless steel AISI 304";
+  const gt = input.glassThickness ?? "8 / 10 / 12 mm tempered glass";
+
+  const defaultsBySubcategory: Record<
+    keyof typeof glassRoute,
+    {
+      features: string[];
+      applications: string[];
+      finishOptions: string[];
+      howToOrder: string;
+    }
+  > = {
+    hinge: {
+      features: [
+        `${mat} construction.`,
+        "Suitable for frameless glass door and partition systems.",
+        `Compatible with ${gt}.`,
+        "Available in satin and polished stainless steel finish.",
+        "Designed for left and right-hand door installation.",
+      ],
+      applications: [
+        "Frameless glass doors (interior and exterior).",
+        "Glass shower enclosures.",
+        "Glass partitions and office dividers.",
+        "Retail display and architectural glazing.",
+      ],
+      finishOptions: ["Satin stainless steel (630)", "Polished stainless steel (629)"],
+      howToOrder: "TG · Model No · Finish",
+    },
+    bathroom: {
+      features: [
+        `${mat} construction.`,
+        "Designed for glass shower and bathroom doors.",
+        "Ergonomic grip profile.",
+        "Corrosion-resistant for humid and wet environments.",
+        "Suitable for glass thickness 8–12 mm.",
+      ],
+      applications: [
+        "Glass shower enclosure doors.",
+        "Bathroom glass partition doors.",
+        "Wet-area glass doors and panels.",
+      ],
+      finishOptions: ["Satin stainless steel (630)", "Polished stainless steel (629)"],
+      howToOrder: "TG · Model No · Finish",
+    },
+    patch: {
+      features: [
+        `${mat} construction.`,
+        "Structural point-fixed glass fitting.",
+        `Compatible with ${gt}.`,
+        "Adjustable pivot/swivel joint for glass alignment.",
+        "Load-bearing design for frameless glass systems.",
+      ],
+      applications: [
+        "Frameless glass door bottom and top rails.",
+        "Glass wall and floor fixing for partitions.",
+        "Structural glazing facades.",
+        "Shower enclosure floor and wall anchoring.",
+      ],
+      finishOptions: ["Satin stainless steel (630)", "Polished stainless steel (629)"],
+      howToOrder: "TG · Model No · Finish",
+    },
+    pull: {
+      features: [
+        `${mat} tube construction.`,
+        "Round cross-section handle bar.",
+        "Available with back-to-back (BB) or back-to-wall (BT) configuration.",
+        "Suitable for glass thickness 8–12 mm.",
+        "Available in custom lengths.",
+      ],
+      applications: [
+        "Frameless and semi-frameless glass doors.",
+        "Glass entrance doors.",
+        "Shower glass doors.",
+        "Office glass partition doors.",
+      ],
+      finishOptions: ["Satin stainless steel (630)", "Polished stainless steel (629)"],
+      howToOrder: "TG · Model No · Length · Configuration (BB/BT) · Finish",
+    },
+    lipseal: {
+      features: [
+        "Co-extruded EPDM rubber / PVC profile.",
+        "Flexible and durable seal for glass door edges.",
+        "UV and ozone resistant.",
+        "Easy installation — snap-on or adhesive fit.",
+        "Available in multiple profiles for different glass thicknesses.",
+      ],
+      applications: [
+        "Bottom seals for frameless glass doors.",
+        "Side and top seals for glass shower enclosures.",
+        "Glass partition edge protection.",
+        "Weatherproofing for exterior glass doors.",
+      ],
+      finishOptions: ["Clear / transparent", "Black", "White", "Grey"],
+      howToOrder: "TG · Model No · Length (specify in metres)",
+    },
+  };
+
+  const def = defaultsBySubcategory[input.subcategory];
+  const modelNo = input.modelNo;
+
+  const specsBase: Array<{ label: string; value: string }> = [
+    { label: "Model No", value: modelNo },
+    { label: "Material", value: mat },
+  ];
+  if (input.glassThickness) specsBase.push({ label: "Glass thickness", value: input.glassThickness });
+  const specs = input.specs ? [...specsBase, ...input.specs] : specsBase;
+
+  const imgSrc = input.imagePath ?? oldProductImage(input.imageFilename);
 
   return defineProduct({
     section: "door-hardware",
     familySlug: "glass-hardware",
     familyTitle: "Glass Hardware",
-    image: oldProductImage(imageFilename),
-    gallery: gallery(oldProductImage(imageFilename)),
-    sourceOldUrl: oldDoorHardwareProductUrlWithName(id, legacyName),
-    isIndexable: false,
-    description: note,
-    shortDescription: input.shortDescription ?? note,
-    overview: input.overview ?? note,
-    features: input.features ?? [],
-    applications: input.applications ?? [],
-    finishOptions: input.finishOptions ?? [],
+    ...route,
+    slug: input.slug,
+    title: input.title,
+    image: imgSrc,
+    gallery: gallery(imgSrc),
+    imageAlt: input.imageAlt ?? `${input.title} product image`,
+    sourceOldUrl: oldDoorHardwareProductUrlWithName(input.id, input.legacyName),
+    isIndexable: true,
+    description: `${input.title} by TUR — ${route.category} for frameless glass door systems. ${mat}.`,
+    shortDescription: `${input.title} — ${route.category.toLowerCase()}, ${mat.toLowerCase()}.`,
+    overview: `${input.title} is a ${route.category.toLowerCase()} manufactured in ${mat}, designed for use in frameless glass door and partition systems. It is available in satin and polished stainless steel finish.`,
+    features: input.features ?? def.features,
+    applications: input.applications ?? def.applications,
+    finishOptions: input.finishOptions ?? def.finishOptions,
+    specs,
+    howToOrder: input.howToOrder ?? def.howToOrder,
+    orderCodeExample: input.orderCodeExample,
     relatedSlugs: input.relatedSlugs ?? [],
-    ...input,
+    additionalRouteGroupSlugs: input.additionalRouteGroupSlugs,
+    variants: input.variants,
+    detailImages: input.detailImages,
+    inquirySubject: input.inquirySubject ?? `${input.title} Inquiry`,
   });
 }
 
@@ -310,12 +428,18 @@ function defineEuropeanDoorCloserProduct(
     title: string;
     modelNo: string;
     imageFilename: string;
+    imagePath?: string;
+    detailImages?: Product["detailImages"];
     mechanism: string;
     powerSize?: string;
     maxDoorWidth?: string;
     maxOpeningAngle?: string;
     mount?: string;
     arm?: string;
+    features?: string[];
+    applications?: string[];
+    finishOptions?: string[];
+    accessories?: string[];
     relatedSlugs?: string[];
   },
 ): Product {
@@ -327,6 +451,7 @@ function defineEuropeanDoorCloserProduct(
     input.maxOpeningAngle ? { label: "Max opening angle", value: input.maxOpeningAngle } : null,
     input.mount ? { label: "Mount", value: input.mount } : null,
     input.arm ? { label: "Arm", value: input.arm } : null,
+    ...(input.accessories ?? []).map((a) => ({ label: "Accessory", value: a })),
   ].filter(Boolean) as Product["specs"];
 
   return defineEuropeanIronmongeryProduct({
@@ -338,26 +463,28 @@ function defineEuropeanDoorCloserProduct(
       `${input.title}, model ${input.modelNo}, from the old TUR European Ironmongery Control The Door listing.`,
     shortDescription: `${input.modelNo} ${input.mechanism} door closer.`,
     overview:
-      `${input.modelNo} is listed on the old TUR page with adjustable closing and latching speed, thermo-constant valve, non-handed installation and ${input.mechanism}.`,
+      `${input.modelNo} features adjustable closing and latching speed, thermo-constant valve, non-handed installation and ${input.mechanism}.`,
     imageFilename: input.imageFilename,
+    imagePath: input.imagePath,
     imageAlt: `${input.modelNo} ${input.title}`,
-    features: [
+    features: input.features ?? [
       "Adjustable closing and latching speed.",
       "Thermo-constant valve.",
       input.mechanism,
       "Single-action door.",
       "Non-handed installation.",
     ],
-    applications: [
+    applications: input.applications ?? [
       "Standard door mount on pull side",
-      "Transom mount as listed on old TUR page",
-      "Single-action doors",
+      "Single-action door",
+      "Non-handed installation",
     ],
-    finishOptions: [
-      "Anodized aluminum or painted finish as listed on old TUR page",
-      "Plated and painted finishes available upon request",
+    finishOptions: input.finishOptions ?? [
+      "Anodized aluminum (standard)",
+      "Other finishes available upon request",
     ],
     specs,
+    detailImages: input.detailImages,
     inquirySubject: `${input.modelNo} Door Closer Inquiry`,
     relatedSlugs: input.relatedSlugs ?? [],
   });
@@ -370,8 +497,16 @@ function defineEuropeanMortiseLockProduct(
     title: string;
     modelNo: string;
     imageFilename: string;
+    imagePath?: string;
+    detailImages?: Product["detailImages"];
     series?: string;
     certifications?: string[];
+    backset?: string;
+    ctcDistance?: string;
+    follower?: string;
+    forendWidth?: string;
+    features?: string[];
+    applications?: string[];
     relatedSlugs?: string[];
   },
 ): Product {
@@ -386,18 +521,24 @@ function defineEuropeanMortiseLockProduct(
     overview:
       `${input.modelNo} is listed by TUR for wood or metal rebated doors or flush doors, with stainless steel 304 forend/strike/latch/bolt/follower components where applicable and a steel lock case.`,
     imageFilename: input.imageFilename,
+    imagePath: input.imagePath,
     imageAlt: `${input.modelNo} ${input.title}`,
-    features: euroLockFeatures,
-    applications: euroLockApplications,
+    features: input.features ?? euroLockFeatures,
+    applications: input.applications ?? euroLockApplications,
     finishOptions: ["Satin Stainless Steel", "Other finishes upon request"],
     specs: [
       { label: "Model No", value: input.modelNo },
       input.series ? { label: "Series", value: input.series } : null,
+      input.backset ? { label: "Backset", value: input.backset } : null,
+      input.ctcDistance ? { label: "CTC distance", value: input.ctcDistance } : null,
+      input.follower ? { label: "Follower", value: input.follower } : null,
+      input.forendWidth ? { label: "Forend width", value: input.forendWidth } : null,
       { label: "Configuration", value: "One lock body, one strike plate, one pocket, one set of fixing screws" },
       ...(input.certifications ?? []).map((value) => ({ label: "Certification", value })),
     ].filter(Boolean) as Product["specs"],
     howToOrder:
-      "Brand Identity · Model No · Function · Backset · CTC Distance · Forend · Options · Finish",
+      "Brand Identity · Series (14 Premium / 15 Project) · Function · Backset · CTC Distance · Forend · Options · Finish",
+    detailImages: input.detailImages,
     inquirySubject: `${input.modelNo} Lock Inquiry`,
     relatedSlugs: input.relatedSlugs ?? [],
   });
@@ -448,7 +589,16 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "TE4100 Series Full Mortise Hinges are for medium weight doors with medium to high frequency service, suitable for hollow metal or wood doors.",
     imageFilename: "default-1028666161201019.jpg",
+    imagePath: europeanIronmongeryImage("hang-the-door/te4100-series/te4100-series-main.jpg"),
     imageAlt: "TE4100 Series full mortise hinge",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("hang-the-door/te4100-series/te4100-series-technical-drawing.png"),
+        alt: "TE4100 Series hinge dimension drawing",
+        caption: "Dimension drawing — W, H, T measurements per model. See spec table for values.",
+      },
+    ],
     features: [
       "Stainless steel 304.",
       "Stainless Steel ball bearing with imported damping oil.",
@@ -490,7 +640,16 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "TE4160 Rising Hinges use a simple no-bearing construction with lubricated pin; door self-closes by gravity.",
     imageFilename: "default-268660749201019.jpg",
+    imagePath: europeanIronmongeryImage("hang-the-door/rising-hinges/rising-hinges-main.jpg"),
     imageAlt: "TE4160 rising hinge",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("hang-the-door/rising-hinges/rising-hinges-technical-drawing.png"),
+        alt: "TE4160 rising hinge dimension drawing",
+        caption: "Dimension drawing — W 102 mm, H 76 mm, T 3 mm.",
+      },
+    ],
     features: [
       "Stainless steel 304.",
       "Applicable to wood flush door.",
@@ -521,6 +680,7 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "TA4600 concealed hinges are continuously adjustable for height, side and closing pressure. The old TUR page positions the hinge for truly flush panel appearance.",
     imageFilename: "default-1951756068201019.jpg",
+    imagePath: europeanIronmongeryImage("hang-the-door/3d-adjustable-concealed-hinges-european/3d-adjustable-concealed-hinges-european-main.jpg"),
     imageAlt: "TA4600 3D adjustable concealed hinge",
     features: [
       "Continuously adjustable for height, side and closing pressure.",
@@ -551,7 +711,22 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "The old TUR page lists TE4400 as a heavy duty double action spring hinge applicable to flush wood doors, opening to 180 degrees.",
     imageFilename: "default-1389431866201019.jpg",
+    imagePath: europeanIronmongeryImage("hang-the-door/heavy-duty-double-action-spring-hinge/heavy-duty-double-action-spring-hinge-main.jpg"),
     imageAlt: "TE4400 heavy duty double action spring hinge",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("hang-the-door/heavy-duty-double-action-spring-hinge/heavy-duty-double-action-spring-hinge-technical-drawing-1.png"),
+        alt: "TE4400 double action spring hinge dimension drawing",
+        caption: "Dimension drawing — hinge profile and mounting dimensions.",
+      },
+      {
+        title: "Technical Drawing (2)",
+        image: europeanIronmongeryImage("hang-the-door/heavy-duty-double-action-spring-hinge/heavy-duty-double-action-spring-hinge-technical-drawing-2.png"),
+        alt: "TE4400 double action spring hinge detail drawing",
+        caption: "Detail drawing — spring hinge leaf and knuckle dimensions.",
+      },
+    ],
     features: [
       "Stainless steel 304.",
       "Applicable to flush wood door.",
@@ -574,6 +749,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Standard Arm (Project Series)",
     ...europeanRoute.control,
     imageFilename: "default-1843416672201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-project-series/door-closer-rack-pinion-standard-arm-project-series-main.jpg"),
     imageAlt: "Project Series rack and pinion door closer with standard arm",
     inquirySubject: "Project Series Door Closer Inquiry",
   }),
@@ -583,6 +759,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Standard Arm",
     ...europeanRoute.control,
     imageFilename: "default-655103557201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-european/door-closer-rack-pinion-standard-arm-european-main.jpg"),
     imageAlt: "European rack and pinion door closer with standard arm",
     inquirySubject: "Rack and Pinion Standard Arm Door Closer Inquiry",
   }),
@@ -592,6 +769,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Track Arm",
     ...europeanRoute.control,
     imageFilename: "default-428456101201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-track-arm-european/door-closer-rack-pinion-track-arm-european-main.jpg"),
     imageAlt: "European rack and pinion door closer with track arm",
     inquirySubject: "Rack and Pinion Track Arm Door Closer Inquiry",
   }),
@@ -601,10 +779,42 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Standard Arm",
     modelNo: "TE7768",
     imageFilename: "default-1148107137201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7768/door-closer-rack-pinion-standard-arm-te7768-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7768/door-closer-rack-pinion-standard-arm-te7768-technical-drawing.png"),
+        alt: "TE7768 door closer dimension drawing",
+        caption: "TE7768 dimension drawing — surface mount standard arm.",
+      },
+    ],
     mechanism: "Rack and pinion action with standard arm mechanism",
-    powerSize: "Template adjustable power size 2 / 3 / 4",
+    powerSize: "Template adjustable power size 2/3/4",
     mount: "Surface mount",
     arm: "Standard arm",
+    features: [
+      "Template adjustable power size 2/3/4.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Back check optional upon request.",
+      "Surface mount.",
+      "Rack and pinion action.",
+      "Standard arm mechanism.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Standard door mount on pull side",
+      "Transom mount on push side",
+      "Parallel bracket application on size 3",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Painted silver (standard)",
+      "Plating for covers only — finishes available upon request",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Standard arm", "Hold open arm", "Parallel bracket", "Cover"],
     relatedSlugs: ["door-closer-rack-pinion-standard-arm-te7772v"],
   }),
   defineEuropeanDoorCloserProduct({
@@ -613,10 +823,41 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Standard Arm",
     modelNo: "TE7772V",
     imageFilename: "default-1512759909201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7772v/door-closer-rack-pinion-standard-arm-te7772v-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7772v/door-closer-rack-pinion-standard-arm-te7772v-technical-drawing.png"),
+        alt: "TE7772V door closer dimension drawing",
+        caption: "TE7772V dimension drawing — surface mount standard arm.",
+      },
+    ],
     mechanism: "Rack and pinion action with standard arm mechanism",
     powerSize: "Selectable position power size 2~4",
     mount: "Surface mount",
     arm: "Standard arm",
+    features: [
+      "Selectable position power size 2~4.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Adjustable back check.",
+      "Surface mount.",
+      "Rack and pinion action.",
+      "Standard arm mechanism.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Standard door mount on pull side",
+      "Transom mount on push side",
+      "Parallel bracket application on size 3",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum (standard)",
+      "Plated and painted finishes available upon request",
+    ],
+    accessories: ["Standard arm", "Hold open arm", "Parallel bracket", "Fixing plate", "Drop plate", "Cover"],
     relatedSlugs: ["door-closer-rack-pinion-standard-arm-te7768"],
   }),
   defineThinEuropeanIronmongeryProduct({
@@ -625,6 +866,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Standard Arm",
     ...europeanRoute.control,
     imageFilename: "default-265562356201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-european-variant/door-closer-rack-pinion-standard-arm-european-variant-main.jpg"),
     imageAlt: "European rack and pinion standard arm door closer variant",
     inquirySubject: "Rack and Pinion Standard Arm Door Closer Variant Inquiry",
   }),
@@ -634,10 +876,40 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Track Arm",
     modelNo: "TE7763B",
     imageFilename: "default-289207891201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-track-arm-te7763b/door-closer-rack-pinion-track-arm-te7763b-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-track-arm-te7763b/door-closer-rack-pinion-track-arm-te7763b-technical-drawing.png"),
+        alt: "TE7763B door closer dimension drawing",
+        caption: "TE7763B dimension drawing — surface mount track arm.",
+      },
+    ],
     mechanism: "Rack and pinion action with track arm mechanism",
     powerSize: "Fixed power size 2~4",
     mount: "Surface mount",
-    arm: "Track arm; hold open device accessory",
+    arm: "Track arm",
+    features: [
+      "Fixed power size 2~4.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Adjustable back check.",
+      "Surface mount.",
+      "Rack and pinion action.",
+      "Track arm mechanism.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Standard door mount on pull side",
+      "Transom mount on pull and push side",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum for door closer body and track rail (standard)",
+      "Plated and painted finishes available upon request",
+    ],
+    accessories: ["Track arm", "Hold open device"],
     relatedSlugs: ["hydraulic-patch-fitting-te7820-60kg"],
   }),
   defineEuropeanDoorCloserProduct({
@@ -646,12 +918,47 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Track Arm",
     modelNo: "TE7765G",
     imageFilename: "default-950763569201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-track-arm-te7765g/door-closer-rack-pinion-track-arm-te7765g-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-track-arm-te7765g/door-closer-rack-pinion-track-arm-te7765g-technical-drawing.png"),
+        alt: "TE7765G door closer dimension drawing",
+        caption: "TE7765G dimension drawing — surface mount track arm, max 1100 mm door width.",
+      },
+    ],
     mechanism: "Rack and pinion action with track arm mechanism",
     powerSize: "Adjustable power size 2~4",
     maxDoorWidth: "1100 mm",
     maxOpeningAngle: "180 degrees",
     mount: "Surface mount",
     arm: "Track arm",
+    features: [
+      "Adjustable power size 2~4.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Adjustable back check.",
+      "Delay action optional upon request.",
+      "Surface mount.",
+      "Rack and pinion action.",
+      "Track arm mechanism.",
+      "Maximum door width 1100 mm.",
+      "Maximum opening angle 180 degrees.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Standard door mount on pull side",
+      "Transom mount on pull and push side",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum (standard)",
+      "Painted silver",
+      "Plating for covers only",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Track arm", "Hold open device", "Cover"],
   }),
   defineEuropeanDoorCloserProduct({
     id: 144,
@@ -659,12 +966,47 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Standard Arm",
     modelNo: "TE7783G",
     imageFilename: "default-1377856926201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7783g/door-closer-rack-pinion-standard-arm-te7783g-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7783g/door-closer-rack-pinion-standard-arm-te7783g-technical-drawing.png"),
+        alt: "TE7783G door closer dimension drawing",
+        caption: "TE7783G dimension drawing — surface mount standard arm, max 1100 mm door width.",
+      },
+    ],
     mechanism: "Rack and pinion action with standard arm mechanism",
     powerSize: "Adjustable power size 2~4",
     maxDoorWidth: "1100 mm",
     maxOpeningAngle: "180 degrees",
     mount: "Surface mount",
     arm: "Standard arm",
+    features: [
+      "Adjustable power size 2~4.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Adjustable back check.",
+      "Surface mount.",
+      "Rack and pinion action.",
+      "Standard arm mechanism.",
+      "Maximum door width 1100 mm.",
+      "Maximum opening angle 180 degrees.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Standard door mount on pull side",
+      "Transom mount on pull and push side",
+      "Parallel bracket application on size 3~4",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum (standard)",
+      "Painted silver",
+      "Plating for covers only",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Standard arm", "Hold open arm", "Parallel bracket", "Cover"],
   }),
   defineEuropeanDoorCloserProduct({
     id: 143,
@@ -672,12 +1014,45 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Concealed Rack & Pinion With Track Arm",
     modelNo: "TE7766B",
     imageFilename: "default-1778544943201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-concealed-rack-pinion-track-arm-te7766b/door-closer-concealed-rack-pinion-track-arm-te7766b-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-concealed-rack-pinion-track-arm-te7766b/door-closer-concealed-rack-pinion-track-arm-te7766b-technical-drawing.png"),
+        alt: "TE7766B concealed door closer dimension drawing",
+        caption: "TE7766B dimension drawing — concealed in door, track arm.",
+      },
+    ],
     mechanism: "Concealed rack and pinion action with track arm mechanism",
     powerSize: "Fixed power size 3",
     maxDoorWidth: "950 mm",
     maxOpeningAngle: "120 degrees",
     mount: "Concealed in door",
     arm: "Track arm",
+    features: [
+      "Fixed power size 3.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Cushion limit stay.",
+      "Concealed mount.",
+      "Rack and pinion action.",
+      "Track arm mechanism.",
+      "Maximum door width 950 mm.",
+      "Maximum opening angle 120 degrees.",
+      "Minimum door thickness: steel 40 mm / wood 44 mm.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Concealed in door",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum (standard)",
+      "Painted silver",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Track arm"],
   }),
   defineEuropeanDoorCloserProduct({
     id: 142,
@@ -685,12 +1060,44 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Cam Action System With Track Arm",
     modelNo: "TE7791B",
     imageFilename: "default-2123130416201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-cam-action-track-arm-te7791b/door-closer-cam-action-track-arm-te7791b-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-cam-action-track-arm-te7791b/door-closer-cam-action-track-arm-te7791b-technical-drawing.png"),
+        alt: "TE7791B cam action door closer dimension drawing",
+        caption: "TE7791B dimension drawing — cam action, surface mount track arm.",
+      },
+    ],
     mechanism: "Cam action with track arm mechanism",
     powerSize: "Fixed power size 3",
     maxDoorWidth: "950 mm",
     maxOpeningAngle: "180 degrees",
     mount: "Surface mount",
     arm: "Track arm",
+    features: [
+      "Fixed power size 3.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Surface mount.",
+      "Cam action.",
+      "Track arm mechanism.",
+      "Maximum door width 950 mm.",
+      "Maximum opening angle 180 degrees.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "B type: door mount on pull side and transom mount on push side",
+      "G type: door mount on push side and transom mount on pull side",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum for door closer body and track rail (standard)",
+      "Painted silver",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Track arm", "Hold open device", "Cushion limit stay"],
   }),
   defineThinEuropeanIronmongeryProduct({
     id: 140,
@@ -698,6 +1105,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "EN Standard Door Closer - Cam Action System",
     ...europeanRoute.control,
     imageFilename: "default-628070307201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/en-standard-door-closer-cam-action-system-te7792g/en-standard-door-closer-cam-action-system-te7792g-main.jpg"),
     imageAlt: "TE7792G EN standard cam action door closer",
     inquirySubject: "TE7792G EN Standard Door Closer Inquiry",
   }),
@@ -707,12 +1115,47 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Cam Action System With Track Arm",
     modelNo: "TE7793P",
     imageFilename: "default-806147947201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-cam-action-track-arm-te7793p/door-closer-cam-action-track-arm-te7793p-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-cam-action-track-arm-te7793p/door-closer-cam-action-track-arm-te7793p-technical-drawing.png"),
+        alt: "TE7793P cam action door closer dimension drawing",
+        caption: "TE7793P dimension drawing — cam action, surface mount track arm, max 1250 mm door width.",
+      },
+    ],
     mechanism: "Cam action with track arm mechanism",
     powerSize: "Adjustable power size 2~5",
     maxDoorWidth: "1250 mm",
     maxOpeningAngle: "180 degrees",
     mount: "Surface mount",
     arm: "Track arm",
+    features: [
+      "Adjustable power size 2~5.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Adjustable back check.",
+      "Adjustable delay action.",
+      "Surface mount.",
+      "Cam action.",
+      "Track arm mechanism.",
+      "Maximum door width 1250 mm.",
+      "Maximum opening angle 180 degrees.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "B type: door mount on pull side and transom mount on push side",
+      "G type: door mount on push side and transom mount on pull side",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum for door closer body and track rail (standard)",
+      "Painted silver",
+      "Plating for covers only",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Track arm", "Cover", "Mounting plate", "Hold open device", "Cushion limit stay", "Angle bracket"],
   }),
   defineEuropeanDoorCloserProduct({
     id: 138,
@@ -720,12 +1163,47 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Rack & Pinion With Standard Arm",
     modelNo: "TE7781J",
     imageFilename: "default-196158867201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7781j/door-closer-rack-pinion-standard-arm-te7781j-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-rack-pinion-standard-arm-te7781j/door-closer-rack-pinion-standard-arm-te7781j-technical-drawing.png"),
+        alt: "TE7781J door closer dimension drawing",
+        caption: "TE7781J dimension drawing — surface mount standard arm, max 1400 mm door width.",
+      },
+    ],
     mechanism: "Rack and pinion action with standard arm mechanism",
     powerSize: "Adjustable power size 2~6",
     maxDoorWidth: "1400 mm",
     maxOpeningAngle: "180 degrees",
     mount: "Surface mount",
     arm: "Standard arm",
+    features: [
+      "Adjustable power size 2~6.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Adjustable back check.",
+      "Surface mount.",
+      "Rack and pinion action.",
+      "Standard arm mechanism.",
+      "Maximum door width 1400 mm.",
+      "Maximum opening angle 180 degrees.",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Standard door mount on pull side",
+      "Transom mount on push side",
+      "Parallel bracket application on size 3~5",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum (standard)",
+      "Painted silver",
+      "Plating for covers only",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Standard arm", "Hold open arm", "Parallel bracket", "Cover"],
   }),
   defineEuropeanDoorCloserProduct({
     id: 137,
@@ -733,12 +1211,45 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Door Closer Concealed Cam Action System With Track Arm",
     modelNo: "TE7796G",
     imageFilename: "default-974688142201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/door-closer-concealed-cam-action-track-arm-te7796g/door-closer-concealed-cam-action-track-arm-te7796g-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/door-closer-concealed-cam-action-track-arm-te7796g/door-closer-concealed-cam-action-track-arm-te7796g-technical-drawing.png"),
+        alt: "TE7796G concealed cam action door closer dimension drawing",
+        caption: "TE7796G dimension drawing — concealed in door or transom, track arm.",
+      },
+    ],
     mechanism: "Concealed cam action with track arm mechanism",
     powerSize: "Adjustable power size 2~4",
     maxDoorWidth: "1100 mm",
     maxOpeningAngle: "120 degrees",
     mount: "Concealed in door or transom",
     arm: "Track arm",
+    features: [
+      "Adjustable power size 2~4.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Concealed mount.",
+      "Cam action.",
+      "Track arm mechanism.",
+      "Maximum door width 1100 mm.",
+      "Maximum opening angle 120 degrees.",
+      "Minimum door thickness: 40 mm (fire doors 44~54 mm).",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Concealed in door",
+      "Concealed in transom",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum for door closer body and track rail (standard)",
+      "Painted silver",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Track arm (large standard, small optional)", "Hold open device", "Cushion limit stay", "Fixing plate", "End cap"],
   }),
   defineEuropeanDoorCloserProduct({
     id: 136,
@@ -746,12 +1257,45 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Concealed Cam-Action Door Closer with Track Arm",
     modelNo: "TE7796M",
     imageFilename: "default-645123548201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/concealed-cam-action-door-closer-track-arm-te7796m/concealed-cam-action-door-closer-track-arm-te7796m-main.jpg"),
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/concealed-cam-action-door-closer-track-arm-te7796m/concealed-cam-action-door-closer-track-arm-te7796m-technical-drawing.png"),
+        alt: "TE7796M concealed cam action door closer dimension drawing",
+        caption: "TE7796M dimension drawing — concealed in door or transom, track arm.",
+      },
+    ],
     mechanism: "Concealed cam action with track arm mechanism",
     powerSize: "Adjustable power size 2~4",
     maxDoorWidth: "1100 mm",
     maxOpeningAngle: "120 degrees",
     mount: "Concealed in door or transom",
     arm: "Track arm",
+    features: [
+      "Adjustable power size 2~4.",
+      "Adjustable closing and latching speed.",
+      "Thermo-constant valve.",
+      "Concealed mount.",
+      "Cam action.",
+      "Track arm mechanism.",
+      "Maximum door width 1100 mm.",
+      "Maximum opening angle 120 degrees.",
+      "Minimum door thickness: 40 mm (fire doors 44~54 mm).",
+      "Non-handed installation.",
+    ],
+    applications: [
+      "Concealed in door",
+      "Concealed in transom",
+      "Single-action door",
+      "Non-handed installation",
+    ],
+    finishOptions: [
+      "Anodized aluminum for door closer body and track rail (standard)",
+      "Painted silver",
+      "Other finishes available upon request",
+    ],
+    accessories: ["Track arm (large standard, small optional)", "Hold open device", "Cushion limit stay", "Fixing plate", "End cap"],
   }),
   defineEuropeanIronmongeryProduct({
     id: 135,
@@ -764,7 +1308,16 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "TE7820 - 60KG hydraulic patch fitting provides fixed power size 3, adjustable closing and latching speed, maximum door control opening angle at 170 degrees, and mechanical hold-open at 90 or 105 degrees.",
     imageFilename: "default-705474213210428.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/hydraulic-patch-fitting-te7820-60kg/hydraulic-patch-fitting-te7820-60kg-main.jpg"),
     imageAlt: "TE7820 - 60KG hydraulic patch fitting",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/hydraulic-patch-fitting-te7820-60kg/hydraulic-patch-fitting-te7820-60kg-technical-drawing.png"),
+        alt: "TE7820 60KG hydraulic patch fitting dimension drawing",
+        caption: "TE7820 dimension drawing — patch fitting with door control mechanism.",
+      },
+    ],
     features: [
       "Fixed power size 3.",
       "Adjustable closing and latching speed.",
@@ -794,7 +1347,16 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "The old TUR page lists TE7830 with adjustable closing and latching speed, mechanical hold-open at 90 or 105 degrees and standard arm, pivot, alternative spindle and offset arm accessories.",
     imageFilename: "default-1986072130201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/floor-spring-te7830/floor-spring-te7830-main.jpg"),
     imageAlt: "TE7830 floor spring",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/floor-spring-te7830/floor-spring-te7830-technical-drawing.png"),
+        alt: "TE7830 floor spring dimension drawing",
+        caption: "TE7830 dimension drawing — floor spring installation dimensions.",
+      },
+    ],
     features: [
       "Fixed power size 2/3/4; size 2 EN compliance.",
       "Adjustable closing and latching speed.",
@@ -818,7 +1380,16 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "The old TUR page lists TE7850 with adjustable closing and latching speed, mechanical hold-open at 90 degrees optional upon request and standard arm, pivot, alternative spindle and offset arm accessories.",
     imageFilename: "default-778887791201019.jpg",
+    imagePath: europeanIronmongeryImage("control-the-door/floor-spring-te7850/floor-spring-te7850-main.jpg"),
     imageAlt: "TE7850 floor spring",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("control-the-door/floor-spring-te7850/floor-spring-te7850-technical-drawing.png"),
+        alt: "TE7850 floor spring dimension drawing",
+        caption: "TE7850 dimension drawing — floor spring installation dimensions.",
+      },
+    ],
     features: [
       "Fixed power size 2/3/4; size 2 EN compliance.",
       "Adjustable closing and latching speed.",
@@ -838,8 +1409,11 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1400 Series Mortise Sash Lock (Premium Series)",
       modelNo: "TE1410",
       imageFilename: "default-1438874941201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1400-series-mortise-sash-lock-premium/te1400-series-mortise-sash-lock-premium-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1400-series-mortise-sash-lock-premium/te1400-series-mortise-sash-lock-premium-technical-drawing.png"), alt: "TE1410 mortise sash lock dimension drawing", caption: "TE1410 — lock body dimension drawing." }],
       series: "TE1400 Premium Series",
       certifications: ["CE Certified", "BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "55 / 60 mm", ctcDistance: "72 / 85 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
     },
     {
       id: 266,
@@ -847,8 +1421,11 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1400 Series Privacy Lock",
       modelNo: "TE1420",
       imageFilename: "default-516534796201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1400-series-privacy-lock/te1400-series-privacy-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1400-series-privacy-lock/te1400-series-privacy-lock-technical-drawing.png"), alt: "TE1420 privacy lock dimension drawing", caption: "TE1420 — lock body dimension drawing." }],
       series: "TE1400 Premium Series",
       certifications: ["BS EN12209:2003 200,000 life cycle test"],
+      backset: "55 / 60 mm", ctcDistance: "72 / 85 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
     },
     {
       id: 264,
@@ -856,8 +1433,11 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1400 Series Latch Lock",
       modelNo: "TE1430",
       imageFilename: "default-313493394201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1400-series-latch-lock/te1400-series-latch-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1400-series-latch-lock/te1400-series-latch-lock-technical-drawing.png"), alt: "TE1430 latch lock dimension drawing", caption: "TE1430 — lock body dimension drawing." }],
       series: "TE1400 Premium Series",
       certifications: ["CE Certified", "BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "55 / 60 mm", ctcDistance: "72 / 85 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
     },
     {
       id: 161,
@@ -865,8 +1445,12 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1400 Series Deadbolt Lock",
       modelNo: "TE1440",
       imageFilename: "default-2078171597201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1400-series-deadbolt-lock/te1400-series-deadbolt-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1400-series-deadbolt-lock/te1400-series-deadbolt-lock-technical-drawing.png"), alt: "TE1440 deadbolt lock dimension drawing", caption: "TE1440 — lock body dimension drawing." }],
       series: "TE1400 Premium Series",
       certifications: ["CE Certified", "BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "30 / 35 / 40 / 45 / 50 / 55 / 60 mm", ctcDistance: "72 / 85 / 92 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
+      features: ["Applicable to wood or metal rebated door or flush door.", "For fire door, smoke lobby door in residential, industrial and commercial projects.", "Forend, strike, bolt made of stainless steel 304; lock case made of steel.", "Use with euro profile cylinder, double turns deadbolt.", "Non-handed."],
     },
     {
       id: 160,
@@ -874,8 +1458,11 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1500 Series Sash Lock (Project Series)",
       modelNo: "TE1510",
       imageFilename: "default-318376160201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-sash-lock-project/te1500-series-sash-lock-project-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1500-series-sash-lock-project/te1500-series-sash-lock-project-technical-drawing.png"), alt: "TE1510 sash lock dimension drawing", caption: "TE1510 — lock body dimension drawing." }],
       series: "TE1500 Project Series",
       certifications: ["CE Certified", "BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "55 / 60 mm", ctcDistance: "72 / 85 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
     },
     {
       id: 159,
@@ -883,8 +1470,11 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1500 Series Privacy Lock",
       modelNo: "TE1520",
       imageFilename: "default-1834594537201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-privacy-lock/te1500-series-privacy-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1500-series-privacy-lock/te1500-series-privacy-lock-technical-drawing.png"), alt: "TE1520 privacy lock dimension drawing", caption: "TE1520 — lock body dimension drawing." }],
       series: "TE1500 Project Series",
       certifications: ["BS EN12209:2003 200,000 life cycle test"],
+      backset: "55 / 60 mm", ctcDistance: "72 / 85 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
     },
     {
       id: 158,
@@ -892,8 +1482,11 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1500 Series Latch Lock",
       modelNo: "TE1530",
       imageFilename: "default-802851067201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-latch-lock/te1500-series-latch-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1500-series-latch-lock/te1500-series-latch-lock-technical-drawing.png"), alt: "TE1530 latch lock dimension drawing", caption: "TE1530 — lock body dimension drawing." }],
       series: "TE1500 Project Series",
       certifications: ["CE Certified", "BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "55 / 60 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
     },
     {
       id: 157,
@@ -901,8 +1494,12 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1500 Series Deadbolt Lock",
       modelNo: "TE1540",
       imageFilename: "default-990920304201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-deadbolt-lock/te1500-series-deadbolt-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1500-series-deadbolt-lock/te1500-series-deadbolt-lock-technical-drawing.png"), alt: "TE1540 deadbolt lock dimension drawing", caption: "TE1540 — lock body dimension drawing." }],
       series: "TE1500 Project Series",
       certifications: ["CE Certified", "BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "30 / 35 / 40 / 45 / 50 / 55 / 60 mm", ctcDistance: "72 / 85 / 92 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
+      features: ["Applicable to wood or metal rebated door or flush door.", "For fire door, smoke lobby door in residential, industrial and commercial projects.", "Forend, strike, bolt made of stainless steel 304; lock case made of steel.", "Use with euro profile cylinder, double turns deadbolt.", "Non-handed."],
     },
     {
       id: 155,
@@ -910,8 +1507,12 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1500 Series Night Latch Lock",
       modelNo: "TE1560",
       imageFilename: "default-1532964646201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-night-latch-lock/te1500-series-night-latch-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1500-series-night-latch-lock/te1500-series-night-latch-lock-technical-drawing.png"), alt: "TE1560 night latch lock dimension drawing", caption: "TE1560 — lock body dimension drawing." }],
       series: "TE1500 Project Series",
       certifications: ["BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "55 / 60 mm", ctcDistance: "72 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
+      features: ["Applicable to wood or metal rebated door or flush door.", "For fire door, smoke lobby door or interior door in residential, industrial and commercial projects.", "Forend, strike, latch, security latch, follower made of stainless steel 304; lock case made of steel.", "Use with euro profile cylinder, double turns deadbolt.", "Compatible with panic device or electric strike.", "Non-handed, easy-adjust direction at project site."],
     },
     {
       id: 153,
@@ -919,57 +1520,89 @@ const europeanIronmongeryProducts: Product[] = [
       title: "TE1500 Series Escape Lock",
       modelNo: "TE1580",
       imageFilename: "default-921942143201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-escape-lock/te1500-series-escape-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/te1500-series-escape-lock/te1500-series-escape-lock-technical-drawing.png"), alt: "TE1580 escape lock dimension drawing", caption: "TE1580 — lock body dimension drawing." }],
       series: "TE1500 Project Series",
       certifications: ["BS EN12209:2003 200,000 life cycle test", "BS EN1634 fire rated"],
+      backset: "55 / 60 mm", ctcDistance: "72 / 78 mm", follower: "8×8 mm", forendWidth: "20 mm (rebated) / 22–24 mm (flush)",
+      features: ["Applicable to wood or metal rebated door or flush door.", "For fire door, smoke lobby door or interior door in residential, industrial and commercial projects.", "Forend, strike, latch, bolt, follower made of stainless steel 304; lock case made of steel.", "Outside lever retracts latch; inside lever retracts both latches; bolt for emergency escape.", "Use with euro profile cylinder, double turns deadbolt.", "Non-handed, direction adjustable at project site."],
     },
     {
       id: 152,
       slug: "roller-latch-sash-lock-european",
       title: "Roller Latch Sash Lock",
-      modelNo: "TE1520 Roller Latch Sash Lock",
+      modelNo: "TE1720",
       imageFilename: "default-29049113201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/roller-latch-sash-lock-european/roller-latch-sash-lock-european-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/roller-latch-sash-lock-european/roller-latch-sash-lock-european-technical-drawing.png"), alt: "Roller latch sash lock dimension drawing", caption: "Roller latch sash lock — dimension drawing." }],
+      backset: "55 / 60 mm", ctcDistance: "72 mm",
+      features: ["Applicable to wood or metal flush door.", "Forend, strike, roller latch, bolt made of stainless steel 304; lock case made of steel.", "Use with euro profile cylinder, double turns deadbolt.", "Non-handed."],
+      applications: ["Wood or metal flush doors", "Residential and commercial projects"],
     },
     {
       id: 151,
       slug: "small-dead-bolt-lock",
       title: "Small Dead Bolt Lock",
-      modelNo: "Small Dead Bolt Lock",
+      modelNo: "TE1770",
       imageFilename: "default-1561990946201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/small-dead-bolt-lock/small-dead-bolt-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/small-dead-bolt-lock/small-dead-bolt-lock-technical-drawing.png"), alt: "Small dead bolt lock dimension drawing", caption: "Small dead bolt lock — dimension drawing." }],
+      backset: "55 mm",
+      features: ["Applicable to wood or metal rebated door or flush door.", "Forend, strike, bolt made of stainless steel 304; lock case made of steel.", "Use with euro profile cylinder, double turns deadbolt.", "Non-handed."],
     },
     {
       id: 150,
       slug: "small-latch-lock",
       title: "Small Latch Lock",
-      modelNo: "Small Latch Lock",
+      modelNo: "TE1780",
       imageFilename: "default-905974820201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/small-latch-lock/small-latch-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/small-latch-lock/small-latch-lock-technical-drawing.png"), alt: "Small latch lock dimension drawing", caption: "Small latch lock — dimension drawing." }],
+      backset: "55 mm",
+      features: ["Applicable to wood or metal rebated door or flush door.", "Forend, strike, latch made of stainless steel 304; lock case made of steel.", "Use with lever handle and thumb turn.", "Non-handed."],
     },
     {
       id: 149,
       slug: "hook-lock",
       title: "Hook Lock",
-      modelNo: "Hook Lock",
+      modelNo: "TE1750",
       imageFilename: "default-7747549201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/hook-lock/hook-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/hook-lock/hook-lock-technical-drawing.png"), alt: "Hook lock dimension drawing", caption: "Hook lock — dimension drawing." }],
+      backset: "50 mm",
+      features: ["Applicable to wood or metal sliding door.", "Forend, strike, bolt made of stainless steel 304; lock case made of steel.", "Non-handed."],
+      applications: ["Wood or metal sliding doors"],
     },
     {
       id: 148,
       slug: "hook-lock-for-ep-cylinder",
       title: "Hook Lock for EP Cylinder",
-      modelNo: "Hook Lock for EP Cylinder",
+      modelNo: "TE1760",
       imageFilename: "default-1052147061201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/hook-lock-for-ep-cylinder/hook-lock-for-ep-cylinder-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/hook-lock-for-ep-cylinder/hook-lock-for-ep-cylinder-technical-drawing.png"), alt: "Hook lock for EP cylinder dimension drawing", caption: "Hook lock for EP cylinder — dimension drawing." }],
+      backset: "50 mm",
+      features: ["Applicable to wood or metal sliding door.", "Forend, strike, bolt made of stainless steel 304; lock case made of steel.", "Use with euro profile cylinder.", "Non-handed."],
+      applications: ["Wood or metal sliding doors requiring euro profile cylinder"],
     },
     {
       id: 147,
       slug: "narrow-stile-sash-lock",
       title: "Narrow Stile Sash Lock",
-      modelNo: "Narrow Stile Sash Lock",
+      modelNo: "TE1710",
       imageFilename: "default-716066047201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/narrow-stile-sash-lock/narrow-stile-sash-lock-main.jpg"),
+      detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("secure-the-door/narrow-stile-sash-lock/narrow-stile-sash-lock-technical-drawing.png"), alt: "Narrow stile sash lock dimension drawing", caption: "Narrow stile sash lock — dimension drawing." }],
+      backset: "20 / 25 / 30 mm",
+      features: ["Applicable to wood or metal rebated door or flush door.", "Forend, strike, latch, bolt made of stainless steel 304; lock case made of steel.", "Use with euro profile cylinder.", "Non-handed."],
     },
     {
       id: 146,
       slug: "narrow-stile-deadbolt-lock",
       title: "Narrow Stile Deadbolt Lock",
-      modelNo: "Narrow Stile Deadbolt Lock",
+      modelNo: "TE1740",
       imageFilename: "default-466759482201019.jpg",
+      imagePath: europeanIronmongeryImage("secure-the-door/narrow-stile-deadbolt-lock/narrow-stile-deadbolt-lock-main.jpg"),
     },
   ].map((item) => defineEuropeanMortiseLockProduct(item)),
   defineThinEuropeanIronmongeryProduct({
@@ -978,6 +1611,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "TE1500 Series Classroom Lock",
     ...europeanRoute.secure,
     imageFilename: "default-735006640201019.jpg",
+    imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-classroom-lock/te1500-series-classroom-lock-main.jpg"),
     imageAlt: "TE1550 classroom lock",
     inquirySubject: "TE1500 Series Classroom Lock Inquiry",
   }),
@@ -987,6 +1621,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "TE1500 Series Mortise X-Ray Lock",
     ...europeanRoute.secure,
     imageFilename: "default-995055801201019.jpg",
+    imagePath: europeanIronmongeryImage("secure-the-door/te1500-series-mortise-x-ray-lock/te1500-series-mortise-x-ray-lock-main.jpg"),
     imageAlt: "TE1570 mortise X-Ray lock",
     inquirySubject: "TE1500 Series Mortise X-Ray Lock Inquiry",
   }),
@@ -1001,7 +1636,16 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "The TE3600 old TUR page lists Euro profile cylinders in finest brass material with high precision machining, optional 5 or 6 pins, double opening by keys and BS EN1303:2005 requirement.",
     imageFilename: "default-1710733176201019.jpg",
+    imagePath: europeanIronmongeryImage("cylinders/te3600-series/te3600-series-main.jpg"),
     imageAlt: "TE3600 Euro profile cylinder",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("cylinders/te3600-series/te3600-series-technical-drawing.png"),
+        alt: "TE3600 Euro profile cylinder dimension drawing",
+        caption: "TE3600 dimension drawing — 60 mm and 70 mm length variants.",
+      },
+    ],
     features: [
       "Finest brass material, high precision machining.",
       "Optional 5 pins or 6 pins.",
@@ -1025,6 +1669,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "TE3700 Series",
     ...europeanRoute.cylinders,
     imageFilename: "default-1189688453201019.jpg",
+    imagePath: europeanIronmongeryImage("cylinders/te3700-series/te3700-series-main.jpg"),
     imageAlt: "TE3700 Euro profile cylinder",
     inquirySubject: "TE3700 Series Cylinder Inquiry",
     relatedSlugs: ["te3600-series"],
@@ -1040,6 +1685,7 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "The old TUR page lists pull/plate combinations in 0.75 in and 1 in diameters with 6 in, 8 in and 12 in center-to-center pull dimensions on 4 in x 16 in plates.",
     imageFilename: "default-1472735449201019.jpg",
+    imagePath: europeanIronmongeryImage("furnish-the-door/pull-plates-european/pull-plates-european-main.jpg"),
     imageAlt: "European Pull / Plates hardware",
     features: [
       "Pull/plate combinations listed by model and pull diameter.",
@@ -1060,11 +1706,11 @@ const europeanIronmongeryProducts: Product[] = [
     relatedSlugs: ["h-shape-pull-handle-european", "d-shape-pull-handle-european"],
   }),
   ...[
-    { id: 192, slug: "h-shape-pull-handle-european", title: "H Shape Pull Handle", imageFilename: "default-26507061201019.jpg", model: "TU.H" },
-    { id: 191, slug: "45-h-shape-pull-handle-european", title: "45 H Shape Pull Handle", imageFilename: "default-1100673153201019.jpg", model: "TU.45H" },
-    { id: 190, slug: "od-shape-pull-handle-european", title: "OD Shape Pull Handle", imageFilename: "default-373645198201019.jpg", model: "TU.OD SHAPE" },
-    { id: 189, slug: "ov-shape-pull-handle-european", title: "OV Shape Pull Handle", imageFilename: "default-1266122769201019.jpg", model: "TU.OV SHAPE" },
-    { id: 188, slug: "d-shape-pull-handle-european", title: "D Shape Pull Handle", imageFilename: "default-767434694201019.jpg", model: "TU.D SHAPE", standard: "Standard sizes only" },
+    { id: 192, slug: "h-shape-pull-handle-european", title: "H Shape Pull Handle", imageFilename: "default-26507061201019.jpg", imagePath: europeanIronmongeryImage("furnish-the-door/h-shape-pull-handle-european/h-shape-pull-handle-european-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door/h-shape-pull-handle-european/h-shape-pull-handle-european-technical-drawing.png"), alt: "H shape pull handle dimension drawing", caption: "TU.H — pull handle dimension drawing." }], model: "TU.H" },
+    { id: 191, slug: "45-h-shape-pull-handle-european", title: "45 H Shape Pull Handle", imageFilename: "default-1100673153201019.jpg", imagePath: europeanIronmongeryImage("furnish-the-door/45-h-shape-pull-handle-european/45-h-shape-pull-handle-european-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door/45-h-shape-pull-handle-european/45-h-shape-pull-handle-european-technical-drawing.png"), alt: "45 H shape pull handle dimension drawing", caption: "TU.45H — pull handle dimension drawing." }], model: "TU.45H" },
+    { id: 190, slug: "od-shape-pull-handle-european", title: "OD Shape Pull Handle", imageFilename: "default-373645198201019.jpg", imagePath: europeanIronmongeryImage("furnish-the-door/od-shape-pull-handle-european/od-shape-pull-handle-european-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door/od-shape-pull-handle-european/od-shape-pull-handle-european-technical-drawing.png"), alt: "OD shape pull handle dimension drawing", caption: "TU.OD SHAPE — pull handle dimension drawing." }], model: "TU.OD SHAPE" },
+    { id: 189, slug: "ov-shape-pull-handle-european", title: "OV Shape Pull Handle", imageFilename: "default-1266122769201019.jpg", imagePath: europeanIronmongeryImage("furnish-the-door/ov-shape-pull-handle-european/ov-shape-pull-handle-european-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door/ov-shape-pull-handle-european/ov-shape-pull-handle-european-technical-drawing.png"), alt: "OV shape pull handle dimension drawing", caption: "TU.OV SHAPE — pull handle dimension drawing." }], model: "TU.OV SHAPE" },
+    { id: 188, slug: "d-shape-pull-handle-european", title: "D Shape Pull Handle", imageFilename: "default-767434694201019.jpg", imagePath: europeanIronmongeryImage("furnish-the-door/d-shape-pull-handle-european/d-shape-pull-handle-european-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door/d-shape-pull-handle-european/d-shape-pull-handle-european-technical-drawing.png"), alt: "D shape pull handle dimension drawing", caption: "TU.D SHAPE — pull handle dimension drawing." }], model: "TU.D SHAPE", standard: "Standard sizes only" },
   ].map((item) =>
     defineEuropeanIronmongeryProduct({
       id: item.id,
@@ -1077,15 +1723,20 @@ const europeanIronmongeryProducts: Product[] = [
       overview:
         `${item.title} uses Stainless Steel Grade 316, includes solid stainless steel fitting and is available in singles and pairs. ${item.standard ?? "Standard and custom size listed on old TUR page."}`,
       imageFilename: item.imageFilename,
+      imagePath: item.imagePath,
+      ...("detailImages" in item ? { detailImages: item.detailImages as Product["detailImages"] } : {}),
       imageAlt: `${item.title} European Ironmongery`,
       features: euroPullHandleFeatures,
       applications: ["Glass doors", "Timber doors", "Aluminum doors", "PVC doors"],
-      finishOptions: ["Stainless Steel Finish"],
+      finishOptions: ["Satin stainless steel", "Polished stainless steel", "Finish codes: 630, 629, 626, 625, 606, 605"],
       specs: [
         { label: "Model shape", value: item.model },
         { label: "Maximum door thickness", value: "110 mm with M8 bolt" },
+        { label: "Configuration", value: "Pull handle with studs and washers" },
+        { label: "Stability by dia.", value: "19 mm → max 1000 mm; 25 mm → max 1500 mm; 32 mm → max 2000 mm; 38 mm → max 2400 mm; 50 mm → max 2600 mm" },
       ],
-      howToOrder: "Brand Identity · Model Shape · Length · Length · Dia. · Type · Finish",
+      howToOrder: "Brand Identity · Model Shape · Length (H) · Length (L) · Dia. · Type (BT / BB) · Finish",
+      orderCodeExample: `TU.H.300.200.25.BB.630`,
       inquirySubject: `${item.title} Inquiry`,
       relatedSlugs: ["pull-plates-european", "special-handles"],
     }),
@@ -1101,7 +1752,16 @@ const europeanIronmongeryProducts: Product[] = [
     overview:
       "The old TUR page lists TU.PH283 as a tubular design pull handle in Stainless Steel Grade 304, suitable for glass, timber, aluminum and PVC doors.",
     imageFilename: "default-598644510201019.jpg",
+    imagePath: europeanIronmongeryImage("furnish-the-door/special-handles/special-handles-main.jpg"),
     imageAlt: "TU.PH283 special handle",
+    detailImages: [
+      {
+        title: "Technical Drawing",
+        image: europeanIronmongeryImage("furnish-the-door/special-handles/special-handles-technical-drawing.png"),
+        alt: "TU.PH283 special handle dimension drawing",
+        caption: "TU.PH283 dimension drawing — tubular pull handle dimensions.",
+      },
+    ],
     features: [
       "Tubular design pull handle.",
       "Stainless Steel Grade 304.",
@@ -1122,6 +1782,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Lever Action Flush Bolt",
     ...europeanRoute.bolt,
     imageFilename: "default-758161593201019.jpg",
+    imagePath: europeanIronmongeryImage("bolt-the-door/lever-action-flush-bolt-european/lever-action-flush-bolt-european-main.jpg"),
     imageAlt: "TU.DB006 lever action flush bolt",
     inquirySubject: "Lever Action Flush Bolt Inquiry",
   }),
@@ -1131,6 +1792,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Lever Action Flush Bolt",
     ...europeanRoute.bolt,
     imageFilename: "default-693094572201019.jpg",
+    imagePath: europeanIronmongeryImage("bolt-the-door/lever-action-flush-bolt-european-variant/lever-action-flush-bolt-european-variant-main.jpg"),
     imageAlt: "Lever action flush bolt variant",
     inquirySubject: "Lever Action Flush Bolt Variant Inquiry",
   }),
@@ -1140,6 +1802,7 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Automatic Flush Bolt For Wood Doors",
     ...europeanRoute.bolt,
     imageFilename: "default-1914649793201019.jpg",
+    imagePath: europeanIronmongeryImage("bolt-the-door/automatic-flush-bolt-for-wood-doors-european/automatic-flush-bolt-for-wood-doors-european-main.jpg"),
     imageAlt: "TU.DB016 automatic flush bolt for wood doors",
     inquirySubject: "European Automatic Flush Bolt For Wood Doors Inquiry",
   }),
@@ -1149,27 +1812,28 @@ const europeanIronmongeryProducts: Product[] = [
     title: "Dust Proof Strike",
     ...europeanRoute.bolt,
     imageFilename: "default-2129728871201019.jpg",
+    imagePath: europeanIronmongeryImage("bolt-the-door/dust-proof-strike-european/dust-proof-strike-european-main.jpg"),
     imageAlt: "European dust proof strike",
     inquirySubject: "European Dust Proof Strike Inquiry",
   }),
   ...[
-    { id: 215, slug: "door-stop-european", title: "Door Stop", imageFilename: "default-475192325201108.jpg" },
-    { id: 214, slug: "thumb-turn-indicator", title: "Thumb Turn Indicator", imageFilename: "default-1821303611201108.jpg" },
-    { id: 213, slug: "door-guard", title: "Door Guard", imageFilename: "default-1131835947201108.jpg" },
-    { id: 212, slug: "door-holders", title: "Door Holders", imageFilename: "default-657146935201108.jpg" },
-    { id: 211, slug: "door-viewer-european", title: "Door Viewer", imageFilename: "default-1303624194201108.jpg" },
-    { id: 210, slug: "escutcheon-european", title: "Escutcheon", imageFilename: "default-2143359644201108.jpg" },
-    { id: 209, slug: "flush-handle", title: "Flush Handle", imageFilename: "default-537298917201108.jpg" },
-    { id: 208, slug: "push-plate-european", title: "Push Plate", imageFilename: "default-1589710071201108.jpg" },
-    { id: 207, slug: "flush-ring-pull-handle", title: "Flush Ring Pull Handle", imageFilename: "default-921777569201108.jpg" },
-    { id: 206, slug: "finger-pull", title: "Finger Pull", imageFilename: "default-622478242201108.jpg" },
-    { id: 205, slug: "door-protection-plates-european", title: "Door Protection Plates", imageFilename: "default-96432182201108.jpg" },
-    { id: 204, slug: "dust-excluding-floor-socket", title: "Dust Excluding Floor Socket", imageFilename: "default-1668475389201108.jpg" },
-    { id: 203, slug: "easy-clean-floor-socket", title: "Easy Clean Floor Socket", imageFilename: "default-1921769358201108.jpg" },
-    { id: 202, slug: "roller-latches-european", title: "Roller Latches", imageFilename: "default-682926123201108.jpg" },
-    { id: 201, slug: "coat-hook", title: "Coat Hook", imageFilename: "default-1809187484201108.jpg" },
-    { id: 200, slug: "sign-plates", title: "Sign Plates", imageFilename: "default-1216978138201108.jpg" },
-    { id: 199, slug: "special-sign-plates", title: "Special Sign Plates", imageFilename: "default-1639005195201108.jpg" },
+    { id: 215, slug: "door-stop-european", title: "Door Stop", imageFilename: "default-475192325201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/door-stop-european/door-stop-european-main.jpg") },
+    { id: 214, slug: "thumb-turn-indicator", title: "Thumb Turn Indicator", imageFilename: "default-1821303611201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/thumb-turn-indicator/thumb-turn-indicator-main.jpg") },
+    { id: 213, slug: "door-guard", title: "Door Guard", imageFilename: "default-1131835947201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/door-guard/door-guard-main.jpg") },
+    { id: 212, slug: "door-holders", title: "Door Holders", imageFilename: "default-657146935201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/door-holders/door-holders-main.jpg") },
+    { id: 211, slug: "door-viewer-european", title: "Door Viewer", imageFilename: "default-1303624194201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/door-viewer-european/door-viewer-european-main.jpg") },
+    { id: 210, slug: "escutcheon-european", title: "Escutcheon", imageFilename: "default-2143359644201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/escutcheon-european/escutcheon-european-main.jpg") },
+    { id: 209, slug: "flush-handle", title: "Flush Handle", imageFilename: "default-537298917201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/flush-handle/flush-handle-main.jpg") },
+    { id: 208, slug: "push-plate-european", title: "Push Plate", imageFilename: "default-1589710071201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/push-plate-european/push-plate-european-main.jpg") },
+    { id: 207, slug: "flush-ring-pull-handle", title: "Flush Ring Pull Handle", imageFilename: "default-921777569201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/flush-ring-pull-handle/flush-ring-pull-handle-main.jpg") },
+    { id: 206, slug: "finger-pull", title: "Finger Pull", imageFilename: "default-622478242201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/finger-pull/finger-pull-main.jpg") },
+    { id: 205, slug: "door-protection-plates-european", title: "Door Protection Plates", imageFilename: "default-96432182201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/door-protection-plates-european/door-protection-plates-european-main.jpg") },
+    { id: 204, slug: "dust-excluding-floor-socket", title: "Dust Excluding Floor Socket", imageFilename: "default-1668475389201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/dust-excluding-floor-socket/dust-excluding-floor-socket-main.jpg") },
+    { id: 203, slug: "easy-clean-floor-socket", title: "Easy Clean Floor Socket", imageFilename: "default-1921769358201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/easy-clean-floor-socket/easy-clean-floor-socket-main.jpg") },
+    { id: 202, slug: "roller-latches-european", title: "Roller Latches", imageFilename: "default-682926123201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/roller-latches-european/roller-latches-european-main.jpg") },
+    { id: 201, slug: "coat-hook", title: "Coat Hook", imageFilename: "default-1809187484201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/coat-hook/coat-hook-main.jpg") },
+    { id: 200, slug: "sign-plates", title: "Sign Plates", imageFilename: "default-1216978138201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/sign-plates/sign-plates-main.jpg") },
+    { id: 199, slug: "special-sign-plates", title: "Special Sign Plates", imageFilename: "default-1639005195201108.jpg", imagePath: europeanIronmongeryImage("ancillary-products/special-sign-plates/special-sign-plates-main.jpg") },
   ].map((item) =>
     defineThinEuropeanIronmongeryProduct({
       ...item,
@@ -1179,16 +1843,16 @@ const europeanIronmongeryProducts: Product[] = [
     }),
   ),
   ...[
-    { id: 230, slug: "te9800-series-premium", title: "TE9800 Series (Premium Series)", modelNo: "TE9810N", imageFilename: "default-1488174141210428.jpg" },
-    { id: 229, slug: "narrow-stile-surface-vertical-rod-exit-device-european", title: "Narrow Stile Surface Vertical Rod Exit Device", modelNo: "TE9820N", imageFilename: "default-1389004852210428.jpg" },
-    { id: 228, slug: "narrow-stile-concealed-vertical-rod-exit-device-european", title: "Narrow Stile Concealed Vertical Rod Exit Device", modelNo: "TE9840N", imageFilename: "default-990654259210428.jpg" },
-    { id: 227, slug: "te9700-series-project", title: "TE9700 Series (Project Series)", modelNo: "TE9700", imageFilename: "default-1963452465210428.jpg" },
-    { id: 226, slug: "surface-vertical-rod-exit-device-european", title: "Surface Vertical Rod Exit Device", modelNo: "TE9820N", imageFilename: "default-601971151210428.jpg" },
-    { id: 225, slug: "less-bottom-rod-exit-device-european", title: "Less Bottom Rod Exit Device", modelNo: "TE9720-LBR", imageFilename: "default-871735882210428.jpg" },
-    { id: 224, slug: "mortise-type-rim-exit-device-european", title: "Mortise Type Rim Exit Device", modelNo: "TE9710", imageFilename: "default-1543813237210428.jpg" },
-    { id: 223, slug: "concealed-vertical-rod-exit-device-commercial", title: "Concealed Vertical Rod Exit Device (Commercial Series)", modelNo: "TE9740 CVR", imageFilename: "default-194395892210428.jpg" },
-    { id: 222, slug: "rim-exit-device-european", title: "Rim Exit Device", modelNo: "TE9010", imageFilename: "default-1623449185210428.jpg" },
-    { id: 221, slug: "surface-vertical-rod-exit-device-european-variant", title: "Surface Vertical Rod Exit Device", modelNo: "TE9020", imageFilename: "default-1241252894210428.jpg" },
+    { id: 230, slug: "te9800-series-premium", title: "TE9800 Series (Premium Series)", modelNo: "TE9810N", imageFilename: "default-1488174141210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/te9800-series-premium/te9800-series-premium-main.jpg") },
+    { id: 229, slug: "narrow-stile-surface-vertical-rod-exit-device-european", title: "Narrow Stile Surface Vertical Rod Exit Device", modelNo: "TE9820N", imageFilename: "default-1389004852210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/narrow-stile-surface-vertical-rod-exit-device-european/narrow-stile-surface-vertical-rod-exit-device-european-main.jpg") },
+    { id: 228, slug: "narrow-stile-concealed-vertical-rod-exit-device-european", title: "Narrow Stile Concealed Vertical Rod Exit Device", modelNo: "TE9840N", imageFilename: "default-990654259210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/narrow-stile-concealed-vertical-rod-exit-device-european/narrow-stile-concealed-vertical-rod-exit-device-european-main.jpg") },
+    { id: 227, slug: "te9700-series-project", title: "TE9700 Series (Project Series)", modelNo: "TE9700", imageFilename: "default-1963452465210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/te9700-series-project/te9700-series-project-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("emergency-exits/te9700-series-project/te9700-series-project-technical-drawing.png"), alt: "TE9700 exit device dimension drawing", caption: "TE9700 — exit device installation dimension drawing." }] },
+    { id: 226, slug: "surface-vertical-rod-exit-device-european", title: "Surface Vertical Rod Exit Device", modelNo: "TE9820N", imageFilename: "default-601971151210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/surface-vertical-rod-exit-device-european/surface-vertical-rod-exit-device-european-main.jpg") },
+    { id: 225, slug: "less-bottom-rod-exit-device-european", title: "Less Bottom Rod Exit Device", modelNo: "TE9720-LBR", imageFilename: "default-871735882210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/less-bottom-rod-exit-device-european/less-bottom-rod-exit-device-european-main.jpg") },
+    { id: 224, slug: "mortise-type-rim-exit-device-european", title: "Mortise Type Rim Exit Device", modelNo: "TE9710", imageFilename: "default-1543813237210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/mortise-type-rim-exit-device-european/mortise-type-rim-exit-device-european-main.jpg") },
+    { id: 223, slug: "concealed-vertical-rod-exit-device-commercial", title: "Concealed Vertical Rod Exit Device (Commercial Series)", modelNo: "TE9740 CVR", imageFilename: "default-194395892210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/concealed-vertical-rod-exit-device-commercial/concealed-vertical-rod-exit-device-commercial-main.jpg") },
+    { id: 222, slug: "rim-exit-device-european", title: "Rim Exit Device", modelNo: "TE9010", imageFilename: "default-1623449185210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/rim-exit-device-european/rim-exit-device-european-main.jpg") },
+    { id: 221, slug: "surface-vertical-rod-exit-device-european-variant", title: "Surface Vertical Rod Exit Device", modelNo: "TE9020", imageFilename: "default-1241252894210428.jpg", imagePath: europeanIronmongeryImage("emergency-exits/surface-vertical-rod-exit-device-european-variant/surface-vertical-rod-exit-device-european-variant-main.jpg") },
   ].map((item) =>
     defineEuropeanIronmongeryProduct({
       id: item.id,
@@ -1201,6 +1865,8 @@ const europeanIronmongeryProducts: Product[] = [
       overview:
         `${item.modelNo} is listed on the old TUR page with finish, strike, latch bolt, dogging, door size, projection, mounting height and fire-rating details.`,
       imageFilename: item.imageFilename,
+      imagePath: item.imagePath,
+      ...("detailImages" in item ? { detailImages: item.detailImages as Product["detailImages"] } : {}),
       imageAlt: `${item.modelNo} ${item.title}`,
       features: [
         "AL and SSS finishes standard; other finishes consult factory.",
@@ -1220,11 +1886,11 @@ const europeanIronmongeryProducts: Product[] = [
     }),
   ),
   ...[
-    { id: 220, slug: "escutcheon-lever-trim-european-1", title: "Escutcheon Lever Trim", modelNo: "TE9454", imageFilename: "default-2107418513201019.jpg", detail: "Outside trim prepared for Euro Profile Cylinder" },
-    { id: 219, slug: "escutcheon-lever-trim-european-2", title: "Escutcheon Lever Trim", modelNo: "TE9464", imageFilename: "default-647482236201019.jpg", detail: "Heavy Duty, Regular Size" },
-    { id: 218, slug: "escutcheon-lever-trim-european-3", title: "Escutcheon Lever Trim", modelNo: "TE9468", imageFilename: "default-1639330471201019.jpg", detail: "Heavy Duty, Large Size" },
-    { id: 217, slug: "escutcheon-lever-trim-european-4", title: "Escutcheon Lever Trim", modelNo: "TE9434", imageFilename: "default-623421317201019.jpg", detail: "Narrow Stile" },
-    { id: 216, slug: "escutcheon-thumbpiece-trim-european", title: "Escutcheon Thumbpiece Trim", modelNo: "TE9453", imageFilename: "default-278913889201019.jpg", detail: "Thumbpiece Trim" },
+    { id: 220, slug: "escutcheon-lever-trim-european-1", title: "Escutcheon Lever Trim", modelNo: "TE9454", imageFilename: "default-2107418513201019.jpg", imagePath: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-1/escutcheon-lever-trim-european-1-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-1/escutcheon-lever-trim-european-1-technical-drawing-1.png"), alt: "TE9454 lever trim drawing 1", caption: "TE9454 — lever trim dimension drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-1/escutcheon-lever-trim-european-1-technical-drawing-2.png"), alt: "TE9454 lever trim drawing 2", caption: "TE9454 — lever trim detail drawing." }], detail: "Outside trim prepared for Euro Profile Cylinder" },
+    { id: 219, slug: "escutcheon-lever-trim-european-2", title: "Escutcheon Lever Trim", modelNo: "TE9464", imageFilename: "default-647482236201019.jpg", imagePath: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-2/escutcheon-lever-trim-european-2-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-2/escutcheon-lever-trim-european-2-technical-drawing-1.png"), alt: "TE9464 lever trim drawing 1", caption: "TE9464 — lever trim dimension drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-2/escutcheon-lever-trim-european-2-technical-drawing-2.png"), alt: "TE9464 lever trim drawing 2", caption: "TE9464 — lever trim detail drawing." }], detail: "Heavy Duty, Regular Size" },
+    { id: 218, slug: "escutcheon-lever-trim-european-3", title: "Escutcheon Lever Trim", modelNo: "TE9468", imageFilename: "default-1639330471201019.jpg", imagePath: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-3/escutcheon-lever-trim-european-3-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-3/escutcheon-lever-trim-european-3-technical-drawing-1.png"), alt: "TE9468 lever trim drawing 1", caption: "TE9468 — lever trim dimension drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-3/escutcheon-lever-trim-european-3-technical-drawing-2.png"), alt: "TE9468 lever trim drawing 2", caption: "TE9468 — lever trim detail drawing." }], detail: "Heavy Duty, Large Size" },
+    { id: 217, slug: "escutcheon-lever-trim-european-4", title: "Escutcheon Lever Trim", modelNo: "TE9434", imageFilename: "default-623421317201019.jpg", imagePath: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-4/escutcheon-lever-trim-european-4-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-4/escutcheon-lever-trim-european-4-technical-drawing-1.png"), alt: "TE9434 lever trim drawing 1", caption: "TE9434 narrow stile — lever trim dimension drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("emergency-exits/escutcheon-lever-trim-european-4/escutcheon-lever-trim-european-4-technical-drawing-2.png"), alt: "TE9434 lever trim drawing 2", caption: "TE9434 narrow stile — lever trim detail drawing." }], detail: "Narrow Stile" },
+    { id: 216, slug: "escutcheon-thumbpiece-trim-european", title: "Escutcheon Thumbpiece Trim", modelNo: "TE9453", imageFilename: "default-278913889201019.jpg", imagePath: europeanIronmongeryImage("emergency-exits/escutcheon-thumbpiece-trim-european/escutcheon-thumbpiece-trim-european-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("emergency-exits/escutcheon-thumbpiece-trim-european/escutcheon-thumbpiece-trim-european-technical-drawing-1.png"), alt: "TE9453 thumbpiece trim drawing 1", caption: "TE9453 — thumbpiece trim dimension drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("emergency-exits/escutcheon-thumbpiece-trim-european/escutcheon-thumbpiece-trim-european-technical-drawing-2.png"), alt: "TE9453 thumbpiece trim drawing 2", caption: "TE9453 — thumbpiece trim detail drawing." }], detail: "Thumbpiece Trim" },
   ].map((item) =>
     defineEuropeanIronmongeryProduct({
       id: item.id,
@@ -1237,6 +1903,8 @@ const europeanIronmongeryProducts: Product[] = [
       overview:
         `The old TUR page lists ${item.modelNo} with entrance, storeroom, passage and dummy functions and US32D standard finish.`,
       imageFilename: item.imageFilename,
+      imagePath: item.imagePath,
+      ...("detailImages" in item ? { detailImages: item.detailImages as Product["detailImages"] } : {}),
       imageAlt: `${item.modelNo} ${item.title}`,
       features: [
         "Entrance, storeroom, passage and dummy functions listed on old TUR page.",
@@ -1254,24 +1922,24 @@ const europeanIronmongeryProducts: Product[] = [
     }),
   ),
   ...[
-    { id: 186, slug: "lever-handle-te1910-968", title: "Lever Handle - TE1910.968", modelNo: "TE1910.968", imageFilename: "default-1046534655201108.jpg" },
-    { id: 185, slug: "lever-handle-te1910-967", title: "Lever Handle - TE1910.967", modelNo: "TE1910.967", imageFilename: "default-406274475201108.jpg" },
-    { id: 184, slug: "lever-handle-te1910-966", title: "Lever Handle - TE1910.966", modelNo: "TE1910.966", imageFilename: "default-1309932359201108.jpg" },
-    { id: 183, slug: "lever-handle-te1910-970", title: "Lever Handle - TE1910.970", modelNo: "TE1910.970", imageFilename: "default-2028079372201108.jpg" },
-    { id: 182, slug: "lever-handle-te1920-968", title: "Lever Handle - TE1920.968", modelNo: "TE1920.968", imageFilename: "default-914338100201108.jpg" },
-    { id: 181, slug: "lever-handle-te1920-967", title: "Lever Handle - TE1920.967", modelNo: "TE1920.967", imageFilename: "default-579207970201108.jpg" },
-    { id: 180, slug: "lever-handle-te1920-966", title: "Lever Handle - TE1920.966", modelNo: "TE1920.966", imageFilename: "default-1726371322201108.jpg" },
-    { id: 179, slug: "lever-handle-te1920-971", title: "Lever Handle - TE1920.971", modelNo: "TE1920.971", imageFilename: "default-2064762550201108.jpg" },
-    { id: 178, slug: "lever-handle-te1920-977", title: "Lever Handle - TE1920.977", modelNo: "TE1920.977", imageFilename: "default-1521571993201108.jpg" },
-    { id: 177, slug: "lever-handle-te1920-970", title: "Lever Handle - TE1920.970", modelNo: "TE1920.970", imageFilename: "default-2048012775201108.jpg" },
-    { id: 176, slug: "lever-handle-te1920-964", title: "Lever Handle - TE1920.964", modelNo: "TE1920.964", imageFilename: "default-1118339186201108.jpg" },
-    { id: 175, slug: "lever-handle-te1920-938", title: "Lever Handle - TE1920.938", modelNo: "TE1920.938", imageFilename: "default-938111185201108.jpg" },
-    { id: 174, slug: "lever-handle-te1920-939", title: "Lever Handle - TE1920.939", modelNo: "TE1920.939", imageFilename: "default-1747531255201108.jpg" },
-    { id: 173, slug: "lever-handle-te1920-911", title: "Lever Handle - TE1920.911", modelNo: "TE1920.911", imageFilename: "default-194863659201108.jpg" },
-    { id: 172, slug: "lever-handle-te1920-955", title: "Lever Handle - TE1920.955", modelNo: "TE1920.955", imageFilename: "default-102988534201108.jpg" },
-    { id: 171, slug: "knob-handle-te1920-910", title: "Knob Handle - TE1920.910", modelNo: "TE1920.910", imageFilename: "default-1949229705201108.jpg" },
-    { id: 170, slug: "knob-handle-te1920-914", title: "Knob Handle - TE1920.914", modelNo: "TE1920.914", imageFilename: "default-32454508201108.jpg" },
-    { id: 169, slug: "knob-handle-te1920-912", title: "Knob Handle - TE1920.912", modelNo: "TE1920.912", imageFilename: "default-705623301201108.jpg" },
+    { id: 186, slug: "lever-handle-te1910-968", title: "Lever Handle - TE1910.968", modelNo: "TE1910.968", imageFilename: "default-1046534655201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-968/lever-handle-te1910-968-main.jpg") },
+    { id: 185, slug: "lever-handle-te1910-967", title: "Lever Handle - TE1910.967", modelNo: "TE1910.967", imageFilename: "default-406274475201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-967/lever-handle-te1910-967-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-967/lever-handle-te1910-967-technical-drawing.png"), alt: "Lever Handle TE1910.967 dimension drawing", caption: "TE1910.967 — handle dimension drawing." }] },
+    { id: 184, slug: "lever-handle-te1910-966", title: "Lever Handle - TE1910.966", modelNo: "TE1910.966", imageFilename: "default-1309932359201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-966/lever-handle-te1910-966-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-966/lever-handle-te1910-966-technical-drawing.png"), alt: "Lever Handle TE1910.966 dimension drawing", caption: "TE1910.966 — handle dimension drawing." }] },
+    { id: 183, slug: "lever-handle-te1910-970", title: "Lever Handle - TE1910.970", modelNo: "TE1910.970", imageFilename: "default-2028079372201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-970/lever-handle-te1910-970-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-970/lever-handle-te1910-970-technical-drawing-1.png"), alt: "Lever Handle TE1910.970 drawing 1", caption: "TE1910.970 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1910-970/lever-handle-te1910-970-technical-drawing-2.png"), alt: "Lever Handle TE1910.970 drawing 2", caption: "TE1910.970 — installation dimension drawing." }] },
+    { id: 182, slug: "lever-handle-te1920-968", title: "Lever Handle - TE1920.968", modelNo: "TE1920.968", imageFilename: "default-914338100201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-968/lever-handle-te1920-968-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-968/lever-handle-te1920-968-technical-drawing-1.png"), alt: "Lever Handle TE1920.968 drawing 1", caption: "TE1920.968 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-968/lever-handle-te1920-968-technical-drawing-2.png"), alt: "Lever Handle TE1920.968 drawing 2", caption: "TE1920.968 — installation dimension drawing." }] },
+    { id: 181, slug: "lever-handle-te1920-967", title: "Lever Handle - TE1920.967", modelNo: "TE1920.967", imageFilename: "default-579207970201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-967/lever-handle-te1920-967-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-967/lever-handle-te1920-967-technical-drawing-1.png"), alt: "Lever Handle TE1920.967 drawing 1", caption: "TE1920.967 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-967/lever-handle-te1920-967-technical-drawing-2.png"), alt: "Lever Handle TE1920.967 drawing 2", caption: "TE1920.967 — installation dimension drawing." }] },
+    { id: 180, slug: "lever-handle-te1920-966", title: "Lever Handle - TE1920.966", modelNo: "TE1920.966", imageFilename: "default-1726371322201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-966/lever-handle-te1920-966-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-966/lever-handle-te1920-966-technical-drawing-1.png"), alt: "Lever Handle TE1920.966 drawing 1", caption: "TE1920.966 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-966/lever-handle-te1920-966-technical-drawing-2.png"), alt: "Lever Handle TE1920.966 drawing 2", caption: "TE1920.966 — installation dimension drawing." }] },
+    { id: 179, slug: "lever-handle-te1920-971", title: "Lever Handle - TE1920.971", modelNo: "TE1920.971", imageFilename: "default-2064762550201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-971/lever-handle-te1920-971-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-971/lever-handle-te1920-971-technical-drawing-1.png"), alt: "Lever Handle TE1920.971 drawing 1", caption: "TE1920.971 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-971/lever-handle-te1920-971-technical-drawing-2.png"), alt: "Lever Handle TE1920.971 drawing 2", caption: "TE1920.971 — installation dimension drawing." }] },
+    { id: 178, slug: "lever-handle-te1920-977", title: "Lever Handle - TE1920.977", modelNo: "TE1920.977", imageFilename: "default-1521571993201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-977/lever-handle-te1920-977-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-977/lever-handle-te1920-977-technical-drawing-1.png"), alt: "Lever Handle TE1920.977 drawing 1", caption: "TE1920.977 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-977/lever-handle-te1920-977-technical-drawing-2.png"), alt: "Lever Handle TE1920.977 drawing 2", caption: "TE1920.977 — installation dimension drawing." }] },
+    { id: 177, slug: "lever-handle-te1920-970", title: "Lever Handle - TE1920.970", modelNo: "TE1920.970", imageFilename: "default-2048012775201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-970/lever-handle-te1920-970-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-970/lever-handle-te1920-970-technical-drawing-1.png"), alt: "Lever Handle TE1920.970 drawing 1", caption: "TE1920.970 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-970/lever-handle-te1920-970-technical-drawing-2.png"), alt: "Lever Handle TE1920.970 drawing 2", caption: "TE1920.970 — installation dimension drawing." }] },
+    { id: 176, slug: "lever-handle-te1920-964", title: "Lever Handle - TE1920.964", modelNo: "TE1920.964", imageFilename: "default-1118339186201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-964/lever-handle-te1920-964-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-964/lever-handle-te1920-964-technical-drawing-1.png"), alt: "Lever Handle TE1920.964 drawing 1", caption: "TE1920.964 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-964/lever-handle-te1920-964-technical-drawing-2.png"), alt: "Lever Handle TE1920.964 drawing 2", caption: "TE1920.964 — installation dimension drawing." }] },
+    { id: 175, slug: "lever-handle-te1920-938", title: "Lever Handle - TE1920.938", modelNo: "TE1920.938", imageFilename: "default-938111185201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-938/lever-handle-te1920-938-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-938/lever-handle-te1920-938-technical-drawing-1.png"), alt: "Lever Handle TE1920.938 drawing 1", caption: "TE1920.938 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-938/lever-handle-te1920-938-technical-drawing-2.png"), alt: "Lever Handle TE1920.938 drawing 2", caption: "TE1920.938 — installation dimension drawing." }] },
+    { id: 174, slug: "lever-handle-te1920-939", title: "Lever Handle - TE1920.939", modelNo: "TE1920.939", imageFilename: "default-1747531255201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-939/lever-handle-te1920-939-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-939/lever-handle-te1920-939-technical-drawing-1.png"), alt: "Lever Handle TE1920.939 drawing 1", caption: "TE1920.939 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-939/lever-handle-te1920-939-technical-drawing-2.png"), alt: "Lever Handle TE1920.939 drawing 2", caption: "TE1920.939 — installation dimension drawing." }] },
+    { id: 173, slug: "lever-handle-te1920-911", title: "Lever Handle - TE1920.911", modelNo: "TE1920.911", imageFilename: "default-194863659201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-911/lever-handle-te1920-911-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-911/lever-handle-te1920-911-technical-drawing-1.png"), alt: "Lever Handle TE1920.911 drawing 1", caption: "TE1920.911 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-911/lever-handle-te1920-911-technical-drawing-2.png"), alt: "Lever Handle TE1920.911 drawing 2", caption: "TE1920.911 — installation dimension drawing." }] },
+    { id: 172, slug: "lever-handle-te1920-955", title: "Lever Handle - TE1920.955", modelNo: "TE1920.955", imageFilename: "default-102988534201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-955/lever-handle-te1920-955-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-955/lever-handle-te1920-955-technical-drawing-1.png"), alt: "Lever Handle TE1920.955 drawing 1", caption: "TE1920.955 — handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/lever-handle-te1920-955/lever-handle-te1920-955-technical-drawing-2.png"), alt: "Lever Handle TE1920.955 drawing 2", caption: "TE1920.955 — installation dimension drawing." }] },
+    { id: 171, slug: "knob-handle-te1920-910", title: "Knob Handle - TE1920.910", modelNo: "TE1920.910", imageFilename: "default-1949229705201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-910/knob-handle-te1920-910-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-910/knob-handle-te1920-910-technical-drawing-1.png"), alt: "Knob Handle TE1920.910 drawing 1", caption: "TE1920.910 — knob handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-910/knob-handle-te1920-910-technical-drawing-2.png"), alt: "Knob Handle TE1920.910 drawing 2", caption: "TE1920.910 — knob handle dimension drawing." }] },
+    { id: 170, slug: "knob-handle-te1920-914", title: "Knob Handle - TE1920.914", modelNo: "TE1920.914", imageFilename: "default-32454508201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-914/knob-handle-te1920-914-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-914/knob-handle-te1920-914-technical-drawing-1.png"), alt: "Knob Handle TE1920.914 drawing 1", caption: "TE1920.914 — knob handle design drawing." }, { title: "Technical Drawing (2)", image: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-914/knob-handle-te1920-914-technical-drawing-2.png"), alt: "Knob Handle TE1920.914 drawing 2", caption: "TE1920.914 — knob handle dimension drawing." }] },
+    { id: 169, slug: "knob-handle-te1920-912", title: "Knob Handle - TE1920.912", modelNo: "TE1920.912", imageFilename: "default-705623301201108.jpg", imagePath: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-912/knob-handle-te1920-912-main.jpg"), detailImages: [{ title: "Technical Drawing", image: europeanIronmongeryImage("furnish-the-door-lever-handle/knob-handle-te1920-912/knob-handle-te1920-912-technical-drawing.png"), alt: "Knob Handle TE1920.912 dimension drawing", caption: "TE1920.912 — knob handle dimension drawing." }] },
   ].map((item) =>
     defineEuropeanIronmongeryProduct({
       id: item.id,
@@ -1279,25 +1947,35 @@ const europeanIronmongeryProducts: Product[] = [
       title: item.title,
       ...europeanRoute.lever,
       description:
-        `${item.title} from the old TUR European Ironmongery lever handle route.`,
+        `${item.title}, model ${item.modelNo}, in stainless steel 304 round tube for wood and metal doors.`,
       shortDescription: `${item.modelNo} lever/knob handle in stainless steel 304 round tube.`,
       overview:
-        `The old TUR page lists ${item.modelNo} for wood and metal doors, with stainless steel 304 round tube, built-in retaining spring construction and 38-45 mm door thickness.`,
+        `${item.modelNo} features stainless steel 304 round tube (Ø19 mm), built-in retaining spring construction, suitable for wood and metal doors 38–45 mm thick. Certified to BS EN 1906:2012.`,
       imageFilename: item.imageFilename,
+      imagePath: item.imagePath,
+      ...("detailImages" in item ? { detailImages: item.detailImages as Product["detailImages"] } : {}),
       imageAlt: `${item.title} European Ironmongery handle`,
       features: [
         "Applicable to wood and metal doors.",
         "Stainless steel 304 round tube, diameter 19 mm.",
         "Built-in retaining spring construction.",
-        "Door thickness 38-45 mm.",
+        "Door thickness 38–45 mm.",
       ],
-      applications: ["Wood doors", "Metal doors", "European Ironmongery lever handle sets"],
-      finishOptions: ["Satin", "Polished", "Other finishes upon request"],
+      applications: ["Wood doors", "Metal doors", "Residential and commercial door sets"],
+      finishOptions: [
+        "Satin (630)",
+        "Polished (629)",
+        "Finish codes: 630, 629, 02, 606, 605, 603",
+        "Special options: *AM Anti-Microbial, *LL Lead Line, *316 SS Grade 316",
+      ],
       specs: [
         { label: "Model No", value: item.modelNo },
-        { label: "Grade", value: "Grade 4 where listed on old TUR page" },
+        { label: "Grade", value: "Grade 4" },
+        { label: "Certification", value: "BS EN 1906:2012 200,000 life cycle test" },
+        { label: "Configuration", value: item.slug.startsWith("knob") ? "One pair knob handle, one spindle, one hexagon spanner, fixing screws" : "One pair lever handle, one pair escutcheon, one spindle, one hexagon spanner, fixing screws" },
       ],
-      howToOrder: "Brand Identity · Model No · Series · Design · Options · Options · Finish",
+      howToOrder: "TE · Series (19 Premium / 20 Project) · Design · Model No · Finish",
+      orderCodeExample: `TE1910.967.630`,
       inquirySubject: `${item.modelNo} Handle Inquiry`,
       relatedSlugs: ["te1400-series-mortise-sash-lock-premium", "te3600-series"],
     }),
@@ -1305,6 +1983,7 @@ const europeanIronmongeryProducts: Product[] = [
 ];
 
 const glassHardwareProducts: Product[] = [
+  // ── Glass Hinge & Glass Clip ──────────────────────────────────────────────
   ...[
     { id: 348, code: "TG.GH101", image: "default-1589064676201111.jpg" },
     { id: 347, code: "TG.GH102", image: "default-231575771201111.jpg" },
@@ -1312,64 +1991,171 @@ const glassHardwareProducts: Product[] = [
     { id: 345, code: "TG.GH104", image: "default-222612358201111.jpg" },
     { id: 344, code: "TG.GH105", image: "default-1714523478201111.jpg" },
     { id: 343, code: "TG.GH106", image: "default-695728812201111.jpg" },
+  ].map((item) =>
+    defineGlassHardwareProduct({
+      id: item.id,
+      legacyName: item.code.toLowerCase(),
+      slug: item.code.toLowerCase().replace(/\./g, "-"),
+      modelNo: item.code,
+      title: `${item.code} Glass Hinge`,
+      subcategory: "hinge",
+      imageFilename: item.image,
+      imageAlt: `${item.code} glass hinge product image`,
+      glassThickness: "8 / 10 / 12 mm tempered glass",
+      features: [
+        "Stainless steel AISI 304 construction.",
+        "Suitable for frameless glass door and partition systems.",
+        "Compatible with 8 / 10 / 12 mm tempered glass.",
+        "Available in satin and polished stainless steel finish.",
+        "Designed for left and right-hand door installation.",
+      ],
+      specs: [
+        { label: "Finish (standard)", value: "Satin stainless steel" },
+      ],
+      howToOrder: "TG · Model No · Finish",
+      orderCodeExample: `${item.code}.630`,
+      inquirySubject: `${item.code} Glass Hinge Inquiry`,
+    }),
+  ),
+  ...[
     { id: 342, code: "TG.GH201", image: "default-507832379201111.jpg" },
     { id: 341, code: "TG.GH202", image: "default-2045158988201111.jpg" },
     { id: 340, code: "TG.GH203", image: "default-1468896434201111.jpg" },
     { id: 339, code: "TG.GH204", image: "default-762123721201111.jpg" },
     { id: 338, code: "TG.GH205", image: "default-535464810201111.jpg" },
     { id: 337, code: "TG.GH206", image: "default-1218173687201111.jpg" },
+  ].map((item) =>
+    defineGlassHardwareProduct({
+      id: item.id,
+      legacyName: item.code.toLowerCase(),
+      slug: item.code.toLowerCase().replace(/\./g, "-"),
+      modelNo: item.code,
+      title: `${item.code} Glass Hinge`,
+      subcategory: "hinge",
+      imageFilename: item.image,
+      imageAlt: `${item.code} glass hinge product image`,
+      glassThickness: "8 / 10 / 12 mm tempered glass",
+      features: [
+        "Stainless steel AISI 304 construction.",
+        "Suitable for frameless glass door and partition systems.",
+        "Compatible with 8 / 10 / 12 mm tempered glass.",
+        "Available in satin and polished stainless steel finish.",
+        "Designed for left and right-hand door installation.",
+      ],
+      specs: [
+        { label: "Finish (standard)", value: "Satin stainless steel" },
+      ],
+      howToOrder: "TG · Model No · Finish",
+      orderCodeExample: `${item.code}.630`,
+      inquirySubject: `${item.code} Glass Hinge Inquiry`,
+    }),
+  ),
+  ...[
     { id: 336, code: "TG.GH301", image: "default-507528363201111.jpg" },
     { id: 335, code: "TG.GH302", image: "default-2105135296201111.jpg" },
     { id: 334, code: "TG.GH303", image: "default-448364203201111.jpg" },
     { id: 333, code: "TG.GH304", image: "default-1774961835201111.jpg" },
     { id: 331, code: "TG.GH306", image: "default-364221670201111.jpg" },
   ].map((item) =>
-    defineThinGlassHardwareProduct({
+    defineGlassHardwareProduct({
       id: item.id,
       legacyName: item.code.toLowerCase(),
       slug: item.code.toLowerCase().replace(/\./g, "-"),
-      title: item.code,
-      ...glassRoute.hinge,
+      modelNo: item.code,
+      title: `${item.code} Glass Hinge`,
+      subcategory: "hinge",
       imageFilename: item.image,
-      imageAlt: `${item.code} glass hinge or glass clip product image`,
-      inquirySubject: `${item.code} Glass Hinge & Glass Clip Inquiry`,
+      imageAlt: `${item.code} glass hinge product image`,
+      glassThickness: "8 / 10 / 12 mm tempered glass",
+      features: [
+        "Stainless steel AISI 304 construction.",
+        "Suitable for frameless glass door and partition systems.",
+        "Compatible with 8 / 10 / 12 mm tempered glass.",
+        "Available in satin and polished stainless steel finish.",
+        "Designed for left and right-hand door installation.",
+      ],
+      specs: [
+        { label: "Finish (standard)", value: "Satin stainless steel" },
+      ],
+      howToOrder: "TG · Model No · Finish",
+      orderCodeExample: `${item.code}.630`,
+      inquirySubject: `${item.code} Glass Hinge Inquiry`,
     }),
   ),
+  // ── Bathroom Handle ───────────────────────────────────────────────────────
   ...[
     { id: 370, code: "TG.BH101", image: "default-569443347201111.jpg" },
     { id: 369, code: "TG.BH102", image: "default-1335774624201111.jpg" },
     { id: 368, code: "TG.BH105", image: "default-2034265093201111.jpg" },
     { id: 363, code: "TG.BH106", image: "default-812869035201111.jpg" },
   ].map((item) =>
-    defineThinGlassHardwareProduct({
+    defineGlassHardwareProduct({
       id: item.id,
       legacyName: item.code.toLowerCase(),
       slug: item.code.toLowerCase().replace(/\./g, "-"),
-      title: item.code,
-      ...glassRoute.bathroom,
+      modelNo: item.code,
+      title: `${item.code} Bathroom Handle`,
+      subcategory: "bathroom",
       imageFilename: item.image,
       imageAlt: `${item.code} bathroom handle product image`,
+      glassThickness: "8 / 10 / 12 mm tempered glass",
+      features: [
+        "Stainless steel AISI 304 construction.",
+        "Designed for glass shower and bathroom doors.",
+        "Ergonomic grip profile.",
+        "Corrosion-resistant for humid and wet environments.",
+        "Suitable for glass thickness 8 / 10 / 12 mm.",
+      ],
+      specs: [
+        { label: "Finish (standard)", value: "Satin stainless steel" },
+      ],
+      howToOrder: "TG · Model No · Finish",
+      orderCodeExample: `${item.code}.630`,
       inquirySubject: `${item.code} Bathroom Handle Inquiry`,
     }),
   ),
+  // ── Glass Knob ────────────────────────────────────────────────────────────
   ...[
-    { id: 362, title: "TG.GK102 / TG.GK102-H", slug: "tg-gk102-tg-gk102-h", legacyName: "tg.gk102+%2F+tg.gk102-h", image: "default-1457247921201111.jpg", variants: ["TG.GK102", "TG.GK102-H"] },
-    { id: 361, title: "TG.GK103 / TG.GK103-H", slug: "tg-gk103-tg-gk103-h", legacyName: "tg.gk103+%2F+tg.gk103-h", image: "default-1121328181201111.jpg", variants: ["TG.GK103", "TG.GK103-H"] },
-    { id: 360, title: "TG.GK106 / TG.GK106-H", slug: "tg-gk106-tg-gk106-h", legacyName: "tg.gk106+%2F+tg.gk106-h", image: "default-604622999201111.jpg", variants: ["TG.GK106", "TG.GK106-H"] },
-    { id: 359, title: "TG.GK107 / TG.GK107-H", slug: "tg-gk107-tg-gk107-h", legacyName: "tg.gk107+%2F+tg.gk107-h", image: "default-1876003595201111.jpg", variants: ["TG.GK107", "TG.GK107-H"] },
+    { id: 362, code: "TG.GK102", title: "TG.GK102 / TG.GK102-H", slug: "tg-gk102-tg-gk102-h", legacyName: "tg.gk102+%2F+tg.gk102-h", image: "default-1457247921201111.jpg" },
+    { id: 361, code: "TG.GK103", title: "TG.GK103 / TG.GK103-H", slug: "tg-gk103-tg-gk103-h", legacyName: "tg.gk103+%2F+tg.gk103-h", image: "default-1121328181201111.jpg" },
+    { id: 360, code: "TG.GK106", title: "TG.GK106 / TG.GK106-H", slug: "tg-gk106-tg-gk106-h", legacyName: "tg.gk106+%2F+tg.gk106-h", image: "default-604622999201111.jpg" },
+    { id: 359, code: "TG.GK107", title: "TG.GK107 / TG.GK107-H", slug: "tg-gk107-tg-gk107-h", legacyName: "tg.gk107+%2F+tg.gk107-h", image: "default-1876003595201111.jpg" },
   ].map((item) =>
-    defineThinGlassHardwareProduct({
+    defineGlassHardwareProduct({
       id: item.id,
       legacyName: item.legacyName,
       slug: item.slug,
-      title: item.title,
-      ...glassRoute.bathroom,
+      modelNo: item.code,
+      title: `${item.title} Glass Knob`,
+      subcategory: "bathroom",
       imageFilename: item.image,
       imageAlt: `${item.title} glass knob product image`,
-      variants: item.variants.map((variant) => ({ key: variant, label: variant })),
+      glassThickness: "8 / 10 / 12 mm tempered glass",
+      features: [
+        "Stainless steel AISI 304 construction.",
+        "Round profile knob for frameless glass doors.",
+        "-H variant: holed design for through-bolt glass installation.",
+        "Standard variant: surface-mount on glass.",
+        "Available in satin and polished stainless steel finish.",
+      ],
+      applications: [
+        "Frameless glass doors.",
+        "Glass partition doors.",
+        "Shower enclosure glass doors.",
+      ],
+      specs: [
+        { label: "Finish (standard)", value: "Satin stainless steel" },
+      ],
+      howToOrder: "TG · Model No · Type (-H holed or standard) · Finish",
+      orderCodeExample: `${item.code}.630`,
+      variants: [
+        { key: item.code, label: item.code },
+        { key: `${item.code}-H`, label: `${item.code}-H (Holed)` },
+      ],
       inquirySubject: `${item.title} Glass Knob Inquiry`,
     }),
   ),
+  // ── Patch Fitting ─────────────────────────────────────────────────────────
   ...[
     { id: 387, code: "TG.PF101", image: "default-66369246201111.jpg" },
     { id: 386, code: "TG.PF102", image: "default-21654029201111.jpg" },
@@ -1382,41 +2168,112 @@ const glassHardwareProducts: Product[] = [
     { id: 377, code: "TG.PF304", image: "default-242899507201111.jpg" },
     { id: 375, code: "TG.PF308", image: "default-975572265201111.jpg" },
     { id: 374, code: "TG.PF30K", image: "default-899466034201111.jpg" },
-    { id: 373, code: "TG.FS201", image: "default-547351889201111.jpg" },
   ].map((item) =>
-    defineThinGlassHardwareProduct({
+    defineGlassHardwareProduct({
       id: item.id,
       legacyName: item.code.toLowerCase(),
       slug: item.code.toLowerCase().replace(/\./g, "-"),
-      title: item.code,
-      ...glassRoute.patch,
+      modelNo: item.code,
+      title: `${item.code} Patch Fitting`,
+      subcategory: "patch",
       imageFilename: item.image,
       imageAlt: `${item.code} patch fitting product image`,
+      glassThickness: "10 / 12 mm tempered glass",
+      features: [
+        "Stainless steel AISI 304 construction.",
+        "Structural point-fixed glass fitting.",
+        "Compatible with 10 / 12 mm tempered glass.",
+        "Adjustable pivot/swivel joint for glass alignment.",
+        "Load-bearing design for frameless glass systems.",
+      ],
+      specs: [
+        { label: "Finish (standard)", value: "Satin stainless steel" },
+      ],
+      howToOrder: "TG · Model No · Finish",
+      orderCodeExample: `${item.code}.630`,
       inquirySubject: `${item.code} Patch Fitting Inquiry`,
     }),
   ),
-  defineThinGlassHardwareProduct({
+  defineGlassHardwareProduct({
+    id: 373,
+    legacyName: "tg.fs201",
+    slug: "tg-fs201",
+    modelNo: "TG.FS201",
+    title: "TG.FS201 Floor Spring",
+    subcategory: "patch",
+    imageFilename: "default-547351889201111.jpg",
+    imageAlt: "TG.FS201 floor spring product image",
+    glassThickness: "10 / 12 mm tempered glass",
+    features: [
+      "Stainless steel AISI 304 housing.",
+      "Floor-recessed hydraulic closer mechanism.",
+      "Designed for frameless glass door pivot and controlled closing.",
+      "Adjustable closing speed.",
+      "Compatible with 10 / 12 mm tempered glass doors.",
+    ],
+    applications: [
+      "Frameless glass door floor-pivot closing systems.",
+      "Glass entrance doors requiring floor-recessed closer.",
+      "Commercial glass door installations.",
+    ],
+    specs: [
+      { label: "Finish (standard)", value: "Satin stainless steel" },
+    ],
+    howToOrder: "TG · Model No · Finish",
+    orderCodeExample: "TG.FS201.630",
+    inquirySubject: "TG.FS201 Floor Spring Inquiry",
+  }),
+  defineGlassHardwareProduct({
     id: 372,
     legacyName: "tg.pf103",
     slug: "tg-pf103",
-    title: "TG.PF103",
-    ...glassRoute.patch,
+    modelNo: "TG.PF103",
+    title: "TG.PF103 Patch Fitting",
+    subcategory: "patch",
     additionalRouteGroupSlugs: ["bathroom-handle-glass-knob"],
     imageFilename: "default-1487633146201111.jpg",
     imageAlt: "TG.PF103 patch fitting product image",
-    inquirySubject: "TG.PF103 Patch Fitting Inquiry",
+    glassThickness: "10 / 12 mm tempered glass",
+    features: [
+      "Stainless steel AISI 304 construction.",
+      "Structural point-fixed glass fitting.",
+      "Compatible with 10 / 12 mm tempered glass.",
+      "Adjustable pivot/swivel joint for glass alignment.",
+      "Load-bearing design for frameless glass systems.",
+    ],
+    specs: [
+      { label: "Finish (standard)", value: "Satin stainless steel" },
+    ],
+    howToOrder: "TG · Model No · Finish",
+    orderCodeExample: "TG.PF103.630",
     // Old site lists id=385 under Bathroom Handle & Glass Knob and id=372 under Patch Fitting — both resolved to this canonical product.
+    inquirySubject: "TG.PF103 Patch Fitting Inquiry",
   }),
-  defineThinGlassHardwareProduct({
+  defineGlassHardwareProduct({
     id: 371,
     legacyName: "tg.pf303",
     slug: "tg-pf303",
-    title: "TG.PF303",
-    ...glassRoute.patch,
+    modelNo: "TG.PF303",
+    title: "TG.PF303 Patch Fitting",
+    subcategory: "patch",
     imageFilename: "default-686811223201111.jpg",
     imageAlt: "TG.PF303 patch fitting product image",
+    glassThickness: "10 / 12 mm tempered glass",
+    features: [
+      "Stainless steel AISI 304 construction.",
+      "Structural point-fixed glass fitting.",
+      "Compatible with 10 / 12 mm tempered glass.",
+      "Adjustable pivot/swivel joint for glass alignment.",
+      "Load-bearing design for frameless glass systems.",
+    ],
+    specs: [
+      { label: "Finish (standard)", value: "Satin stainless steel" },
+    ],
+    howToOrder: "TG · Model No · Finish",
+    orderCodeExample: "TG.PF303.630",
     inquirySubject: "TG.PF303 Patch Fitting Inquiry",
   }),
+  // ── Pull Handle ───────────────────────────────────────────────────────────
   ...[
     { id: 397, code: "TG.PH001", image: "default-218957808201111.jpg" },
     { id: 396, code: "TG.PH002", image: "default-1861366099201111.jpg" },
@@ -1429,17 +2286,33 @@ const glassHardwareProducts: Product[] = [
     { id: 389, code: "TG.PH023", image: "default-1391215518201111.jpg" },
     { id: 388, code: "TG.PH024", image: "default-1521007057201111.jpg" },
   ].map((item) =>
-    defineThinGlassHardwareProduct({
+    defineGlassHardwareProduct({
       id: item.id,
       legacyName: item.code.toLowerCase(),
       slug: item.code.toLowerCase().replace(/\./g, "-"),
-      title: item.code,
-      ...glassRoute.pull,
+      modelNo: item.code,
+      title: `${item.code} Pull Handle`,
+      subcategory: "pull",
       imageFilename: item.image,
       imageAlt: `${item.code} pull handle product image`,
+      glassThickness: "8 / 10 / 12 mm tempered glass",
+      features: [
+        "Stainless steel AISI 304 round tube construction.",
+        "Available with back-to-back (BB) or back-to-wall (BT) configuration.",
+        "Suitable for glass thickness 8 / 10 / 12 mm.",
+        "Available in satin and polished stainless steel finish.",
+        "Available in custom lengths.",
+      ],
+      specs: [
+        { label: "Finish (standard)", value: "Satin stainless steel" },
+        { label: "Configuration", value: "BB (back-to-back) or BT (back-to-wall)" },
+      ],
+      howToOrder: "TG · Model No · Length · Configuration (BB/BT) · Finish",
+      orderCodeExample: `${item.code}.300.BB.630`,
       inquirySubject: `${item.code} Pull Handle Inquiry`,
     }),
   ),
+  // ── Lipseal ───────────────────────────────────────────────────────────────
   ...[
     { id: 405, code: "TG.LS101", image: "default-1994992506201111.jpg" },
     { id: 404, code: "TG.LS102", image: "default-1773839939201111.jpg" },
@@ -1450,14 +2323,28 @@ const glassHardwareProducts: Product[] = [
     { id: 399, code: "TG.LS107", image: "default-1824135895201111.jpg" },
     { id: 398, code: "TG.LS108", image: "default-408796359201111.jpg" },
   ].map((item) =>
-    defineThinGlassHardwareProduct({
+    defineGlassHardwareProduct({
       id: item.id,
       legacyName: item.code.toLowerCase(),
       slug: item.code.toLowerCase().replace(/\./g, "-"),
-      title: item.code,
-      ...glassRoute.lipseal,
+      modelNo: item.code,
+      title: `${item.code} Lipseal`,
+      subcategory: "lipseal",
       imageFilename: item.image,
       imageAlt: `${item.code} lipseal product image`,
+      features: [
+        "Co-extruded EPDM rubber / PVC profile.",
+        "Flexible and durable seal for glass door edges.",
+        "UV and ozone resistant.",
+        "Easy installation — snap-on or adhesive fit.",
+        "Available in multiple profiles for different glass thicknesses.",
+      ],
+      specs: [
+        { label: "Material", value: "EPDM rubber / PVC" },
+        { label: "Colour (standard)", value: "Clear / transparent" },
+      ],
+      howToOrder: "TG · Model No · Colour · Length (specify in metres)",
+      orderCodeExample: `${item.code}.CL.2M`,
       inquirySubject: `${item.code} Lipseal Inquiry`,
     }),
   ),
@@ -6411,22 +7298,45 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-locks",
     routeGroupTitle: "Electromagnetic Locks",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=239&n=tu.d800",
     description:
-      "TU.D800 electromagnetic lock — placeholder page pending full product content migration from the old TUR website.",
+      "TU.D800 double-door surface-mounted electromagnetic lock with 800 lbs × 2 holding force — patented mounting plate, automatic 12/24VDC selection and no residual magnetism, for double-leaf access-controlled openings.",
     shortDescription:
-      "TU.D800 electromagnetic lock for access-controlled openings. // TODO: migrate full spec from old site",
+      "800 lbs × 2 double-door surface-mounted electromagnetic lock with auto 12/24VDC and no residual magnetism.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 239).",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "TU.D800 electromagnetic lock — access control hardware",
-    gallery: gallery("/tur/cat-access-readers.jpg", "/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
-    inquirySubject: "TU.D800 Inquiry",
-    relatedSlugs: ["tu-300", "tu-1296", "tu-1297"],
+      "The TU.D800 is a double-door electromagnetic lock delivering 800 lbs holding force per leaf. It uses a new style patented mounting plate with increased thickness at the screw holes for enhanced stability. The system can be installed on various door types using optional auxiliary mounting brackets, and supports automatic 12/24VDC voltage selection.",
+    image: oldProductImage("default-1746362339201112.jpg"),
+    imageAlt: "TU.D800 double-door electromagnetic lock — access control hardware",
+    gallery: gallery(oldProductImage("default-1746362339201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
+      "New style mounting plate with increased immobility (patented).",
+      "Aluminium anodized casing (US28).",
+      "MOV prevents spike and surge current.",
+      "Automatic voltage selection 12/24VDC.",
+      "No residual magnetism.",
+      "NF S 61-937 compliant (unmonitored models). CE: EC651213.",
+      "Optional bond sensor and bi-colour status LED indicator (model suffix M).",
+      "Optional relock time delay (model suffix TD).",
+      "Optional door held open alarm (model suffix BZ).",
+    ],
+    applications: [
+      "Double-leaf access-controlled entry doors",
+      "Commercial and institutional double-door openings",
+      "Server room and equipment room double-door entry",
+    ],
+    specs: [
+      { label: "Holding Force", value: "800 lbs × 2 (double door)" },
+      { label: "Voltage", value: "Auto-selectable 12/24VDC" },
+      { label: "Casing", value: "Aluminium anodized (US28)" },
+      { label: "Certifications", value: "NF S 61-937 (unmonitored), CE: EC651213" },
+      { label: "Narrow Frame / Outswing Bracket", value: "L-TU-D800, L-TU-D800AU" },
+      { label: "Inswing Door Bracket", value: "LZ-TU-D800, LZ-TU-D800AU" },
+    ],
+    finishOptions: ["Aluminium Anodized (US28)"],
+    inquirySubject: "TU.D800 Electromagnetic Lock Inquiry",
+    relatedSlugs: ["tu-d600", "tu-d1200", "tu-800"],
   }),
   defineProduct({
     slug: "bolt-the-door",
@@ -6753,9 +7663,10 @@ export const products: Product[] = [
       "Concealed door loop with nickel-plated steel case and flex conduit for hinge-side cable routing.",
     overview:
       "The TU.DL-400 is a concealed door loop designed to route power and signal cables through the hinge side of access-controlled doors without exposed wiring. The nickel-plated steel case and flex conduit provide a durable, corrosion-resistant solution, and the square mounting tabs allow for easy recessed installation into the door frame.",
-    image: "/tur/meta-default.jpg",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=426&n=tu.dl-400",
+    image: oldProductImage("default-784888902201112.jpg"),
     imageAlt: "TU.DL-400 concealed door loop — nickel-plated cable conduit for access-controlled doors",
-    gallery: gallery("/tur/meta-default.jpg", "/tur/cat-access-control.jpg"),
+    gallery: gallery(oldProductImage("default-784888902201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       "Nickel-plated steel case.",
       "Nickel-plated steel flex conduit.",
@@ -7975,22 +8886,24 @@ export const products: Product[] = [
     routeGroupSlug: "electromagnetic-locks",
     routeGroupTitle: "Electromagnetic Locks",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=408&n=tu.300",
     description:
-      "TU.300 surface-mounted electromagnetic lock with 300 lbs holding force — features a new style mounting plate with increased stability, automatic 12/24VDC selection and no residual magnetism.",
+      "TU.300 surface-mounted electromagnetic lock with 300 lbs holding force — features a new style patented mounting plate with increased stability, automatic 12/24VDC selection and no residual magnetism.",
     shortDescription:
       "300 lbs surface-mounted electromagnetic lock with auto 12/24VDC selection and no residual magnetism.",
     overview:
-      "The TUR series electromagnetic locks use a new style mounting plate. The mounting plate is designed with increased thickness for the screw hole at each end to secure the lock body with more stability and strength. The TUR series can be installed on various types of doors or door frames with optional auxiliary mounting brackets.",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU-300 electromagnetic lock — surface-mounted access control hardware",
-    gallery: gallery("/tur/cat-access-control.jpg", "/tur/cat-access-readers.jpg"),
+      "The TUR series electromagnetic locks use a new style mounting plate designed with increased thickness at the screw holes for enhanced stability and strength. The TU.300 can be installed on various door types using optional auxiliary mounting brackets, and features automatic 12/24VDC voltage selection with no residual magnetism for reliable fail-safe operation.",
+    image: oldProductImage("default-1523447879201112.jpg"),
+    imageAlt: "TU.300 electromagnetic lock — surface-mounted access control hardware",
+    gallery: gallery(oldProductImage("default-1523447879201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
-      "New style mounting plate with increased immobility.",
+      "New style mounting plate with increased immobility (patented).",
       "Aluminium anodized casing (US28).",
       "MOV prevents spike and surge current.",
       "Automatic voltage selection 12/24VDC.",
       "No residual magnetism.",
+      "NF S 61-937 compliant (unmonitored models). CE: EC651213.",
       "Optional bond sensor and bi-colour status LED indicator (model suffix M).",
     ],
     applications: [
@@ -8002,12 +8915,13 @@ export const products: Product[] = [
       { label: "Holding Force", value: "300 lbs" },
       { label: "Voltage", value: "Auto-selectable 12/24VDC" },
       { label: "Casing", value: "Aluminium anodized (US28)" },
-      { label: "Narrow Frame / Outswing Door Bracket", value: "L-TU-300" },
+      { label: "Certifications", value: "NF S 61-937 (unmonitored), CE: EC651213" },
+      { label: "Narrow Frame / Outswing Bracket", value: "L-TU-300" },
       { label: "Inswing Door Bracket", value: "LZ-TU-300" },
     ],
     finishOptions: ["Aluminium Anodized (US28)"],
     inquirySubject: "TU.300 Electromagnetic Lock Inquiry",
-    relatedSlugs: ["tu-600-electromagnetic-lock", "tu-1200", "tu-600-armature-mounting-accessory"],
+    relatedSlugs: ["tu-600-electromagnetic-lock", "tu-800", "tu-1200"],
   }),
   defineProduct({
     slug: "tu-600-electromagnetic-lock",
@@ -8017,22 +8931,45 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-locks",
     routeGroupTitle: "Electromagnetic Locks",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=407&n=tu.600",
     description:
-      "TU.600 electromagnetic lock — placeholder page pending full content migration from the old TUR website.",
+      "TU.600 surface-mounted electromagnetic lock with 600 lbs holding force — patented mounting plate, automatic 12/24VDC selection, MOV surge protection and no residual magnetism for reliable single-door access control.",
     shortDescription:
-      "TU.600 electromagnetic lock. // TODO: migrate full spec from old site",
+      "600 lbs surface-mounted electromagnetic lock with auto 12/24VDC and MOV surge protection.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 407).",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU.600 electromagnetic lock product image",
-    gallery: gallery("/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.600 electromagnetic lock delivers 600 lbs holding force using a new style patented mounting plate with increased screw-hole thickness for enhanced stability. It supports automatic 12/24VDC voltage selection, includes MOV surge protection and has no residual magnetism. Optional bond sensor, relock time delay and door status sensor models are available.",
+    image: oldProductImage("default-157478342201112.jpg"),
+    imageAlt: "TU.600 electromagnetic lock — 600 lbs surface-mounted access control lock",
+    gallery: gallery(oldProductImage("default-157478342201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
+      "New style mounting plate with increased immobility (patented).",
+      "Aluminium anodized casing (US28).",
+      "MOV prevents spike and surge current.",
+      "Automatic voltage selection 12/24VDC.",
+      "No residual magnetism.",
+      "NF S 61-937 compliant (unmonitored models). CE: EC651213.",
+      "Optional bond sensor and bi-colour LED (model suffix M).",
+      "Optional relock time delay (model suffix TD).",
+      "Optional door status sensor (model suffix DS).",
+    ],
+    applications: [
+      "Commercial entry doors and internal controlled openings",
+      "Server room and equipment room access",
+      "Institutional and hospitality access-controlled doors",
+    ],
+    specs: [
+      { label: "Holding Force", value: "600 lbs" },
+      { label: "Voltage", value: "Auto-selectable 12/24VDC" },
+      { label: "Casing", value: "Aluminium anodized (US28)" },
+      { label: "Certifications", value: "NF S 61-937 (unmonitored), CE: EC651213" },
+      { label: "Narrow Frame / Outswing Bracket", value: "L-TU-600, L-TU-600AU" },
+      { label: "Inswing Door Bracket", value: "LZ-TU-600, LZ-TU-600AU, Z-TU-600" },
+    ],
+    finishOptions: ["Aluminium Anodized (US28)"],
     inquirySubject: "TU.600 Electromagnetic Lock Inquiry",
-    relatedSlugs: ["tu-300", "tu-800", "tu-600-armature-mounting-accessory"],
+    relatedSlugs: ["tu-300", "tu-800", "tu-1200"],
   }),
   defineProduct({
     slug: "tu-800",
@@ -8042,22 +8979,47 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-locks",
     routeGroupTitle: "Electromagnetic Locks",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=406&n=tu.800",
     description:
-      "TU.800 electromagnetic lock — placeholder page pending full content migration from the old TUR website.",
+      "TU.800 surface-mounted electromagnetic lock with 800 lbs holding force — patented mounting plate, automatic 12/24VDC selection, full option set including door held open alarm and large LED indicator.",
     shortDescription:
-      "TU.800 electromagnetic lock. // TODO: migrate full spec from old site",
+      "800 lbs surface-mounted electromagnetic lock with auto 12/24VDC and full option set.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 406).",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU.800 electromagnetic lock product image",
-    gallery: gallery("/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.800 electromagnetic lock delivers 800 lbs holding force with a new style patented mounting plate. It supports the full TUR option set including bond sensor, relock time delay, door status sensor, large LED with reset input and door held open alarm — suitable for high-traffic and high-security commercial openings.",
+    image: oldProductImage("default-994063519201112.jpg"),
+    imageAlt: "TU.800 electromagnetic lock — 800 lbs surface-mounted access control lock",
+    gallery: gallery(oldProductImage("default-994063519201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
+      "New style mounting plate with increased immobility (patented).",
+      "Aluminium anodized casing (US28).",
+      "MOV prevents spike and surge current.",
+      "Automatic voltage selection 12/24VDC.",
+      "No residual magnetism.",
+      "NF S 61-937 compliant (unmonitored models). CE: EC651213.",
+      "Optional bond sensor and bi-colour LED (model suffix M).",
+      "Optional relock time delay (model suffix TD).",
+      "Optional door status sensor (model suffix DS).",
+      "Optional large LED with reset input (model suffix LD).",
+      "Optional door held open alarm (model suffix BZ).",
+    ],
+    applications: [
+      "High-traffic commercial and institutional entry doors",
+      "Main entrance controlled openings",
+      "Security-sensitive single-door access control",
+    ],
+    specs: [
+      { label: "Holding Force", value: "800 lbs" },
+      { label: "Voltage", value: "Auto-selectable 12/24VDC" },
+      { label: "Casing", value: "Aluminium anodized (US28)" },
+      { label: "Certifications", value: "NF S 61-937 (unmonitored), CE: EC651213" },
+      { label: "Narrow Frame / Outswing Bracket", value: "L-TU-800, L-TU-800AU" },
+      { label: "Inswing Door Bracket", value: "LZ-TU-800, LZ-TU-800AU, Z-TU-800" },
+    ],
+    finishOptions: ["Aluminium Anodized (US28)"],
     inquirySubject: "TU.800 Electromagnetic Lock Inquiry",
-    relatedSlugs: ["tu-300", "tu-1200", "tu-600-armature-mounting-accessory"],
+    relatedSlugs: ["tu-600-electromagnetic-lock", "tu-1200", "tu-d800"],
   }),
   defineProduct({
     slug: "tu-1200",
@@ -8067,22 +9029,47 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-locks",
     routeGroupTitle: "Electromagnetic Locks",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=241&n=tu.1200",
     description:
-      "TU.1200 electromagnetic lock — placeholder page pending full content migration from the old TUR website.",
+      "TU.1200 surface-mounted electromagnetic lock with 1200 lbs holding force — patented mounting plate, automatic 12/24VDC, full option set, NF S 61-937 compliant — for high-security single-door access control.",
     shortDescription:
-      "TU.1200 electromagnetic lock. // TODO: migrate full spec from old site",
+      "1200 lbs surface-mounted electromagnetic lock with auto 12/24VDC and NF S 61-937 compliance.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 241).",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU.1200 electromagnetic lock product image",
-    gallery: gallery("/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.1200 electromagnetic lock is the highest capacity single-door model in the TUR EM lock range, delivering 1200 lbs holding force. It uses a new style patented mounting plate and supports the full option set including large LED with reset and door held open alarm. NF S 61-937 compliant on unmonitored models.",
+    image: oldProductImage("default-1431701893201112.jpg"),
+    imageAlt: "TU.1200 electromagnetic lock — 1200 lbs high-capacity surface-mounted lock",
+    gallery: gallery(oldProductImage("default-1431701893201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
+      "New style mounting plate with increased immobility (patented).",
+      "Aluminium anodized casing (US28).",
+      "MOV prevents spike and surge current.",
+      "Automatic voltage selection 12/24VDC.",
+      "No residual magnetism.",
+      "NF S 61-937 compliant (unmonitored models). CE: EC651213.",
+      "Optional bond sensor and bi-colour LED (model suffix M).",
+      "Optional relock time delay (model suffix TD).",
+      "Optional door status sensor (model suffix DS).",
+      "Optional large LED with reset input (model suffix LD).",
+      "Optional door held open alarm (model suffix BZ).",
+    ],
+    applications: [
+      "High-security single-door controlled entry",
+      "Data centres and secure facility access",
+      "Government and institutional high-security doors",
+    ],
+    specs: [
+      { label: "Holding Force", value: "1200 lbs" },
+      { label: "Voltage", value: "Auto-selectable 12/24VDC" },
+      { label: "Casing", value: "Aluminium anodized (US28)" },
+      { label: "Certifications", value: "NF S 61-937 (unmonitored), CE: EC651213" },
+      { label: "Narrow Frame / Outswing Bracket", value: "L-TU-1200, L-TU-1200AU" },
+      { label: "Inswing Door Bracket", value: "LZ-TU-1200, LZ-TU-1200AU, Z-TU-1200" },
+    ],
+    finishOptions: ["Aluminium Anodized (US28)"],
     inquirySubject: "TU.1200 Electromagnetic Lock Inquiry",
-    relatedSlugs: ["tu-800", "tu-d800", "tu-600-armature-mounting-accessory"],
+    relatedSlugs: ["tu-800", "tu-d1200", "tu-d800"],
   }),
   defineProduct({
     slug: "tu-d600",
@@ -8092,22 +9079,44 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-locks",
     routeGroupTitle: "Electromagnetic Locks",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=240&n=tu.d600",
     description:
-      "TU.D600 electromagnetic lock — placeholder page pending full content migration from the old TUR website.",
+      "TU.D600 double-door surface-mounted electromagnetic lock with 600 lbs × 2 holding force — patented mounting plate, automatic 12/24VDC, NF S 61-937 compliant, for double-leaf access-controlled openings.",
     shortDescription:
-      "TU.D600 electromagnetic lock. // TODO: migrate full spec from old site",
+      "600 lbs × 2 double-door electromagnetic lock with auto 12/24VDC and NF S 61-937 compliance.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 240).",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU.D600 electromagnetic lock product image",
-    gallery: gallery("/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.D600 is a double-door electromagnetic lock delivering 600 lbs holding force per leaf. The new style patented mounting plate provides enhanced stability for both leaves. Optional bond sensor, relock time delay and door status sensor models are available.",
+    image: oldProductImage("default-61504511201112.jpg"),
+    imageAlt: "TU.D600 double-door electromagnetic lock — 600 lbs × 2 access control hardware",
+    gallery: gallery(oldProductImage("default-61504511201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "New style mounting plate with increased immobility (patented).",
+      "Aluminium anodized casing (US28).",
+      "MOV prevents spike and surge current.",
+      "Automatic voltage selection 12/24VDC.",
+      "No residual magnetism.",
+      "NF S 61-937 compliant (unmonitored models). CE: EC651213.",
+      "Optional bond sensor and bi-colour LED (model suffix M).",
+      "Optional relock time delay (model suffix TD).",
+      "Optional door status sensor (model suffix DS).",
+    ],
+    applications: [
+      "Double-leaf access-controlled entry doors",
+      "Commercial and institutional double-door openings",
+      "Lobby and reception double-door entry control",
+    ],
+    specs: [
+      { label: "Holding Force", value: "600 lbs × 2 (double door)" },
+      { label: "Voltage", value: "Auto-selectable 12/24VDC" },
+      { label: "Casing", value: "Aluminium anodized (US28)" },
+      { label: "Certifications", value: "NF S 61-937 (unmonitored), CE: EC651213" },
+      { label: "Narrow Frame / Outswing Bracket", value: "L-TU-D600, L-TU-D600AU" },
+      { label: "Inswing Door Bracket", value: "LZ-TU-D600, LZ-TU-D600AU" },
+    ],
+    finishOptions: ["Aluminium Anodized (US28)"],
     inquirySubject: "TU.D600 Electromagnetic Lock Inquiry",
-    relatedSlugs: ["tu-d800", "tu-d1200", "tu-600-armature-mounting-accessory"],
+    relatedSlugs: ["tu-d800", "tu-d1200", "tu-600-electromagnetic-lock"],
   }),
   defineProduct({
     slug: "tu-d1200",
@@ -8117,22 +9126,45 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-locks",
     routeGroupTitle: "Electromagnetic Locks",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=238&n=tu.d1200",
     description:
-      "TU.D1200 electromagnetic lock — placeholder page pending full content migration from the old TUR website.",
+      "TU.D1200 double-door surface-mounted electromagnetic lock with 1200 lbs × 2 holding force — highest capacity double-door EM lock in the TUR range, NF S 61-937 compliant.",
     shortDescription:
-      "TU.D1200 electromagnetic lock. // TODO: migrate full spec from old site",
+      "1200 lbs × 2 double-door electromagnetic lock — highest capacity in the TUR EM lock range.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 238).",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU.D1200 electromagnetic lock product image",
-    gallery: gallery("/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.D1200 is the highest capacity double-door electromagnetic lock in the TUR range, delivering 1200 lbs per leaf. It uses the new style patented mounting plate and supports optional bond sensor, relock time delay, door status sensor and door held open alarm.",
+    image: oldProductImage("default-224228047210401.jpg"),
+    imageAlt: "TU.D1200 double-door electromagnetic lock — 1200 lbs × 2 high-capacity lock",
+    gallery: gallery(oldProductImage("default-224228047210401.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "New style mounting plate with increased immobility (patented).",
+      "Aluminium anodized casing (US28).",
+      "MOV prevents spike and surge current.",
+      "Automatic voltage selection 12/24VDC.",
+      "No residual magnetism.",
+      "NF S 61-937 compliant (unmonitored models). CE: EC651213.",
+      "Optional bond sensor and bi-colour LED (model suffix M).",
+      "Optional relock time delay (model suffix TD).",
+      "Optional door status sensor (model suffix DS).",
+      "Optional door held open alarm (model suffix BZ).",
+    ],
+    applications: [
+      "High-security double-leaf entry control",
+      "Data centres and secure facility double-door access",
+      "Government and institutional high-security double-door openings",
+    ],
+    specs: [
+      { label: "Holding Force", value: "1200 lbs × 2 (double door)" },
+      { label: "Voltage", value: "Auto-selectable 12/24VDC" },
+      { label: "Casing", value: "Aluminium anodized (US28)" },
+      { label: "Certifications", value: "NF S 61-937 (unmonitored), CE: EC651213" },
+      { label: "Narrow Frame / Outswing Bracket", value: "L-TU-D1200, L-TU-D1200AU" },
+      { label: "Inswing Door Bracket", value: "LZ-TU-D1200, LZ-TU-D1200AU" },
+    ],
+    finishOptions: ["Aluminium Anodized (US28)"],
     inquirySubject: "TU.D1200 Electromagnetic Lock Inquiry",
-    relatedSlugs: ["tu-d600", "tu-d800", "tu-600-armature-mounting-accessory"],
+    relatedSlugs: ["tu-d600", "tu-d800", "tu-1200"],
   }),
   defineProduct({
     slug: "tu-1296",
@@ -8143,15 +9175,16 @@ export const products: Product[] = [
     routeGroupSlug: "electric-strikes",
     routeGroupTitle: "Electric Strikes",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=430&n=tu.1296",
     description:
       "TU.1296 ANSI electric rim strike — surface-mounted for rim exit devices with a Pullman latch bolt, featuring optional latch monitor, stainless steel housing and no frame cutting required.",
     shortDescription:
       "Surface-mounted ANSI electric rim strike for rim exit devices with Pullman latch bolt.",
     overview:
-      "The TU1276/1296 ANSI electric rim strike series is surface mounted and designed with strength and durability for use with rim exit devices with a Pullman latch bolt. It features an optional latch monitor and has a stainless steel housing. No cutting on the frame is required for installation.",
-    image: "/tur/slider-6.webp",
+      "The TU1296 ANSI electric rim strike series is surface mounted and designed with strength and durability for use with rim exit devices with a Pullman latch bolt. It features an optional latch monitor and has a stainless steel housing. No cutting on the frame is required for installation. Burglary-resistant listed (BP10269).",
+    image: oldProductImage("default-409213743210429.jpg"),
     imageAlt: "TU.1296 electric rim strike — surface-mounted ANSI electric strike",
-    gallery: gallery("/tur/slider-6.webp", "/tur/cat-access-control.jpg"),
+    gallery: gallery(oldProductImage("default-409213743210429.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       "Field selectable 12 or 24VDC.",
       "Field reversible fail-secure or fail-safe.",
@@ -8192,15 +9225,16 @@ export const products: Product[] = [
     routeGroupSlug: "electric-strikes",
     routeGroupTitle: "Electric Strikes",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=242&n=tu.1297",
     description:
       "TU.1297 ANSI electric rim strike — surface-mounted for rim exit devices with a Pullman latch bolt, with field-selectable voltage, field-reversible fail-safe/fail-secure and stainless steel housing.",
     shortDescription:
       "Surface-mounted ANSI electric rim strike with field-selectable 12/24VDC and optional latch monitor.",
     overview:
       "The TU1297 ANSI electric rim strike is surface mounted and designed with strength and durability for use with rim exit devices with a Pullman latch bolt. No cutting on the frame is required for installation. An optional latch monitor model (TU1297M) is available.",
-    image: "/tur/slider-6.webp",
+    image: oldProductImage("default-439255966210429.jpg"),
     imageAlt: "TU.1297 electric rim strike — surface-mounted ANSI electric strike",
-    gallery: gallery("/tur/slider-6.webp", "/tur/cat-access-control.jpg"),
+    gallery: gallery(oldProductImage("default-439255966210429.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       "Field selectable 12 or 24VDC.",
       "Field reversible fail-safe or fail-secure.",
@@ -8242,15 +9276,16 @@ export const products: Product[] = [
     routeGroupSlug: "electromechanical-locking-devices",
     routeGroupTitle: "Electromechanical Locking Devices",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=412&n=tu.l800",
     description:
       "TU.L800 electromechanical mortise lock — suitable for a wide range of applications with various monitoring functions, operable standalone or integrated into sophisticated access control systems.",
     shortDescription:
       "Electromechanical mortise lock with field-configurable fail-safe/fail-secure and monitoring outputs.",
     overview:
       "The TU.L800 series is an electromechanical mortise lock ideal for a wide range of applications and available with various monitoring functions. It can operate standalone or be integrated into sophisticated access control systems.",
-    image: "/tur/cat-access-control.jpg",
+    image: oldProductImage("default-562344867201112.jpg"),
     imageAlt: "TU.L800 electromechanical mortise lock — access-controlled door hardware",
-    gallery: gallery("/tur/cat-access-control.jpg", "/tur/sliding-e.jpg"),
+    gallery: gallery(oldProductImage("default-562344867201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       'Field selectable 12/24VDC — 600mA at 12VDC or 300mA at 24VDC.',
       "Field configurable fail-safe or fail-secure operation.",
@@ -8286,15 +9321,16 @@ export const products: Product[] = [
     routeGroupSlug: "electromechanical-locking-devices",
     routeGroupTitle: "Electromechanical Locking Devices",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=411&n=tu.pbh-350",
     description:
       "TU.PBH-350 electromechanical push bar with delayed egress — triggers an audible alarm and remains locked for a field-selectable 15 or 30 second delay, then releases automatically for emergency egress.",
     shortDescription:
       "Electromechanical push bar with delayed egress, 95 dB alarm and emergency release.",
     overview:
-      "The TU.PBH-350 electromechanical push bar manages unauthorised exits through controlled delayed egress. When activated, it triggers a 95 dB audible alarm and remains locked for a field-selectable 15 or 30 second delay — providing personnel response time. During emergencies, the system disengages to permit immediate egress. The TU.PBH-350LD variant incorporates a large dual-colour LED indicator for enhanced visibility in low-light environments.",
-    image: "/tur/cat-access-control.jpg",
+      "The TU.PBH-350 electromechanical push bar manages unauthorised exits through controlled delayed egress. When activated, it triggers a 95 dB audible alarm and remains locked for a field-selectable 15 or 30 second delay — providing personnel response time. During emergencies, the system disengages to permit immediate egress. The TU.PBH-350DE is the standard delayed egress model. The TU.PBH-350LD variant incorporates a large dual-colour LED indicator for enhanced visibility in low-light environments.",
+    image: oldProductImage("default-456934738201112.jpg"),
     imageAlt: "TU.PBH-350 electromechanical push bar — delayed egress exit device",
-    gallery: gallery("/tur/cat-access-control.jpg", "/tur/sliding-e.jpg"),
+    gallery: gallery(oldProductImage("default-456934738201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       "Field-selectable exit delay: 15 or 30 seconds.",
       "95 dB audible alarm on activation.",
@@ -8303,7 +9339,8 @@ export const products: Product[] = [
       "Door ajar alarm triggering input.",
       "Manual reset input via key switch.",
       "Fail-safe lock mode.",
-      "TU.PBH-350LD variant with large dual-colour LED indicator.",
+      "TU.PBH-350DE — standard delayed egress push bar model.",
+      "TU.PBH-350LD — variant with large dual-colour LED indicator.",
     ],
     applications: [
       "Delayed egress exits in commercial and institutional buildings",
@@ -8330,69 +9367,104 @@ export const products: Product[] = [
   // ── Door Hardware — Access Control: Armature Mounting Accessories ──────────
   defineProduct({
     slug: "tu-600-armature-mounting-accessory",
-    title: "TU.600 Armature Mounting Accessory",
+    title: "TU.600 Electric Strike",
     section: "door-hardware",
     familySlug: "access-control",
     familyTitle: "Access Control",
     routeGroupSlug: "armature-mounting-accessories",
     routeGroupTitle: "Armature Mounting Accessories",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=410&n=tu.600",
     description:
-      "TU.600 series armature mounting bracket — Z-bracket and flat-plate options for correctly positioning and securing the armature plate of TU.600 series electromagnetic locks across single and double door applications.",
+      "TU.600 electric strike for European mortise locks — 12/24VDC, 10 mm latch throw, field-reversible fail-safe/fail-secure, 1,500 lbs static strength, zinc alloy construction with brushed stainless steel finish.",
     shortDescription:
-      "Z-bracket and flat-plate mounting accessories for TU.600 series electromagnetic locks.",
+      "Electric strike for European mortise locks — 10 mm latch, 1,500 lbs static strength, 1,000,000 cycle rating.",
     overview:
-      "Correct armature alignment is essential to achieving the rated holding force of an electromagnetic lock. The TU.600 armature mounting accessories include Z-bracket and flat-plate configurations, ensuring the armature is correctly positioned and secured on a range of door types — including timber, aluminium and glass-door applications.",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "TU.600 armature mounting bracket — electromagnetic lock installation accessory",
-    gallery: gallery("/tur/cat-access-readers.jpg", "/tur/cat-access-control.jpg"),
+      "The TU.600 electric strike is designed for European mortise locks and can be installed in metal and wood door frames. It features field-reversible fail-safe or fail-secure operation, a 10 mm latchbolt accommodation and a zinc alloy body with brushed stainless steel finish. Three faceplate models (TU600, TU610, TU620) cover different mortise lock configurations including versions with a deadbolt.",
+    image: oldProductImage("default-749582669201112.jpg"),
+    imageAlt: "TU.600 electric strike — European mortise lock electric release",
+    gallery: gallery(oldProductImage("default-749582669201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
-      "Z-bracket and flat-plate configurations for correct armature alignment.",
-      "Compatible with TU.600 series electromagnetic locks.",
-      "Ensures full rated holding force through accurate positioning.",
-      "Suitable for timber, aluminium and glass-door applications.",
+      "Field selectable 12 or 24VDC operation.",
+      "Accommodates 10 mm European mortise latchbolt.",
+      "Field reversible fail-safe or fail-secure configuration.",
+      "Non-handed, fully reversible design.",
+      "Static strength 1,500 lbs (680 kg).",
+      "Endurance rating 1,000,000 cycles.",
+      "Zinc alloy construction.",
+      "Brushed stainless steel finish (US32D).",
+      "TU610 / TU620 variants for mortise lock with deadbolt.",
     ],
     applications: [
-      "TU.600 electromagnetic lock installation",
-      "Single and double door access-control coordination",
-      "Glass door electromagnetic lock mounting",
+      "European mortise lock electric release on access-controlled doors",
+      "Metal and wood door frame installations",
+      "Retrofit electric release for European ironmongery door sets",
     ],
-    finishOptions: ["Anodised Aluminium", "Stainless Steel"],
-    inquirySubject: "TU.600 Armature Mounting Accessory Inquiry",
-    relatedSlugs: ["tu-810-armature-mounting-accessory", "tu-300", "tu-600-electromagnetic-lock"],
+    specs: [
+      { label: "Voltage", value: "12/24VDC (field selectable)" },
+      { label: "Latch Throw", value: "10 mm" },
+      { label: "Operation Mode", value: "Field reversible fail-safe or fail-secure" },
+      { label: "Static Strength", value: "1,500 lbs (680 kg)" },
+      { label: "Endurance Rating", value: "1,000,000 cycles" },
+      { label: "Construction", value: "Zinc alloy" },
+      { label: "Finish", value: "Brushed Stainless Steel (US32D)" },
+      { label: "Compatible Lockset", value: "European mortise lock" },
+    ],
+    finishOptions: ["Brushed Stainless Steel (US32D)"],
+    inquirySubject: "TU.600 Electric Strike Inquiry",
+    relatedSlugs: ["tu-810-armature-mounting-accessory", "tu-1296", "tu-1297"],
   }),
   defineProduct({
     slug: "tu-810-armature-mounting-accessory",
-    title: "TU.810 Armature Mounting Accessory",
+    title: "TU.810 Electric Strike",
     section: "door-hardware",
     familySlug: "access-control",
     familyTitle: "Access Control",
     routeGroupSlug: "armature-mounting-accessories",
     routeGroupTitle: "Armature Mounting Accessories",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=409&n=tu.810",
     description:
-      "TU.810 series armature mounting bracket — Z-bracket, L-bracket and flat-plate options for correctly positioning and securing the armature plate of TU.810 series electromagnetic locks.",
+      "TU.810 electric strike for European mortise locks — 12/24VDC, 12 mm latch throw, field-reversible fail-safe/fail-secure, 800 lbs static strength, stainless steel keeper, with optional latch monitor.",
     shortDescription:
-      "Z-bracket, L-bracket and flat-plate mounting accessories for TU.810 series electromagnetic locks.",
+      "Electric strike for European mortise locks — 12 mm latch, 800 lbs static strength, optional latch monitor.",
     overview:
-      "The TU.810 armature mounting accessories cover Z-bracket, L-bracket and flat-plate configurations for the full TU.810 lock range. They ensure the armature plate is correctly positioned on any door type, maintaining the correct gap tolerance to achieve rated holding force and reliable operation.",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "TU.810 armature mounting bracket — electromagnetic lock installation accessory",
-    gallery: gallery("/tur/cat-access-readers.jpg", "/tur/cat-access-control.jpg"),
+      "The TU.810 series electric strike is designed for European mortise locks with a 12 mm latchbolt. It features field-reversible fail-safe or fail-secure operation, a stainless steel keeper for enhanced security and an optional latch monitor. The non-handed design accommodates left and right-hand door openings. The TU811 model provides a non-monitored alternative.",
+    image: oldProductImage("default-1330978191201112.jpg"),
+    imageAlt: "TU.810 electric strike — European mortise lock electric release with latch monitor",
+    gallery: gallery(oldProductImage("default-1330978191201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
-      "Z-bracket, L-bracket and flat-plate configurations available.",
-      "Compatible with TU.810 series electromagnetic locks.",
-      "Maintains correct armature gap for rated holding force.",
-      "Suitable for single, double and glass-door configurations.",
+      "Dual 12/24VDC operation.",
+      "Accommodates 12 mm European mortise latchbolt.",
+      "Field reversible fail-safe or fail-secure configuration.",
+      "Non-handed, fully reversible design.",
+      "Static strength 800 lbs (363 kg).",
+      "Endurance rating 1,000,000 cycles.",
+      "Zinc alloy construction.",
+      "Stainless steel keeper for enhanced security.",
+      "Brushed stainless steel finish (US32D).",
+      "Optional latch monitor (TU810 monitored; TU811 non-monitored).",
     ],
     applications: [
-      "TU.810 electromagnetic lock installation",
-      "Double-door and heavy-duty access control",
-      "Glass-door and frameless access-controlled entries",
+      "European mortise lock electric release on access-controlled doors",
+      "Metal and wood door frame installations",
+      "Doors requiring latch monitoring output",
     ],
-    finishOptions: ["Anodised Aluminium", "Stainless Steel"],
-    inquirySubject: "TU.810 Armature Mounting Accessory Inquiry",
-    relatedSlugs: ["tu-600-armature-mounting-accessory", "tu-300", "tu-1296"],
+    specs: [
+      { label: "Voltage", value: "12/24VDC (dual)" },
+      { label: "Latch Throw", value: "12 mm" },
+      { label: "Operation Mode", value: "Field reversible fail-safe or fail-secure" },
+      { label: "Static Strength", value: "800 lbs (363 kg)" },
+      { label: "Endurance Rating", value: "1,000,000 cycles" },
+      { label: "Construction", value: "Zinc alloy" },
+      { label: "Keeper", value: "Stainless steel" },
+      { label: "Finish", value: "Brushed Stainless Steel (US32D)" },
+      { label: "Compatible Lockset", value: "European mortise lock" },
+      { label: "Latch Monitor Option", value: "TU810 (monitored) / TU811 (non-monitored)" },
+    ],
+    finishOptions: ["Brushed Stainless Steel (US32D)"],
+    inquirySubject: "TU.810 Electric Strike Inquiry",
+    relatedSlugs: ["tu-600-armature-mounting-accessory", "tu-1296", "tu-1297"],
   }),
 
   // ── Door Hardware — Access Control: E-ACCESS ──────────────────────────────
@@ -8404,20 +9476,47 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "e-access",
     routeGroupTitle: "E-ACCESS",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=415&n=easiprox",
     description:
-      "EasiProx proximity access reader — placeholder page pending full content migration from the old TUR website.",
+      "EasiProx Bluetooth + RFID access reader — 12VDC, Bluetooth Low Energy 4.2, 50 m operating range, supports smartphone and RFID EM card, up to 200 users with 1,000 audit trails.",
     shortDescription:
-      "EasiProx proximity reader for access-controlled entry. // TODO: migrate full spec from old site",
+      "Bluetooth 4.2 + RFID EM access reader — 50 m range, 200 users, smartphone or card access.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 415).",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "EasiProx proximity reader product image",
-    gallery: gallery("/tur/cat-access-readers.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "EasiProx is a Bluetooth Low Energy 4.2 access reader that supports both smartphone-based and RFID EM card access. It operates at 12VDC, communicates over a 50 m range and manages up to 200 users with one administrator account. The built-in 85 dB buzzer provides door held open and tamper alarms. User management includes adding/deleting/viewing users, granting time-limited access and recording up to 1,000 audit trail events.",
+    image: oldProductImage("default-1459381370201112.jpg"),
+    imageAlt: "EasiProx Bluetooth RFID access reader — smartphone and card access control",
+    gallery: gallery(oldProductImage("default-1459381370201112.jpg"), "/tur/cat-access-readers.jpg"),
+    features: [
+      "Bluetooth Low Energy 4.2 communication.",
+      "Supports smartphone and RFID EM card access.",
+      "50 m operating range.",
+      "Up to 200 users with 1 administrator.",
+      "Up to 1,000 user audit trail events.",
+      "Built-in 85 dB door held open alarm buzzer.",
+      "Tamper alarm.",
+      "REX input and alarm output.",
+      "Automatic unlocking function.",
+      "Time-period and date-specific access grant.",
+    ],
+    applications: [
+      "Office entry doors with smartphone access control",
+      "Managed RFID card and mobile access points",
+      "Small to medium commercial and residential access control",
+    ],
+    specs: [
+      { label: "Input Power", value: "12 VDC" },
+      { label: "Bluetooth", value: "Low Energy 4.2" },
+      { label: "Operating Range", value: "50 m (164 ft)" },
+      { label: "Operating Temperature", value: "+10°C to +40°C" },
+      { label: "Users", value: "1 administrator + 200 users" },
+      { label: "Access Methods", value: "Smartphone, RFID EM card" },
+      { label: "Audit Trail", value: "Up to 1,000 events" },
+      { label: "Alarm", value: "Built-in 85 dB buzzer (door held open, tamper)" },
+      { label: "Dimensions", value: "114 × 80 × 18 mm (ANSI size)" },
+      { label: "Finish", value: "Navy Blue" },
+    ],
+    finishOptions: ["Navy Blue"],
     inquirySubject: "EasiProx Inquiry",
     relatedSlugs: ["easiprox-slim", "e1196", "tu-dg-750"],
   }),
@@ -8429,20 +9528,47 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "e-access",
     routeGroupTitle: "E-ACCESS",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=414&n=easiprox+slim",
     description:
-      "EasiProx Slim proximity access reader — placeholder page pending full content migration from the old TUR website.",
+      "EasiProx Slim slim-profile Bluetooth + RFID access reader — 12VDC, Bluetooth Low Energy 4.2, 50 m range, up to 200 users, compact 88 × 44 × 23 mm form factor in black finish.",
     shortDescription:
-      "EasiProx Slim slim-profile proximity reader. // TODO: migrate full spec from old site",
+      "Slim Bluetooth 4.2 + RFID access reader — compact 88 × 44 × 23 mm, 50 m range, 200 users.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 414).",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "EasiProx Slim proximity reader product image",
-    gallery: gallery("/tur/cat-access-readers.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "EasiProx Slim is the compact profile version of EasiProx, offering the same Bluetooth Low Energy 4.2 and RFID EM card functionality in a slimmer 88 × 44 × 23 mm form factor. It supports 12VDC operation, up to 200 users and 1,000 audit trail events with identical alarm and REX capabilities to the standard model.",
+    image: oldProductImage("default-976938246201112.jpg"),
+    imageAlt: "EasiProx Slim compact Bluetooth RFID access reader — slim-profile access control",
+    gallery: gallery(oldProductImage("default-976938246201112.jpg"), "/tur/cat-access-readers.jpg"),
+    features: [
+      "Compact slim-profile form factor.",
+      "Bluetooth Low Energy 4.2 communication.",
+      "Supports smartphone and RFID EM card access.",
+      "50 m operating range.",
+      "Up to 200 users with 1 administrator.",
+      "Up to 1,000 user audit trail events.",
+      "Built-in 85 dB door held open alarm buzzer.",
+      "Tamper alarm.",
+      "REX input and alarm output.",
+      "Automatic unlocking function.",
+    ],
+    applications: [
+      "Space-constrained door-side mounting points",
+      "Office and commercial access control with smartphone or card",
+      "Retrofit access control on narrow door frames",
+    ],
+    specs: [
+      { label: "Input Power", value: "12 VDC" },
+      { label: "Bluetooth", value: "Low Energy 4.2" },
+      { label: "Operating Range", value: "50 m (164 ft)" },
+      { label: "Operating Temperature", value: "+10°C to +40°C" },
+      { label: "Users", value: "1 administrator + 200 users" },
+      { label: "Access Methods", value: "Smartphone, RFID EM card" },
+      { label: "Audit Trail", value: "Up to 1,000 events" },
+      { label: "Alarm", value: "Built-in 85 dB buzzer (door held open, tamper)" },
+      { label: "Dimensions", value: "88 × 44 × 23 mm (ANSI size)" },
+      { label: "Finish", value: "Black" },
+    ],
+    finishOptions: ["Black"],
     inquirySubject: "EasiProx Slim Inquiry",
     relatedSlugs: ["easiprox", "e1196", "tu-dg-750"],
   }),
@@ -8454,20 +9580,46 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "e-access",
     routeGroupTitle: "E-ACCESS",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=413&n=e1196",
     description:
-      "E1196 access control unit — placeholder page pending full content migration from the old TUR website.",
+      "E1196 Bluetooth access reader — 12–24VDC, Bluetooth Low Energy 4.0, 50 m range, smartphone access, 196 users with anti-tailgate function and built-in 85 dB alarm.",
     shortDescription:
-      "E1196 access control system. // TODO: migrate full spec from old site",
+      "Bluetooth 4.0 access reader — 12–24VDC, 196 users, smartphone access, anti-tailgate.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 413).",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "E1196 access control unit product image",
-    gallery: gallery("/tur/cat-access-readers.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The E1196 is a Bluetooth Low Energy 4.0 access reader supporting 12–24VDC operation and smartphone-based access for up to 196 users. It features anti-tailgate functionality, a built-in 85 dB door held open alarm, REX input and automatic unlocking. Available in black or white finish in a 114 × 69.5 × 30 mm ANSI-size housing.",
+    image: oldProductImage("default-667581963201112.jpg"),
+    imageAlt: "E1196 Bluetooth access reader — smartphone-based access control unit",
+    gallery: gallery(oldProductImage("default-667581963201112.jpg"), "/tur/cat-access-readers.jpg"),
+    features: [
+      "Bluetooth Low Energy 4.0 communication.",
+      "Smartphone-based access control.",
+      "12–24VDC operation.",
+      "50 m operating range.",
+      "Up to 196 users with 1 administrator.",
+      "Anti-tailgate function.",
+      "Built-in 85 dB door held open alarm buzzer.",
+      "REX input and alarm output.",
+      "Automatic unlocking function.",
+      "User access grant and disable management.",
+    ],
+    applications: [
+      "Commercial access control with smartphone credentials",
+      "Office and institutional entry management",
+      "Doors requiring anti-tailgate monitoring",
+    ],
+    specs: [
+      { label: "Input Power", value: "12–24 VDC" },
+      { label: "Bluetooth", value: "Low Energy 4.0" },
+      { label: "Operating Range", value: "50 m (164 ft)" },
+      { label: "Operating Temperature", value: "+10°C to +40°C" },
+      { label: "Users", value: "1 administrator + 196 users" },
+      { label: "Access Methods", value: "Smartphone" },
+      { label: "Alarm", value: "Built-in 85 dB buzzer (door held open)" },
+      { label: "Dimensions", value: "114 × 69.5 × 30 mm (ANSI size)" },
+      { label: "Finish", value: "Black / White" },
+    ],
+    finishOptions: ["Black", "White"],
     inquirySubject: "E1196 Inquiry",
     relatedSlugs: ["easiprox", "easiprox-slim", "tu-dg-750"],
   }),
@@ -8482,15 +9634,16 @@ export const products: Product[] = [
     routeGroupSlug: "digital-keypad-system",
     routeGroupTitle: "Digital Keypad System",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=416&n=tu.dg.750",
     description:
       "TU.DG.750 digital keypad system with backlit tactile keys and separate controller — supports 1,000 users, 4–6 digit PIN codes and dual relay outputs for credential-free access control.",
     shortDescription:
       "Digital keypad with backlit tactile keys, separate controller, 1,000 users and 4–6 digit PIN codes.",
     overview:
       "The TU.DG-750 digital keypad system provides PIN-based access control using a surface-mounted backlit keypad and a separate controller unit. It supports up to 1,000 users plus 10 special codes and accepts 4–6 digit PIN entries. The system includes two REX inputs, one door-sensor input, one tamper input and two relay outputs — suitable for standalone access control on commercial and institutional doors where card infrastructure is not required.",
-    image: "/tur/cat-access-readers.jpg",
+    image: oldProductImage("default-354386383201112.jpg"),
     imageAlt: "TU.DG-750 digital keypad system — backlit tactile keypad for PIN-based access control",
-    gallery: gallery("/tur/cat-access-readers.jpg", "/tur/cat-access-control.jpg"),
+    gallery: gallery(oldProductImage("default-354386383201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       "Backlit tactile keys for low-light operation.",
       "Separate controller for clean door-side installation.",
@@ -8532,20 +9685,38 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "infrared-wireless-exit-devices",
     routeGroupTitle: "Infrared & Wireless Exit Devices",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=418&n=tu.rts-600",
     description:
-      "TU.RTS-600 infrared request-to-exit sensor — placeholder page pending full content migration from the old TUR website.",
+      "TU.RTS-600 infrared request-to-exit sensor — ANSI size, bi-colour LED indicator, relay rated 3A at 125VAC/30VDC, surface mount variant available (RTS-600-S), 10 cm detection range.",
     shortDescription:
-      "TU.RTS-600 infrared RTE sensor for touchless egress. // TODO: migrate full spec from old site",
+      "ANSI-size infrared RTE sensor — bi-colour LED, 3A relay, 10 cm detection range.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 418).",
-    image: "/tur/slider-6.webp",
-    imageAlt: "TU.RTS-600 infrared request-to-exit sensor product image",
-    gallery: gallery("/tur/slider-6.webp"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.RTS-600 is an infrared request-to-exit sensor in ANSI size format. It features a bi-colour LED status indicator and a relay rated at 3A 125VAC/30VDC for integration with access control systems. A surface-mount variant (RTS-600-S) is available for applications where flush mounting is not practical.",
+    image: oldProductImage("default-1905651319210401.jpg"),
+    imageAlt: "TU.RTS-600 infrared request-to-exit sensor — ANSI size touchless egress device",
+    gallery: gallery(oldProductImage("default-1905651319210401.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "ANSI size form factor.",
+      "Infrared detection for touchless request-to-exit.",
+      "10 cm (3 15/16\") detection range.",
+      "Bi-colour status LED indicator.",
+      "Relay rated 3A at 125VAC / 30VDC.",
+      "Surface mount variant available (RTS-600-S).",
+    ],
+    applications: [
+      "Touchless egress on access-controlled doors",
+      "Commercial and institutional exit management",
+      "Integration with electromagnetic locks and electric strikes",
+    ],
+    specs: [
+      { label: "Form Factor", value: "ANSI size" },
+      { label: "Detection Range", value: "10 cm (3 15/16\")" },
+      { label: "Relay", value: "3A at 125VAC / 30VDC" },
+      { label: "LED", value: "Bi-colour status indicator" },
+      { label: "Surface Mount Variant", value: "RTS-600-S" },
+    ],
+    finishOptions: ["Standard"],
     inquirySubject: "TU.RTS-600 Inquiry",
     relatedSlugs: ["tu-rts-500", "tu-300", "tu-1296"],
   }),
@@ -8557,20 +9728,38 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "infrared-wireless-exit-devices",
     routeGroupTitle: "Infrared & Wireless Exit Devices",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=417&n=tu.rts-500",
     description:
-      "TU.RTS-500 infrared request-to-exit sensor — placeholder page pending full content migration from the old TUR website.",
+      "TU.RTS-500 infrared request-to-exit sensor — European size, bi-colour LED indicator, relay rated 3A at 125VAC/30VDC, surface mount variant available (RTS-500-S), 10 cm detection range.",
     shortDescription:
-      "TU.RTS-500 infrared RTE sensor for touchless egress. // TODO: migrate full spec from old site",
+      "European-size infrared RTE sensor — bi-colour LED, 3A relay, 10 cm detection range.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 417).",
-    image: "/tur/slider-6.webp",
-    imageAlt: "TU.RTS-500 infrared request-to-exit sensor product image",
-    gallery: gallery("/tur/slider-6.webp"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.RTS-500 is an infrared request-to-exit sensor in European size format. It features a bi-colour LED status indicator and a relay rated at 3A 125VAC/30VDC for integration with access control systems. A surface-mount variant (RTS-500-S) is available for applications where flush mounting is not practical.",
+    image: oldProductImage("default-1441777840210401.jpg"),
+    imageAlt: "TU.RTS-500 infrared request-to-exit sensor — European size touchless egress device",
+    gallery: gallery(oldProductImage("default-1441777840210401.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "European size form factor.",
+      "Infrared detection for touchless request-to-exit.",
+      "10 cm detection range.",
+      "Bi-colour status LED indicator.",
+      "Relay rated 3A at 125VAC / 30VDC.",
+      "Surface mount variant available (RTS-500-S).",
+    ],
+    applications: [
+      "Touchless egress on access-controlled doors",
+      "European-format door installations",
+      "Integration with electromagnetic locks and electric strikes",
+    ],
+    specs: [
+      { label: "Form Factor", value: "European size" },
+      { label: "Detection Range", value: "10 cm" },
+      { label: "Relay", value: "3A at 125VAC / 30VDC" },
+      { label: "LED", value: "Bi-colour status indicator" },
+      { label: "Surface Mount Variant", value: "RTS-500-S" },
+    ],
+    finishOptions: ["Standard"],
     inquirySubject: "TU.RTS-500 Inquiry",
     relatedSlugs: ["tu-rts-600", "tu-300", "tu-1296"],
   }),
@@ -8585,15 +9774,16 @@ export const products: Product[] = [
     routeGroupSlug: "electromagnetic-door-holders",
     routeGroupTitle: "Electromagnetic Door Holders",
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=421&n=tu.d900f",
     description:
       "TU.D900F floor-mounted electromagnetic door holder with 80 lbs holding force, swivel armature plate and manual release button — for fire-door hold-open with automatic release on alarm activation.",
     shortDescription:
       "Floor-mounted electromagnetic door holder with 80 lbs holding force, swivel armature and manual release.",
     overview:
       "The TU.D900F is a floor-mounted electromagnetic door holder that keeps fire doors open for normal circulation and releases automatically when a fire alarm signal is received. The swivel armature plate accommodates minor door misalignment, and the manual release button allows the door to be released independently of the alarm system. Suitable for doors where wall or face mounting is not practical.",
-    image: "/tur/cat-access-control.jpg",
+    image: oldProductImage("default-1363145553201112.jpg"),
     imageAlt: "TU.D900F floor-mounted electromagnetic door holder — fire door hold-open device",
-    gallery: gallery("/tur/cat-access-control.jpg", "/tur/sliding-e.jpg"),
+    gallery: gallery(oldProductImage("default-1363145553201112.jpg"), "/tur/cat-access-control.jpg"),
     features: [
       "Floor-mounted hold-open for fire-door circulation routes.",
       "80 lbs holding force.",
@@ -8627,20 +9817,39 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-door-holders",
     routeGroupTitle: "Electromagnetic Door Holders",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=420&n=tu.d900w",
     description:
-      "TU.D900W electromagnetic door holder — placeholder page pending full content migration from the old TUR website.",
+      "TU.D900W wall-mounted electromagnetic door holder with 80 lbs holding force, swivel armature plate and stainless steel finish — available in flush (TU.D900W) and surface (TU.D900WS) wall mount configurations.",
     shortDescription:
-      "TU.D900W electromagnetic door holder. // TODO: migrate full spec from old site",
+      "Wall-mounted electromagnetic door holder — 80 lbs holding force, flush or surface mount, stainless steel.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 420).",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU.D900W electromagnetic door holder product image",
-    gallery: gallery("/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.D900W is a wall-mounted electromagnetic door holder that holds fire doors open and releases automatically on alarm signal. It features a swivel armature plate for door alignment tolerance and is available in flush wall mount (TU.D900W) and surface wall mount (TU.D900WS) configurations. Stainless steel finish for corrosion resistance.",
+    image: oldProductImage("default-753135905201112.jpg"),
+    imageAlt: "TU.D900W wall-mounted electromagnetic door holder — fire door hold-open device",
+    gallery: gallery(oldProductImage("default-753135905201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "Wall-mounted hold-open for fire-door circulation routes.",
+      "80 lbs holding force.",
+      "Swivel armature plate to accommodate door misalignment.",
+      "Automatic release on fire alarm signal.",
+      "Available in flush wall mount (TU.D900W) and surface wall mount (TU.D900WS).",
+      "Stainless steel finish.",
+      "24 VAC/DC operation (12 VAC/DC special order).",
+    ],
+    applications: [
+      "Fire-door hold-open in commercial corridors",
+      "Hospital ward and institutional circulation routes",
+      "Wall-mounted fire-door coordination",
+    ],
+    specs: [
+      { label: "Mount", value: "Flush wall (TU.D900W) or surface wall (TU.D900WS)" },
+      { label: "Holding Force", value: "80 lbs" },
+      { label: "Voltage", value: "24 VAC/DC (special order: 12 VAC/DC)" },
+      { label: "Armature", value: "Swivel armature plate" },
+      { label: "Finish", value: "Stainless steel" },
+    ],
+    finishOptions: ["Stainless Steel"],
     inquirySubject: "TU.D900W Electromagnetic Door Holder Inquiry",
     relatedSlugs: ["tu-d900f", "tu-d990", "tu-300"],
   }),
@@ -8652,20 +9861,37 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "electromagnetic-door-holders",
     routeGroupTitle: "Electromagnetic Door Holders",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=419&n=tu.d990",
     description:
-      "TU.D990 electromagnetic door holder — placeholder page pending full content migration from the old TUR website.",
+      "TU.D990 electromagnetic door holder — dual voltage 12/24 VAC/DC (32.9 lbs) or 110–220 VAC (38.8 lbs), flush or surface wall mount, stainless steel finish, swivel armature plate.",
     shortDescription:
-      "TU.D990 electromagnetic door holder. // TODO: migrate full spec from old site",
+      "Dual voltage electromagnetic door holder — 32.9 lbs at 12/24VAC/DC or 38.8 lbs at 110–220VAC.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 419).",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "TU.D990 electromagnetic door holder product image",
-    gallery: gallery("/tur/cat-access-control.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.D990 electromagnetic door holder offers dual voltage options: 12/24 VAC/DC providing 32.9 lbs holding force, or 110–220 VAC providing 38.8 lbs holding force. It mounts flush (TU.D970) or surface (TU.D970S) on the wall with a swivel armature plate and stainless steel finish. Releases automatically on fire alarm signal.",
+    image: oldProductImage("default-1189349479201112.jpg"),
+    imageAlt: "TU.D990 electromagnetic door holder — dual voltage wall-mounted hold-open device",
+    gallery: gallery(oldProductImage("default-1189349479201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "Dual voltage operation: 12/24 VAC/DC or 110–220 VAC.",
+      "Swivel armature plate to accommodate door misalignment.",
+      "Flush wall mount (TU.D970) and surface wall mount (TU.D970S) variants.",
+      "Stainless steel finish.",
+      "Automatic release on fire alarm signal.",
+    ],
+    applications: [
+      "Fire-door hold-open requiring mains (110–220V) voltage operation",
+      "Commercial and institutional fire-door corridors",
+      "Wall-mounted door holder for varied voltage environments",
+    ],
+    specs: [
+      { label: "Holding Force (12/24 VAC/DC)", value: "32.9 lbs" },
+      { label: "Holding Force (110–220 VAC)", value: "38.8 lbs" },
+      { label: "Mount", value: "Flush wall (TU.D970) or surface wall (TU.D970S)" },
+      { label: "Armature", value: "Swivel armature plate" },
+      { label: "Finish", value: "Stainless steel" },
+    ],
+    finishOptions: ["Stainless Steel"],
     inquirySubject: "TU.D990 Electromagnetic Door Holder Inquiry",
     relatedSlugs: ["tu-d900f", "tu-d900w", "tu-300"],
   }),
@@ -8679,20 +9905,37 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "access-control-accessories",
     routeGroupTitle: "Access Control Accessories",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=425&n=tu.dl-417st",
     description:
-      "TU.DL-417ST door loop — placeholder page pending full content migration from the old TUR website.",
+      "TU.DL-417ST concealed door loop — stainless steel case and flex conduit with square mounting tabs for recessed installation in metal frames, routing power and signal cables through the hinge side of access-controlled doors.",
     shortDescription:
-      "TU.DL-417ST door loop for cable routing. // TODO: migrate full spec from old site",
+      "Concealed stainless steel door loop for metal frames — recessed installation for hinge-side cable routing.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 425).",
-    image: "/tur/meta-default.jpg",
-    imageAlt: "TU.DL-417ST door loop product image",
-    gallery: gallery("/tur/meta-default.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
+      "The TU.DL-417ST is a concealed door loop in stainless steel construction, designed for installation in metal door frames. The stainless steel flex conduit and case provide superior corrosion resistance over the nickel-plated TU.DL-400 model. Square mounting tabs allow recessed installation for a clean, low-profile cable path on the hinge side of access-controlled doors.",
+    image: oldProductImage("default-1523805726201112.jpg"),
+    imageAlt: "TU.DL-417ST stainless steel door loop — concealed cable conduit for metal frames",
+    gallery: gallery(oldProductImage("default-1523805726201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "Stainless steel case and flex conduit.",
+      "Square mounting tabs for easy recessed installation.",
+      "Designed for metal door frame installations.",
+      "Suitable for electromagnetic lock and electric-strike power leads.",
+    ],
+    applications: [
+      "Metal frame electromagnetic lock installations",
+      "Electric-strike access-controlled metal doors",
+      "High-durability cable routing in commercial applications",
+    ],
+    specs: [
+      { label: "Case Material", value: "Stainless steel" },
+      { label: "Conduit Material", value: "Stainless steel flex conduit" },
+      { label: "Dimensions (imperial)", value: '11 7/16" L × 15/16" W × 13/16" D' },
+      { label: "Dimensions (metric)", value: "290 L × 24.5 W × 20 D mm" },
+      { label: "Inside Conduit Diameter", value: '3/8" (10 mm)' },
+      { label: "Outside Conduit Diameter", value: '9/16" (14.5 mm)' },
+    ],
+    finishOptions: ["Stainless Steel"],
     inquirySubject: "TU.DL-417ST Door Loop Inquiry",
     relatedSlugs: ["tu-dl-400", "tu-2071", "tu-300"],
   }),
@@ -8704,21 +9947,40 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "access-control-accessories",
     routeGroupTitle: "Access Control Accessories",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=424&n=tu.2071",
     description:
-      "TU.2071 access control accessory — placeholder page pending full content migration from the old TUR website.",
+      "TU.2071 magnetic contact — SPDT wired mount, aluminum alloy housing, operating gap 25 mm for wood and 5 mm for iron, 18–22 AWG leads, for door status monitoring in access control systems.",
     shortDescription:
-      "TU.2071 access control accessory. // TODO: migrate full spec from old site",
+      "SPDT magnetic contact — 25 mm wood / 5 mm iron gap, aluminum alloy housing, wired mount.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 424).",
-    image: "/tur/project-2.jpg",
-    imageAlt: "TU.2071 access control accessory product image",
-    gallery: gallery("/tur/project-2.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
-    inquirySubject: "TU.2071 Inquiry",
+      "The TU.2071 magnetic contact provides door status monitoring for access control and alarm systems. The SPDT wired-mount design with aluminum alloy housing detects door open/close status with an operating gap of 25 mm on wood surfaces and 5 mm on iron surfaces. Supplied with 18–22 AWG leads.",
+    image: oldProductImage("default-1172011213201112.jpg"),
+    imageAlt: "TU.2071 magnetic contact — door status sensor for access control systems",
+    gallery: gallery(oldProductImage("default-1172011213201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "SPDT (single pole double throw) switch configuration.",
+      "Wired mounting.",
+      "Aluminum alloy housing.",
+      "Operating gap: 25 mm on wood surfaces.",
+      "Operating gap: 5 mm on iron surfaces.",
+      "18–22 AWG electrical leads.",
+    ],
+    applications: [
+      "Door status monitoring in access control systems",
+      "Fire alarm and building management system door sensors",
+      "Electromagnetic lock door open/close feedback",
+    ],
+    specs: [
+      { label: "Switch Type", value: "SPDT (single pole double throw)" },
+      { label: "Mounting", value: "Wired mount" },
+      { label: "Housing", value: "Aluminum alloy" },
+      { label: "Operating Gap (wood)", value: "25 mm" },
+      { label: "Operating Gap (iron)", value: "5 mm" },
+      { label: "Lead Wire", value: "18–22 AWG" },
+    ],
+    finishOptions: ["Aluminum Alloy"],
+    inquirySubject: "TU.2071 Magnetic Contact Inquiry",
     relatedSlugs: ["tu-2071-ar", "tu-2031", "tu-dl-400"],
   }),
   defineProduct({
@@ -8729,21 +9991,41 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "access-control-accessories",
     routeGroupTitle: "Access Control Accessories",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=423&n=tu.2071-ar",
     description:
-      "TU.2071-AR access control accessory — placeholder page pending full content migration from the old TUR website.",
+      "TU.2071-AR magnetic contact — SPDT wired mount, aluminum alloy housing, wider operating gap of 34 mm for wood and 7 mm for iron, 18–22 AWG leads.",
     shortDescription:
-      "TU.2071-AR access control accessory. // TODO: migrate full spec from old site",
+      "SPDT magnetic contact with wider gap — 34 mm wood / 7 mm iron, aluminum alloy, wired mount.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 423).",
-    image: "/tur/project-2.jpg",
-    imageAlt: "TU.2071-AR access control accessory product image",
-    gallery: gallery("/tur/project-2.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
-    inquirySubject: "TU.2071-AR Inquiry",
+      "The TU.2071-AR magnetic contact is the wide-gap variant of the TU.2071, offering a 34 mm operating gap on wood surfaces and 7 mm on iron — suitable for doors with looser tolerances or heavier frame profiles. SPDT wired mount configuration with aluminum alloy housing and 18–22 AWG leads.",
+    image: oldProductImage("default-949080760201112.jpg"),
+    imageAlt: "TU.2071-AR magnetic contact — wide-gap door status sensor for access control",
+    gallery: gallery(oldProductImage("default-949080760201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "SPDT (single pole double throw) switch configuration.",
+      "Wired mounting.",
+      "Aluminum alloy housing.",
+      "Wide operating gap: 34 mm on wood surfaces.",
+      "Wide operating gap: 7 mm on iron surfaces.",
+      "18–22 AWG electrical leads.",
+      "Suitable for doors with looser frame tolerances.",
+    ],
+    applications: [
+      "Door status monitoring where wider gap tolerance is required",
+      "Heavy-frame and commercial door access control monitoring",
+      "Electromagnetic lock door open/close feedback",
+    ],
+    specs: [
+      { label: "Switch Type", value: "SPDT (single pole double throw)" },
+      { label: "Mounting", value: "Wired mount" },
+      { label: "Housing", value: "Aluminum alloy" },
+      { label: "Operating Gap (wood)", value: "34 mm" },
+      { label: "Operating Gap (iron)", value: "7 mm" },
+      { label: "Lead Wire", value: "18–22 AWG" },
+    ],
+    finishOptions: ["Aluminum Alloy"],
+    inquirySubject: "TU.2071-AR Magnetic Contact Inquiry",
     relatedSlugs: ["tu-2071", "tu-2031", "tu-dl-400"],
   }),
   defineProduct({
@@ -8754,21 +10036,40 @@ export const products: Product[] = [
     familyTitle: "Access Control",
     routeGroupSlug: "access-control-accessories",
     routeGroupTitle: "Access Control Accessories",
-    isIndexable: false,
     category: "Access Control",
+    sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=422&n=tu.2031",
     description:
-      "TU.2031 access control accessory — placeholder page pending full content migration from the old TUR website.",
+      "TU.2031 magnetic contact — SPDT screw mount, plastic housing, operating gap 29 mm for wood and 18 mm for iron, 18–22 AWG leads.",
     shortDescription:
-      "TU.2031 access control accessory. // TODO: migrate full spec from old site",
+      "SPDT magnetic contact — 29 mm wood / 18 mm iron gap, plastic housing, screw mount.",
     overview:
-      "// TODO: migrate full product description, specifications and model data from old TUR website (legacy ID 422).",
-    image: "/tur/project-2.jpg",
-    imageAlt: "TU.2031 access control accessory product image",
-    gallery: gallery("/tur/project-2.jpg"),
-    features: [],
-    applications: [],
-    finishOptions: [],
-    inquirySubject: "TU.2031 Inquiry",
+      "The TU.2031 magnetic contact uses screw-mount installation with a plastic housing, offering an operating gap of 29 mm on wood and 18 mm on iron surfaces. The SPDT configuration and 18–22 AWG leads are compatible with standard access control and alarm panel inputs.",
+    image: oldProductImage("default-1392344115201112.jpg"),
+    imageAlt: "TU.2031 magnetic contact — screw-mount door sensor for access control systems",
+    gallery: gallery(oldProductImage("default-1392344115201112.jpg"), "/tur/cat-access-control.jpg"),
+    features: [
+      "SPDT (single pole double throw) switch configuration.",
+      "Screw-mount installation.",
+      "Plastic housing.",
+      "Operating gap: 29 mm on wood surfaces.",
+      "Operating gap: 18 mm on iron surfaces.",
+      "18–22 AWG electrical leads.",
+    ],
+    applications: [
+      "Door status monitoring in access control and alarm systems",
+      "Residential and light commercial door sensors",
+      "Electromagnetic lock and electric-strike feedback",
+    ],
+    specs: [
+      { label: "Switch Type", value: "SPDT (single pole double throw)" },
+      { label: "Mounting", value: "Screw mount" },
+      { label: "Housing", value: "Plastic" },
+      { label: "Operating Gap (wood)", value: "29 mm" },
+      { label: "Operating Gap (iron)", value: "18 mm" },
+      { label: "Lead Wire", value: "18–22 AWG" },
+    ],
+    finishOptions: ["Plastic Housing"],
+    inquirySubject: "TU.2031 Magnetic Contact Inquiry",
     relatedSlugs: ["tu-2071", "tu-2071-ar", "tu-dl-400"],
   }),
 
