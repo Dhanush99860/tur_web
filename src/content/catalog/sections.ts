@@ -1,4 +1,4 @@
-import { createInquiryHref } from "@/content/site/site-config";
+﻿import { createInquiryHref } from "@/content/site/site-config";
 import type { CatalogSection, CatalogSectionSlug } from "@/types";
 
 export const catalogSections: CatalogSection[] = [
@@ -11,7 +11,7 @@ export const catalogSections: CatalogSection[] = [
       "Door Hardware is the main route into TUR's architectural hardware offer, organised around the core specification categories used across commercial and premium architectural projects.",
     organizationLine:
       "Door Hardware is structured by how openings are specified: hanging, controlling, securing, furnishing, access coordination and sealing performance.",
-    image: "/tur/format-lockset.jpg",
+    image: "/tur/door-hardware/format-lockset.jpg",
     imageAlt: "Format UK branded lockset and euro cylinder — TUR door hardware",
     highlights: [
       "American Standard",
@@ -29,7 +29,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/american-standard",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/project-1.jpg",
+        image: "/tur/home/project-1.jpg",
         imageAlt: "Coordinated hanging and architectural door hardware from TUR",
       },
       {
@@ -40,7 +40,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/european-ironmongery",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/mc-2.jpg",
+        image: "/tur/door-hardware/mc-2.jpg",
         imageAlt: "Premium lever-handle and ironmongery detail from TUR",
       },
       {
@@ -51,7 +51,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/glass-hardware",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/cat-glass-hardware.jpg",
+        image: "/tur/door-hardware/cat-glass-hardware.jpg",
         imageAlt: "Glass hinges and clip hardware for frameless architectural applications",
       },
       {
@@ -62,7 +62,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/access-control",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/cat-access-control.jpg",
+        image: "/tur/door-hardware/cat-access-control.jpg",
         imageAlt: "G·U access control — turnstiles and controlled glass entrance systems",
       },
       {
@@ -73,7 +73,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/sealing-systems",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/cat-sealing-systems.jpg",
+        image: "/tur/door-hardware/cat-sealing-systems.jpg",
         imageAlt: "Door bottom seal and threshold system for architectural openings",
       },
     ],
@@ -210,7 +210,7 @@ export const catalogSections: CatalogSection[] = [
       "Automatic Operators is the main route into TUR's entrance automation platform, organised around movement type, access-control logic and system coordination across commercial, healthcare, hospitality and high-traffic project environments.",
     organizationLine:
       "Automatic Operators is structured by entrance movement and control logic: sliding, controlled access, revolving, swing automation, all-glass systems, and activation and safety sensing.",
-    image: "/tur/sliding-b.jpg",
+    image: "/tur/door-hardware/sliding-b.jpg",
     imageAlt: "Automatic sliding entrance system and operator-led movement from TUR",
     highlights: [
       "Sliding Doors",
@@ -229,7 +229,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/sliding-doors",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/sliding-b.jpg",
+        image: "/tur/door-hardware/sliding-b.jpg",
         imageAlt: "Automatic sliding entrance system from TUR",
       },
       {
@@ -240,7 +240,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/controlled-physical-access",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/project-4.jpg",
+        image: "/tur/home/project-4.jpg",
         imageAlt: "Controlled physical access systems and regulated pedestrian flow from TUR",
       },
       {
@@ -251,7 +251,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/revolving-doors",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/project-c.jpg",
+        image: "/tur/home/project-c.jpg",
         imageAlt: "Premium revolving entrance system from TUR",
       },
       {
@@ -262,7 +262,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/swing-door-drives",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/sliding-d.jpg",
+        image: "/tur/door-hardware/sliding-d.jpg",
         imageAlt: "Automatic swing door drive from TUR",
       },
       {
@@ -273,7 +273,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/all-glass-systems",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/sliding-c.jpg",
+        image: "/tur/door-hardware/sliding-c.jpg",
         imageAlt: "Automatic all-glass entrance system from TUR",
       },
       {
@@ -284,7 +284,7 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/automatic-pulse-generators-and-sensors",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/slider-6.webp",
+        image: "/tur/home/slider-6.webp",
         imageAlt: "Automatic entrance activation devices and safety sensors from TUR",
       },
     ],

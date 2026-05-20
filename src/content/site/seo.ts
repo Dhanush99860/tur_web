@@ -1,4 +1,4 @@
-import type { SeoPage } from "@/types";
+﻿import type { SeoPage } from "@/types";
 import { siteConfig } from "@/content/site/site-config";
 
 export const seoDefaults = {
@@ -14,7 +14,7 @@ export const pageSeo = {
     description:
       "Integrated architectural door hardware, automatic entry systems, access control, glass hardware and sealing systems for project-led commercial and institutional work.",
     path: "/",
-    image: "/tur/meta-default.jpg",
+    image: "/tur/site/meta-default.jpg",
     keywords: [
       "architectural door hardware",
       "automatic entry systems",
@@ -29,7 +29,7 @@ export const pageSeo = {
     description:
       "Learn about TUR's architectural hardware and automatic entry systems offer, heritage through James Gibbons Format, regional experience and technical project support.",
     path: "/about",
-    image: "/tur/project-c.jpg",
+    image: "/tur/home/project-c.jpg",
     keywords: [
       "about tur",
       "james gibbons format",
@@ -44,7 +44,7 @@ export const pageSeo = {
     description:
       "Access the TUR company profile and use downloads as the core route for profile, catalog and technical support requests.",
     path: "/downloads",
-    image: "/tur/meta-default.jpg",
+    image: "/tur/site/meta-default.jpg",
     keywords: [
       "tur downloads",
       "company profile",
@@ -58,7 +58,7 @@ export const pageSeo = {
     description:
       "Contact TUR Middle East FZC for product details, technical services, project support and regional coordination.",
     path: "/contact",
-    image: "/tur/project-b.jpg",
+    image: "/tur/home/project-b.jpg",
     keywords: [
       "contact tur",
       "tur middle east fzc",
@@ -72,7 +72,7 @@ export const pageSeo = {
     description:
       "Architectural door hardware families spanning American Standard, European Ironmongery, Glass Hardware, Access Control and Sealing Systems.",
     path: "/door-hardware",
-    image: "/tur/project-b.jpg",
+    image: "/tur/home/project-b.jpg",
     keywords: [
       "door hardware",
       "american standard hardware",
@@ -87,7 +87,7 @@ export const pageSeo = {
     description:
       "Sliding, revolving, swing and controlled access systems shaped for premium entrance performance and project coordination.",
     path: "/automatic-operators",
-    image: "/tur/slider-3.webp",
+    image: "/tur/home/slider-3.webp",
     keywords: [
       "automatic operators",
       "sliding doors",

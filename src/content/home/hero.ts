@@ -1,4 +1,4 @@
-import type { HomeHero } from "@/types";
+﻿import type { HomeHero } from "@/types";
 import { createInquiryHref } from "@/content/site/site-config";
 
 export const homeHero: HomeHero = {
@@ -23,7 +23,7 @@ export const homeHero: HomeHero = {
       title: "Architectural Hardware For Every Opening",
       description: "Complete specification routes — hanging, securing, access control and sealing — for commercial, hospitality and institutional environments.",
       href: "/door-hardware",
-      image: "/tur/format-lockset.jpg",
+      image: "/tur/door-hardware/format-lockset.jpg",
       imageAlt: "Format UK branded lockset and cylinder — TUR architectural door hardware",
     },
     {
@@ -31,7 +31,7 @@ export const homeHero: HomeHero = {
       label: "Automatic Entry Systems",
       title: "TSW150 Automatic Door Operator",
       description: "High-performance automatic entry engineered for hospitality, healthcare and high-traffic architectural spaces.",
-      image: "/tur/tsw150-operator.jpg",
+      image: "/tur/home/tsw150-operator.jpg",
       imageAlt: "TSW150 G·U automatic swing door operator",
     },
     {
@@ -40,7 +40,7 @@ export const homeHero: HomeHero = {
       title: "Precision Sliding Door Drives",
       description: "From compact configurations to heavy-duty sliding systems — built for demanding architectural and commercial environments.",
       href: "/automatic-operators",
-      image: "/tur/sliding-door-hero.jpg",
+      image: "/tur/home/sliding-door-hero.jpg",
       imageAlt: "Automatic sliding door system — commercial architectural installation",
     },
   ],

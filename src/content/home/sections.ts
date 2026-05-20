@@ -1,4 +1,4 @@
-import type {
+﻿import type {
   CollectionTab,
   ContactOffice,
   DownloadResource,
@@ -38,12 +38,12 @@ export const homeSpotlightProductSlug = "furnish-the-door";
 
 export const homeSpotlightImages = [
   {
-    src: "/tur/project-b.jpg",
+    src: "/tur/home/project-b.jpg",
     alt: "Premium lever handle and door furnishing detail from TUR",
     label: "Ironmongery Detail",
   },
   {
-    src: "/tur/project-2.jpg",
+    src: "/tur/home/project-2.jpg",
     alt: "European ironmongery project reference from TUR",
   },
 ] as const satisfies readonly GalleryImage[];
@@ -56,7 +56,7 @@ export const homeResourceCards: ResourceCard[] = [
       "Partner brands, product verticals, technical services, certifications and regional registrations — consolidated in one reference document for project teams and specifiers.",
     href: "/company_profile.pdf",
     ctaLabel: "Download Profile PDF",
-    image: "/tur/project-2.jpg",
+    image: "/tur/home/project-2.jpg",
     imageAlt: "TUR architectural hardware — company profile reference",
   },
   {
@@ -66,7 +66,7 @@ export const homeResourceCards: ResourceCard[] = [
       "30+ years of regional delivery. Hardware specification, scheduling, shop drawings, master keying and project-led technical coordination across commercial, hospitality and institutional work.",
     href: "/about",
     ctaLabel: "Explore the Platform",
-    image: "/tur/project-a.jpg",
+    image: "/tur/home/project-a.jpg",
     imageAlt: "TUR heritage and regional delivery platform",
   },
   {
@@ -76,7 +76,7 @@ export const homeResourceCards: ResourceCard[] = [
       "Reach TUR for hardware selection, family routing, catalog access, technical clarification and project-specific support from the first conversation through to delivery.",
     href: "/contact",
     ctaLabel: "Contact TUR",
-    image: "/tur/project-c.jpg",
+    image: "/tur/home/project-c.jpg",
     imageAlt: "Project inquiry and technical coordination with TUR",
   },
 ];
@@ -87,7 +87,7 @@ export const homeStoryCards: StoryCard[] = [
     title: "Since 1670, through James Gibbons Format.",
     description:
       "TUR's hardware platform is rooted in the James Gibbons Format legacy — one of the oldest established names in architectural hardware, founded in 1670. This heritage informs every product family, specification route and brand partnership carried into TUR's offer.",
-    image: "/tur/format-lockset.jpg",
+    image: "/tur/door-hardware/format-lockset.jpg",
     imageAlt: "Format UK branded lockset — architectural hardware heritage since 1670",
   },
   {
@@ -95,7 +95,7 @@ export const homeStoryCards: StoryCard[] = [
     title: "30+ years of project delivery across the region.",
     description:
       "Three decades of hardware specification, supply and coordination across commercial, hospitality, healthcare and institutional projects throughout the Middle East and South Asia — from first inquiry to final commissioning.",
-    image: "/tur/project-a.jpg",
+    image: "/tur/home/project-a.jpg",
     imageAlt: "Regional project delivery — architectural hardware specification across the Middle East",
   },
   {
@@ -103,7 +103,7 @@ export const homeStoryCards: StoryCard[] = [
     title: "From scheduling to master keying and installation.",
     description:
       "TUR's technical services extend across the full project cycle — estimation, scheduling, shop drawings, master keying, installation support and on-site troubleshooting — so that the hardware package is coordinated from specification through to handover.",
-    image: "/tur/mc-2.jpg",
+    image: "/tur/door-hardware/mc-2.jpg",
     imageAlt: "Technical hardware coordination and project services — TUR",
   },
   {
@@ -111,7 +111,7 @@ export const homeStoryCards: StoryCard[] = [
     title: "A broader platform across three regions.",
     description:
       "Registrations, manufacturing partnerships and project experience across Europe, the Middle East and South Asia give TUR a reach that extends well beyond a single market — supporting international specifications, procurement and coordinated project delivery.",
-    image: "/tur/project-c.jpg",
+    image: "/tur/home/project-c.jpg",
     imageAlt: "Global presence — TUR platform across Europe, Middle East and South Asia",
   },
 ];
@@ -122,7 +122,7 @@ export const homeCollectionTabs: CollectionTab[] = [
     href: "/door-hardware",
     description:
       "The full route into architectural hardware — hanging, controlling, securing, furnishing, glass systems and sealing in one organised section.",
-    image: "/tur/format-lockset.jpg",
+    image: "/tur/door-hardware/format-lockset.jpg",
     imageAlt: "Format UK architectural lockset — TUR Door Hardware section",
   },
   {
@@ -130,7 +130,7 @@ export const homeCollectionTabs: CollectionTab[] = [
     href: "/automatic-operators",
     description:
       "Sliding, swing, revolving and controlled entrance systems for commercial, healthcare, hospitality and high-traffic project environments.",
-    image: "/tur/sliding-b.jpg",
+    image: "/tur/door-hardware/sliding-b.jpg",
     imageAlt: "Automatic sliding entrance system — TUR Automatic Operators",
   },
   {
@@ -138,7 +138,7 @@ export const homeCollectionTabs: CollectionTab[] = [
     href: "/door-hardware/access-control",
     description:
       "Electromagnetic locks, electric strikes and E-ACCESS systems for coordinated secure entry — integrated with the broader hardware package.",
-    image: "/tur/cat-access-control.jpg",
+    image: "/tur/door-hardware/cat-access-control.jpg",
     imageAlt: "G·U access control — secure entry systems and turnstiles",
   },
   {
@@ -146,7 +146,7 @@ export const homeCollectionTabs: CollectionTab[] = [
     href: "/door-hardware/glass-hardware",
     description:
       "Frameless glass fittings, patch hardware, hinges and pull handles for all-glass architectural openings and storefront conditions.",
-    image: "/tur/cat-glass-hardware.jpg",
+    image: "/tur/door-hardware/cat-glass-hardware.jpg",
     imageAlt: "Glass hinges and clip hardware for frameless architectural applications",
   },
   {
@@ -154,7 +154,7 @@ export const homeCollectionTabs: CollectionTab[] = [
     href: "/door-hardware/european-ironmongery",
     description:
       "Premium lever handles, cylinders and coordinated ironmongery packages for finish-led specification and architectural door sets.",
-    image: "/tur/mc-2.jpg",
+    image: "/tur/door-hardware/mc-2.jpg",
     imageAlt: "European ironmongery — premium lever handles and door furnishing",
   },
   {
@@ -162,7 +162,7 @@ export const homeCollectionTabs: CollectionTab[] = [
     href: "/door-hardware/sealing-systems",
     description:
       "Threshold, bottom and perimeter seals for entrance performance, acoustic control and architectural detailing across the full door set.",
-    image: "/tur/cat-sealing-systems.jpg",
+    image: "/tur/door-hardware/cat-sealing-systems.jpg",
     imageAlt: "Door bottom seal and threshold system for architectural openings",
   },
 ];
@@ -209,32 +209,32 @@ export const homeTestimonials: Testimonial[] = [
 
 export const homePartnerLogos: GalleryImage[] = [
   {
-    src: "/tur/logo-1-1.png",
+    src: "/tur/site/logo-1-1.png",
     alt: "BKS partner logo",
     label: "BKS",
   },
   {
-    src: "/tur/logo-1-2.png",
+    src: "/tur/site/logo-1-2.png",
     alt: "BKS Locks partner logo",
     label: "BKS Locks",
   },
   {
-    src: "/tur/logo-1-3.png",
+    src: "/tur/site/logo-1-3.png",
     alt: "DZE partner logo",
     label: "DZE",
   },
   {
-    src: "/tur/logo-1-4.png",
+    src: "/tur/site/logo-1-4.png",
     alt: "TUR Nederland partner logo",
     label: "TUR Nederland",
   },
   {
-    src: "/tur/logo-1-5.png",
+    src: "/tur/site/logo-1-5.png",
     alt: "VGE partner logo",
     label: "VGE",
   },
   {
-    src: "/tur/logo-1-6.png",
+    src: "/tur/site/logo-1-6.png",
     alt: "James Gibbons Format partner logo",
     label: "James Gibbons Format",
   },
@@ -246,7 +246,7 @@ export const aboutHighlights: StoryCard[] = [
     title: "Since 1670 legacy",
     description:
       "TUR references a long partnership and heritage narrative shaped through James Gibbons Format and project-led architectural hardware.",
-    image: "/tur/slider-2.webp",
+    image: "/tur/home/slider-2.webp",
     imageAlt: "James Gibbons Format and heritage visual",
   },
   {
@@ -254,7 +254,7 @@ export const aboutHighlights: StoryCard[] = [
     title: "Architectural hardware and automatic entry systems",
     description:
       "The TUR offer brings together hardware, access control, sealing systems and automatic operators under one coordinated platform.",
-    image: "/tur/project-a.jpg",
+    image: "/tur/home/project-a.jpg",
     imageAlt: "Architectural hardware and automatic entry systems",
   },
   {
@@ -262,7 +262,7 @@ export const aboutHighlights: StoryCard[] = [
     title: "Project-oriented technical coordination",
     description:
       "Architects, consultants, contractors and project teams can use TUR for coordinated hardware selection and inquiry-led support.",
-    image: "/tur/mc-2.jpg",
+    image: "/tur/door-hardware/mc-2.jpg",
     imageAlt: "Project teams and technical coordination",
   },
   {
@@ -270,7 +270,7 @@ export const aboutHighlights: StoryCard[] = [
     title: "Regional and global presence",
     description:
       "TUR's visible regional structure supports a broader global platform for project delivery and product coordination.",
-    image: "/tur/project-c.jpg",
+    image: "/tur/home/project-c.jpg",
     imageAlt: "Global presence and regional structure",
   },
 ];
@@ -283,7 +283,7 @@ export const downloadResources: DownloadResource[] = [
     href: "/company_profile.pdf",
     ctaLabel: "Download PDF",
     eyebrow: "Primary Download",
-    image: "/tur/meta-default.jpg",
+    image: "/tur/site/meta-default.jpg",
     imageAlt: "TUR company profile download",
   },
   {
@@ -293,7 +293,7 @@ export const downloadResources: DownloadResource[] = [
     href: createInquiryHref("Request Catalog"),
     ctaLabel: "Request Details",
     eyebrow: "Support",
-    image: "/tur/slider-4.webp",
+    image: "/tur/home/slider-4.webp",
     imageAlt: "Request product catalog",
   },
   {
@@ -303,7 +303,7 @@ export const downloadResources: DownloadResource[] = [
     href: "/contact",
     ctaLabel: "Contact TUR",
     eyebrow: "Project Support",
-    image: "/tur/video-thumb.png",
+    image: "/tur/home/video-thumb.png",
     imageAlt: "Technical services inquiry",
   },
 ];

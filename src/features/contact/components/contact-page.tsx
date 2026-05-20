@@ -1,4 +1,4 @@
-import { contactOffices } from "@/content/home/sections";
+﻿import { contactOffices } from "@/content/home/sections";
 import { createInquiryHref, siteConfig, siteContact } from "@/content/site/site-config";
 import { ContactInquiryForm } from "@/components/forms/contact-inquiry-form";
 import { PageContainer } from "@/components/layout/page-container";
@@ -79,7 +79,7 @@ export function ContactPage() {
           </div>
 
           <CoverImage
-            src="/tur/project-b.jpg"
+            src="/tur/home/project-b.jpg"
             alt="Regional presence and project support"
             sizes="(max-width: 1279px) 100vw, 50vw"
             className="surface-panel min-h-[24rem] overflow-hidden sm:min-h-[28rem]"

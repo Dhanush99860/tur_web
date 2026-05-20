@@ -1,4 +1,4 @@
-import { aboutHighlights } from "@/content/home/sections";
+﻿import { aboutHighlights } from "@/content/home/sections";
 import { siteConfig } from "@/content/site/site-config";
 import { PageContainer } from "@/components/layout/page-container";
 import { CoverImage } from "@/components/shared/cover-image";
@@ -36,7 +36,7 @@ export function AboutPage() {
           </div>
 
           <CoverImage
-            src="/tur/project-c.jpg"
+            src="/tur/home/project-c.jpg"
             alt="About TUR and global project support"
             sizes="(max-width: 1279px) 100vw, 50vw"
             className="surface-panel min-h-[24rem]"

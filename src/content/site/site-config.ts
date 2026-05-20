@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@/types";
+﻿import type { SiteConfig } from "@/types";
 
 export const siteConfig = {
   name: "TUR Middle East FZC",
@@ -10,7 +10,7 @@ export const siteConfig = {
   locale: "en_US",
   themeColor: "#3055A6",
   themeColorDark: "#1B2B56",
-  ogImage: "/tur/meta-default.jpg",
+  ogImage: "/tur/site/meta-default.jpg",
   logoPath: "/logo/logo-brand.png",
   logoWhitePath: "/logo/logo-brand-white.png",
   manifestPath: "/manifest.webmanifest",

@@ -1,4 +1,4 @@
-import { getCatalogFamiliesBySection, getCatalogFamily } from "@/content/catalog/categories";
+﻿import { getCatalogFamiliesBySection, getCatalogFamily } from "@/content/catalog/categories";
 import { getProductBySlug, products } from "@/content/catalog/products";
 import { pageSeo } from "@/content/site/seo";
 import { createInquiryHref, siteConfig } from "@/content/site/site-config";
@@ -446,21 +446,21 @@ export const headerSearchPanel = {
     {
       title: "Company profile, catalog requests and supporting downloads.",
       href: "/downloads",
-      image: "/tur/meta-default.jpg",
+      image: "/tur/site/meta-default.jpg",
       imageAlt: "TUR downloads preview",
       eyebrow: "Downloads",
     },
     {
       title: "Heritage, global presence and project-led technical support.",
       href: "/about",
-      image: "/tur/project-c.jpg",
+      image: "/tur/home/project-c.jpg",
       imageAlt: "TUR about preview",
       eyebrow: "About TUR",
     },
     {
       title: "Reach TUR for product details, technical services and project inquiries.",
       href: "/contact",
-      image: "/tur/project-b.jpg",
+      image: "/tur/home/project-b.jpg",
       imageAlt: "TUR contact preview",
       eyebrow: "Contact",
     },

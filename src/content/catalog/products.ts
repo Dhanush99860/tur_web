@@ -1,4 +1,4 @@
-import type { Product } from "@/types";
+﻿import type { Product } from "@/types";
 
 const gallery = (...items: string[]) => items;
 
@@ -134,27 +134,27 @@ function oldDoorHardwareProductUrl(id: number) {
 }
 
 function secureDoorImage(filename: string) {
-  return `/tur/american-standard/secure-the-door/${filename}`;
+  return `/tur/door-hardware/american-standard/secure-the-door/${filename}`;
 }
 
 function boltDoorImage(filename: string) {
-  return `/tur/american-standard/bolt-the-door/${filename}`;
+  return `/tur/door-hardware/american-standard/bolt-the-door/${filename}`;
 }
 
 function ancillaryImage(filename: string) {
-  return `/tur/american-standard/ancillary-products/${filename}`;
+  return `/tur/door-hardware/american-standard/ancillary-products/${filename}`;
 }
 
 function emergencyExitsImage(filename: string) {
-  return `/tur/american-standard/emergency-exits/${filename}`;
+  return `/tur/door-hardware/american-standard/emergency-exits/${filename}`;
 }
 
 function furnishTheDoorImage(filename: string) {
-  return `/tur/american-standard/furnish-the-door/${filename}`;
+  return `/tur/door-hardware/american-standard/furnish-the-door/${filename}`;
 }
 
 function europeanIronmongeryImage(filename: string) {
-  return `/tur/european-ironmongery/${filename}`;
+  return `/tur/door-hardware/european-ironmongery/${filename}`;
 }
 
 function defineEuropeanIronmongeryProduct({
@@ -2370,9 +2370,9 @@ export const products: Product[] = [
       "Core hanging hardware for coordinated architectural door sets.",
     overview:
       "Hang The Door acts as the entry point for coordinated hanging packages across commercial, hospitality and institutional specifications.",
-    image: "/tur/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg",
     imageAlt: "Hang The Door product family visual",
-    gallery: gallery("/tur/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg"),
     features: [
       "Supports coordinated hinge and hanging schedules.",
       "Suitable for project-wide hardware packages.",
@@ -2401,9 +2401,9 @@ export const products: Product[] = [
       "Door control hardware for reliable movement and closing.",
     overview:
       "This family supports controlled operation, closing performance and smooth daily circulation within coordinated hardware schedules.",
-    image: "/tur/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg",
+    image: "/tur/door-hardware/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg",
     imageAlt: "ANSI door closer — overhead control hardware for commercial door sets",
-    gallery: gallery("/tur/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg"),
     features: [
       "Supports coordinated closing and movement performance.",
       "Suitable for circulation-heavy environments.",
@@ -2432,9 +2432,9 @@ export const products: Product[] = [
       "Security hardware families for controlled and protected openings.",
     overview:
       "Secure The Door brings together core securing functions where reliability, safety and controlled access matter within a broader hardware package.",
-    image: "/tur/european-lockset.jpg",
+    image: "/tur/door-hardware/european-lockset.jpg",
     imageAlt: "European mortise lockbody with lever handle — secure door hardware",
-    gallery: gallery("/tur/european-lockset.jpg", "/tur/format-lockset.jpg", "/tur/project-2.jpg"),
+    gallery: gallery("/tur/door-hardware/european-lockset.jpg", "/tur/door-hardware/format-lockset.jpg", "/tur/home/project-2.jpg"),
     features: [
       "Supports protected and controlled openings.",
       "Fits coordinated hardware schedules.",
@@ -2464,9 +2464,9 @@ export const products: Product[] = [
     description: "Redirect-only alias for the American Standard Bolt The Door route group.",
     shortDescription: "Redirect-only alias for Bolt The Door.",
     overview: "Redirect-only alias for the American Standard Bolt The Door route group.",
-    image: "/tur/slider-2.webp",
+    image: "/tur/home/slider-2.webp",
     imageAlt: "American Standard bolt hardware route group visual",
-    gallery: gallery("/tur/slider-2.webp"),
+    gallery: gallery("/tur/home/slider-2.webp"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -2485,9 +2485,9 @@ export const products: Product[] = [
     description: "Redirect-only alias for the American Standard Ancillary Products route group.",
     shortDescription: "Redirect-only alias for Ancillary Products.",
     overview: "Redirect-only alias for the American Standard Ancillary Products route group.",
-    image: "/tur/slider-1.webp",
+    image: "/tur/home/slider-1.webp",
     imageAlt: "American Standard ancillary products route group visual",
-    gallery: gallery("/tur/slider-1.webp"),
+    gallery: gallery("/tur/home/slider-1.webp"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -2506,9 +2506,9 @@ export const products: Product[] = [
     description: "Redirect-only alias for the American Standard Emergency Exits route group.",
     shortDescription: "Redirect-only alias for Emergency Exits.",
     overview: "Redirect-only alias for the American Standard Emergency Exits route group.",
-    image: "/tur/sliding-f.jpg",
+    image: "/tur/door-hardware/sliding-f.jpg",
     imageAlt: "American Standard emergency exits route group visual",
-    gallery: gallery("/tur/sliding-f.jpg"),
+    gallery: gallery("/tur/door-hardware/sliding-f.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -2527,9 +2527,9 @@ export const products: Product[] = [
     description: "Redirect-only alias for the American Standard Furnish The Door route group.",
     shortDescription: "Redirect-only alias for Furnish The Door.",
     overview: "Redirect-only alias for the American Standard Furnish The Door route group.",
-    image: "/tur/mc-1.jpg",
+    image: "/tur/door-hardware/mc-1.jpg",
     imageAlt: "American Standard furnish the door route group visual",
-    gallery: gallery("/tur/mc-1.jpg"),
+    gallery: gallery("/tur/door-hardware/mc-1.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -2553,11 +2553,11 @@ export const products: Product[] = [
       "Single Action (TA4410, TA4420) and Double Action (TA4460) — both variants on one product page.",
     overview:
       "The TA4400 series spring hinge brings controlled self-closing to door sets without a surface-mounted closer. Available in single-action (SA) and double-action (DA) configurations, the TA4460 model covers 6\" leaf width in US26D/626 and US32D/630 finishes. The Radius Corner (RC) option adapts the hinge for radius-prepared mortises.",
-    image: "/tur/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-main.jpg",
     imageAlt: "ANSI TA4460 standard weight spring hinge — single and double action",
     gallery: gallery(
-      "/tur/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-main.jpg",
-      "/tur/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-alt.jpg",
+      "/tur/door-hardware/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-main.jpg",
+      "/tur/door-hardware/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-alt.jpg",
     ),
     features: [
       "Single Action (SA): TA4410 (4½\" × 4\") and TA4420 (4½\" × 4½\") — standard one-way self-closing.",
@@ -2605,14 +2605,14 @@ export const products: Product[] = [
       {
         title: "Single Action Drawing",
         variant: "TA4410 / TA4420",
-        image: "/tur/drawings/spring-hinge-sa.png",
+        image: "/tur/door-hardware/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-drawing-sa.png",
         alt: "Single action spring hinge dimensional drawing for TA4410 and TA4420 with height, width and thickness dimensions",
         caption: "Single Action configuration — TA4410 / TA4420",
       },
       {
         title: "Double Action Drawing",
         variant: "TA4460",
-        image: "/tur/drawings/spring-hinge-da.png",
+        image: "/tur/door-hardware/american-standard/hang-the-door/spring-hinge-standard-weight/spring-hinge-standard-weight-drawing-da.png",
         alt: "Double action spring hinge dimensional drawing for TA4460 with hinge height, barrel diameter and door preparation section",
         caption: "Double Action configuration — TA4460",
       },
@@ -2640,9 +2640,9 @@ export const products: Product[] = [
       "ANSI full mortise butt hinges — standard weight for commercial door sets.",
     overview:
       "Full mortise hinges are recessed into both the door leaf and frame, delivering a clean, flush surface and dependable long-term operation. The standard weight series covers the majority of commercial, institutional and hospitality door sets within the American Standard range. Available in a range of sizes and finishes to match project-wide hardware schedules.",
-    image: "/tur/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg",
     imageAlt: "ANSI full mortise standard weight butt hinge — commercial door hardware",
-    gallery: gallery("/tur/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-main.jpg"),
     specs: [
       { label: "Series", value: "TA4000 Standard Duty" },
       { label: "Type", value: "Standard Weight, 5 Knuckle, 2 ball bearing hinges, Steel" },
@@ -2671,7 +2671,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Technical Drawing",
-        image: "/tur/drawings/full-mortise-sw-drawing.png",
+        image: "/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-standard-weight/full-mortise-hinges-standard-weight-drawing.png",
         alt: "TA4000 Standard Duty full mortise hinge technical drawing showing hinge dimensions and screw layout",
         caption: "TA4000 Standard Duty full mortise hinge dimensional drawing.",
       },
@@ -2742,9 +2742,9 @@ export const products: Product[] = [
       "Full-length continuous hinges for high-traffic, heavy-use door openings.",
     overview:
       "The TA4500 series continuous hinge runs the full height of the door — distributing load evenly and eliminating the point stress that causes standard butt hinges to wear prematurely. Full mortise pin and barrel design for doors up to 600 lbs. Non-handed, with a 1/8\" inset and 48\" maximum door width. Accepts bevel or square edge doors. Available in aluminum, cold rolled steel and Type 304 stainless steel with fire ratings up to 3 hours.",
-    image: "/tur/american-standard/hang-the-door/continuous-hinges/continuous-hinges-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/continuous-hinges/continuous-hinges-main.jpg",
     imageAlt: "Full-length continuous hinge — high-traffic door application",
-    gallery: gallery("/tur/american-standard/hang-the-door/continuous-hinges/continuous-hinges-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/continuous-hinges/continuous-hinges-main.jpg"),
     specs: [
       { label: "Type", value: "Full Mortise Pin & Barrel Continuous Hinge" },
       { label: "Max Door Weight", value: "600 lbs" },
@@ -2776,7 +2776,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Technical Drawing",
-        image: "/tur/drawings/continuous-hinges-drawing.png",
+        image: "/tur/door-hardware/american-standard/hang-the-door/continuous-hinges/continuous-hinges-drawing.png",
         alt: "TA4500 continuous hinge technical drawing showing full mortise pin and barrel hinge installation on a non-beveled door",
         caption: "TA4500 continuous hinge engineering drawing — shown on non-beveled door.",
       },
@@ -2843,9 +2843,9 @@ export const products: Product[] = [
       "ANSI concealed bearing hinges — smooth, quiet operation for commercial door sets.",
     overview:
       "The TA4300 series concealed bearing hinge incorporates ball bearings between the knuckles, eliminating metal-on-metal contact for smooth and quiet operation. Standard weight, 3-knuckle, stainless steel construction. Available in a range of sizes with 2BB and 4BB configurations.",
-    image: "/tur/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg",
     imageAlt: "TA4300 concealed bearing hinge — American Standard door hardware",
-    gallery: gallery("/tur/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg"),
     specs: [
       { label: "Series", value: "TA4300" },
       { label: "Type", value: "Standard Weight, Concealed Bearing, 3 Knuckle Hinges, Stainless Steel" },
@@ -2876,7 +2876,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Technical Drawing",
-        image: "/tur/drawings/concealed-bearing-hinges-drawing.png",
+        image: "/tur/door-hardware/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-drawing.png",
         alt: "TA4300 concealed bearing hinge technical drawing showing hinge dimensions, knuckle section and screw layout",
         caption: "TA4300 concealed bearing hinge dimensional drawing.",
       },
@@ -2933,9 +2933,9 @@ export const products: Product[] = [
       "Heavy Weight, 5 Knuckle, 4BB full mortise hinges in Stainless Steel for heavy-duty commercial openings.",
     overview:
       "The TA4000 Heavy Duty series covers 5-knuckle full mortise hinges with 4 ball bearings for smooth, dependable operation under heavy loads and high cycle counts. Stainless steel construction. Options include NRP, ETW, PIC, RC, HT, stamp for fire rating, and SS316 grade available upon request.",
-    image: "/tur/american-standard/hang-the-door/full-mortise-hinges-heavy-weight/full-mortise-hinges-heavy-weight-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-heavy-weight/full-mortise-hinges-heavy-weight-main.jpg",
     imageAlt: "ANSI full mortise heavy weight 4BB butt hinge — heavy-duty commercial door hardware",
-    gallery: gallery("/tur/american-standard/hang-the-door/full-mortise-hinges-heavy-weight/full-mortise-hinges-heavy-weight-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-heavy-weight/full-mortise-hinges-heavy-weight-main.jpg"),
     features: [
       "Heavy Weight, 5 Knuckle, 4 ball bearing (4BB) construction for demanding applications.",
       "Stainless Steel material — corrosion-resistant for interior and exterior use.",
@@ -2966,7 +2966,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Technical Drawing",
-        image: "/tur/drawings/full-mortise-hw-drawing.png",
+        image: "/tur/door-hardware/american-standard/hang-the-door/full-mortise-hinges-heavy-weight/full-mortise-hinges-heavy-weight-drawing.png",
         alt: "TA4000 Heavy Duty full mortise hinge technical drawing showing hinge height, width, thickness and screw layout",
         caption: "TA4000 Heavy Duty full mortise hinge dimensional drawing.",
       },
@@ -3023,9 +3023,9 @@ export const products: Product[] = [
       "ETW hinge preparation for concealed wiring to electrified door functions.",
     overview:
       "Electric Through Wire is for use when power is required to the door. ETW routes wiring invisibly through the hinge, keeping installations clean and code-compliant. Specify ETW hinge and number of wires required. Hinges should be installed in the centre hinge location. Standard length: 12\" × 48\". Other wire lengths available by order. Packed one per box.",
-    image: "/tur/american-standard/hang-the-door/electric-through-wire-etw/electric-through-wire-etw-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/electric-through-wire-etw/electric-through-wire-etw-main.jpg",
     imageAlt: "Electric Through Wire ETW hinge — concealed wiring for electrified door hardware",
-    gallery: gallery("/tur/american-standard/hang-the-door/electric-through-wire-etw/electric-through-wire-etw-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/electric-through-wire-etw/electric-through-wire-etw-main.jpg"),
     specs: [
       { label: "Specify", value: "ETW hinge and number of wires required" },
       { label: "Wire Configurations", value: "2 × 18 AWG, 4 × 28 AWG, 8 × 28 AWG, 12 × 28 AWG" },
@@ -3073,9 +3073,9 @@ export const products: Product[] = [
       "TA4200 full mortise detention hinges — shear-resistant stud, sloped tips, C32D Cast Stainless Steel.",
     overview:
       "The TA4200 Detention series is a full mortise butt hinge with shear-resistant stud and sloped tips. The stud design prevents the hinge from being removed or tampered with from the secure side. Designed for correctional facilities, secure institutional environments and any opening where forced removal of hardware is a primary security concern.",
-    image: "/tur/american-standard/hang-the-door/detention-hinges/detention-hinges-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/detention-hinges/detention-hinges-main.jpg",
     imageAlt: "TA4200 detention hinge — high-security tamper-resistant door hardware",
-    gallery: gallery("/tur/american-standard/hang-the-door/detention-hinges/detention-hinges-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/detention-hinges/detention-hinges-main.jpg"),
     specs: [
       { label: "Series", value: "TA4200 Heavy Duty" },
       { label: "Type", value: "Heavy Weight, 5 Knuckle, 4 ball bearing hinges, Stainless Steel" },
@@ -3102,7 +3102,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Technical Drawing",
-        image: "/tur/drawings/detention-hinges-drawing.png",
+        image: "/tur/door-hardware/american-standard/hang-the-door/detention-hinges/detention-hinges-drawing.png",
         alt: "TA4200 detention hinge technical drawing showing hinge dimensions, shear-resistant stud detail and screw layout",
         caption: "TA4200 detention hinge dimensional drawing.",
       },
@@ -3140,9 +3140,9 @@ export const products: Product[] = [
       "3D adjustable concealed hinges for post-installation door alignment in premium applications.",
     overview:
       "The TA4600 series concealed hinge allows height, lateral and compression adjustment after the door is hung — eliminating the need for mortise recutting to correct alignment. Up to 120 kg / 2 pcs. Designed for wood doors and frames, concealed installation, easy adjustment and 180° opening. ANSI/BHMA A156.17 certified. Available in four load ratings (40 / 60 / 80 / 120 kg).",
-    image: "/tur/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg",
     imageAlt: "TA4600 3D adjustable concealed hinge — premium door alignment hardware",
-    gallery: gallery("/tur/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/concealed-bearing-hinges/concealed-bearing-hinges-main.jpg"),
     specs: [
       { label: "Certification", value: "ANSI/BHMA A156.17" },
       { label: "Load Capacity", value: "Up to 120 kg / 2 pcs" },
@@ -3203,9 +3203,9 @@ export const products: Product[] = [
     description: "Radius Corner (RC) preparation option for ANSI full mortise hinges — adapts the hinge for radius-prepared mortise pockets.",
     shortDescription: "RC preparation option for hinges installed in radius-corner mortises.",
     overview: "The RC option specifies a radius-corner hinge leaf profile to match a radius-cut mortise pocket in the door edge and frame. Specified as a suffix on hinge model numbers.",
-    image: "/tur/american-standard/hang-the-door/radius-corner-rc/radius-corner-rc-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/radius-corner-rc/radius-corner-rc-main.jpg",
     imageAlt: "Radius corner hinge preparation option",
-    gallery: gallery("/tur/american-standard/hang-the-door/radius-corner-rc/radius-corner-rc-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/radius-corner-rc/radius-corner-rc-main.jpg"),
     features: ["Matches radius-cut mortise profiles.", "Suffix code: RC — appended to model number."],
     applications: ["Doors with radius-cut mortise pockets", "Hospitality and hotel guestrooms"],
     finishOptions: ["Matches parent hinge finish"],
@@ -3226,9 +3226,9 @@ export const products: Product[] = [
     description: "Plug In Connector (PIC) option for ANSI full mortise hinges — provides a plug-in wiring connector for electrified door functions.",
     shortDescription: "PIC plug-in connector option for electrified hinge wiring.",
     overview: "The PIC (Plug In Connector) option provides a connector interface for electrified door hardware, allowing a clean, pluggable wiring connection at the hinge. Specified as a suffix on compatible hinge model numbers.",
-    image: "/tur/american-standard/hang-the-door/plug-in-connector-pic/plug-in-connector-pic-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/plug-in-connector-pic/plug-in-connector-pic-main.jpg",
     imageAlt: "Plug In Connector PIC hinge option for electrified door hardware",
-    gallery: gallery("/tur/american-standard/hang-the-door/plug-in-connector-pic/plug-in-connector-pic-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/plug-in-connector-pic/plug-in-connector-pic-main.jpg"),
     features: ["Plug-in wiring connector for electrified door functions.", "Suffix code: PIC — appended to model number."],
     applications: ["Access-controlled doors with electrified hardware", "Institutional and commercial electrified openings"],
     finishOptions: ["Matches parent hinge finish"],
@@ -3249,9 +3249,9 @@ export const products: Product[] = [
     description: "Non-Removable Pin (NRP) security option for ANSI full mortise hinges — prevents hinge pin removal when the door is in the open position.",
     shortDescription: "NRP pin security option preventing hinge pin removal on out-swing doors.",
     overview: "The NRP option adds a set screw or staked pin that locks the hinge barrel pin in place, preventing removal of the pin when the door swings open — a security measure for out-swinging exterior doors.",
-    image: "/tur/american-standard/hang-the-door/non-removable-pin-nrp/non-removable-pin-nrp-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/non-removable-pin-nrp/non-removable-pin-nrp-main.jpg",
     imageAlt: "Non-removable pin NRP hinge security option",
-    gallery: gallery("/tur/american-standard/hang-the-door/non-removable-pin-nrp/non-removable-pin-nrp-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/non-removable-pin-nrp/non-removable-pin-nrp-main.jpg"),
     features: ["Locks hinge pin against removal when door is open.", "Essential security option for out-swing exterior doors.", "Suffix code: NRP — appended to model number."],
     applications: ["Exterior out-swing commercial doors", "Institutional perimeter doors"],
     finishOptions: ["Matches parent hinge finish"],
@@ -3272,9 +3272,9 @@ export const products: Product[] = [
     description: "Hospital Tip (HT) option for ANSI full mortise hinges — rounded barrel tip for infection-control and hygiene-critical environments.",
     shortDescription: "HT rounded barrel tip for hygienic, infection-control environments.",
     overview: "The Hospital Tip (HT) option specifies a rounded, smooth barrel tip on the hinge — eliminating the exposed tip edge that can harbour bacteria or snag clothing. Commonly specified for healthcare, food-service and clean-room environments.",
-    image: "/tur/american-standard/hang-the-door/hospital-tip-ht/hospital-tip-ht-main.jpg",
+    image: "/tur/door-hardware/american-standard/hang-the-door/hospital-tip-ht/hospital-tip-ht-main.jpg",
     imageAlt: "Hospital tip HT hinge option for healthcare environments",
-    gallery: gallery("/tur/american-standard/hang-the-door/hospital-tip-ht/hospital-tip-ht-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/hang-the-door/hospital-tip-ht/hospital-tip-ht-main.jpg"),
     features: ["Rounded barrel tip — no exposed sharp edge.", "Supports infection-control and hygiene requirements.", "Suffix code: HT — appended to model number."],
     applications: ["Hospital wards and operating theatres", "Food-service and commercial kitchens", "Clean-room and pharmaceutical facilities"],
     finishOptions: ["Matches parent hinge finish"],
@@ -3300,9 +3300,9 @@ export const products: Product[] = [
       "Grade 2, 7300 Series overhead door closer for light commercial and residential use.",
     overview:
       "The 7300 Series medium duty closer is designed for installation on wood and hollow metal doors and frames in light commercial and residential applications. Cast aluminium body with steel arm. Dual valve adjustment for closing and latch speed. Tri-packed for regular arm, top jamb and parallel mount. UL and cUL Listed, BHMA Certified to ANSI A156.4 Grade 2.",
-    image: "/tur/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg",
+    image: "/tur/door-hardware/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg",
     imageAlt: "TA7303/TA7304 medium duty door closer — ANSI Grade 2, 7300 Series",
-    gallery: gallery("/tur/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-main.jpg"),
     features: [
       "ANSI Grade 2 — UL and cUL Listed, BHMA Certified ANSI A156.4.",
       "7300 Series — cast aluminium closer body; steel arm.",
@@ -3341,7 +3341,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Technical Drawing",
-        image: "/tur/drawings/medium-duty-closer-drawing.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/medium-duty-closer/medium-duty-closer-drawing.png",
         alt: "7300 Series medium duty door closer technical drawing showing closer body and arm dimensions",
         caption: "7300 Series medium duty closer dimensional drawing.",
       },
@@ -3365,9 +3365,9 @@ export const products: Product[] = [
       "Grade 1, 7000 Series TA7016 overhead door closer for high-traffic commercial applications.",
     overview:
       "The 7000 Series Grade 1 closer (TA7016) is designed for wood and hollow metal doors and frames in educational, healthcare, main entrance and high-traffic applications where maximum door control is required. Cast iron body, steel arm, plastic cover (steel cover optional). Three-valve adjustment for closing speed, latch speed and backcheck. Standard features include DA delayed action and BC backcheck. Tri-packed for regular, top jamb and parallel mount.",
-    image: "/tur/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-main.jpg",
+    image: "/tur/door-hardware/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-main.jpg",
     imageAlt: "TA7016 medium/heavy duty door closer — ANSI Grade 1, 7000 Series",
-    gallery: gallery("/tur/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-main.jpg"),
     features: [
       "ANSI Grade 1 — for educational, healthcare, main entrances and high-traffic applications.",
       "7000 Series TA7016 — cast iron closer body; steel arm; plastic cover (steel cover optional).",
@@ -3418,28 +3418,28 @@ export const products: Product[] = [
       {
         title: "Regular Arm Installation",
         variant: "Regular Arm Installation",
-        image: "/tur/drawings/medium-heavy-duty-closer-regular-arm.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-drawing-regular-arm.png",
         alt: "TA7016 regular arm installation diagram showing closer body face-mounted on door frame face",
         caption: "Closer body face-mounted on door; arm articulates on frame face.",
       },
       {
         title: "Parallel Arm Installation",
         variant: "Parallel Arm Installation",
-        image: "/tur/drawings/medium-heavy-duty-closer-parallel-arm.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-drawing-parallel-arm.png",
         alt: "TA7016 parallel arm installation diagram showing closer body face-mounted on door with arm running parallel",
         caption: "Closer body face-mounted on door; arm runs parallel to door face.",
       },
       {
         title: "Top Jamb Installation",
         variant: "Top Jamb Installation",
-        image: "/tur/drawings/medium-heavy-duty-closer-top-jamb.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-drawing-top-jamb.png",
         alt: "TA7016 top jamb installation diagram showing closer body mounted on frame top rail",
         caption: "Closer body mounted on frame top; arm articulates on door top rail.",
       },
       {
         title: "Power Adjustment Chart",
         variant: "Power Adjustment Chart",
-        image: "/tur/drawings/medium-heavy-duty-closer-power-chart.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/medium-heavy-duty-closer/medium-heavy-duty-closer-drawing-power-chart.png",
         alt: "TA7016 power adjustment chart showing minimum door width per spring size requirement",
         caption: "Minimum door width (mm) required per full-power spring size.",
       },
@@ -3532,9 +3532,9 @@ export const products: Product[] = [
       "Grade 1, TA7116 overhead door closer for schools, hospitals and high-traffic applications.",
     overview:
       "The TA7116 heavy duty closer is designed for installation on wood and hollow metal doors and frames in schools, hospitals and other high-traffic applications. Cast aluminium body, steel arm, plastic cover (steel cover optional). Three-valve adjustment for closing speed, latch speed and backcheck. Standard features include DA delayed action and BC backcheck. Tri-packed for regular, top jamb and parallel mount.",
-    image: "/tur/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-main.jpg",
+    image: "/tur/door-hardware/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-main.jpg",
     imageAlt: "TA7116 heavy duty door closer — ANSI Grade 1",
-    gallery: gallery("/tur/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-main.jpg"),
     features: [
       "ANSI Grade 1 — for schools, hospitals and high-traffic applications.",
       "TA7116 — cast aluminium closer body; steel arm; plastic cover (steel cover optional).",
@@ -3563,7 +3563,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "TA7116 Closer Dimensional Drawing",
-        image: "/tur/drawings/heavy-duty-closer-drawing.jpg",
+        image: "/tur/door-hardware/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-drawing.jpg",
         alt: "Heavy duty door closer technical drawing showing closer body and arm dimensions",
         caption: "Heavy duty closer dimensional drawing.",
       },
@@ -3572,25 +3572,25 @@ export const products: Product[] = [
       {
         title: "Regular Arm Installation",
         description: "Closer mounted on door face. Arm jamb bracket on frame face.",
-        image: "/tur/drawings/heavy-duty-closer-regular-arm.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-drawing-regular-arm.png",
         alt: "Heavy duty closer regular arm installation diagram showing closer mounted on door and arm jamb bracket on frame face",
       },
       {
         title: "Parallel Arm Installation",
         description: "Closer mounted on door face. Bracket on frame soffit.",
-        image: "/tur/drawings/heavy-duty-closer-parallel-arm.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-drawing-parallel-arm.png",
         alt: "Heavy duty closer parallel arm installation diagram showing closer mounted on door and bracket on frame soffit",
       },
       {
         title: "Top Jamb Installation",
         description: "Closer mounted on frame face. Arm jamb bracket on door top rail.",
-        image: "/tur/drawings/heavy-duty-closer-top-jamb.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-drawing-top-jamb.png",
         alt: "Heavy duty closer top jamb installation diagram showing closer mounted on frame face and arm bracket on door top rail",
       },
       {
         title: "Power Adjustment Chart",
         // TODO: Verify Heavy Duty Closer power adjustment chart values from old TUR page before final catalogue sign-off.
-        image: "/tur/drawings/heavy-duty-closer-power-chart.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/heavy-duty-closer/heavy-duty-closer-drawing-power-chart.png",
         alt: "TA7116 power adjustment chart showing minimum door width per spring size requirement",
       },
     ],
@@ -3705,9 +3705,9 @@ export const products: Product[] = [
       "Grade 1, 7000 Series TA7016 extra heavy duty closer for maximum door control in educational, healthcare and high-traffic applications.",
     overview:
       "The 7000 Series TA7016 extra heavy duty closer is designed for installation on wood and hollow metal doors and frames in educational, healthcare, main entrance and high-traffic applications where maximum control of the door is required. Cast iron body, steel arm, plastic cover (steel cover optional). Three-valve adjustment for closing speed, latch speed and backcheck. Standard features include DA delayed action and BC backcheck. Tri-packed for regular, top jamb and parallel mount.",
-    image: "/tur/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-main.jpg",
+    image: "/tur/door-hardware/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-main.jpg",
     imageAlt: "TA7016 extra heavy duty door closer — ANSI Grade 1, 7000 Series",
-    gallery: gallery("/tur/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-main.jpg"),
     features: [
       "ANSI Grade 1 — for educational, healthcare, main entrances and maximum-control applications.",
       "7000 Series TA7016 — cast iron closer body; steel arm; plastic cover (steel cover optional).",
@@ -3738,7 +3738,7 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "TA7016 Closer Dimensional Drawing",
-        image: "/tur/drawings/extra-heavy-duty-closer-drawing.jpg",
+        image: "/tur/door-hardware/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-drawing.jpg",
         alt: "Extra heavy duty door closer technical drawing showing closer body and arm dimensions",
         caption: "Extra heavy duty closer dimensional drawing.",
       },
@@ -3747,25 +3747,25 @@ export const products: Product[] = [
       {
         title: "Regular Arm Installation",
         description: "Closer mounted on door face. Arm jamb bracket on frame face.",
-        image: "/tur/drawings/extra-heavy-duty-closer-regular-arm.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-drawing-regular-arm.png",
         alt: "Extra heavy duty closer regular arm installation diagram showing closer mounted on door and arm jamb bracket on frame face",
       },
       {
         title: "Parallel Arm Installation",
         description: "Closer mounted on door face. Bracket on frame soffit.",
-        image: "/tur/drawings/extra-heavy-duty-closer-parallel-arm.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-drawing-parallel-arm.png",
         alt: "Extra heavy duty closer parallel arm installation diagram showing closer mounted on door and bracket on frame soffit",
       },
       {
         title: "Top Jamb Installation",
         description: "Closer mounted on frame face. Arm jamb bracket on door top rail.",
-        image: "/tur/drawings/extra-heavy-duty-closer-top-jamb.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-drawing-top-jamb.png",
         alt: "Extra heavy duty closer top jamb installation diagram showing closer mounted on frame face and arm bracket on door top rail",
       },
       {
         title: "Power Adjustment Chart",
         // TODO: Verify Extra Heavy Duty Closer power adjustment chart values from old TUR page before final catalogue sign-off.
-        image: "/tur/drawings/extra-heavy-duty-closer-power-chart.png",
+        image: "/tur/door-hardware/american-standard/control-the-door/extra-heavy-duty-closer/extra-heavy-duty-closer-drawing-power-chart.png",
         alt: "TA7016 power adjustment chart showing minimum door width per spring size requirement",
       },
     ],
@@ -3886,9 +3886,9 @@ export const products: Product[] = [
       "7900 Series TA7903 concealed door closer with fixed spring force 3# and dual valve speed control.",
     overview:
       "The TA7903 concealed closer uses a fixed spring force 3 mechanism with sliding track arm and optional hold open. It includes dual valves for closing and latching speed adjustment, supports doors up to 950 mm wide and 65 kg, and uses an aluminium casting cylinder with aluminium sliding track. Non-handed.",
-    image: "/tur/american-standard/control-the-door/concealed-door-closer/concealed-door-closer-main.jpg",
+    image: "/tur/door-hardware/american-standard/control-the-door/concealed-door-closer/concealed-door-closer-main.jpg",
     imageAlt: "TA7903 concealed door closer — 7900 Series, clean architectural format",
-    gallery: gallery("/tur/american-standard/control-the-door/concealed-door-closer/concealed-door-closer-main.jpg"),
+    gallery: gallery("/tur/door-hardware/american-standard/control-the-door/concealed-door-closer/concealed-door-closer-main.jpg"),
     features: [
       "7900 Series TA7903 — concealed format for clean architectural door sets.",
       "Fixed spring force 3# with sliding track arm; hold open optional.",
@@ -3925,14 +3925,6 @@ export const products: Product[] = [
       { label: "Handing", value: "Non-handed" },
       { label: "Standard finish", value: "Silver painted" },
       { label: "Other finishes", value: "Upon request" },
-    ],
-    technicalDrawings: [
-      {
-        title: "TA7903 Concealed Closer Dimensional Drawing",
-        image: "/tur/drawings/concealed-door-closer-drawing.png",
-        alt: "TA7903 concealed door closer technical drawing showing closer body, sliding track and installation dimensions",
-        caption: "TA7903 concealed door closer dimensional drawing.",
-      },
     ],
     howToOrderTable: {
       columns: [
@@ -4136,7 +4128,7 @@ export const products: Product[] = [
       {
         title: "Door Direction",
         items: ["LH — Left Hand", "RH — Right Hand"],
-        // TODO: place ta1200-glass-patch-locksets-door-direction.jpg in /public/tur/american-standard/secure-the-door/ta1200-series-glass-patch-locksets/
+        // TODO: place ta1200-glass-patch-locksets-door-direction.jpg in /public/tur/door-hardware/american-standard/secure-the-door/ta1200-series-glass-patch-locksets/
         image: secureDoorImage("ta1200-series-glass-patch-locksets/ta1200-glass-patch-locksets-door-direction.jpg"),
         imageAlt: "TA1200 glass patch lockset handed door direction diagram showing LH and RH configurations.",
         caption: "TA1200 glass patch lockset handed door direction reference.",
@@ -4242,7 +4234,7 @@ export const products: Product[] = [
       { label: "Standard finishes", value: "Standard levers US32D / 630. Designer levers US32D / 630 and US15 / 619" },
       { label: "Other finishes", value: "Available; extended lead time required" },
     ],
-    // TODO: place ta1000-mortise-lockset-grade-1-technical-drawing.jpg in /public/tur/american-standard/secure-the-door/ta1000-series-mortise-lockset-grade-1/
+    // TODO: place ta1000-mortise-lockset-grade-1-technical-drawing.jpg in /public/tur/door-hardware/american-standard/secure-the-door/ta1000-series-mortise-lockset-grade-1/
     technicalDrawings: [
       {
         title: "Technical Drawing",
@@ -7305,9 +7297,9 @@ export const products: Product[] = [
       "800 lbs × 2 double-door surface-mounted electromagnetic lock with auto 12/24VDC and no residual magnetism.",
     overview:
       "The TU.D800 is a double-door electromagnetic lock delivering 800 lbs holding force per leaf. It uses a new style patented mounting plate with increased thickness at the screw holes for enhanced stability. The system can be installed on various door types using optional auxiliary mounting brackets, and supports automatic 12/24VDC voltage selection.",
-    image: "/tur/access-control/electromagnetic-locks/tu-d800/tu-d800-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-locks/tu-d800/tu-d800-main.jpg",
     imageAlt: "TU.D800 double-door electromagnetic lock — access control hardware",
-    gallery: gallery("/tur/access-control/electromagnetic-locks/tu-d800/tu-d800-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-locks/tu-d800/tu-d800-main.jpg"),
     features: [
       "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
       "New style mounting plate with increased immobility (patented).",
@@ -7352,9 +7344,9 @@ export const products: Product[] = [
       "Premium bolting solutions for European ironmongery door sets.",
     overview:
       "Bolt The Door supports premium ironmongery specifications where secure closure, finish coordination and architectural detailing matter.",
-    image: "/tur/mc-1.jpg",
+    image: "/tur/door-hardware/mc-1.jpg",
     imageAlt: "Bolt The Door ironmongery family visual",
-    gallery: gallery("/tur/mc-1.jpg", "/tur/project-2.jpg", "/tur/slider-1.webp"),
+    gallery: gallery("/tur/door-hardware/mc-1.jpg", "/tur/home/project-2.jpg", "/tur/home/slider-1.webp"),
     features: [
       "Supports premium closure hardware packages.",
       "Aligned with refined detailing requirements.",
@@ -7384,9 +7376,9 @@ export const products: Product[] = [
       "Redirect-only alias for Furnish The Door.",
     overview:
       "This redirect-only proxy preserves legacy /products/furnish-the-door links and sends visitors to the European Ironmongery Furnish The Door route group.",
-    image: "/tur/decorative-lever.jpg",
+    image: "/tur/door-hardware/decorative-lever.jpg",
     imageAlt: "European Ironmongery Furnish The Door route group",
-    gallery: gallery("/tur/decorative-lever.jpg", "/tur/european-lockset.jpg", "/tur/mc-2.jpg"),
+    gallery: gallery("/tur/door-hardware/decorative-lever.jpg", "/tur/door-hardware/european-lockset.jpg", "/tur/door-hardware/mc-2.jpg"),
     features: [
       "Route-group alias for European Ironmongery pull plates, pull handles and special handles.",
       "Canonical product listings live on /door-hardware/european-ironmongery/furnish-the-door.",
@@ -7414,9 +7406,9 @@ export const products: Product[] = [
       "Cylinder options for secure and coordinated ironmongery setups.",
     overview:
       "Cylinders provides a direct product-level route for project teams coordinating secure access under premium ironmongery packages.",
-    image: "/tur/slider-2.webp",
+    image: "/tur/home/slider-2.webp",
     imageAlt: "Cylinders product family visual",
-    gallery: gallery("/tur/slider-2.webp", "/tur/sliding-a.jpg", "/tur/project-a.jpg"),
+    gallery: gallery("/tur/home/slider-2.webp", "/tur/door-hardware/sliding-a.jpg", "/tur/home/project-a.jpg"),
     features: [
       "Supports keyed access coordination.",
       "Suitable for premium ironmongery schedules.",
@@ -7446,9 +7438,9 @@ export const products: Product[] = [
       "Lever handle family for premium door furnishing applications.",
     overview:
       "This product page acts as a detail-ready landing point for lever handle migration while keeping the wider ironmongery family structure intact.",
-    image: "/tur/project-2.jpg",
+    image: "/tur/home/project-2.jpg",
     imageAlt: "Lever handle family from TUR European Ironmongery",
-    gallery: gallery("/tur/project-2.jpg", "/tur/project-4.jpg", "/tur/mc-2.jpg"),
+    gallery: gallery("/tur/home/project-2.jpg", "/tur/home/project-4.jpg", "/tur/door-hardware/mc-2.jpg"),
     features: [
       "Supports premium furnishing packages.",
       "Suitable for refined architectural detailing.",
@@ -7478,9 +7470,9 @@ export const products: Product[] = [
       "Frameless hinge and clip hardware for glass applications.",
     overview:
       "This family represents TUR's contemporary glass hardware offer with a clean, specification-ready route into frameless detailing.",
-    image: "/tur/cat-glass-hardware.jpg",
+    image: "/tur/door-hardware/cat-glass-hardware.jpg",
     imageAlt: "Glass hinges and clips for frameless architectural glass applications",
-    gallery: gallery("/tur/cat-glass-hardware.jpg", "/tur/cat-glass-patch.png", "/tur/sliding-b.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-glass-hardware.jpg", "/tur/door-hardware/cat-glass-patch.png", "/tur/door-hardware/sliding-b.jpg"),
     features: [
       "Supports frameless architectural glass applications.",
       "Suitable for clean-lined premium detailing.",
@@ -7510,9 +7502,9 @@ export const products: Product[] = [
       "Glass knobs and bathroom handles for premium partitions.",
     overview:
       "This page gives migration-ready structure to smaller glass hardware families that often arrive later in catalog projects.",
-    image: "/tur/project-4.jpg",
+    image: "/tur/home/project-4.jpg",
     imageAlt: "Bathroom handle and glass knob family visual",
-    gallery: gallery("/tur/project-4.jpg", "/tur/project-b.jpg", "/tur/slider-4.webp"),
+    gallery: gallery("/tur/home/project-4.jpg", "/tur/home/project-b.jpg", "/tur/home/slider-4.webp"),
     features: [
       "Supports bathroom and partition glass applications.",
       "Suitable for contemporary hospitality detailing.",
@@ -7542,9 +7534,9 @@ export const products: Product[] = [
       "Hydraulic patch fitting for frameless glass door coordination.",
     overview:
       "TE7820 acts as a representative glass hardware detail page for patch fittings while broader glass hardware migration continues.",
-    image: "/tur/cat-glass-patch.png",
+    image: "/tur/door-hardware/cat-glass-patch.png",
     imageAlt: "Glass corner patch fitting — TE7820 hydraulic glass door hardware",
-    gallery: gallery("/tur/cat-glass-patch.png", "/tur/cat-glass-hardware.jpg", "/tur/project-1.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-glass-patch.png", "/tur/door-hardware/cat-glass-hardware.jpg", "/tur/home/project-1.jpg"),
     features: [
       "Supports controlled glass door movement.",
       "Suitable for frameless premium entrances.",
@@ -7571,9 +7563,9 @@ export const products: Product[] = [
       "Architectural pull handles for glass and premium door applications.",
     overview:
       "Pull Handle keeps an essential product family visible for migration while supporting a cleaner catalog-first structure.",
-    image: "/tur/cat-glass-pull.jpg",
+    image: "/tur/door-hardware/cat-glass-pull.jpg",
     imageAlt: "Cylindrical stainless steel glass door pull handle",
-    gallery: gallery("/tur/cat-glass-pull.jpg", "/tur/cat-glass-hardware.jpg", "/tur/project-c.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-glass-pull.jpg", "/tur/door-hardware/cat-glass-hardware.jpg", "/tur/home/project-c.jpg"),
     features: [
       "Supports tactile premium detailing.",
       "Suitable for glass and architectural doors.",
@@ -7596,9 +7588,9 @@ export const products: Product[] = [
     description: "Electromagnetic lock products from the TUR Access Control catalogue.",
     shortDescription: "Electromagnetic locks for access-controlled openings.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/electromagnetic-locks.",
-    image: "/tur/cat-access-control.jpg",
+    image: "/tur/door-hardware/cat-access-control.jpg",
     imageAlt: "Access control entrance system with G·U turnstiles and glass doors",
-    gallery: gallery("/tur/cat-access-control.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-access-control.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -7617,9 +7609,9 @@ export const products: Product[] = [
     description: "Electric strike products from the TUR Access Control catalogue.",
     shortDescription: "Electric strikes for integrated access release.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/electric-strikes.",
-    image: "/tur/slider-6.webp",
+    image: "/tur/home/slider-6.webp",
     imageAlt: "Electric strikes product family visual",
-    gallery: gallery("/tur/slider-6.webp"),
+    gallery: gallery("/tur/home/slider-6.webp"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -7638,9 +7630,9 @@ export const products: Product[] = [
     description: "E-ACCESS electronic access control products from the TUR catalogue.",
     shortDescription: "Electronic access control family for managed entry points.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/e-access.",
-    image: "/tur/video-thumb.png",
+    image: "/tur/home/video-thumb.png",
     imageAlt: "E-ACCESS family visual from TUR",
-    gallery: gallery("/tur/video-thumb.png"),
+    gallery: gallery("/tur/home/video-thumb.png"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -7663,9 +7655,9 @@ export const products: Product[] = [
     overview:
       "The TU.DL-400 is a concealed door loop designed to route power and signal cables through the hinge side of access-controlled doors without exposed wiring. The nickel-plated steel case and flex conduit provide a durable, corrosion-resistant solution, and the square mounting tabs allow for easy recessed installation into the door frame.",
     sourceOldUrl: "https://www.tur.com.co/door_hardware/sub/pro?id=426&n=tu.dl-400",
-    image: "/tur/access-control/access-control-accessories/tu-dl-400/tu-dl-400-main.jpg",
+    image: "/tur/door-hardware/access-control/access-control-accessories/tu-dl-400/tu-dl-400-main.jpg",
     imageAlt: "TU.DL-400 concealed door loop — nickel-plated cable conduit for access-controlled doors",
-    gallery: gallery("/tur/access-control/access-control-accessories/tu-dl-400/tu-dl-400-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/access-control-accessories/tu-dl-400/tu-dl-400-main.jpg"),
     features: [
       "Nickel-plated steel case.",
       "Nickel-plated steel flex conduit.",
@@ -7701,9 +7693,9 @@ export const products: Product[] = [
     description: "Door bottom seal solutions for threshold draught, sound and smoke control — automatic and surface-applied profiles for architectural door applications.",
     shortDescription: "Door bottom sealing systems for threshold performance.",
     overview: "Door Bottom Seals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg",
     imageAlt: "Door bottom seal profile — architectural threshold sealing system",
-    gallery: gallery("/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -7722,9 +7714,9 @@ export const products: Product[] = [
     description: "Threshold plate seal solutions combining an aluminium profile with an integrated seal — coordinating with door bottom seals for complete threshold closure.",
     shortDescription: "Threshold plate and seal options for coordinated openings.",
     overview: "Threshold Plate Seals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg",
     imageAlt: "Threshold plate seals family visual",
-    gallery: gallery("/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -7743,9 +7735,9 @@ export const products: Product[] = [
     description: "Frame and perimeter seal profiles for door heads and jambs — surface-applied and concealed options for draught, acoustic and smoke control.",
     shortDescription: "Frame and perimeter seal systems for architectural doors.",
     overview: "Door Frame Or Perimeter Seals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg",
     imageAlt: "Door frame or perimeter seal profile — architectural door gap sealing",
-    gallery: gallery("/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -7764,9 +7756,9 @@ export const products: Product[] = [
     description: "Weather stripping profiles for timber door and window frames — PVC and silicone gasket options for draught and weather control at external openings.",
     shortDescription: "Complementary weather stripping for door sealing systems.",
     overview: "Weather Stripping route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg",
     imageAlt: "Weather stripping family visual",
-    gallery: gallery("/tur/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -7849,7 +7841,7 @@ export const products: Product[] = [
     ],
     applications: ["Premium retail entries", "Corporate lobbies", "Hospitality arrival zones"],
     finishOptions: ["Single Sliding", "Bi-Parting"],
-    diagram: "/tur/drawings/automatic-operators/all-glass-systems/sliding-doors/sliding-doors-drawing.png",
+    diagram: "/tur/automatic-operators/all-glass-systems/sliding-doors/sliding-doors-drawing.png",
     inquirySubject: "shopMaster GSW-A Inquiry",
     relatedSlugs: ["swing-door-drives", "tsw150-automatic-door-operator", "tsw120-automatic-door-operator"],
   }),
@@ -7883,19 +7875,19 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "DTN 80 — Dimensional Overview",
-        image: "/tur/drawings/automatic-operators/swing-door-drives/swing-door-drives/swing-door-drives-drawing-1.png",
+        image: "/tur/automatic-operators/swing-door-drives/swing-door-drives/swing-door-drives-drawing-1.png",
         alt: "DTN 80 automatic swing door operator — dimensional overview drawing",
         caption: "Overall dimensions for door frame and operator mounting coordination.",
       },
       {
         title: "DTN 80 — Mounting Detail",
-        image: "/tur/drawings/automatic-operators/swing-door-drives/swing-door-drives/swing-door-drives-drawing-2.png",
+        image: "/tur/automatic-operators/swing-door-drives/swing-door-drives/swing-door-drives-drawing-2.png",
         alt: "DTN 80 automatic swing door operator — mounting detail drawing",
         caption: "Bracket and mounting point detail for surface-fixed and transom installations.",
       },
       {
         title: "DTN 80 — Arm Configurations",
-        image: "/tur/drawings/automatic-operators/swing-door-drives/swing-door-drives/swing-door-drives-drawing-3.png",
+        image: "/tur/automatic-operators/swing-door-drives/swing-door-drives/swing-door-drives-drawing-3.png",
         alt: "DTN 80 automatic swing door operator — arm configuration drawing",
         caption: "Push, pull and parallel arm configuration options for inward and outward opening doors.",
       },
@@ -7948,7 +7940,7 @@ export const products: Product[] = [
       { label: "Protection type / ambient temperature", value: "IP 20 (dry rooms only) / −15°C up to +50°C" },
     ],
     badge: "Featured",
-    diagram: "/tur/drawings/automatic-operators/sliding-doors/prismatic-sliding-door-cmw/prismatic-sliding-door-cmw-drawing.png",
+    diagram: "/tur/automatic-operators/sliding-doors/prismatic-sliding-door-cmw/prismatic-sliding-door-cmw-drawing.png",
     inquirySubject: "CMW Prismatic Sliding Door Inquiry",
     relatedSlugs: ["curved-sliding-door-cmr", "telescoping-sliding-door-emt", "sliding-doors"],
   }),
@@ -8002,7 +7994,7 @@ export const products: Product[] = [
       { label: "Winter opening width", value: "50% – 100% of clear passage width" },
       { label: "Protection type / ambient temperature", value: "IP 20 (dry rooms only) / −15°C to +50°C" },
     ],
-    diagram: "/tur/drawings/automatic-operators/sliding-doors/curved-sliding-door-cmr/curved-sliding-door-cmr-drawing.png",
+    diagram: "/tur/automatic-operators/sliding-doors/curved-sliding-door-cmr/curved-sliding-door-cmr-drawing.png",
     inquirySubject: "CMR Curved Sliding Door Inquiry",
     relatedSlugs: ["prismatic-sliding-door-cmw", "telescoping-sliding-door-emt", "sliding-doors"],
   }),
@@ -8054,7 +8046,7 @@ export const products: Product[] = [
       { label: "Winter opening width", value: "50% – 100% of clear passage width" },
       { label: "Protection type / ambient temperature", value: "IP 20 (dry rooms only) / −15°C to +50°C" },
     ],
-    diagram: "/tur/drawings/automatic-operators/sliding-doors/telescoping-sliding-door-emt/telescoping-sliding-door-emt-drawing.png",
+    diagram: "/tur/automatic-operators/sliding-doors/telescoping-sliding-door-emt/telescoping-sliding-door-emt-drawing.png",
     inquirySubject: "EMT Telescoping Sliding Door Inquiry",
     relatedSlugs: ["prismatic-sliding-door-cmw", "curved-sliding-door-cmr", "sliding-doors"],
   }),
@@ -8105,7 +8097,7 @@ export const products: Product[] = [
       { label: "Winter opening width", value: "50% – 100% of clear passage width" },
       { label: "Protection type / ambient temperature", value: "IP 20 (dry rooms only) / −15°C to +50°C" },
     ],
-    diagram: "/tur/drawings/automatic-operators/sliding-doors/heavymaster-hm/heavymaster-hm-drawing.png",
+    diagram: "/tur/automatic-operators/sliding-doors/heavymaster-hm/heavymaster-hm-drawing.png",
     inquirySubject: "heavyMaster HM Inquiry",
     relatedSlugs: ["prismatic-sliding-door-cmw", "telescoping-sliding-door-emt", "sliding-doors"],
   }),
@@ -8135,7 +8127,7 @@ export const products: Product[] = [
     applications: ["Corporate headquarters", "Premium hotels", "High-end retail flagships"],
     finishOptions: ["3-Wing", "4-Wing"],
     badge: "Featured",
-    diagram: "/tur/drawings/automatic-operators/revolving-doors/ggg-all-glass-revolving-door/ggg-all-glass-revolving-door-drawing.png",
+    diagram: "/tur/automatic-operators/revolving-doors/ggg-all-glass-revolving-door/ggg-all-glass-revolving-door-drawing.png",
     inquirySubject: "GGG All-Glass Revolving Door Inquiry",
     relatedSlugs: ["gra-standard-revolving-door", "gsi-security-revolving-door", "prismatic-sliding-door-cmw"],
   }),
@@ -8165,13 +8157,13 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "GRA Revolving Door — Plan View",
-        image: "/tur/drawings/automatic-operators/revolving-doors/gra-standard-revolving-door/gra-standard-revolving-door-drawing-1.png",
+        image: "/tur/automatic-operators/revolving-doors/gra-standard-revolving-door/gra-standard-revolving-door-drawing-1.png",
         alt: "GRA standard revolving door — plan view dimensional drawing",
         caption: "Plan view showing wing configuration and clear passage geometry.",
       },
       {
         title: "GRA Revolving Door — Elevation & Drive Detail",
-        image: "/tur/drawings/automatic-operators/revolving-doors/gra-standard-revolving-door/gra-standard-revolving-door-drawing-2.png",
+        image: "/tur/automatic-operators/revolving-doors/gra-standard-revolving-door/gra-standard-revolving-door-drawing-2.png",
         alt: "GRA standard revolving door — elevation and drive detail drawing",
         caption: "Elevation view with drive unit position and installation dimensions.",
       },
@@ -8202,7 +8194,7 @@ export const products: Product[] = [
     ],
     applications: ["Government buildings", "Data centres", "Financial institutions", "Controlled institutional entry"],
     finishOptions: ["Standard", "Enhanced Security"],
-    diagram: "/tur/drawings/automatic-operators/revolving-doors/gsi-security-revolving-door/gsi-security-revolving-door-drawing.png",
+    diagram: "/tur/automatic-operators/revolving-doors/gsi-security-revolving-door/gsi-security-revolving-door-drawing.png",
     inquirySubject: "GSI Security Revolving Door Inquiry",
     relatedSlugs: ["ggg-all-glass-revolving-door", "gra-standard-revolving-door", "turnstile-systems"],
   }),
@@ -8235,25 +8227,25 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Turnstile Systems — Tripod Configuration",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-1.png",
+        image: "/tur/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-1.png",
         alt: "Turnstile systems — tripod configuration dimensional drawing",
         caption: "Tripod turnstile dimensional layout for lane planning and installation.",
       },
       {
         title: "Turnstile Systems — Waist-Height Configuration",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-2.png",
+        image: "/tur/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-2.png",
         alt: "Turnstile systems — waist-height configuration dimensional drawing",
         caption: "Waist-height barrier unit dimensions and lane arrangement detail.",
       },
       {
         title: "Turnstile Systems — Full-Height Configuration",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-3.png",
+        image: "/tur/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-3.png",
         alt: "Turnstile systems — full-height configuration dimensional drawing",
         caption: "Full-height turnstile dimensions and structural envelope.",
       },
       {
         title: "Turnstile Systems — Lane Layout",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-4.png",
+        image: "/tur/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-drawing-4.png",
         alt: "Turnstile systems — multi-lane layout planning drawing",
         caption: "Multi-lane configuration layout for entrance planning coordination.",
       },
@@ -8313,37 +8305,37 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Full-Height Turnstile — Front Elevation",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-1.png",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-1.png",
         alt: "Full-height turnstile — front elevation dimensional drawing",
         caption: "Front elevation showing overall height and rotor arm configuration.",
       },
       {
         title: "Full-Height Turnstile — Side Elevation",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-2.png",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-2.png",
         alt: "Full-height turnstile — side elevation dimensional drawing",
         caption: "Side elevation with depth and base fixing detail.",
       },
       {
         title: "Full-Height Turnstile — Plan View",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-3.png",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-3.png",
         alt: "Full-height turnstile — plan view dimensional drawing",
         caption: "Plan view showing rotor sweep and lane width clearance.",
       },
       {
         title: "Full-Height Turnstile — Base Fixing Detail",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-4.png",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-4.png",
         alt: "Full-height turnstile — base fixing detail drawing",
         caption: "Base plate and floor anchor detail for structural installation.",
       },
       {
         title: "Full-Height Turnstile — Bi-Directional Configuration",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-5.png",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-5.png",
         alt: "Full-height turnstile — bi-directional configuration drawing",
         caption: "Bi-directional unit arrangement for managed two-way passage control.",
       },
       {
         title: "Full-Height Turnstile — Lane Arrangement",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-6.png",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-drawing-6.png",
         alt: "Full-height turnstile — multi-lane arrangement drawing",
         caption: "Multi-lane layout drawing for site planning and access coordination.",
       },
@@ -8425,31 +8417,31 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Escape Route Configuration Overview",
-        image: "/tur/drawings/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-1.png",
+        image: "/tur/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-1.png",
         alt: "HM-F FT escape route sliding door — configuration overview",
         caption: "Fulfils both AutSchR / EltVTR directives and DIN 18650 / EN 16005 requirements in a single door element.",
       },
       {
         title: "Operating Mode — Automatic",
-        image: "/tur/drawings/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-2.png",
+        image: "/tur/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-2.png",
         alt: "HM-F FT escape route sliding door — automatic operating mode diagram",
         caption: "Day mode: movement sensors active, door opens automatically when approached.",
       },
       {
         title: "Operating Mode — Night / Closed",
-        image: "/tur/drawings/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-3.png",
+        image: "/tur/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-3.png",
         alt: "HM-F FT escape route sliding door — night closed mode diagram",
         caption: "Night mode: building closed, escape route remains available through redundant drive.",
       },
       {
         title: "Drive Dimensions",
-        image: "/tur/drawings/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-4.png",
+        image: "/tur/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-4.png",
         alt: "HM-F FT escape route sliding door — drive unit dimensional drawing",
         caption: "Drive unit dimensions for installation planning.",
       },
       {
         title: "Door Leaf Arrangement",
-        image: "/tur/drawings/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-5.png",
+        image: "/tur/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-drawing-5.png",
         alt: "HM-F FT escape route sliding door — door leaf arrangement diagram",
         caption: "Door leaf arrangement showing maximum clear passage widths.",
       },
@@ -8504,7 +8496,7 @@ export const products: Product[] = [
       { label: "Winter opening width", value: "50% – 100% of clear passage width" },
       { label: "Protection type / ambient temperature", value: "IP 20 (dry rooms only) / −15°C to +50°C" },
     ],
-    diagram: "/tur/drawings/automatic-operators/sliding-doors/economaster-em/economaster-em-drawing.png",
+    diagram: "/tur/automatic-operators/sliding-doors/economaster-em/economaster-em-drawing.png",
     inquirySubject: "econoMaster EM Inquiry",
     relatedSlugs: ["compactmaster-cm", "prismatic-sliding-door-cmw", "telescoping-sliding-door-emt"],
   }),
@@ -8553,7 +8545,7 @@ export const products: Product[] = [
       { label: "Opening speed", value: "max. 0.9 m/s" },
       { label: "Winter opening width", value: "50% – 100% of clear passage width" },
     ],
-    diagram: "/tur/drawings/automatic-operators/sliding-doors/compactmaster-cm/compactmaster-cm-drawing.png",
+    diagram: "/tur/automatic-operators/sliding-doors/compactmaster-cm/compactmaster-cm-drawing.png",
     inquirySubject: "compactMaster CM Inquiry",
     relatedSlugs: ["economaster-em", "telescoping-sliding-door-emt", "prismatic-sliding-door-cmw"],
   }),
@@ -8578,37 +8570,37 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Reader Post — Standard Height",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-1.png",
+        image: "/tur/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-1.png",
         alt: "Access control reader post — standard height dimensional drawing",
         caption: "Standard reader post dimensions and mounting detail.",
       },
       {
         title: "Reader Post — Low Profile",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-2.png",
+        image: "/tur/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-2.png",
         alt: "Access control reader post — low profile dimensional drawing",
         caption: "Low-profile reader post for DDA-accessible card reader positioning.",
       },
       {
         title: "Guiding Bar — Single Section",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-3.png",
+        image: "/tur/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-3.png",
         alt: "Pedestrian guiding bar — single section dimensional drawing",
         caption: "Single-section guiding bar length and bracket positions.",
       },
       {
         title: "Guiding Bar — Corner Configuration",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-4.png",
+        image: "/tur/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-4.png",
         alt: "Pedestrian guiding bar — corner configuration drawing",
         caption: "Corner junction detail for lane direction changes.",
       },
       {
         title: "Reader Post & Guiding Bar — Combined Lane",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-5.png",
+        image: "/tur/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-5.png",
         alt: "Reader post and guiding bar — combined lane arrangement drawing",
         caption: "Integrated reader post and guiding bar arrangement within a controlled lane.",
       },
       {
         title: "Multi-Lane Layout with Reader Posts",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-6.png",
+        image: "/tur/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-drawing-6.png",
         alt: "Multi-lane layout with reader posts and guiding bars — planning drawing",
         caption: "Complete multi-lane access layout incorporating reader posts and guiding bar runs.",
       },
@@ -8632,7 +8624,7 @@ export const products: Product[] = [
     features: ["Curved geometry with anti-tailgating passage control.", "Integrates with access management and building security systems.", "Suited to financial, government and institutional specifications."],
     applications: ["Government buildings", "Financial institutions", "Premium institutional access points"],
     finishOptions: ["Standard", "Enhanced Security"],
-    diagram: "/tur/drawings/automatic-operators/controlled-physical-access/gsi-curved-sliding-access/gsi-curved-sliding-access-drawing.png",
+    diagram: "/tur/automatic-operators/controlled-physical-access/gsi-curved-sliding-access/gsi-curved-sliding-access-drawing.png",
     inquirySubject: "GSI Security Curved Sliding Door Inquiry",
     relatedSlugs: ["gsi-security-revolving-door", "turnstile-systems", "speed-gate-barriers"],
   }),
@@ -8655,37 +8647,37 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Sensor Barriers — Single Lane Unit",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-1.png",
+        image: "/tur/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-1.png",
         alt: "Sensor barriers — single lane unit dimensional drawing",
         caption: "Single lane optical sensor barrier unit dimensions.",
       },
       {
         title: "Sensor Barriers — Dual Lane Configuration",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-2.png",
+        image: "/tur/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-2.png",
         alt: "Sensor barriers — dual lane configuration drawing",
         caption: "Paired sensor barrier configuration for controlled bidirectional lanes.",
       },
       {
         title: "Sensor Barriers — Post Height Detail",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-3.png",
+        image: "/tur/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-3.png",
         alt: "Sensor barriers — post height detail drawing",
         caption: "Post height and detection beam level dimensions.",
       },
       {
         title: "Sensor Barriers — Mounting & Base Detail",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-4.png",
+        image: "/tur/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-4.png",
         alt: "Sensor barriers — mounting and base detail drawing",
         caption: "Base plate fixing and floor mounting detail.",
       },
       {
         title: "Sensor Barriers — Lane Width Clearances",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-5.png",
+        image: "/tur/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-5.png",
         alt: "Sensor barriers — lane width clearance drawing",
         caption: "Lane width clearances and recommended spacing for pedestrian flow.",
       },
       {
         title: "Sensor Barriers — Multi-Lane Layout",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-6.png",
+        image: "/tur/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-drawing-6.png",
         alt: "Sensor barriers — multi-lane layout planning drawing",
         caption: "Multi-lane barrier layout for entrance planning and integration coordination.",
       },
@@ -8712,25 +8704,25 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "Swing Gates — Single Gate Unit",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-1.png",
+        image: "/tur/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-1.png",
         alt: "Swing gate — single unit dimensional drawing",
         caption: "Single swing gate unit dimensions for lane planning.",
       },
       {
         title: "Swing Gates — DDA Accessible Lane",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-2.png",
+        image: "/tur/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-2.png",
         alt: "Swing gate — DDA accessible lane configuration drawing",
         caption: "Accessible lane configuration showing clear passage width for DDA compliance.",
       },
       {
         title: "Swing Gates — Post & Hinge Detail",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-3.png",
+        image: "/tur/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-3.png",
         alt: "Swing gate — post and hinge detail drawing",
         caption: "Post and motorised hinge detail for installation coordination.",
       },
       {
         title: "Swing Gates — Lane Layout with Turnstile Integration",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-4.png",
+        image: "/tur/automatic-operators/controlled-physical-access/swing-gates/swing-gates-drawing-4.png",
         alt: "Swing gate — layout with turnstile integration drawing",
         caption: "Combined swing gate and turnstile lane layout for comprehensive access arrangements.",
       },
@@ -8757,43 +8749,43 @@ export const products: Product[] = [
     technicalDrawings: [
       {
         title: "3-Arm Tripod Turnstile — Dimensional Overview",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-1.png",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-1.png",
         alt: "3-arm tripod turnstile — dimensional overview drawing",
         caption: "Overall dimensions for standard 3-arm tripod turnstile unit.",
       },
       {
         title: "3-Arm Tripod Turnstile — Top View",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-2.png",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-2.png",
         alt: "3-arm tripod turnstile — top view drawing",
         caption: "Top view showing arm sweep radius and lane width clearance.",
       },
       {
         title: "3-Arm Tripod Turnstile — Side Elevation",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-3.png",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-3.png",
         alt: "3-arm tripod turnstile — side elevation drawing",
         caption: "Side elevation with post height and arm position detail.",
       },
       {
         title: "2-Arm Turnstile — Dimensional Overview",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-4.png",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-4.png",
         alt: "2-arm turnstile — dimensional overview drawing",
         caption: "Overall dimensions for 2-arm rotor turnstile unit.",
       },
       {
         title: "2-Arm Turnstile — Top View",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-5.png",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-5.png",
         alt: "2-arm turnstile — top view drawing",
         caption: "Top view showing rotor sweep and lane clearance dimensions.",
       },
       {
         title: "Turnstile — Base Fixing Detail",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-6.png",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-6.png",
         alt: "Tripod turnstile — base fixing detail drawing",
         caption: "Floor base plate and anchor fixing detail for secure installation.",
       },
       {
         title: "Turnstile Lane — Multi-Unit Layout",
-        image: "/tur/drawings/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-7.png",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-drawing-7.png",
         alt: "Tripod turnstile — multi-unit lane layout drawing",
         caption: "Multi-lane turnstile arrangement for entrance planning and access coordination.",
       },
@@ -8819,7 +8811,7 @@ export const products: Product[] = [
     features: ["Large-diameter wing configuration for higher visitor throughput.", "Automatic drive with safety sensor integration.", "Suitable for airports, large public buildings and transport hubs."],
     applications: ["Airports and transport hubs", "Large public institutions", "High-traffic commercial buildings"],
     finishOptions: ["3-Wing", "4-Wing"],
-    diagram: "/tur/drawings/automatic-operators/revolving-doors/ggr-large-capacity-revolving/ggr-large-capacity-revolving-drawing.png",
+    diagram: "/tur/automatic-operators/revolving-doors/ggr-large-capacity-revolving/ggr-large-capacity-revolving-drawing.png",
     inquirySubject: "GGR Large-Capacity Revolving Door Inquiry",
     relatedSlugs: ["ggg-all-glass-revolving-door", "gra-standard-revolving-door", "gsi-security-revolving-door"],
   }),
@@ -8841,7 +8833,7 @@ export const products: Product[] = [
     features: ["G30 glass thickness compatible for heavier panel specifications.", "Frameless all-glass aesthetics for premium entrance expression.", "Integrates with access control and safety sensor layers."],
     applications: ["Premium retail", "Corporate headquarters", "Luxury hospitality arrivals"],
     finishOptions: ["Single Slide", "Bi-Parting"],
-    diagram: "/tur/drawings/automatic-operators/all-glass-systems/shopmaster-gsw-m-g30/shopmaster-gsw-m-g30-drawing.png",
+    diagram: "/tur/automatic-operators/all-glass-systems/shopmaster-gsw-m-g30/shopmaster-gsw-m-g30-drawing.png",
     inquirySubject: "shopMaster GSW-M G30 Inquiry",
     relatedSlugs: ["shopmaster-gsw-m", "sliding-doors", "prismatic-sliding-door-cmw"],
   }),
@@ -8861,7 +8853,7 @@ export const products: Product[] = [
     features: ["Full frameless glass sliding system for contemporary entrances.", "Reliable automatic drive with sensor and access control compatibility.", "Wide range of commercial and retail entrance applications."],
     applications: ["Commercial offices", "Retail stores", "Hospitality reception areas"],
     finishOptions: ["Single Slide", "Bi-Parting"],
-    diagram: "/tur/drawings/automatic-operators/all-glass-systems/shopmaster-gsw-m/shopmaster-gsw-m-drawing.png",
+    diagram: "/tur/automatic-operators/all-glass-systems/shopmaster-gsw-m/shopmaster-gsw-m-drawing.png",
     inquirySubject: "shopMaster GSW-M Inquiry",
     relatedSlugs: ["shopmaster-gsw-m-g30", "sliding-doors", "prismatic-sliding-door-cmw"],
   }),
@@ -8919,9 +8911,9 @@ export const products: Product[] = [
     description: "European ironmongery hanging hardware — premium hinges, pivot sets and related door preparation items for specification-led door sets requiring refined finish coordination.",
     shortDescription: "Premium hinges and pivot sets within the European ironmongery route.",
     overview: "Hanging hardware in the European Ironmongery context covers architectural-grade hinges and pivot sets — items specified for finish consistency, load performance and coordinated ironmongery packages.",
-    image: "/tur/mc-2.jpg",
+    image: "/tur/door-hardware/mc-2.jpg",
     imageAlt: "European ironmongery hinge — premium door hanging hardware",
-    gallery: gallery("/tur/mc-2.jpg", "/tur/decorative-lever.jpg", "/tur/european-lockset.jpg"),
+    gallery: gallery("/tur/door-hardware/mc-2.jpg", "/tur/door-hardware/decorative-lever.jpg", "/tur/door-hardware/european-lockset.jpg"),
     features: ["Architectural-grade hinges for finish-led ironmongery packages.", "Coordinates with lever handles, cylinders and escutcheons.", "Suitable for hospitality, executive and institutional door sets."],
     applications: ["Hospitality guestroom door sets", "Executive office suites", "Premium institutional packages"],
     finishOptions: ["Satin Chrome", "Polished Chrome"],
@@ -8940,9 +8932,9 @@ export const products: Product[] = [
     description: "Door control hardware within the European Ironmongery route — floor springs, overhead closers and door coordinators for premium ironmongery specifications requiring refined closing performance.",
     shortDescription: "Floor springs and closers for European ironmongery door sets.",
     overview: "Control hardware in the European Ironmongery route covers floor springs, concealed overhead closers and coordinators — the closing and control layer of a complete premium ironmongery schedule.",
-    image: "/tur/product-door-closer.jpg",
+    image: "/tur/door-hardware/product-door-closer.jpg",
     imageAlt: "European ironmongery floor spring — premium door control hardware",
-    gallery: gallery("/tur/product-door-closer.jpg", "/tur/mc-2.jpg", "/tur/decorative-lever.jpg"),
+    gallery: gallery("/tur/door-hardware/product-door-closer.jpg", "/tur/door-hardware/mc-2.jpg", "/tur/door-hardware/decorative-lever.jpg"),
     features: ["Floor spring and overhead closer options for premium specifications.", "Concealed and surface-mounted configurations available.", "Coordinates with the wider European Ironmongery package."],
     applications: ["Premium hospitality entrances", "Executive office openings", "High-spec public areas"],
     finishOptions: ["Satin Chrome", "Polished Chrome"],
@@ -8961,9 +8953,9 @@ export const products: Product[] = [
     description: "Security hardware within the European Ironmongery route — multi-point locks, mortise locksets and coordinated security accessories for premium architectural door sets.",
     shortDescription: "Multi-point locks and mortise locksets within the European ironmongery route.",
     overview: "Secure The Door in the European Ironmongery context provides multi-point locking bodies, mortise locksets and associated security items — coordinating with cylinders and lever handles for a complete ironmongery package.",
-    image: "/tur/format-lockset.jpg",
+    image: "/tur/door-hardware/format-lockset.jpg",
     imageAlt: "European ironmongery mortise lockset — premium door security hardware",
-    gallery: gallery("/tur/format-lockset.jpg", "/tur/european-lockset.jpg", "/tur/mc-1.jpg"),
+    gallery: gallery("/tur/door-hardware/format-lockset.jpg", "/tur/door-hardware/european-lockset.jpg", "/tur/door-hardware/mc-1.jpg"),
     features: ["Multi-point and mortise lock options for specification-led security.", "Coordinates with cylinders, levers and escutcheons.", "Suitable for premium hospitality, executive and institutional requirements."],
     applications: ["Hospitality guestroom security", "Executive suite door sets", "Institutional secure areas"],
     finishOptions: ["Satin Chrome", "Polished Chrome"],
@@ -8982,9 +8974,9 @@ export const products: Product[] = [
     description: "Completion accessories and supporting items within the European Ironmongery route — door stops, kick plates, letter plates and coordinating trim for premium ironmongery packages.",
     shortDescription: "Completion accessories for European ironmongery packages.",
     overview: "Ancillary products in the European Ironmongery route cover the small but visible hardware items — door stops, kick plates and letter plates — that complete a coherent and finish-matched ironmongery schedule.",
-    image: "/tur/project-4.jpg",
+    image: "/tur/home/project-4.jpg",
     imageAlt: "European ironmongery ancillary products — completion accessories",
-    gallery: gallery("/tur/project-4.jpg", "/tur/mc-2.jpg", "/tur/decorative-lever.jpg"),
+    gallery: gallery("/tur/home/project-4.jpg", "/tur/door-hardware/mc-2.jpg", "/tur/door-hardware/decorative-lever.jpg"),
     features: ["Door stop, kick plate and letter plate options.", "Finish-matched to coordinate across ironmongery packages.", "Suitable for premium architectural door sets."],
     applications: ["Premium hospitality and hotel packages", "Executive office door sets", "High-spec institutional ironmongery"],
     finishOptions: ["Satin Chrome", "Polished Chrome"],
@@ -9003,9 +8995,9 @@ export const products: Product[] = [
     description: "Life-safety exit hardware within the European Ironmongery route — panic bars, touch bars and emergency push pads that maintain finish coordination across a premium ironmongery schedule.",
     shortDescription: "Finish-coordinated panic bars for European ironmongery specifications.",
     overview: "Emergency exit hardware in the European Ironmongery context keeps finish consistency with the wider ironmongery package — providing panic bars and touch bars in matching chrome finishes for specification-led commercial and institutional projects.",
-    image: "/tur/slider-1.webp",
+    image: "/tur/home/slider-1.webp",
     imageAlt: "European ironmongery emergency exit hardware — finish-coordinated panic bar",
-    gallery: gallery("/tur/slider-1.webp", "/tur/format-lockset.jpg", "/tur/mc-1.jpg"),
+    gallery: gallery("/tur/home/slider-1.webp", "/tur/door-hardware/format-lockset.jpg", "/tur/door-hardware/mc-1.jpg"),
     features: ["Panic bar and touch bar in Satin Chrome and Polished Chrome.", "Coordinates with the wider ironmongery finish schedule.", "Suitable for commercial fire exits and institutional egress."],
     applications: ["Commercial fire exit routes", "Institutional egress points", "Premium hospitality life-safety requirements"],
     finishOptions: ["Satin Chrome", "Polished Chrome"],
@@ -9026,9 +9018,9 @@ export const products: Product[] = [
     description: "TG.LS lipseal products from the old TUR Glass Hardware catalogue.",
     shortDescription: "TG.LS lipseal products for glass edge sealing.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/glass-hardware/lipseal.",
-    image: "/tur/cat-glass-hardware.jpg",
+    image: "/tur/door-hardware/cat-glass-hardware.jpg",
     imageAlt: "Lipseal glass edge seal — frameless glass door sealing detail",
-    gallery: gallery("/tur/cat-glass-hardware.jpg", "/tur/cat-glass-patch.png", "/tur/cat-glass-pull.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-glass-hardware.jpg", "/tur/door-hardware/cat-glass-patch.png", "/tur/door-hardware/cat-glass-pull.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9049,9 +9041,9 @@ export const products: Product[] = [
     description: "Armature mounting accessory products from the TUR Access Control catalogue.",
     shortDescription: "Mounting brackets and accessories for electromagnetic lock installation.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/armature-mounting-accessories.",
-    image: "/tur/cat-access-readers.jpg",
+    image: "/tur/door-hardware/cat-access-readers.jpg",
     imageAlt: "Electromagnetic lock armature mounting bracket — access control accessory",
-    gallery: gallery("/tur/cat-access-readers.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-access-readers.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9070,9 +9062,9 @@ export const products: Product[] = [
     description: "Electromechanical locking device products from the TUR Access Control catalogue.",
     shortDescription: "Mechanical bolt with electronic release for discreet locking.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/electromechanical-locking-devices.",
-    image: "/tur/cat-access-control.jpg",
+    image: "/tur/door-hardware/cat-access-control.jpg",
     imageAlt: "Electromechanical locking device — integrated access control hardware",
-    gallery: gallery("/tur/cat-access-control.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-access-control.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9091,9 +9083,9 @@ export const products: Product[] = [
     description: "Digital keypad system products from the TUR Access Control catalogue.",
     shortDescription: "Digital keypad systems for PIN-based standalone or networked access control.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/digital-keypad-system.",
-    image: "/tur/video-thumb.png",
+    image: "/tur/home/video-thumb.png",
     imageAlt: "Digital keypad access control system — PIN-based entry management",
-    gallery: gallery("/tur/video-thumb.png"),
+    gallery: gallery("/tur/home/video-thumb.png"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9112,9 +9104,9 @@ export const products: Product[] = [
     description: "Infrared and wireless exit device products from the TUR Access Control catalogue.",
     shortDescription: "Infrared and wireless RTE devices for touchless access-controlled egress.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/infrared-wireless-exit-devices.",
-    image: "/tur/slider-6.webp",
+    image: "/tur/home/slider-6.webp",
     imageAlt: "Infrared wireless exit device — touchless request-to-exit sensor",
-    gallery: gallery("/tur/slider-6.webp"),
+    gallery: gallery("/tur/home/slider-6.webp"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9133,9 +9125,9 @@ export const products: Product[] = [
     description: "Electromagnetic door holder products from the TUR Access Control catalogue.",
     shortDescription: "Electromagnetic door holders for fire-door hold-open and smoke-control integration.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/electromagnetic-door-holders.",
-    image: "/tur/cat-access-control.jpg",
+    image: "/tur/door-hardware/cat-access-control.jpg",
     imageAlt: "Electromagnetic door holder — fire door hold-open device",
-    gallery: gallery("/tur/cat-access-control.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-access-control.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9154,9 +9146,9 @@ export const products: Product[] = [
     description: "Access control accessory products from the TUR Access Control catalogue.",
     shortDescription: "Power supplies, panels and accessories completing access control systems.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/access-control-accessories.",
-    image: "/tur/project-2.jpg",
+    image: "/tur/home/project-2.jpg",
     imageAlt: "Access control accessories — power supply and system components",
-    gallery: gallery("/tur/project-2.jpg"),
+    gallery: gallery("/tur/home/project-2.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9181,9 +9173,9 @@ export const products: Product[] = [
       "300 lbs surface-mounted electromagnetic lock with auto 12/24VDC selection and no residual magnetism.",
     overview:
       "The TUR series electromagnetic locks use a new style mounting plate designed with increased thickness at the screw holes for enhanced stability and strength. The TU.300 can be installed on various door types using optional auxiliary mounting brackets, and features automatic 12/24VDC voltage selection with no residual magnetism for reliable fail-safe operation.",
-    image: "/tur/access-control/electromagnetic-locks/tu-300/tu-300-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-locks/tu-300/tu-300-main.jpg",
     imageAlt: "TU.300 electromagnetic lock — surface-mounted access control hardware",
-    gallery: gallery("/tur/access-control/electromagnetic-locks/tu-300/tu-300-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-locks/tu-300/tu-300-main.jpg"),
     features: [
       "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
       "New style mounting plate with increased immobility (patented).",
@@ -9227,9 +9219,9 @@ export const products: Product[] = [
       "600 lbs surface-mounted electromagnetic lock with auto 12/24VDC and MOV surge protection.",
     overview:
       "The TU.600 electromagnetic lock delivers 600 lbs holding force using a new style patented mounting plate with increased screw-hole thickness for enhanced stability. It supports automatic 12/24VDC voltage selection, includes MOV surge protection and has no residual magnetism. Optional bond sensor, relock time delay and door status sensor models are available.",
-    image: "/tur/access-control/electromagnetic-locks/tu-600-electromagnetic-lock/tu-600-electromagnetic-lock-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-locks/tu-600-electromagnetic-lock/tu-600-electromagnetic-lock-main.jpg",
     imageAlt: "TU.600 electromagnetic lock — 600 lbs surface-mounted access control lock",
-    gallery: gallery("/tur/access-control/electromagnetic-locks/tu-600-electromagnetic-lock/tu-600-electromagnetic-lock-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-locks/tu-600-electromagnetic-lock/tu-600-electromagnetic-lock-main.jpg"),
     features: [
       "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
       "New style mounting plate with increased immobility (patented).",
@@ -9275,9 +9267,9 @@ export const products: Product[] = [
       "800 lbs surface-mounted electromagnetic lock with auto 12/24VDC and full option set.",
     overview:
       "The TU.800 electromagnetic lock delivers 800 lbs holding force with a new style patented mounting plate. It supports the full TUR option set including bond sensor, relock time delay, door status sensor, large LED with reset input and door held open alarm — suitable for high-traffic and high-security commercial openings.",
-    image: "/tur/access-control/electromagnetic-locks/tu-800/tu-800-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-locks/tu-800/tu-800-main.jpg",
     imageAlt: "TU.800 electromagnetic lock — 800 lbs surface-mounted access control lock",
-    gallery: gallery("/tur/access-control/electromagnetic-locks/tu-800/tu-800-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-locks/tu-800/tu-800-main.jpg"),
     features: [
       "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
       "New style mounting plate with increased immobility (patented).",
@@ -9325,9 +9317,9 @@ export const products: Product[] = [
       "1200 lbs surface-mounted electromagnetic lock with auto 12/24VDC and NF S 61-937 compliance.",
     overview:
       "The TU.1200 electromagnetic lock is the highest capacity single-door model in the TUR EM lock range, delivering 1200 lbs holding force. It uses a new style patented mounting plate and supports the full option set including large LED with reset and door held open alarm. NF S 61-937 compliant on unmonitored models.",
-    image: "/tur/access-control/electromagnetic-locks/tu-1200/tu-1200-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-locks/tu-1200/tu-1200-main.jpg",
     imageAlt: "TU.1200 electromagnetic lock — 1200 lbs high-capacity surface-mounted lock",
-    gallery: gallery("/tur/access-control/electromagnetic-locks/tu-1200/tu-1200-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-locks/tu-1200/tu-1200-main.jpg"),
     features: [
       "Reversible magnet for left or right handed doors (single magnet, unmonitored models).",
       "New style mounting plate with increased immobility (patented).",
@@ -9375,9 +9367,9 @@ export const products: Product[] = [
       "600 lbs × 2 double-door electromagnetic lock with auto 12/24VDC and NF S 61-937 compliance.",
     overview:
       "The TU.D600 is a double-door electromagnetic lock delivering 600 lbs holding force per leaf. The new style patented mounting plate provides enhanced stability for both leaves. Optional bond sensor, relock time delay and door status sensor models are available.",
-    image: "/tur/access-control/electromagnetic-locks/tu-d600/tu-d600-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-locks/tu-d600/tu-d600-main.jpg",
     imageAlt: "TU.D600 double-door electromagnetic lock — 600 lbs × 2 access control hardware",
-    gallery: gallery("/tur/access-control/electromagnetic-locks/tu-d600/tu-d600-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-locks/tu-d600/tu-d600-main.jpg"),
     features: [
       "New style mounting plate with increased immobility (patented).",
       "Aluminium anodized casing (US28).",
@@ -9422,9 +9414,9 @@ export const products: Product[] = [
       "1200 lbs × 2 double-door electromagnetic lock — highest capacity in the TUR EM lock range.",
     overview:
       "The TU.D1200 is the highest capacity double-door electromagnetic lock in the TUR range, delivering 1200 lbs per leaf. It uses the new style patented mounting plate and supports optional bond sensor, relock time delay, door status sensor and door held open alarm.",
-    image: "/tur/access-control/electromagnetic-locks/tu-d1200/tu-d1200-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-locks/tu-d1200/tu-d1200-main.jpg",
     imageAlt: "TU.D1200 double-door electromagnetic lock — 1200 lbs × 2 high-capacity lock",
-    gallery: gallery("/tur/access-control/electromagnetic-locks/tu-d1200/tu-d1200-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-locks/tu-d1200/tu-d1200-main.jpg"),
     features: [
       "New style mounting plate with increased immobility (patented).",
       "Aluminium anodized casing (US28).",
@@ -9470,9 +9462,9 @@ export const products: Product[] = [
       "Surface-mounted ANSI electric rim strike for rim exit devices with Pullman latch bolt.",
     overview:
       "The TU1296 ANSI electric rim strike series is surface mounted and designed with strength and durability for use with rim exit devices with a Pullman latch bolt. It features an optional latch monitor and has a stainless steel housing. No cutting on the frame is required for installation. Burglary-resistant listed (BP10269).",
-    image: "/tur/access-control/electric-strikes/tu-1296/tu-1296-main.jpg",
+    image: "/tur/door-hardware/access-control/electric-strikes/tu-1296/tu-1296-main.jpg",
     imageAlt: "TU.1296 electric rim strike — surface-mounted ANSI electric strike",
-    gallery: gallery("/tur/access-control/electric-strikes/tu-1296/tu-1296-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electric-strikes/tu-1296/tu-1296-main.jpg"),
     features: [
       "Field selectable 12 or 24VDC.",
       "Field reversible fail-secure or fail-safe.",
@@ -9520,9 +9512,9 @@ export const products: Product[] = [
       "Surface-mounted ANSI electric rim strike with field-selectable 12/24VDC and optional latch monitor.",
     overview:
       "The TU1297 ANSI electric rim strike is surface mounted and designed with strength and durability for use with rim exit devices with a Pullman latch bolt. No cutting on the frame is required for installation. An optional latch monitor model (TU1297M) is available.",
-    image: "/tur/access-control/electric-strikes/tu-1297/tu-1297-main.jpg",
+    image: "/tur/door-hardware/access-control/electric-strikes/tu-1297/tu-1297-main.jpg",
     imageAlt: "TU.1297 electric rim strike — surface-mounted ANSI electric strike",
-    gallery: gallery("/tur/access-control/electric-strikes/tu-1297/tu-1297-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electric-strikes/tu-1297/tu-1297-main.jpg"),
     features: [
       "Field selectable 12 or 24VDC.",
       "Field reversible fail-safe or fail-secure.",
@@ -9571,9 +9563,9 @@ export const products: Product[] = [
       "Electromechanical mortise lock with field-configurable fail-safe/fail-secure and monitoring outputs.",
     overview:
       "The TU.L800 series is an electromechanical mortise lock ideal for a wide range of applications and available with various monitoring functions. It can operate standalone or be integrated into sophisticated access control systems.",
-    image: "/tur/access-control/electromechanical-locking-devices/tu-l800/tu-l800-main.jpg",
+    image: "/tur/door-hardware/access-control/electromechanical-locking-devices/tu-l800/tu-l800-main.jpg",
     imageAlt: "TU.L800 electromechanical mortise lock — access-controlled door hardware",
-    gallery: gallery("/tur/access-control/electromechanical-locking-devices/tu-l800/tu-l800-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromechanical-locking-devices/tu-l800/tu-l800-main.jpg"),
     features: [
       'Field selectable 12/24VDC — 600mA at 12VDC or 300mA at 24VDC.',
       "Field configurable fail-safe or fail-secure operation.",
@@ -9616,9 +9608,9 @@ export const products: Product[] = [
       "Electromechanical push bar with delayed egress, 95 dB alarm and emergency release.",
     overview:
       "The TU.PBH-350 electromechanical push bar manages unauthorised exits through controlled delayed egress. When activated, it triggers a 95 dB audible alarm and remains locked for a field-selectable 15 or 30 second delay — providing personnel response time. During emergencies, the system disengages to permit immediate egress. The TU.PBH-350DE is the standard delayed egress model. The TU.PBH-350LD variant incorporates a large dual-colour LED indicator for enhanced visibility in low-light environments.",
-    image: "/tur/access-control/electromechanical-locking-devices/tu-pbh-350/tu-pbh-350-main.jpg",
+    image: "/tur/door-hardware/access-control/electromechanical-locking-devices/tu-pbh-350/tu-pbh-350-main.jpg",
     imageAlt: "TU.PBH-350 electromechanical push bar — delayed egress exit device",
-    gallery: gallery("/tur/access-control/electromechanical-locking-devices/tu-pbh-350/tu-pbh-350-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromechanical-locking-devices/tu-pbh-350/tu-pbh-350-main.jpg"),
     features: [
       "Field-selectable exit delay: 15 or 30 seconds.",
       "95 dB audible alarm on activation.",
@@ -9669,9 +9661,9 @@ export const products: Product[] = [
       "Electric strike for European mortise locks — 10 mm latch, 1,500 lbs static strength, 1,000,000 cycle rating.",
     overview:
       "The TU.600 electric strike is designed for European mortise locks and can be installed in metal and wood door frames. It features field-reversible fail-safe or fail-secure operation, a 10 mm latchbolt accommodation and a zinc alloy body with brushed stainless steel finish. Three faceplate models (TU600, TU610, TU620) cover different mortise lock configurations including versions with a deadbolt.",
-    image: "/tur/access-control/electric-strikes/tu-600-electric-strike/tu-600-electric-strike-main.jpg",
+    image: "/tur/door-hardware/access-control/electric-strikes/tu-600-electric-strike/tu-600-electric-strike-main.jpg",
     imageAlt: "TU.600 electric strike — European mortise lock electric release",
-    gallery: gallery("/tur/access-control/electric-strikes/tu-600-electric-strike/tu-600-electric-strike-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electric-strikes/tu-600-electric-strike/tu-600-electric-strike-main.jpg"),
     features: [
       "Field selectable 12 or 24VDC operation.",
       "Accommodates 10 mm European mortise latchbolt.",
@@ -9718,9 +9710,9 @@ export const products: Product[] = [
       "Electric strike for European mortise locks — 12 mm latch, 800 lbs static strength, optional latch monitor.",
     overview:
       "The TU.810 series electric strike is designed for European mortise locks with a 12 mm latchbolt. It features field-reversible fail-safe or fail-secure operation, a stainless steel keeper for enhanced security and an optional latch monitor. The non-handed design accommodates left and right-hand door openings. The TU811 model provides a non-monitored alternative.",
-    image: "/tur/access-control/electric-strikes/tu-810-electric-strike/tu-810-electric-strike-main.jpg",
+    image: "/tur/door-hardware/access-control/electric-strikes/tu-810-electric-strike/tu-810-electric-strike-main.jpg",
     imageAlt: "TU.810 electric strike — European mortise lock electric release with latch monitor",
-    gallery: gallery("/tur/access-control/electric-strikes/tu-810-electric-strike/tu-810-electric-strike-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electric-strikes/tu-810-electric-strike/tu-810-electric-strike-main.jpg"),
     features: [
       "Dual 12/24VDC operation.",
       "Accommodates 12 mm European mortise latchbolt.",
@@ -9772,9 +9764,9 @@ export const products: Product[] = [
       "Bluetooth 4.2 + RFID EM access reader — 50 m range, 200 users, smartphone or card access.",
     overview:
       "EasiProx is a Bluetooth Low Energy 4.2 access reader that supports both smartphone-based and RFID EM card access. It operates at 12VDC, communicates over a 50 m range and manages up to 200 users with one administrator account. The built-in 85 dB buzzer provides door held open and tamper alarms. User management includes adding/deleting/viewing users, granting time-limited access and recording up to 1,000 audit trail events.",
-    image: "/tur/access-control/e-access/easiprox/easiprox-main.jpg",
+    image: "/tur/door-hardware/access-control/e-access/easiprox/easiprox-main.jpg",
     imageAlt: "EasiProx Bluetooth RFID access reader — smartphone and card access control",
-    gallery: gallery("/tur/access-control/e-access/easiprox/easiprox-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/e-access/easiprox/easiprox-main.jpg"),
     features: [
       "Bluetooth Low Energy 4.2 communication.",
       "Supports smartphone and RFID EM card access.",
@@ -9824,9 +9816,9 @@ export const products: Product[] = [
       "Slim Bluetooth 4.2 + RFID access reader — compact 88 × 44 × 23 mm, 50 m range, 200 users.",
     overview:
       "EasiProx Slim is the compact profile version of EasiProx, offering the same Bluetooth Low Energy 4.2 and RFID EM card functionality in a slimmer 88 × 44 × 23 mm form factor. It supports 12VDC operation, up to 200 users and 1,000 audit trail events with identical alarm and REX capabilities to the standard model.",
-    image: "/tur/access-control/e-access/easiprox-slim/easiprox-slim-main.jpg",
+    image: "/tur/door-hardware/access-control/e-access/easiprox-slim/easiprox-slim-main.jpg",
     imageAlt: "EasiProx Slim compact Bluetooth RFID access reader — slim-profile access control",
-    gallery: gallery("/tur/access-control/e-access/easiprox-slim/easiprox-slim-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/e-access/easiprox-slim/easiprox-slim-main.jpg"),
     features: [
       "Compact slim-profile form factor.",
       "Bluetooth Low Energy 4.2 communication.",
@@ -9876,9 +9868,9 @@ export const products: Product[] = [
       "Bluetooth 4.0 access reader — 12–24VDC, 196 users, smartphone access, anti-tailgate.",
     overview:
       "The E1196 is a Bluetooth Low Energy 4.0 access reader supporting 12–24VDC operation and smartphone-based access for up to 196 users. It features anti-tailgate functionality, a built-in 85 dB door held open alarm, REX input and automatic unlocking. Available in black or white finish in a 114 × 69.5 × 30 mm ANSI-size housing.",
-    image: "/tur/access-control/e-access/e1196/e1196-main.jpg",
+    image: "/tur/door-hardware/access-control/e-access/e1196/e1196-main.jpg",
     imageAlt: "E1196 Bluetooth access reader — smartphone-based access control unit",
-    gallery: gallery("/tur/access-control/e-access/e1196/e1196-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/e-access/e1196/e1196-main.jpg"),
     features: [
       "Bluetooth Low Energy 4.0 communication.",
       "Smartphone-based access control.",
@@ -9929,9 +9921,9 @@ export const products: Product[] = [
       "Digital keypad with backlit tactile keys, separate controller, 1,000 users and 4–6 digit PIN codes.",
     overview:
       "The TU.DG-750 digital keypad system provides PIN-based access control using a surface-mounted backlit keypad and a separate controller unit. It supports up to 1,000 users plus 10 special codes and accepts 4–6 digit PIN entries. The system includes two REX inputs, one door-sensor input, one tamper input and two relay outputs — suitable for standalone access control on commercial and institutional doors where card infrastructure is not required.",
-    image: "/tur/access-control/digital-keypad-system/tu-dg-750/tu-dg-750-main.jpg",
+    image: "/tur/door-hardware/access-control/digital-keypad-system/tu-dg-750/tu-dg-750-main.jpg",
     imageAlt: "TU.DG-750 digital keypad system — backlit tactile keypad for PIN-based access control",
-    gallery: gallery("/tur/access-control/digital-keypad-system/tu-dg-750/tu-dg-750-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/digital-keypad-system/tu-dg-750/tu-dg-750-main.jpg"),
     features: [
       "Backlit tactile keys for low-light operation.",
       "Separate controller for clean door-side installation.",
@@ -9981,9 +9973,9 @@ export const products: Product[] = [
       "ANSI-size infrared RTE sensor — bi-colour LED, 3A relay, 10 cm detection range.",
     overview:
       "The TU.RTS-600 is an infrared request-to-exit sensor in ANSI size format. It features a bi-colour LED status indicator and a relay rated at 3A 125VAC/30VDC for integration with access control systems. A surface-mount variant (RTS-600-S) is available for applications where flush mounting is not practical.",
-    image: "/tur/access-control/infrared-wireless-exit-devices/tu-rts-600/tu-rts-600-main.jpg",
+    image: "/tur/door-hardware/access-control/infrared-wireless-exit-devices/tu-rts-600/tu-rts-600-main.jpg",
     imageAlt: "TU.RTS-600 infrared request-to-exit sensor — ANSI size touchless egress device",
-    gallery: gallery("/tur/access-control/infrared-wireless-exit-devices/tu-rts-600/tu-rts-600-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/infrared-wireless-exit-devices/tu-rts-600/tu-rts-600-main.jpg"),
     features: [
       "ANSI size form factor.",
       "Infrared detection for touchless request-to-exit.",
@@ -10024,9 +10016,9 @@ export const products: Product[] = [
       "European-size infrared RTE sensor — bi-colour LED, 3A relay, 10 cm detection range.",
     overview:
       "The TU.RTS-500 is an infrared request-to-exit sensor in European size format. It features a bi-colour LED status indicator and a relay rated at 3A 125VAC/30VDC for integration with access control systems. A surface-mount variant (RTS-500-S) is available for applications where flush mounting is not practical.",
-    image: "/tur/access-control/infrared-wireless-exit-devices/tu-rts-500/tu-rts-500-main.jpg",
+    image: "/tur/door-hardware/access-control/infrared-wireless-exit-devices/tu-rts-500/tu-rts-500-main.jpg",
     imageAlt: "TU.RTS-500 infrared request-to-exit sensor — European size touchless egress device",
-    gallery: gallery("/tur/access-control/infrared-wireless-exit-devices/tu-rts-500/tu-rts-500-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/infrared-wireless-exit-devices/tu-rts-500/tu-rts-500-main.jpg"),
     features: [
       "European size form factor.",
       "Infrared detection for touchless request-to-exit.",
@@ -10069,9 +10061,9 @@ export const products: Product[] = [
       "Floor-mounted electromagnetic door holder with 80 lbs holding force, swivel armature and manual release.",
     overview:
       "The TU.D900F is a floor-mounted electromagnetic door holder that keeps fire doors open for normal circulation and releases automatically when a fire alarm signal is received. The swivel armature plate accommodates minor door misalignment, and the manual release button allows the door to be released independently of the alarm system. Suitable for doors where wall or face mounting is not practical.",
-    image: "/tur/access-control/electromagnetic-door-holders/tu-d900f/tu-d900f-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-door-holders/tu-d900f/tu-d900f-main.jpg",
     imageAlt: "TU.D900F floor-mounted electromagnetic door holder — fire door hold-open device",
-    gallery: gallery("/tur/access-control/electromagnetic-door-holders/tu-d900f/tu-d900f-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-door-holders/tu-d900f/tu-d900f-main.jpg"),
     features: [
       "Floor-mounted hold-open for fire-door circulation routes.",
       "80 lbs holding force.",
@@ -10113,9 +10105,9 @@ export const products: Product[] = [
       "Wall-mounted electromagnetic door holder — 80 lbs holding force, flush or surface mount, stainless steel.",
     overview:
       "The TU.D900W is a wall-mounted electromagnetic door holder that holds fire doors open and releases automatically on alarm signal. It features a swivel armature plate for door alignment tolerance and is available in flush wall mount (TU.D900W) and surface wall mount (TU.D900WS) configurations. Stainless steel finish for corrosion resistance.",
-    image: "/tur/access-control/electromagnetic-door-holders/tu-d900w/tu-d900w-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-door-holders/tu-d900w/tu-d900w-main.jpg",
     imageAlt: "TU.D900W wall-mounted electromagnetic door holder — fire door hold-open device",
-    gallery: gallery("/tur/access-control/electromagnetic-door-holders/tu-d900w/tu-d900w-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-door-holders/tu-d900w/tu-d900w-main.jpg"),
     features: [
       "Wall-mounted hold-open for fire-door circulation routes.",
       "80 lbs holding force.",
@@ -10157,9 +10149,9 @@ export const products: Product[] = [
       "Dual voltage electromagnetic door holder — 32.9 lbs at 12/24VAC/DC or 38.8 lbs at 110–220VAC.",
     overview:
       "The TU.D990 electromagnetic door holder offers dual voltage options: 12/24 VAC/DC providing 32.9 lbs holding force, or 110–220 VAC providing 38.8 lbs holding force. It mounts flush (TU.D970) or surface (TU.D970S) on the wall with a swivel armature plate and stainless steel finish. Releases automatically on fire alarm signal.",
-    image: "/tur/access-control/electromagnetic-door-holders/tu-d990/tu-d990-main.jpg",
+    image: "/tur/door-hardware/access-control/electromagnetic-door-holders/tu-d990/tu-d990-main.jpg",
     imageAlt: "TU.D990 electromagnetic door holder — dual voltage wall-mounted hold-open device",
-    gallery: gallery("/tur/access-control/electromagnetic-door-holders/tu-d990/tu-d990-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/electromagnetic-door-holders/tu-d990/tu-d990-main.jpg"),
     features: [
       "Dual voltage operation: 12/24 VAC/DC or 110–220 VAC.",
       "Swivel armature plate to accommodate door misalignment.",
@@ -10201,9 +10193,9 @@ export const products: Product[] = [
       "Concealed stainless steel door loop for metal frames — recessed installation for hinge-side cable routing.",
     overview:
       "The TU.DL-417ST is a concealed door loop in stainless steel construction, designed for installation in metal door frames. The stainless steel flex conduit and case provide superior corrosion resistance over the nickel-plated TU.DL-400 model. Square mounting tabs allow recessed installation for a clean, low-profile cable path on the hinge side of access-controlled doors.",
-    image: "/tur/access-control/access-control-accessories/tu-dl-417st/tu-dl-417st-main.jpg",
+    image: "/tur/door-hardware/access-control/access-control-accessories/tu-dl-417st/tu-dl-417st-main.jpg",
     imageAlt: "TU.DL-417ST stainless steel door loop — concealed cable conduit for metal frames",
-    gallery: gallery("/tur/access-control/access-control-accessories/tu-dl-417st/tu-dl-417st-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/access-control-accessories/tu-dl-417st/tu-dl-417st-main.jpg"),
     features: [
       "Stainless steel case and flex conduit.",
       "Square mounting tabs for easy recessed installation.",
@@ -10243,9 +10235,9 @@ export const products: Product[] = [
       "SPDT magnetic contact — 25 mm wood / 5 mm iron gap, aluminum alloy housing, wired mount.",
     overview:
       "The TU.2071 magnetic contact provides door status monitoring for access control and alarm systems. The SPDT wired-mount design with aluminum alloy housing detects door open/close status with an operating gap of 25 mm on wood surfaces and 5 mm on iron surfaces. Supplied with 18–22 AWG leads.",
-    image: "/tur/access-control/access-control-accessories/tu-2071/tu-2071-main.jpg",
+    image: "/tur/door-hardware/access-control/access-control-accessories/tu-2071/tu-2071-main.jpg",
     imageAlt: "TU.2071 magnetic contact — door status sensor for access control systems",
-    gallery: gallery("/tur/access-control/access-control-accessories/tu-2071/tu-2071-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/access-control-accessories/tu-2071/tu-2071-main.jpg"),
     features: [
       "SPDT (single pole double throw) switch configuration.",
       "Wired mounting.",
@@ -10287,9 +10279,9 @@ export const products: Product[] = [
       "SPDT magnetic contact with wider gap — 34 mm wood / 7 mm iron, aluminum alloy, wired mount.",
     overview:
       "The TU.2071-AR magnetic contact is the wide-gap variant of the TU.2071, offering a 34 mm operating gap on wood surfaces and 7 mm on iron — suitable for doors with looser tolerances or heavier frame profiles. SPDT wired mount configuration with aluminum alloy housing and 18–22 AWG leads.",
-    image: "/tur/access-control/access-control-accessories/tu-2071-ar/tu-2071-ar-main.jpg",
+    image: "/tur/door-hardware/access-control/access-control-accessories/tu-2071-ar/tu-2071-ar-main.jpg",
     imageAlt: "TU.2071-AR magnetic contact — wide-gap door status sensor for access control",
-    gallery: gallery("/tur/access-control/access-control-accessories/tu-2071-ar/tu-2071-ar-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/access-control-accessories/tu-2071-ar/tu-2071-ar-main.jpg"),
     features: [
       "SPDT (single pole double throw) switch configuration.",
       "Wired mounting.",
@@ -10332,9 +10324,9 @@ export const products: Product[] = [
       "SPDT magnetic contact — 29 mm wood / 18 mm iron gap, plastic housing, screw mount.",
     overview:
       "The TU.2031 magnetic contact uses screw-mount installation with a plastic housing, offering an operating gap of 29 mm on wood and 18 mm on iron surfaces. The SPDT configuration and 18–22 AWG leads are compatible with standard access control and alarm panel inputs.",
-    image: "/tur/access-control/access-control-accessories/tu-2031/tu-2031-main.jpg",
+    image: "/tur/door-hardware/access-control/access-control-accessories/tu-2031/tu-2031-main.jpg",
     imageAlt: "TU.2031 magnetic contact — screw-mount door sensor for access control systems",
-    gallery: gallery("/tur/access-control/access-control-accessories/tu-2031/tu-2031-main.jpg"),
+    gallery: gallery("/tur/door-hardware/access-control/access-control-accessories/tu-2031/tu-2031-main.jpg"),
     features: [
       "SPDT (single pole double throw) switch configuration.",
       "Screw-mount installation.",
@@ -10374,9 +10366,9 @@ export const products: Product[] = [
     description: "Aluminium threshold plates providing a clean floor-level transition that coordinates with door bottom seals and perimeter systems for complete threshold performance.",
     shortDescription: "Threshold plates for clean floor transitions and perimeter sealing.",
     overview: "Threshold Plates route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg",
     imageAlt: "Threshold plate — architectural door floor transition and sealing",
-    gallery: gallery("/tur/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -10395,9 +10387,9 @@ export const products: Product[] = [
     description: "Intumescent fire and smoke seals for fire-rated door assemblies — heat-activated profiles that expand to close the gap between door leaf and frame.",
     shortDescription: "Intumescent seals for fire-rated door gap closure and smoke protection.",
     overview: "Intumescent Seals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg",
     imageAlt: "Intumescent seal — fire-rated door gap sealing system",
-    gallery: gallery("/tur/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -10416,9 +10408,9 @@ export const products: Product[] = [
     description: "Astragal sealing profiles for double-door meeting edges — surface-applied and rebated seals for draught, acoustic and smoke control.",
     shortDescription: "Astragal seals for double-door meeting-edge draught and smoke control.",
     overview: "Astragals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg",
     imageAlt: "Astragal door seal — double-door meeting edge sealing",
-    gallery: gallery("/tur/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -10437,9 +10429,9 @@ export const products: Product[] = [
     description: "Magnetic astragal profiles for double-door meeting edges — positive contact sealing using magnetic attraction for improved acoustic and smoke performance.",
     shortDescription: "Magnetic astragals for positive contact sealing at double-door meeting edges.",
     overview: "Magnetic Astragals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg",
     imageAlt: "Magnetic astragal seal — double-door positive contact sealing",
-    gallery: gallery("/tur/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -10458,9 +10450,9 @@ export const products: Product[] = [
     description: "Self-adhesive foam and rubber sealing strips for supplementary draught, dust and light acoustic gap sealing across door and window perimeter applications.",
     shortDescription: "Self-adhesive foam seals for supplementary draught and gap sealing.",
     overview: "Self Adhesive Seals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg",
     imageAlt: "Self-adhesive door seal strip — supplementary draught sealing",
-    gallery: gallery("/tur/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -10479,9 +10471,9 @@ export const products: Product[] = [
     description: "Brush strip sealing profiles for door bottoms, thresholds and perimeters — flexible nylon bristle bundles that accommodate uneven floors and varying clearances.",
     shortDescription: "Brush strip seals for threshold, bottom and perimeter flexible sealing.",
     overview: "Brush Strip Seals route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg",
     imageAlt: "Brush strip seal — flexible threshold and perimeter door sealing",
-    gallery: gallery("/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -10500,9 +10492,9 @@ export const products: Product[] = [
     description: "Supporting accessories for sealing system packages — finger-pinch protection, smoke seals and specialist accessories that complete coordinated perimeter sealing installations.",
     shortDescription: "Supporting accessories completing coordinated sealing system packages.",
     overview: "Complementary Products route — see the route group for individual product pages.",
-    image: "/tur/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg",
     imageAlt: "Sealing system complementary products — completion accessories",
-    gallery: gallery("/tur/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -10525,9 +10517,9 @@ export const products: Product[] = [
     description: "TS8Si concealed automatic door bottom seal — silicon rubber, spring-loaded, morticed into door bottom edge for acoustic and medium-temperature smoke control on single and double butt hinged doors.",
     shortDescription: "Concealed automatic silicon door bottom seal for acoustic and smoke control.",
     overview: "The TS8Si is a concealed acoustic automatic door bottom seal with silicon rubber seal, spring-loaded to lift clear of the floor when the door opens a few millimetres. The seal mortices into a 15mm × 34mm groove at the door bottom edge and can also fit aluminium door hollow rails. An adjustable strike block controls the sealing action. Suitable for medium-temperature smoke and fire door applications.",
-    image: "/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg",
     imageAlt: "TS8Si concealed automatic door bottom seal — silicon rubber profile",
-    gallery: gallery("/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts8si/door-bottom-seals-ts8si-main.jpg"),
     features: [
       "Spring-loaded automatic lift — clears floor and carpet when door opens.",
       "Concealed installation in morticed groove for neat appearance.",
@@ -10563,9 +10555,9 @@ export const products: Product[] = [
     description: "TS70 fully morticed automatic door bottom seal — heavy-duty, spring-loaded EPDM sponge seal for single or double butt hinged doors. Self-levelling and reversible for left or right-handed operation.",
     shortDescription: "Heavy-duty fully morticed automatic door bottom seal with EPDM sponge seal.",
     overview: "The TS70 is a heavy-duty fully morticed automatic door bottom seal — the morticed version of the surface-mounted RP38. Spring-loaded to lift clear of the floor when the door opens a few millimetres, and operating automatically by pressure against the adjusting screw on the door jamb. The self-levelling design is reversible for left or right-handed door operation. Minimum door thickness 45mm.",
-    image: "/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts70/door-bottom-seals-ts70-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts70/door-bottom-seals-ts70-main.jpg",
     imageAlt: "TS70 fully morticed automatic door bottom seal",
-    gallery: gallery("/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts70/door-bottom-seals-ts70-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts70/door-bottom-seals-ts70-main.jpg"),
     features: [
       "Spring-loaded automatic retraction on door opening.",
       "Self-levelling mechanism accommodates varying floor conditions.",
@@ -10601,9 +10593,9 @@ export const products: Product[] = [
     description: "TS5A flexible EPDM weather strip sweep seal — surface-applied to door bottoms, screen doors and sash windows. Quick installation without door removal.",
     shortDescription: "Flexible EPDM weather strip sweep seal for door bottoms and screen doors.",
     overview: "The TS5A is a flexible EPDM weather strip sweep seal that fits to the bottom of doors, screen doors and sash windows. It prevents insects, draughts and rain from entering and is easy to install without removing the door. Also suitable for garage tilt-up doors around the stiles. Compatible with Raven threshold plates RP13 and RP82.",
-    image: "/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts5a/door-bottom-seals-ts5a-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts5a/door-bottom-seals-ts5a-main.jpg",
     imageAlt: "TS5A flexible EPDM weather strip sweep seal",
-    gallery: gallery("/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts5a/door-bottom-seals-ts5a-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts5a/door-bottom-seals-ts5a-main.jpg"),
     features: [
       "Flexible EPDM construction for weather and insect control.",
       "No door removal required — quick field installation.",
@@ -10638,9 +10630,9 @@ export const products: Product[] = [
     description: "TS17B co-extruded PVC sweep seal — adhesive-backed, surface-applied to door bottoms and sliding screen doors. Quick installation without door removal, up to 15mm gap.",
     shortDescription: "Co-extruded PVC sweep seal for door bottoms and sliding screen doors.",
     overview: "The TS17B is a co-extruded rigid and flexible PVC sweep seal for door stiles and bottoms. The exceptional flexibility enables swift installation without door removal. Particularly suited for sliding and security screen doors. Available in White, Grey or Brown. Screw-fixable as an alternative to adhesive. Compatible with Raven threshold plates RP13 and RP82.",
-    image: "/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts17b/door-bottom-seals-ts17b-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts17b/door-bottom-seals-ts17b-main.jpg",
     imageAlt: "TS17B co-extruded PVC sweep seal for door bottoms",
-    gallery: gallery("/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts17b/door-bottom-seals-ts17b-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts17b/door-bottom-seals-ts17b-main.jpg"),
     features: [
       "Co-extruded rigid and flexible PVC for exceptional flexibility.",
       "No door removal required — rapid tool-free installation.",
@@ -10673,9 +10665,9 @@ export const products: Product[] = [
     description: "TS99Si heavy-duty automatic door bottom seal — face mount, fully morticed or semi-morticed installation, silicon seal with medium-temperature smoke rating for acoustic and smoke control.",
     shortDescription: "Heavy-duty automatic door bottom seal for face-mount or morticed installation.",
     overview: "The TS99Si is a heavy-duty automatic door bottom seal, spring-loaded to lift clear of the floor when the door opens a few millimetres. Available in face mount, fully morticed and semi-morticed configurations. Medium temperature smoke rated with silicon seal. Operated automatically by pressure against the adjustment block on the door jamb. All escutcheon plates and face mount angle included.",
-    image: "/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts99si/door-bottom-seals-ts99si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts99si/door-bottom-seals-ts99si-main.jpg",
     imageAlt: "TS99Si heavy-duty automatic door bottom seal",
-    gallery: gallery("/tur/sealing-systems/door-bottom-seals/door-bottom-seals-ts99si/door-bottom-seals-ts99si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-bottom-seals/door-bottom-seals-ts99si/door-bottom-seals-ts99si-main.jpg"),
     features: [
       "Spring-loaded automatic lift mechanism.",
       "Available in face mount, fully morticed and semi-morticed configurations.",
@@ -10709,9 +10701,9 @@ export const products: Product[] = [
     description: "TS115 low-profile aluminium threshold plate — used in conjunction with door bottom seals to prevent rain, draught and smoke infiltration at the door sill.",
     shortDescription: "Low-profile aluminium threshold plate for use with door bottom seals.",
     overview: "The TS115 is a low-profile aluminium threshold plate used in conjunction with Raven door bottom seals to prevent rain, draught and smoke infiltration at the door sill. Available in Satin Clear (Silver) or Bronze anodised finish. Can be fixed with screws or adhesive.",
-    image: "/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg",
     imageAlt: "TS115 low-profile aluminium threshold plate seal",
-    gallery: gallery("/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts115/threshold-plate-seals-ts115-main.jpg"),
     features: [
       "Low-profile design minimises trip hazard.",
       "Prevents rain, draught and smoke infiltration.",
@@ -10743,9 +10735,9 @@ export const products: Product[] = [
     description: "TS117Si silicon rubber threshold plate seal — incorporates a silicon seal in the threshold plate, eliminating the need for a separate door bottom seal. Suited to outward-opening butt hinged doors and panic exit devices.",
     shortDescription: "Silicon threshold plate seal — no separate door bottom seal required.",
     overview: "The TS117Si threshold plate seal incorporates a silicon rubber seal within the threshold plate, removing the need for a separate door bottom seal. Designed for outward-opening butt hinged doors and compatible with panic exit devices. For acoustic applications, sound foam can be added beneath the threshold. Gap compression 0mm to 2mm.",
-    image: "/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts117si/threshold-plate-seals-ts117si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts117si/threshold-plate-seals-ts117si-main.jpg",
     imageAlt: "TS117Si silicon threshold plate seal",
-    gallery: gallery("/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts117si/threshold-plate-seals-ts117si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts117si/threshold-plate-seals-ts117si-main.jpg"),
     features: [
       "Integrated seal eliminates need for separate door bottom seal.",
       "Compatible with panic-type exit devices.",
@@ -10779,9 +10771,9 @@ export const products: Product[] = [
     description: "TS111Si silicon rubber threshold plate seal — black silicon seal integrated in the threshold plate for outward-opening butt hinged doors, compatible with panic exit devices. Satin Clear or Bronze finish.",
     shortDescription: "Black silicon threshold plate seal for outward-opening doors with panic exits.",
     overview: "The TS111Si is a weather-resistant threshold plate seal with integrated black silicon rubber seal, designed for outward-opening butt hinged doors and compatible with panic exit devices. Like the TS117Si, it eliminates the need for a separate door bottom seal. Available in Satin Clear or Bronze finish. Acoustic applications can be accommodated by filling the void with sound foam.",
-    image: "/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts111si/threshold-plate-seals-ts111si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts111si/threshold-plate-seals-ts111si-main.jpg",
     imageAlt: "TS111Si black silicon threshold plate seal",
-    gallery: gallery("/tur/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts111si/threshold-plate-seals-ts111si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plate-seals/threshold-plate-seals-ts111si/threshold-plate-seals-ts111si-main.jpg"),
     features: [
       "Integrated silicon seal — no separate door bottom seal required.",
       "Compatible with panic-type exit devices.",
@@ -10817,9 +10809,9 @@ export const products: Product[] = [
     description: "TS19 ribbed aluminium threshold plate — hard anodised, low profile, suitable for heavy pedestrian and wheeled commercial traffic. Provides a clean delineation between adjacent floor surfaces and an optimal sealing surface for door bottom seals.",
     shortDescription: "Ribbed hard anodised aluminium threshold plate for heavy commercial traffic.",
     overview: "The TS19 is a hard anodised aluminium threshold plate with a ribbed profile, installed at door sills to provide a clean delineation between adjacent floor surfaces. Designed to withstand heavy pedestrian and wheeled commercial traffic. Supports door bottom sweep seals on carpeted, uneven or sloping floors. Wheelchair-accessible with relevant building code compliance. Available in Satin Clear or Bronze anodised finish.",
-    image: "/tur/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg",
     imageAlt: "TS19 ribbed aluminium threshold plate",
-    gallery: gallery("/tur/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts19/threshold-plates-ts19-main.jpg"),
     features: [
       "Hard anodised ribbed profile for heavy pedestrian and wheeled traffic.",
       "Low profile prevents tripping and wheel obstruction.",
@@ -10853,9 +10845,9 @@ export const products: Product[] = [
     description: "TS18 heavy-duty aluminium threshold plate for butt hinged, double and pivot hinge doors — accommodates high-pile carpets and concealed screw fixings through door jambs.",
     shortDescription: "Heavy-duty aluminium threshold plate for butt hinged and pivot hinge doors.",
     overview: "The TS18 is a heavy-duty aluminium threshold plate designed for butt hinged, single, double or pivot hinge doors. The design allows door leaves to clear high-pile carpets and accommodates concealed screw fixings through door jambs. Can be pre-assembled with an aluminium door frame prior to transport as a complete unit. Compatible with TUR door bottom seals TS2B and TS74.",
-    image: "/tur/sealing-systems/threshold-plates/threshold-plates-ts18/threshold-plates-ts18-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts18/threshold-plates-ts18-main.jpg",
     imageAlt: "TS18 heavy-duty aluminium threshold plate",
-    gallery: gallery("/tur/sealing-systems/threshold-plates/threshold-plates-ts18/threshold-plates-ts18-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts18/threshold-plates-ts18-main.jpg"),
     features: [
       "Accommodates door leaves clearing high-pile carpet.",
       "Concealed screw fixings through door jambs.",
@@ -10888,9 +10880,9 @@ export const products: Product[] = [
     description: "TS27 heavy-duty aluminium threshold plate — sill and carpet edge protection with Satin Clear or Bronze anodised finish. Pre-supplied fasteners.",
     shortDescription: "Heavy-duty aluminium threshold plate for sill and carpet edge protection.",
     overview: "The TS27 is a heavy-duty aluminium threshold plate for door sill and carpet edge protection. Available in Satin Clear (Silver) or Bronze anodised finish. Zinc plated CSK screws supplied. Compatible with TUR door bottom seals.",
-    image: "/tur/sealing-systems/threshold-plates/threshold-plates-ts27/threshold-plates-ts27-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts27/threshold-plates-ts27-main.jpg",
     imageAlt: "TS27 heavy-duty aluminium threshold plate",
-    gallery: gallery("/tur/sealing-systems/threshold-plates/threshold-plates-ts27/threshold-plates-ts27-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts27/threshold-plates-ts27-main.jpg"),
     features: [
       "Heavy-duty construction for sill and carpet edge protection.",
       "Multiple finish options.",
@@ -10921,9 +10913,9 @@ export const products: Product[] = [
     description: "TS28 wide heavy-duty aluminium threshold plate — for use with door bottom seals or pivot hinge doors. Also available in solid brass for weather-exposed applications.",
     shortDescription: "Wide heavy-duty threshold plate for door bottom seals and pivot doors.",
     overview: "The TS28 is a wide heavy-duty aluminium threshold plate used in conjunction with door bottom seals or pivot hinge doors. Also available in solid brass for weather-exposed applications. Available in Satin Clear anodised finish. Zinc plated CSK screws supplied.",
-    image: "/tur/sealing-systems/threshold-plates/threshold-plates-ts28/threshold-plates-ts28-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts28/threshold-plates-ts28-main.jpg",
     imageAlt: "TS28 wide heavy-duty aluminium threshold plate",
-    gallery: gallery("/tur/sealing-systems/threshold-plates/threshold-plates-ts28/threshold-plates-ts28-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts28/threshold-plates-ts28-main.jpg"),
     features: [
       "Wide profile for use with door bottom seals or pivot hinge doors.",
       "Solid brass option for weather-exposed applications.",
@@ -10955,9 +10947,9 @@ export const products: Product[] = [
     description: "TS77 ribbed aluminium threshold plate — for door sills or internal door mat ramp frames. Ribbed extrusions can be positioned back-to-back for a two-way ramp. NCC BCA Pt. D2.15 compliant.",
     shortDescription: "Ribbed aluminium threshold plate and internal mat ramp frame.",
     overview: "The TS77 is a heavy-duty ribbed aluminium threshold plate for door sills or internal door mat ramp frames. The ribbed extrusions can be positioned back-to-back to create a two-way threshold ramp. Complies with NCC BCA Pt. D2.15 Thresholds (b). Available in Satin Clear or Bronze anodised finish.",
-    image: "/tur/sealing-systems/threshold-plates/threshold-plates-ts77/threshold-plates-ts77-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts77/threshold-plates-ts77-main.jpg",
     imageAlt: "TS77 ribbed aluminium threshold plate and mat ramp frame",
-    gallery: gallery("/tur/sealing-systems/threshold-plates/threshold-plates-ts77/threshold-plates-ts77-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/threshold-plates/threshold-plates-ts77/threshold-plates-ts77-main.jpg"),
     features: [
       "Ribbed extrusion — can be positioned back-to-back for two-way ramp.",
       "Suitable as door sill or internal mat ramp frame.",
@@ -10992,9 +10984,9 @@ export const products: Product[] = [
     description: "TS114 door bottom intumescent fire and hot smoke seal — retrofit design for non-compliant fire doors with clearances of 14mm to 20mm. No door removal required.",
     shortDescription: "Retrofit intumescent fire and smoke seal for gaps 14–20mm at door bottoms.",
     overview: "The TS114 is a door bottom intumescent fire and hot smoke seal designed to salvage non-compliant fire doors where floor clearances exceed 10mm. The retrofit design avoids costly door replacement and eliminates the need to remove doors during installation. Approved for use on leading proprietary fire doors. The finned gasket engages an approved threshold plate to enhance sealing on uneven surfaces.",
-    image: "/tur/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg",
     imageAlt: "TS114 intumescent fire and hot smoke door bottom seal",
-    gallery: gallery("/tur/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/intumescent-seals/intumescent-seals-ts114/intumescent-seals-ts114-main.jpg"),
     features: [
       "Retrofit design — no door removal required.",
       "Suitable for clearances of 14mm to 20mm.",
@@ -11031,9 +11023,9 @@ export const products: Product[] = [
     description: "TS120 co-extruded PVC acoustic and smoke seal — self-adhesive, for rebated frames of single or double butt hinged doors and windows. Gap 3mm to 5.5mm.",
     shortDescription: "Co-extruded PVC self-adhesive acoustic and smoke seal for rebated door frames.",
     overview: "The TS120 is a co-extruded rigid and flexible flame-retardant PVC acoustic and smoke seal for rebated frames of single or double butt hinged doors and windows. Self-adhesive backing on both sides for quick installation. Discreetly positioned in protected frame corners. Available in door set sizes. Gap range 3mm to 5.5mm.",
-    image: "/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts120/door-frame-or-perimeter-seals-ts120-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts120/door-frame-or-perimeter-seals-ts120-main.jpg",
     imageAlt: "TS120 co-extruded PVC acoustic and smoke perimeter seal",
-    gallery: gallery("/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts120/door-frame-or-perimeter-seals-ts120-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts120/door-frame-or-perimeter-seals-ts120-main.jpg"),
     features: [
       "Acoustic and smoke seal performance.",
       "Self-adhesive both sides — no tools required for installation.",
@@ -11065,9 +11057,9 @@ export const products: Product[] = [
     description: "TS69 woven pile sweep seal — fits into a groove around the door perimeter or frame to reduce air movement around internal doors without restricting operation. Gap 3mm to 4mm.",
     shortDescription: "Woven pile perimeter seal for groove-fit installation around door frames.",
     overview: "The TS69 is a woven pile sweep seal that fits into a 10mm × 4mm groove around the door perimeter or frame. The non-obtrusive design reduces air movement without restricting door operation. PVC rigid holder in Bronze with black woven polypropylene pile. Gap range 3mm to 4mm.",
-    image: "/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts69/door-frame-or-perimeter-seals-ts69-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts69/door-frame-or-perimeter-seals-ts69-main.jpg",
     imageAlt: "TS69 woven pile door perimeter seal",
-    gallery: gallery("/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts69/door-frame-or-perimeter-seals-ts69-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts69/door-frame-or-perimeter-seals-ts69-main.jpg"),
     features: [
       "Non-obtrusive woven pile design — does not impede door operation.",
       "Fits into groove around door perimeter or frame.",
@@ -11098,9 +11090,9 @@ export const products: Product[] = [
     description: "TS73 co-extruded PVC perimeter seal — push-in fit into 2.5mm × 6mm kerf groove. Maintains tight radii for compound curves. UV, ozone and mildew resistant. Gap 6mm to 8mm.",
     shortDescription: "Co-extruded PVC perimeter seal for kerf groove installation, suits compound curves.",
     overview: "The TS73 is a co-extruded rigid and flexible PVC sweep seal for insertion into saw kerf grooves on frames or doors. The material maintains tight radii and accommodates compound curves when bent around a frame. Resistant to UV, ozone, mildew and discoloration. Available in coil form up to 200 metres. Two rows recommended for enhanced noise reduction.",
-    image: "/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts73/door-frame-or-perimeter-seals-ts73-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts73/door-frame-or-perimeter-seals-ts73-main.jpg",
     imageAlt: "TS73 co-extruded PVC door frame perimeter seal",
-    gallery: gallery("/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts73/door-frame-or-perimeter-seals-ts73-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts73/door-frame-or-perimeter-seals-ts73-main.jpg"),
     features: [
       "Push-in locking fit in kerf groove — no adhesive required.",
       "Maintains tight radii and accommodates compound curves.",
@@ -11132,9 +11124,9 @@ export const products: Product[] = [
     description: "TS124 co-extruded PVC acoustic smoke seal — self-adhesive, multi-finned, for rebated timber or steel door frames. Suitable for new and retrofit installation. Gap 3mm to 5mm.",
     shortDescription: "Co-extruded PVC self-adhesive acoustic smoke seal for rebated door frames.",
     overview: "The TS124 Delta Seal Plus™ is a co-extruded rigid and flexible flame-retardant PVC acoustic smoke seal for rebated timber or steel door frames. Self-adhesive backing on both rigid fixing legs. Multi-finned profile for improved sealing contact. Gap range 3mm to 5mm. Suitable for new and retrofit applications.",
-    image: "/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts124/door-frame-or-perimeter-seals-ts124-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts124/door-frame-or-perimeter-seals-ts124-main.jpg",
     imageAlt: "TS124 co-extruded PVC acoustic smoke perimeter seal",
-    gallery: gallery("/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts124/door-frame-or-perimeter-seals-ts124-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts124/door-frame-or-perimeter-seals-ts124-main.jpg"),
     features: [
       "Multi-finned self-adhesive design for improved sealing contact.",
       "Acoustic smoke seal performance.",
@@ -11167,9 +11159,9 @@ export const products: Product[] = [
     description: "TS56 finned PVC sweep seal — fits into a groove around the door perimeter or frame to reduce noise and air movement without obstructing door operation. Gap 2mm to 4mm.",
     shortDescription: "Finned PVC sweep seal for groove-fit installation around internal door frames.",
     overview: "The TS56 is a finned PVC sweep seal that fits into a 10mm × 4mm groove around the door perimeter or frame. Reduces noise and air movement around internal doors without restricting door function. Rigid PVC holder in Bronze with flexible PVC fins in Black. Gap range 2mm to 4mm. Replacement seal TS469.",
-    image: "/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts56/door-frame-or-perimeter-seals-ts56-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts56/door-frame-or-perimeter-seals-ts56-main.jpg",
     imageAlt: "TS56 finned PVC door perimeter seal",
-    gallery: gallery("/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts56/door-frame-or-perimeter-seals-ts56-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts56/door-frame-or-perimeter-seals-ts56-main.jpg"),
     features: [
       "Finned PVC fins for reliable gap sealing.",
       "Reduces noise and air movement without obstructing door operation.",
@@ -11201,9 +11193,9 @@ export const products: Product[] = [
     description: "TS78Si acoustic medium-temperature smoke door frame seal — aluminium carrier with silicon rubber seal for head and jambs of single or double butt hinged doors. Gap 0mm to 6mm.",
     shortDescription: "Aluminium carrier silicon seal for acoustic and smoke control at door head and jambs.",
     overview: "The TS78Si is an acoustic medium-temperature smoke door frame seal with a sturdy aluminium carrier and silicon rubber seal. Installs on door stops at the head and jambs of single or double butt hinged doors. The slotted aluminium carrier allows easy adjustment around jambs and door removal. Suitable for mitred or butt joint configurations. Gap range 0mm to 6mm.",
-    image: "/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg",
     imageAlt: "TS78Si aluminium carrier silicon door frame seal",
-    gallery: gallery("/tur/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/door-frame-or-perimeter-seals/door-frame-or-perimeter-seals-ts78si/door-frame-or-perimeter-seals-ts78si-main.jpg"),
     features: [
       "Acoustic and medium-temperature smoke seal performance.",
       "Slotted aluminium carrier for easy installation and adjustment.",
@@ -11239,9 +11231,9 @@ export const products: Product[] = [
     description: "TS16Si acoustic and smoke astragal — aluminium trim with silicon rubber seal for the meeting stiles of double butt hinged doors. Gap 2.5mm to 8mm. BS 476 Section 31.1 smoke leakage compliant.",
     shortDescription: "Acoustic and smoke astragal for double-door meeting stiles — silicon rubber seal.",
     overview: "The TS16Si is an acoustic and smoke meeting stile astragal with an aluminium trim that conceals the sealing portion and provides a secure weatherproof rebate stop. Designed for the meeting stiles of double butt hinged doors, plain or rebated. The aluminium trim accommodates locks and latches where necessary. Complies with BS 476 Section 31.1, AS 6905 and EN 13501-2 Sa/Sm smoke leakage standards. For maximum acoustic performance, install two seals — one per leaf.",
-    image: "/tur/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg",
     imageAlt: "TS16Si acoustic and smoke meeting stile astragal",
-    gallery: gallery("/tur/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/astragals/astragals-ts16si/astragals-ts16si-main.jpg"),
     features: [
       "Acoustic and smoke seal at double-door meeting stile.",
       "Aluminium trim conceals seal and provides weatherproof rebate stop.",
@@ -11279,9 +11271,9 @@ export const products: Product[] = [
     description: "TS65 magnetic meeting stile astragal — refrigeration-type PVC magnetic strip in an anodised aluminium channel, morticed into double timber door stiles. Provides a very positive seal; latches may not be required.",
     shortDescription: "Magnetic PVC meeting stile seal for double timber doors — morticed aluminium channel.",
     overview: "The TS65 is a refrigeration-type PVC magnetic strip housed in an anodised aluminium channel, morticed into hardwood double timber door stiles. The magnetic seal provides a very positive seal with sufficient closing strength that latches may not be required. Magnetic seals are locked to prevent creeping. Suited to pivot, sliding or butt-hinged hardwood double timber doors. Not recommended for highly active doors — suited to infrequent use. Centre latching cannot be used in this configuration.",
-    image: "/tur/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg",
     imageAlt: "TS65 magnetic meeting stile astragal for double timber doors",
-    gallery: gallery("/tur/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/magnetic-astragals/magnetic-astragals-ts65/magnetic-astragals-ts65-main.jpg"),
     features: [
       "Refrigeration-type PVC magnetic strip for very positive contact seal.",
       "Sufficient closing strength — latches may not be required.",
@@ -11319,9 +11311,9 @@ export const products: Product[] = [
     description: "TS48B EPDM closed-cell sponge self-adhesive door and window frame weather strip — compression seal set into frame corners. Gap 3mm to 5mm. Available in White, Brown or Grey.",
     shortDescription: "EPDM closed-cell sponge self-adhesive compression seal for door and window frames.",
     overview: "The TS48B is a superior quality self-adhesive EPDM closed-cell sponge compression seal for door and window frames. Set into the corners between the stop and frame to provide a compression seal. Available in 5m coil packs (2 × 2.5m) or jumbo 50m reels. Available in White, Brown or Grey. Contact surface must be clean, smooth and if painted, well cured.",
-    image: "/tur/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg",
     imageAlt: "TS48B EPDM self-adhesive compression seal for door and window frames",
-    gallery: gallery("/tur/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/self-adhesive-seals/self-adhesive-seals-ts48b/self-adhesive-seals-ts48b-main.jpg"),
     features: [
       "Superior quality EPDM closed-cell sponge construction.",
       "Compression seal for tight, reliable contact.",
@@ -11357,9 +11349,9 @@ export const products: Product[] = [
     description: "TS2A nylon brush strip seal with aluminium carrier — self-adhesive or screw fix, for door bottoms on sliding, double acting and single hinged doors. Gap up to 19mm.",
     shortDescription: "Nylon brush strip seal for door bottoms on sliding and double acting doors.",
     overview: "The TS2A is a nylon brush strip seal with an aluminium carrier, designed for sliding or double acting door bottoms. Fine, dense, UV-stabilised black nylon filament. Can be concealed within aluminium door suite bottom rails when installed by the fabricator. Self-adhesive backing or screw fix. Used in conjunction with TUR threshold plates. Gap up to 19mm user determined.",
-    image: "/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg",
     imageAlt: "TS2A nylon brush strip seal for sliding and double acting door bottoms",
-    gallery: gallery("/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts2a/brush-strip-seals-ts2a-main.jpg"),
     features: [
       "Fine, dense UV-stabilised black nylon filament.",
       "Self-adhesive backing or screw fix.",
@@ -11393,9 +11385,9 @@ export const products: Product[] = [
     description: "TS2B nylon brush strip seal with galvanised steel spine and anodised aluminium holder — for door bottoms on sliding, revolving, pivot, roll-up and panel lift doors. Gap up to 13mm.",
     shortDescription: "Heavy-duty nylon brush strip seal with galvanised steel spine for demanding door types.",
     overview: "The TS2B is a nylon brush strip seal with a galvanised steel spine and anodised aluminium holder, designed for heavy-duty door types including sliding, revolving, pivot, roll-up and panel lift doors. Fine, dense, UV-stabilised black nylon filament with minimal wear characteristics. Seals against smoke, odours, draughts, light, dust, insects and bushfire embers. Also available without aluminium holders. Self-adhesive backing or screw fix.",
-    image: "/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts2b/brush-strip-seals-ts2b-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts2b/brush-strip-seals-ts2b-main.jpg",
     imageAlt: "TS2B heavy-duty nylon brush strip seal with galvanised steel spine",
-    gallery: gallery("/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts2b/brush-strip-seals-ts2b-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts2b/brush-strip-seals-ts2b-main.jpg"),
     features: [
       "Fine, dense UV-stabilised nylon filament with minimal wear.",
       "Galvanised steel spine for heavy-duty performance.",
@@ -11430,9 +11422,9 @@ export const products: Product[] = [
     description: "TS41 nylon brush strip seal — for door bottoms on single, double, revolving and sliding doors and roll-up door lintels. Large gap range 30mm to 50mm. Prevents bird and debris ingress.",
     shortDescription: "Large-gap nylon brush strip seal for door bottoms and roll-up door lintels.",
     overview: "The TS41 is a nylon brush strip seal designed for installations where large lintels of roll-up doors are present, or large gap conditions are needed. Fine, dense black nylon filament with aluminium carrier. Prevents ingress of birds and wind-blown debris. Gap range 30mm to 50mm. Requires a fairly constant sealing gap during door operation to avoid excessive wear.",
-    image: "/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts41/brush-strip-seals-ts41-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts41/brush-strip-seals-ts41-main.jpg",
     imageAlt: "TS41 large-gap nylon brush strip seal for roll-up door lintels",
-    gallery: gallery("/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts41/brush-strip-seals-ts41-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts41/brush-strip-seals-ts41-main.jpg"),
     features: [
       "Large gap range 30mm to 50mm.",
       "Prevents bird and wind-blown debris ingress.",
@@ -11465,9 +11457,9 @@ export const products: Product[] = [
     description: "TS74 nylon brush strip seal with self-adhesive aluminium carrier — for door bottoms on single, double, sliding and double acting doors. Gap up to 13mm.",
     shortDescription: "Self-adhesive nylon brush strip seal for door bottoms on single and sliding doors.",
     overview: "The TS74 is a nylon brush strip seal with a self-adhesive aluminium carrier, designed for neat site installation at door bottoms on single, double, sliding and double acting doors. Fine, dense black nylon filament, UV-stabilised. Gap up to 13mm. Contact surface must be clean and smooth. Used with TUR threshold plates.",
-    image: "/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts74/brush-strip-seals-ts74-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts74/brush-strip-seals-ts74-main.jpg",
     imageAlt: "TS74 self-adhesive nylon brush strip seal for door bottoms",
-    gallery: gallery("/tur/sealing-systems/brush-strip-seals/brush-strip-seals-ts74/brush-strip-seals-ts74-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/brush-strip-seals/brush-strip-seals-ts74/brush-strip-seals-ts74-main.jpg"),
     features: [
       "Self-adhesive carrier for neat on-site installation.",
       "Fine, dense UV-stabilised black nylon filament.",
@@ -11503,9 +11495,9 @@ export const products: Product[] = [
     description: "TS62 finger-pinch protection — aluminium carrier with EPDM rubber seal, prevents finger jamming on the hinge side and jamb side of butt hinged or centre pivot doors. Up to 2100mm.",
     shortDescription: "Aluminium finger-pinch protection with EPDM seal for door hinge and jamb sides.",
     overview: "The TS62 is a finger-pinch protection device with an aluminium carrier and EPDM rubber seal, designed to prevent finger jamming on the hinge side and at the jamb on hinged side of doors. Provides maximum protection when installed to the full height of the door or jamb. Multiple units can be joined together using butt joints for longer lengths. Slotted fixing holes allow installation flexibility. Push-in cover strip.",
-    image: "/tur/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg",
     imageAlt: "TS62 finger-pinch protection for door hinge and jamb sides",
-    gallery: gallery("/tur/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/complementary-products/complementary-products-ts62/complementary-products-ts62-main.jpg"),
     features: [
       "Prevents finger jamming on hinge side and jamb side of doors.",
       "Maximum protection when installed full height.",
@@ -11539,9 +11531,9 @@ export const products: Product[] = [
     description: "TS62BW finger-pinch protection — PVC construction in Brown and White with coverstrips. Prevents finger jamming on the hinge side and jamb side of doors.",
     shortDescription: "PVC finger-pinch protection in Brown and White for door hinge and jamb sides.",
     overview: "The TS62BW is a PVC finger-pinch protection device available in Brown and White, with coverstrips included. Prevents finger jamming on the hinge side and jamb side of hinged doors. Replacement: TS462BW.",
-    image: "/tur/sealing-systems/complementary-products/complementary-products-ts62bw/complementary-products-ts62bw-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/complementary-products/complementary-products-ts62bw/complementary-products-ts62bw-main.jpg",
     imageAlt: "TS62BW PVC finger-pinch protection — Brown and White",
-    gallery: gallery("/tur/sealing-systems/complementary-products/complementary-products-ts62bw/complementary-products-ts62bw-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/complementary-products/complementary-products-ts62bw/complementary-products-ts62bw-main.jpg"),
     features: [],
     applications: ["Butt hinged doors — hinge and jamb sides"],
     specs: [
@@ -11569,9 +11561,9 @@ export const products: Product[] = [
     description: "TS600 Series wooden door and window frame gasket — PVC and silicone options in Brown, White or Grey. Hardness 40–80 Shore A for timber frame weather sealing applications.",
     shortDescription: "PVC and silicone door and window frame gasket for timber frame weather sealing.",
     overview: "The TS600 Series is a wooden door and window frame gasket range available in PVC and silicone materials. Available in Brown, White or Grey with hardness options from 40 to 80 Shore A to suit different timber frame installation requirements and weather sealing conditions.",
-    image: "/tur/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg",
+    image: "/tur/door-hardware/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg",
     imageAlt: "TS600 Series timber door and window frame gasket — weather stripping",
-    gallery: gallery("/tur/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg"),
+    gallery: gallery("/tur/door-hardware/sealing-systems/weather-stripping/weather-stripping-ts600-series/weather-stripping-ts600-series-main.jpg"),
     features: [
       "PVC and silicone material options.",
       "Available in Brown, White or Grey.",

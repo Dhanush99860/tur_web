@@ -1,4 +1,4 @@
-import { createInquiryHref } from "@/content/site/site-config";
+﻿import { createInquiryHref } from "@/content/site/site-config";
 import { catalogSections, getCatalogSection } from "@/content/catalog/sections";
 import type { CatalogCard, CatalogFamily, CatalogSectionSlug } from "@/types";
 
@@ -15,7 +15,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
       "Coordinated hardware families for hanging, controlling, securing and furnishing architectural door sets.",
     intro:
       "American Standard organizes the core door functions used across commercial, hospitality, healthcare and institutional specifications, helping teams move from family-level coordination into more specific child routes.",
-    image: "/tur/categories/default-2026954824201015.jpg",
+    image: "/tur/door-hardware/categories/default-2026954824201015.jpg",
     imageAlt: "Coordinated American Standard lever, cylinder and mortise lock hardware from TUR",
     highlights: [
       "7 coordinated routes",
@@ -33,7 +33,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         scope:
           "Includes hinges, concealed hinges, rising hinges and related hanging routes where dedicated pages exist.",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1260902568201015.jpg",
+        image: "/tur/door-hardware/categories/default-1260902568201015.jpg",
         imageAlt: "American Standard hanging hardware — hinges and door preparation components",
         imageClassName: "object-left-center",
       },
@@ -47,7 +47,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         scope:
           "Includes closers, floor-spring and controlled movement routes where available.",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-319952360201015.jpg",
+        image: "/tur/door-hardware/categories/default-319952360201015.jpg",
         imageAlt: "American Standard door closer — overhead control hardware",
         imageClassName: "object-[24%_center]",
       },
@@ -60,7 +60,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         scope:
           "Includes sash locks, latch locks, deadbolts, hook locks and related securing routes.",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1292769047201015.jpg",
+        image: "/tur/door-hardware/categories/default-1292769047201015.jpg",
         imageAlt: "American Standard mortise lock and cylinder — secure door hardware",
         imageClassName: "object-[32%_center]",
       },
@@ -73,7 +73,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         scope:
           "Includes bolting hardware used alongside lock and latch coordination.",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-517696467201015.jpg",
+        image: "/tur/door-hardware/categories/default-517696467201015.jpg",
         imageAlt: "American Standard flush bolt — door bolting hardware",
         imageClassName: "object-left-center",
       },
@@ -87,7 +87,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         scope:
           "Includes lever, trim and furnishing-led routes where detail pages exist.",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1228180766201015.jpg",
+        image: "/tur/door-hardware/categories/default-1228180766201015.jpg",
         imageAlt: "American Standard lever handle and trim hardware",
         imageClassName: "object-[58%_center]",
       },
@@ -100,7 +100,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         priority: "secondary",
         scope: "Includes rim, vertical rod and related exit-device routes.",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-848766351201015.jpg",
+        image: "/tur/door-hardware/categories/default-848766351201015.jpg",
         imageAlt: "American Standard emergency exit hardware — panic bar and life-safety devices",
         imageClassName: "object-[24%_center]",
       },
@@ -114,7 +114,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         scope:
           "Catalog support available where dedicated detail pages are still being staged.",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-355604123201015.jpg",
+        image: "/tur/door-hardware/categories/default-355604123201015.jpg",
         imageAlt: "American Standard ancillary hardware — accessories and supporting components",
         imageClassName: "object-left-center",
       },
@@ -241,7 +241,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
               "A route for hanging hardware families including spring hinges, full mortise hinges, continuous hinges and concealed bearing hinges.",
             href: routeGroupHref("door-hardware", "american-standard", "hang-the-door"),
             ctaLabel: "Explore Route",
-            image: "/tur/categories/default-1260902568201015.jpg",
+            image: "/tur/door-hardware/categories/default-1260902568201015.jpg",
             imageAlt: "American Standard hanging hardware — hinges and door preparation",
             imageClassName: "object-left-center",
           },
@@ -251,7 +251,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
               "A route for closer-led coordination, managed movement and controlled closing behavior.",
             href: routeGroupHref("door-hardware", "american-standard", "control-the-door"),
             ctaLabel: "Explore Route",
-            image: "/tur/categories/default-319952360201015.jpg",
+            image: "/tur/door-hardware/categories/default-319952360201015.jpg",
             imageAlt: "American Standard door closer — overhead door control hardware",
             imageClassName: "object-[24%_center]",
           },
@@ -261,7 +261,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
               "A route for lock, latch and controlled-opening security families.",
             href: routeGroupHref("door-hardware", "american-standard", "secure-the-door"),
             ctaLabel: "Explore Route",
-            image: "/tur/categories/default-1292769047201015.jpg",
+            image: "/tur/door-hardware/categories/default-1292769047201015.jpg",
             imageAlt: "American Standard mortise lock and cylinder hardware",
             imageClassName: "object-[32%_center]",
           },
@@ -297,7 +297,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
       "Premium ironmongery families for architectural door sets, finish coordination and furnishing packages.",
     intro:
       "European Ironmongery brings together core door functions and design-conscious hardware families suited to premium specifications.",
-    image: "/tur/european-ironmongery/furnish-the-door-lever-handle/lever-handle-te1920-966/lever-handle-te1920-966-main.jpg",
+    image: "/tur/door-hardware/european-ironmongery/furnish-the-door-lever-handle/lever-handle-te1920-966/lever-handle-te1920-966-main.jpg",
     imageAlt: "European Ironmongery lever and lockset hardware from TUR",
     highlights: ["Bolt The Door", "Cylinders", "TE1910 / TE1920 Lever Handles"],
     cards: [
@@ -307,7 +307,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "hang-the-door"),
         eyebrow: "Ironmongery Route",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/hang-the-door/te4100-series/te4100-series-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/hang-the-door/te4100-series/te4100-series-main.jpg",
         imageAlt: "TE4100 European ironmongery hinge — premium door hanging hardware",
       },
       {
@@ -316,7 +316,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "control-the-door"),
         eyebrow: "Ironmongery Route",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/control-the-door/door-closer-rack-pinion-track-arm-te7763b/door-closer-rack-pinion-track-arm-te7763b-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/control-the-door/door-closer-rack-pinion-track-arm-te7763b/door-closer-rack-pinion-track-arm-te7763b-main.jpg",
         imageAlt: "TE7763B rack and pinion closer — European ironmongery control hardware",
       },
       {
@@ -325,7 +325,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "secure-the-door"),
         eyebrow: "Ironmongery Route",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/secure-the-door/te1400-series-mortise-sash-lock-premium/te1400-series-mortise-sash-lock-premium-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/secure-the-door/te1400-series-mortise-sash-lock-premium/te1400-series-mortise-sash-lock-premium-main.jpg",
         imageAlt: "TE1400 European ironmongery mortise lockset — premium door security hardware",
       },
       {
@@ -334,7 +334,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "cylinders"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/cylinders/te3600-series/te3600-series-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/cylinders/te3600-series/te3600-series-main.jpg",
         imageAlt: "TE3600 Euro profile cylinder — European ironmongery cylinder hardware",
       },
       {
@@ -344,7 +344,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "furnish-the-door"),
         eyebrow: "Featured Family",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/furnish-the-door/pull-plates-european/pull-plates-european-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/furnish-the-door/pull-plates-european/pull-plates-european-main.jpg",
         imageAlt: "European Ironmongery pull plates and pull handles — furnishing hardware",
       },
       {
@@ -353,7 +353,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "bolt-the-door"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/bolt-the-door/lever-action-flush-bolt-european/lever-action-flush-bolt-european-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/bolt-the-door/lever-action-flush-bolt-european/lever-action-flush-bolt-european-main.jpg",
         imageAlt: "European ironmongery lever action flush bolt — door bolting hardware",
       },
       {
@@ -362,7 +362,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "ancillary-products"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/ancillary-products/door-stop-european/door-stop-european-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/ancillary-products/door-stop-european/door-stop-european-main.jpg",
         imageAlt: "European ironmongery ancillary products — door stops, indicators and accessories",
       },
       {
@@ -371,7 +371,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "emergency-exits"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/emergency-exits/te9800-series-premium/te9800-series-premium-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/emergency-exits/te9800-series-premium/te9800-series-premium-main.jpg",
         imageAlt: "TE9800 European ironmongery exit device — finish-coordinated emergency exit",
       },
       {
@@ -380,7 +380,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "european-ironmongery", "furnish-the-door-lever-handle"),
         eyebrow: "Featured Family",
         ctaLabel: "Explore Route",
-        image: "/tur/european-ironmongery/furnish-the-door-lever-handle/lever-handle-te1910-968/lever-handle-te1910-968-main.jpg",
+        image: "/tur/door-hardware/european-ironmongery/furnish-the-door-lever-handle/lever-handle-te1910-968/lever-handle-te1910-968-main.jpg",
         imageAlt: "TE1910 lever handle — European Ironmongery furnishing hardware",
       },
     ],
@@ -425,7 +425,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
       "Frameless and all-glass fittings for hinges, clips, patch fittings, pull handles and supporting glass applications.",
     intro:
       "Glass Hardware groups contemporary fitting families for frameless entrances, partitions and premium all-glass door applications.",
-    image: "/tur/categories/default-834056193201116.jpg",
+    image: "/tur/door-hardware/categories/default-834056193201116.jpg",
     imageAlt: "Glass hardware solutions from TUR — hinges, patch fittings and pull handles",
     highlights: ["Glass Hinge & Glass Clip", "Patch Fitting", "Pull Handle"],
     cards: [
@@ -435,7 +435,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "glass-hardware", "glass-hinge-glass-clip"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-2080527890201111.jpg",
+        image: "/tur/door-hardware/categories/default-2080527890201111.jpg",
         imageAlt: "TG.GH glass hinges and clips for frameless architectural glass applications",
       },
       {
@@ -444,7 +444,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "glass-hardware", "bathroom-handle-glass-knob"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1966218428201111.jpg",
+        image: "/tur/door-hardware/categories/default-1966218428201111.jpg",
         imageAlt: "TG.BH bathroom handle and TG.GK glass knob — glass hardware",
       },
       {
@@ -453,7 +453,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "glass-hardware", "patch-fitting"),
         eyebrow: "Featured Family",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-45651367201111.jpg",
+        image: "/tur/door-hardware/categories/default-45651367201111.jpg",
         imageAlt: "TG.PF patch fitting — hydraulic coordination for frameless glass doors",
       },
       {
@@ -462,7 +462,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "glass-hardware", "pull-handle"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-769966786201111.jpg",
+        image: "/tur/door-hardware/categories/default-769966786201111.jpg",
         imageAlt: "TG.PH architectural pull handles for glass and premium door applications",
       },
       {
@@ -471,7 +471,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "glass-hardware", "lipseal"),
         eyebrow: "Family",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1292103519201111.jpg",
+        image: "/tur/door-hardware/categories/default-1292103519201111.jpg",
         imageAlt: "TG.LS lipseal — glass edge sealing for frameless glass doors and partitions",
       },
     ],
@@ -516,7 +516,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
       "Integrated locking, release devices, E-ACCESS systems and accessories for secure and coordinated entry points.",
     intro:
       "Access Control covers the locking, release and electronic access layers needed to coordinate secure opening packages across commercial and institutional projects.",
-    image: "/tur/categories/default-74293256201015.jpg",
+    image: "/tur/door-hardware/categories/default-74293256201015.jpg",
     imageAlt: "Access control and electromagnetic locking systems from TUR",
     highlights: ["Electromagnetic Locks", "Electric Strikes", "E-ACCESS"],
     cards: [
@@ -526,7 +526,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "electromagnetic-locks"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-228066963201112.jpg",
+        image: "/tur/door-hardware/categories/default-228066963201112.jpg",
         imageAlt: "TU electromagnetic locks — surface-mounted access control maglocks",
       },
       {
@@ -535,7 +535,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "electric-strikes"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-66092838201112.jpg",
+        image: "/tur/door-hardware/categories/default-66092838201112.jpg",
         imageAlt: "TU electric strikes — ANSI rim strike and European mortise release hardware",
       },
       {
@@ -544,7 +544,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "armature-mounting-accessories"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-42037815201112.jpg",
+        image: "/tur/door-hardware/categories/default-42037815201112.jpg",
         imageAlt: "Armature mounting accessories — brackets for electromagnetic lock installation",
       },
       {
@@ -553,7 +553,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "electromechanical-locking-devices"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-973600067201112.jpg",
+        image: "/tur/door-hardware/categories/default-973600067201112.jpg",
         imageAlt: "TU.L800 and TU.PBH-350 electromechanical locking devices",
       },
       {
@@ -562,7 +562,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "e-access"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1195187513201112.jpg",
+        image: "/tur/door-hardware/categories/default-1195187513201112.jpg",
         imageAlt: "EasiProx Bluetooth and RFID access readers — E-ACCESS electronic systems",
       },
       {
@@ -571,7 +571,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "digital-keypad-system"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-941202816201112.jpg",
+        image: "/tur/door-hardware/categories/default-941202816201112.jpg",
         imageAlt: "TU.DG-750 digital keypad system — PIN-based access control",
       },
       {
@@ -580,7 +580,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "infrared-wireless-exit-devices"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-107836858201112.jpg",
+        image: "/tur/door-hardware/categories/default-107836858201112.jpg",
         imageAlt: "TU.RTS infrared request-to-exit sensors — touchless egress devices",
       },
       {
@@ -589,7 +589,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "electromagnetic-door-holders"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1789777103201112.jpg",
+        image: "/tur/door-hardware/categories/default-1789777103201112.jpg",
         imageAlt: "TU.D900 electromagnetic door holders — fire door hold-open devices",
       },
       {
@@ -598,7 +598,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "access-control", "access-control-accessories"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-936568577201112.jpg",
+        image: "/tur/door-hardware/categories/default-936568577201112.jpg",
         imageAlt: "Access control accessories — door loops, magnetic contacts and power supplies",
       },
     ],
@@ -648,7 +648,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
       "Door bottom, threshold and perimeter seals that support coordinated threshold performance and architectural detailing.",
     intro:
       "Sealing Systems covers threshold, perimeter and weather solutions used to complete entrance packages and improve door performance.",
-    image: "/tur/categories/default-247230572201020.jpg",
+    image: "/tur/door-hardware/categories/default-247230572201020.jpg",
     imageAlt: "Door bottom seals and threshold sealing systems from TUR",
     highlights: ["Door Bottom Seals", "Threshold Plate Seals", "Weather Stripping"],
     cards: [
@@ -658,7 +658,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "door-bottom-seals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-70562155201109.jpg",
+        image: "/tur/door-hardware/categories/default-70562155201109.jpg",
         imageAlt: "Door bottom sealing systems for threshold performance",
       },
       {
@@ -667,7 +667,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "threshold-plate-seals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1123808333201109.jpg",
+        image: "/tur/door-hardware/categories/default-1123808333201109.jpg",
         imageAlt: "Threshold plate seals — aluminium floor-mounted sealing profiles",
       },
       {
@@ -676,7 +676,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "threshold-plates"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-654990898201109.jpg",
+        image: "/tur/door-hardware/categories/default-654990898201109.jpg",
         imageAlt: "Threshold plates — aluminium door floor transition and sealing",
       },
       {
@@ -685,7 +685,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "intumescent-seals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1956765799201109.jpg",
+        image: "/tur/door-hardware/categories/default-1956765799201109.jpg",
         imageAlt: "Intumescent seals — heat-activated fire-rated door gap sealing",
       },
       {
@@ -694,7 +694,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "door-frame-or-perimeter-seals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1021603673201109.jpg",
+        image: "/tur/door-hardware/categories/default-1021603673201109.jpg",
         imageAlt: "Door frame and perimeter seals — head and jamb gap sealing profiles",
       },
       {
@@ -703,7 +703,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "astragals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-782518864201109.jpg",
+        image: "/tur/door-hardware/categories/default-782518864201109.jpg",
         imageAlt: "Astragal seals — meeting edge sealing for double-door sets",
       },
       {
@@ -712,7 +712,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "magnetic-astragals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-756307014201109.jpg",
+        image: "/tur/door-hardware/categories/default-756307014201109.jpg",
         imageAlt: "Magnetic astragals — positive contact meeting edge sealing for double doors",
       },
       {
@@ -721,7 +721,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "self-adhesive-seals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1868387964201109.jpg",
+        image: "/tur/door-hardware/categories/default-1868387964201109.jpg",
         imageAlt: "Self-adhesive seals — foam and rubber strips for door perimeter sealing",
       },
       {
@@ -730,7 +730,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "brush-strip-seals"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-464847982201109.jpg",
+        image: "/tur/door-hardware/categories/default-464847982201109.jpg",
         imageAlt: "Brush strip seals — flexible nylon bristle sealing for door bottoms",
       },
       {
@@ -739,7 +739,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "complementary-products"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-342301605201109.jpg",
+        image: "/tur/door-hardware/categories/default-342301605201109.jpg",
         imageAlt: "Complementary sealing products — smoke seals and completion accessories",
       },
       {
@@ -748,7 +748,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
         href: routeGroupHref("door-hardware", "sealing-systems", "weather-stripping"),
         eyebrow: "Route",
         ctaLabel: "Explore Route",
-        image: "/tur/categories/default-1772346152201109.jpg",
+        image: "/tur/door-hardware/categories/default-1772346152201109.jpg",
         imageAlt: "Weather stripping — surface-applied door weather and draught seals",
       },
     ],
