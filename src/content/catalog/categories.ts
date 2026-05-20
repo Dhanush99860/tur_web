@@ -796,7 +796,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       "Automatic sliding door families shaped for circulation, controlled access and streamlined architectural entry sequences.",
     intro:
       "Sliding Doors collects key sliding families used across commercial and high-traffic entrance planning.",
-    image: "/tur/sliding-b.jpg",
+    image: "/tur/automatic-operators/sliding-doors/prismatic-sliding-door-cmw/prismatic-sliding-door-cmw-main.png",
     imageAlt: "Automatic sliding doors from TUR",
     highlights: ["Prismatic CMW", "Telescoping EMT", "heavyMaster HM"],
     cards: [
@@ -806,7 +806,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("prismatic-sliding-door-cmw"),
         eyebrow: "Featured Product",
         ctaLabel: "View Product",
-        image: "/tur/sliding-door-hero.jpg",
+        image: "/tur/automatic-operators/sliding-doors/prismatic-sliding-door-cmw/prismatic-sliding-door-cmw-main.png",
         imageAlt: "Prismatic automatic sliding door — commercial entrance installation",
       },
       {
@@ -815,7 +815,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("curved-sliding-door-cmr"),
         eyebrow: "Sliding Family",
         ctaLabel: "View Product",
-        image: "/tur/sliding-a.jpg",
+        image: "/tur/automatic-operators/sliding-doors/curved-sliding-door-cmr/curved-sliding-door-cmr-main.jpg",
         imageAlt: "Curved automatic sliding door — premium architectural entrance",
       },
       {
@@ -824,7 +824,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("telescoping-sliding-door-emt"),
         eyebrow: "Sliding Family",
         ctaLabel: "View Product",
-        image: "/tur/sliding-c.jpg",
+        image: "/tur/automatic-operators/sliding-doors/telescoping-sliding-door-emt/telescoping-sliding-door-emt-main.jpg",
         imageAlt: "Telescoping automatic sliding door — compact entrance system",
       },
       {
@@ -833,7 +833,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("escape-route-sliding-door-hm-f-ft"),
         eyebrow: "Safety Sliding",
         ctaLabel: "View Product",
-        image: "/tur/sliding-f.jpg",
+        image: "/tur/automatic-operators/sliding-doors/escape-route-sliding-door-hm-f-ft/escape-route-sliding-door-hm-f-ft-main.jpg",
         imageAlt: "Escape route automatic sliding door — fire-tested entrance system",
       },
       {
@@ -842,7 +842,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("heavymaster-hm"),
         eyebrow: "Sliding Family",
         ctaLabel: "View Product",
-        image: "/tur/sliding-e.jpg",
+        image: "/tur/automatic-operators/sliding-doors/heavymaster-hm/heavymaster-hm-main.jpg",
         imageAlt: "Heavy-duty automatic sliding door — industrial and institutional entrance",
       },
       {
@@ -851,7 +851,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("economaster-em"),
         eyebrow: "Sliding Family",
         ctaLabel: "View Product",
-        image: "/tur/sliding-d.jpg",
+        image: "/tur/automatic-operators/sliding-doors/economaster-em/economaster-em-main.jpg",
         imageAlt: "econoMaster EM automatic sliding door — economy entrance operator",
       },
       {
@@ -860,7 +860,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("compactmaster-cm"),
         eyebrow: "Sliding Family",
         ctaLabel: "View Product",
-        image: "/tur/sliding-b.jpg",
+        image: "/tur/automatic-operators/sliding-doors/compactmaster-cm/compactmaster-cm-main.jpg",
         imageAlt: "compactMaster CM automatic sliding door — compact overhead operator",
       },
     ],
@@ -906,7 +906,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       "Security entrance systems that guide, channel and control physical access across sensitive or high-volume environments.",
     intro:
       "Controlled Physical Access groups turnstiles, swing gates, reader posts and related systems for secure flow management.",
-    image: "/tur/cat-access-readers.jpg",
+    image: "/tur/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-main.jpg",
     imageAlt: "Controlled physical access reader posts and turnstile systems from TUR",
     highlights: ["Turnstiles", "Swing Gates", "Reader Posts"],
     cards: [
@@ -916,7 +916,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("reader-posts-guiding-bar"),
         eyebrow: "Supporting System",
         ctaLabel: "View Product",
-        image: "/tur/cat-access-readers.jpg",
+        image: "/tur/automatic-operators/controlled-physical-access/reader-posts-guiding-bar/reader-posts-guiding-bar-main.jpg",
         imageAlt: "Access control reader post and pedestrian guiding bar system",
       },
       {
@@ -925,7 +925,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("gsi-curved-sliding-access"),
         eyebrow: "Security System",
         ctaLabel: "View Product",
-        image: "/tur/cat-access-control.jpg",
+        image: "/tur/automatic-operators/controlled-physical-access/gsi-curved-sliding-access/gsi-curved-sliding-access-main.jpg",
         imageAlt: "GSI security curved sliding access door — controlled entrance system",
       },
       {
@@ -934,7 +934,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("full-height-turnstile"),
         eyebrow: "Access System",
         ctaLabel: "View Product",
-        image: "/tur/sliding-f.jpg",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-main.jpg",
         imageAlt: "Full-height turnstile — perimeter access control system",
       },
       {
@@ -943,7 +943,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("sensor-barriers"),
         eyebrow: "Access System",
         ctaLabel: "View Product",
-        image: "/tur/sliding-e.jpg",
+        image: "/tur/automatic-operators/controlled-physical-access/sensor-barriers/sensor-barriers-main.jpg",
         imageAlt: "Optical sensor barrier system — guided pedestrian access control",
       },
       {
@@ -952,7 +952,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("swing-gates"),
         eyebrow: "Access System",
         ctaLabel: "View Product",
-        image: "/tur/swing-door-hero.jpg",
+        image: "/tur/automatic-operators/controlled-physical-access/swing-gates/swing-gates-main.jpg",
         imageAlt: "Controlled swing gate — pedestrian access management system",
       },
       {
@@ -961,7 +961,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("turnstile-systems"),
         eyebrow: "Featured Product",
         ctaLabel: "View Product",
-        image: "/tur/cat-access-readers.jpg",
+        image: "/tur/automatic-operators/controlled-physical-access/turnstile-systems/turnstile-systems-main.jpg",
         imageAlt: "G·U access control turnstile system — controlled pedestrian access",
       },
       {
@@ -970,7 +970,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("tripod-turnstiles"),
         eyebrow: "Access System",
         ctaLabel: "View Product",
-        image: "/tur/project-4.jpg",
+        image: "/tur/automatic-operators/controlled-physical-access/tripod-turnstiles/tripod-turnstiles-main.jpg",
         imageAlt: "Tripod 3-arm turnstile — single-person passage access control",
       },
     ],
@@ -1015,7 +1015,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       "Security, standard and all-glass revolving door families for premium and high-capacity entrance applications.",
     intro:
       "Revolving Doors provides a family-level overview of the key revolving door systems in the TUR range.",
-    image: "/tur/project-c.jpg",
+    image: "/tur/automatic-operators/revolving-doors/ggg-all-glass-revolving-door/ggg-all-glass-revolving-door-main.jpg",
     imageAlt: "Revolving door systems from TUR",
     highlights: ["Security Revolving", "Large Capacity", "All-Glass Revolving"],
     cards: [
@@ -1025,7 +1025,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("gsi-security-revolving-door"),
         eyebrow: "Security System",
         ctaLabel: "View Product",
-        image: "/tur/project-b.jpg",
+        image: "/tur/automatic-operators/revolving-doors/gsi-security-revolving-door/gsi-security-revolving-door-main.jpg",
         imageAlt: "Security revolving door — controlled access entrance system",
       },
       {
@@ -1034,7 +1034,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("ggr-large-capacity-revolving"),
         eyebrow: "Revolving Family",
         ctaLabel: "View Product",
-        image: "/tur/sliding-d.jpg",
+        image: "/tur/automatic-operators/revolving-doors/ggr-large-capacity-revolving/ggr-large-capacity-revolving-main.jpg",
         imageAlt: "GGR large-capacity automatic revolving door — high-throughput entrance",
       },
       {
@@ -1043,7 +1043,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("ggg-all-glass-revolving-door"),
         eyebrow: "Featured Product",
         ctaLabel: "View Product",
-        image: "/tur/sliding-b.jpg",
+        image: "/tur/automatic-operators/revolving-doors/ggg-all-glass-revolving-door/ggg-all-glass-revolving-door-main.jpg",
         imageAlt: "All-glass revolving door — premium architectural entrance system",
       },
       {
@@ -1052,7 +1052,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("gra-standard-revolving-door"),
         eyebrow: "Revolving Family",
         ctaLabel: "View Product",
-        image: "/tur/sliding-c.jpg",
+        image: "/tur/automatic-operators/revolving-doors/gra-standard-revolving-door/gra-standard-revolving-door-main.jpg",
         imageAlt: "Standard automatic revolving door — commercial entrance installation",
       },
     ],
@@ -1097,7 +1097,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       "Automatic swing door operator families for accessibility, controlled circulation and specification-led entrance packages.",
     intro:
       "Swing Door Drives focuses on operator families for accessible, commercial and controlled entrance applications.",
-    image: "/tur/tsw150-operator.jpg",
+    image: "/tur/automatic-operators/swing-door-drives/tsw150-automatic-door-operator/tsw150-automatic-door-operator-main.jpg",
     imageAlt: "TSW150 automatic swing door operator from TUR",
     highlights: ["DTN 80", "TSW150", "TSW120"],
     cards: [
@@ -1107,7 +1107,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("swing-door-drives"),
         eyebrow: "Featured Product",
         ctaLabel: "View Product",
-        image: "/tur/product-door-closer.jpg",
+        image: "/tur/automatic-operators/swing-door-drives/swing-door-drives/swing-door-drives-main.jpg",
         imageAlt: "DTN 80 automatic swing door operator from TUR",
       },
       {
@@ -1116,7 +1116,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("tsw150-automatic-door-operator"),
         eyebrow: "Featured Product",
         ctaLabel: "View Product",
-        image: "/tur/swing-door-hero.jpg",
+        image: "/tur/automatic-operators/swing-door-drives/tsw150-automatic-door-operator/tsw150-automatic-door-operator-main.jpg",
         imageAlt: "TSW150 automatic swing door operator from TUR",
       },
       {
@@ -1125,7 +1125,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("tsw120-automatic-door-operator"),
         eyebrow: "Featured Product",
         ctaLabel: "View Product",
-        image: "/tur/product-swing-operator.jpg",
+        image: "/tur/automatic-operators/swing-door-drives/tsw120-automatic-door-operator/tsw120-automatic-door-operator-main.jpg",
         imageAlt: "TSW120 automatic swing door operator from TUR",
       },
     ],
@@ -1170,7 +1170,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       "All-glass sliding systems for premium architectural entrances and coordinated storefront-style applications.",
     intro:
       "All Glass Systems collects the shopMaster families used for premium all-glass movement and entrance coordination.",
-    image: "/tur/sliding-c.jpg",
+    image: "/tur/automatic-operators/all-glass-systems/sliding-doors/sliding-doors-main.jpg",
     imageAlt: "All-glass systems from TUR",
     highlights: ["shopMaster GSW-A", "GSW-M G30", "GSW-M"],
     cards: [
@@ -1180,21 +1180,21 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         href: productHref("sliding-doors"),
         eyebrow: "Featured Product",
         ctaLabel: "View Product",
-        image: "/tur/cat-glass-hardware.jpg",
+        image: "/tur/automatic-operators/all-glass-systems/sliding-doors/sliding-doors-main.jpg",
         imageAlt: "shopMaster GSW-A all-glass automatic entrance system from TUR",
       },
       {
         title: "shopMaster GSW-M G30",
         description: "All-glass system family for premium coordinated entrances.",
         eyebrow: "All-Glass Family",
-        image: "/tur/cat-glass-patch.png",
+        image: "/tur/automatic-operators/all-glass-systems/shopmaster-gsw-m-g30/shopmaster-gsw-m-g30-main.jpg",
         imageAlt: "shopMaster GSW-M G30 all-glass system patch fitting from TUR",
       },
       {
         title: "shopMaster GSW-M",
         description: "Supporting all-glass system family for premium applications.",
         eyebrow: "All-Glass Family",
-        image: "/tur/cat-glass-pull.jpg",
+        image: "/tur/automatic-operators/all-glass-systems/shopmaster-gsw-m/shopmaster-gsw-m-main.jpg",
         imageAlt: "shopMaster GSW-M all-glass entrance pull hardware from TUR",
       },
     ],
@@ -1239,7 +1239,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       "Activation devices and sensor layers that support coordinated automatic entry operation.",
     intro:
       "This landing page currently acts as a category overview for activation devices, sensors and supporting control inputs for automatic entrances.",
-    image: "/tur/cat-gu-automatic.jpg",
+    image: "/tur/automatic-operators/automatic-pulse-generators-and-sensors/activation-devices-sensors/activation-devices-sensors-main.webp",
     imageAlt: "Automatic entrance activation devices and sensors from TUR",
     highlights: ["Activation Devices", "Safety Sensors", "Control Inputs"],
     cards: [
@@ -1247,21 +1247,21 @@ const automaticOperatorFamilies: CatalogFamily[] = [
         title: "Activation Devices",
         description: "Supporting activation and trigger devices for automatic entrances.",
         eyebrow: "Category Overview",
-        image: "/tur/slider-4.webp",
+        image: "/tur/automatic-operators/automatic-pulse-generators-and-sensors/activation-devices-sensors/activation-devices-sensors-main.webp",
         imageAlt: "Automatic door activation devices from TUR",
       },
       {
         title: "Safety Sensors",
         description: "Sensor layers for coordinated activation and user safety.",
         eyebrow: "Category Overview",
-        image: "/tur/slider-5.webp",
+        image: "/tur/automatic-operators/automatic-pulse-generators-and-sensors/safety-sensors/safety-sensors-main.webp",
         imageAlt: "Safety sensor systems for automatic entrances from TUR",
       },
       {
         title: "Control Inputs",
         description: "Push buttons, wireless triggers and supporting control inputs.",
         eyebrow: "Category Overview",
-        image: "/tur/cat-access-control.jpg",
+        image: "/tur/automatic-operators/automatic-pulse-generators-and-sensors/control-inputs/control-inputs-main.jpg",
         imageAlt: "Control input devices for automatic door systems from TUR",
       },
     ],
