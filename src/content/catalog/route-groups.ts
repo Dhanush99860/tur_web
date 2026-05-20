@@ -12,7 +12,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Coordinated hanging hardware for architectural door sets — hinges, pivots, concealed hinges and related leaf-support components.",
     shortDescription:
       "Hinges, pivots and concealed hanging hardware for architectural door sets.",
-    image: "/tur/slider-4.webp",
+    image: "/tur/categories/default-1260902568201015.jpg",
     imageAlt: "American Standard hanging hardware — hinges and door preparation components",
     eyebrow: "American Standard · Hanging Hardware",
     keywords: [
@@ -34,7 +34,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Door closers, floor springs and controlled movement hardware for dependable closing performance across commercial and institutional applications.",
     shortDescription:
       "Overhead closers and floor springs for controlled door movement.",
-    image: "/tur/product-door-closer.jpg",
+    image: "/tur/categories/default-319952360201015.jpg",
     imageAlt: "American Standard door closer — overhead control hardware",
     eyebrow: "American Standard · Control Hardware",
     keywords: [
@@ -56,7 +56,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Mortise locks, cylindrical locks, deadbolts and hook locks for secure openings across American Standard hardware schedules.",
     shortDescription:
       "Mortise locks, deadbolts and locking hardware for secure openings.",
-    image: "/tur/european-lockset.jpg",
+    image: "/tur/categories/default-1292769047201015.jpg",
     imageAlt: "American Standard mortise lockset and cylinder — door security hardware",
     eyebrow: "American Standard · Security Hardware",
     legacyEntryCount: 13,
@@ -78,7 +78,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Lever handles, rose plates, escutcheons and trim that complete the architectural door-set package under American Standard specifications.",
     shortDescription:
       "Lever handles, trim and finishing hardware for American Standard door sets.",
-    image: "/tur/mc-1.jpg",
+    image: "/tur/categories/default-1228180766201015.jpg",
     imageAlt: "American Standard lever handle and trim hardware",
     eyebrow: "American Standard · Furnishing Hardware",
     keywords: [
@@ -99,7 +99,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Flush bolts, surface bolts and coordinated bolting hardware for paired and single door sets in American Standard specifications.",
     shortDescription:
       "Flush and surface bolts for coordinated American Standard door sets.",
-    image: "/tur/slider-2.webp",
+    image: "/tur/categories/default-517696467201015.jpg",
     imageAlt: "American Standard flush bolt — door bolting hardware",
     eyebrow: "American Standard · Bolting Hardware",
     keywords: [
@@ -120,7 +120,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Panic hardware, rim exit devices, vertical-rod devices and life-safety components for compliant emergency egress conditions.",
     shortDescription:
       "Panic hardware and exit devices for compliant emergency egress.",
-    image: "/tur/sliding-f.jpg",
+    image: "/tur/categories/default-848766351201015.jpg",
     imageAlt: "Emergency exit hardware — panic bar and life-safety door devices",
     eyebrow: "American Standard · Life Safety",
     keywords: [
@@ -142,7 +142,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Supporting hardware, protective plates, viewers, knockers and complementary accessories that complete coordinated American Standard door packages.",
     shortDescription:
       "Accessories and supporting hardware to complete American Standard packages.",
-    image: "/tur/slider-1.webp",
+    image: "/tur/categories/default-355604123201015.jpg",
     imageAlt: "American Standard ancillary hardware components",
     eyebrow: "American Standard · Ancillary",
     keywords: [
@@ -165,8 +165,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "European Ironmongery hanging hardware from the old TUR catalogue, including TE4100 full mortise hinges, rising hinges, concealed hinges and heavy duty double action spring hinges.",
     shortDescription:
       "Hinges and hanging hardware for European Ironmongery door sets.",
-    image: "/TUR Website Images/products/default-1028666161201019.jpg",
-    imageAlt: "TE4100 Series full mortise hinge for European Ironmongery hanging hardware",
+    image: "/tur/european-ironmongery/hang-the-door/te4100-series/te4100-series-main.jpg",
+    imageAlt: "TE4100 Series full mortise hinge — European Ironmongery hanging hardware",
     eyebrow: "European Ironmongery · Hanging Hardware",
     keywords: ["TE4100", "rising hinges", "concealed hinges", "European door hinges"],
   },
@@ -180,8 +180,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Door closers, concealed closers, cam-action closers, hydraulic patch fittings and floor springs from the European Ironmongery old-site catalogue.",
     shortDescription:
       "Closers, patch fittings and floor springs for European Ironmongery door control.",
-    image: "/TUR Website Images/products/default-289207891201019.jpg",
-    imageAlt: "TE7763B rack and pinion door closer with track arm",
+    image: "/tur/european-ironmongery/control-the-door/door-closer-rack-pinion-track-arm-te7763b/door-closer-rack-pinion-track-arm-te7763b-main.jpg",
+    imageAlt: "TE7763B rack and pinion door closer with track arm — European Ironmongery control hardware",
     eyebrow: "European Ironmongery · Control Hardware",
     keywords: ["door closer", "TE7763B", "floor spring", "hydraulic patch fitting"],
   },
@@ -195,8 +195,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "TE1400 and TE1500 mortise lock bodies, latch locks, deadbolt locks, hook locks and narrow stile locks from the European Ironmongery catalogue.",
     shortDescription:
       "Mortise locks, deadbolts, hook locks and narrow stile locks.",
-    image: "/TUR Website Images/products/default-1438874941201019.jpg",
-    imageAlt: "TE1400 Series mortise sash lock body",
+    image: "/tur/european-ironmongery/secure-the-door/te1400-series-mortise-sash-lock-premium/te1400-series-mortise-sash-lock-premium-main.jpg",
+    imageAlt: "TE1400 Series mortise sash lock — European Ironmongery security hardware",
     eyebrow: "European Ironmongery · Security Hardware",
     keywords: ["TE1400", "TE1500", "mortise sash lock", "hook lock"],
   },
@@ -209,8 +209,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "European profile cylinder products from the old TUR catalogue, including TE3600 and TE3700 series cylinder pages.",
     shortDescription: "European profile cylinder series for keyed access coordination.",
-    image: "/TUR Website Images/products/default-1710733176201019.jpg",
-    imageAlt: "TE3600 Euro profile cylinder",
+    image: "/tur/european-ironmongery/cylinders/te3600-series/te3600-series-main.jpg",
+    imageAlt: "TE3600 Euro profile cylinder — European Ironmongery keyed hardware",
     eyebrow: "European Ironmongery · Cylinders",
     keywords: ["TE3600", "TE3700", "Euro profile cylinders", "door cylinders"],
   },
@@ -223,8 +223,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "Pull plates, pull handles and special handles from the European Ironmongery furnishing route.",
     shortDescription: "Pull plates and pull-handle families for European Ironmongery.",
-    image: "/TUR Website Images/products/default-1472735449201019.jpg",
-    imageAlt: "European Ironmongery pull and plate hardware",
+    image: "/tur/european-ironmongery/furnish-the-door/pull-plates-european/pull-plates-european-main.jpg",
+    imageAlt: "European Ironmongery pull plates — furnishing hardware",
     eyebrow: "European Ironmongery · Furnishing Hardware",
     keywords: ["pull plates", "H shape pull handle", "D shape pull handle", "special handles"],
   },
@@ -237,8 +237,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "Lever action flush bolts, automatic flush bolts and dust proof strikes from the European Ironmongery bolting route.",
     shortDescription: "Flush bolts and strike hardware for European Ironmongery door sets.",
-    image: "/TUR Website Images/products/default-758161593201019.jpg",
-    imageAlt: "European Ironmongery lever action flush bolt",
+    image: "/tur/european-ironmongery/bolt-the-door/lever-action-flush-bolt-european/lever-action-flush-bolt-european-main.jpg",
+    imageAlt: "European Ironmongery lever action flush bolt — bolting hardware",
     eyebrow: "European Ironmongery · Bolting Hardware",
     keywords: ["lever action flush bolt", "automatic flush bolt", "dust proof strike"],
   },
@@ -251,8 +251,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "Door stops, indicators, guards, viewers, escutcheons, pulls, plates, sockets, roller latches, coat hooks and sign plates from the European Ironmongery accessory route.",
     shortDescription: "Accessory and completion hardware for European Ironmongery packages.",
-    image: "/TUR Website Images/products/default-475192325201108.jpg",
-    imageAlt: "European Ironmongery ancillary door hardware",
+    image: "/tur/european-ironmongery/ancillary-products/door-stop-european/door-stop-european-main.jpg",
+    imageAlt: "European Ironmongery door stop — ancillary hardware",
     eyebrow: "European Ironmongery · Ancillary",
     keywords: ["door stop", "thumb turn indicator", "door viewer", "sign plates"],
   },
@@ -265,8 +265,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "TE9800 and TE9700 exit device series, vertical rod devices, rim devices and escutcheon trims from the European Ironmongery emergency exit route.",
     shortDescription: "Exit devices and trim hardware for European Ironmongery egress.",
-    image: "/TUR Website Images/products/default-1488174141210428.jpg",
-    imageAlt: "TE9800 Series premium exit device",
+    image: "/tur/european-ironmongery/emergency-exits/te9800-series-premium/te9800-series-premium-main.jpg",
+    imageAlt: "TE9800 Series premium exit device — European Ironmongery life safety hardware",
     eyebrow: "European Ironmongery · Life Safety",
     keywords: ["TE9800", "TE9700", "exit device", "escutcheon trim"],
   },
@@ -279,8 +279,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "TE1910 and TE1920 lever and knob handle pages from the old TUR European Ironmongery lever-handle route.",
     shortDescription: "TE1910 and TE1920 lever and knob handle designs.",
-    image: "/TUR Website Images/products/default-1046534655201108.jpg",
-    imageAlt: "Lever Handle TE1910.968",
+    image: "/tur/european-ironmongery/furnish-the-door-lever-handle/lever-handle-te1910-968/lever-handle-te1910-968-main.jpg",
+    imageAlt: "TE1910.968 lever handle — European Ironmongery lever and knob handles",
     eyebrow: "European Ironmongery · Lever Handles",
     keywords: ["TE1910", "TE1920", "lever handle", "knob handle"],
   },
@@ -295,8 +295,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "TG.GH glass hinge and glass clip products from the old TUR Glass Hardware catalogue.",
     shortDescription: "TG.GH glass hinge and clip products for frameless glass applications.",
-    image: "/TUR Website Images/products/default-1589064676201111.jpg",
-    imageAlt: "TG.GH101 glass hinge or glass clip product image",
+    image: "/tur/categories/default-2080527890201111.jpg",
+    imageAlt: "TG.GH glass hinge and glass clip — frameless door hardware",
     eyebrow: "Glass Hardware - Hinge & Clip",
     keywords: ["TG.GH101", "glass hinge", "glass clip", "Glass Hardware"],
   },
@@ -309,8 +309,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "Bathroom handle and glass knob products from the old TUR Glass Hardware catalogue.",
     shortDescription: "TG.BH and TG.GK bathroom handle and glass knob products.",
-    image: "/TUR Website Images/products/default-569443347201111.jpg",
-    imageAlt: "TG.BH101 bathroom handle product image",
+    image: "/tur/categories/default-1966218428201111.jpg",
+    imageAlt: "TG.BH bathroom handle and TG.GK glass knob — glass hardware",
     eyebrow: "Glass Hardware - Handles & Knobs",
     keywords: ["TG.BH101", "TG.GK102", "bathroom handle", "glass knob"],
   },
@@ -323,8 +323,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "TG.PF and TG.FS patch fitting products from the old TUR Glass Hardware catalogue.",
     shortDescription: "TG.PF patch fitting products for glass hardware schedules.",
-    image: "/TUR Website Images/products/default-66369246201111.jpg",
-    imageAlt: "TG.PF101 patch fitting product image",
+    image: "/tur/categories/default-45651367201111.jpg",
+    imageAlt: "TG.PF patch fitting — frameless glass door hardware",
     eyebrow: "Glass Hardware - Patch Fittings",
     keywords: ["TG.PF101", "TG.PF103", "patch fitting", "Glass Hardware"],
   },
@@ -337,8 +337,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "TG.PH pull handle products from the old TUR Glass Hardware catalogue.",
     shortDescription: "TG.PH pull handles for Glass Hardware applications.",
-    image: "/TUR Website Images/products/default-218957808201111.jpg",
-    imageAlt: "TG.PH001 pull handle product image",
+    image: "/tur/categories/default-769966786201111.jpg",
+    imageAlt: "TG.PH pull handle — architectural glass door pull handle",
     eyebrow: "Glass Hardware - Pull Handles",
     keywords: ["TG.PH001", "TG.PH024", "pull handle", "Glass Hardware"],
   },
@@ -351,8 +351,8 @@ export const routeGroups: CatalogRouteGroup[] = [
     description:
       "TG.LS lipseal products from the old TUR Glass Hardware catalogue.",
     shortDescription: "TG.LS lipseal products for glass edge sealing.",
-    image: "/TUR Website Images/products/default-1994992506201111.jpg",
-    imageAlt: "TG.LS101 lipseal product image",
+    image: "/tur/categories/default-1292103519201111.jpg",
+    imageAlt: "TG.LS lipseal — glass edge sealing for frameless glass doors",
     eyebrow: "Glass Hardware - Lipseal",
     keywords: ["TG.LS101", "TG.LS108", "lipseal", "glass lip seal"],
   },
@@ -368,8 +368,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Electromagnetic locks for access-controlled single and double door applications, including TU single and double magnet lock ranges.",
     shortDescription:
       "TU electromagnetic locks for secure access-controlled openings.",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "Access control entrance system with G·U turnstiles and glass doors",
+    image: "/tur/categories/default-228066963201112.jpg",
+    imageAlt: "TU electromagnetic locks — surface-mounted access control maglocks",
     eyebrow: "Access Control · Electromagnetic Locks",
     keywords: [
       "electromagnetic lock",
@@ -394,8 +394,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Electric strike solutions for access-controlled entry — surface-mounted and frame-integrated models compatible with standard locksets and access control systems.",
     shortDescription:
       "Electric strikes for integrated release and access-controlled door operation.",
-    image: "/tur/slider-6.webp",
-    imageAlt: "Electric strikes product family visual",
+    image: "/tur/categories/default-66092838201112.jpg",
+    imageAlt: "TU electric strikes — ANSI rim strike and electric release hardware",
     eyebrow: "Access Control · Electric Strikes",
     keywords: [
       "electric strike",
@@ -416,8 +416,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Mounting brackets, Z-brackets and armature accessories for coordinated electromagnetic lock installation across single, double and glass door configurations.",
     shortDescription:
       "Z-brackets, L-brackets and mounting plates for electromagnetic lock installation.",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "Electromagnetic lock armature mounting bracket — access control accessory",
+    image: "/tur/categories/default-42037815201112.jpg",
+    imageAlt: "Armature mounting accessories — brackets for electromagnetic lock installation",
     eyebrow: "Access Control · Mounting Accessories",
     keywords: [
       "armature mounting bracket",
@@ -437,8 +437,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Electromechanical locking devices integrating mechanical bolt function with electronic access release for secure, coordinated entry management at controlled openings.",
     shortDescription:
       "Mechanical bolt with electronic release for discreet access-controlled locking.",
-    image: "/tur/sliding-e.jpg",
-    imageAlt: "Electromechanical locking device — integrated access control hardware",
+    image: "/tur/categories/default-973600067201112.jpg",
+    imageAlt: "Electromechanical locking devices — TU.L800 and TU.PBH-350 push bar",
     eyebrow: "Access Control · Electromechanical Locking",
     keywords: [
       "electromechanical lock",
@@ -459,8 +459,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Electronic access control systems — proximity readers, keypads and credential-management hardware for secure, managed entry across commercial and institutional projects.",
     shortDescription:
       "Proximity readers, keypads and credential systems for electronic access management.",
-    image: "/tur/video-thumb.png",
-    imageAlt: "E-ACCESS family visual from TUR",
+    image: "/tur/categories/default-1195187513201112.jpg",
+    imageAlt: "E-ACCESS proximity readers and Bluetooth access systems — EasiProx and E1196",
     eyebrow: "Access Control · E-ACCESS Systems",
     keywords: [
       "E-ACCESS",
@@ -481,8 +481,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Digital keypad systems for PIN-based standalone or networked access control — suitable for secondary authentication, back-of-house access and low-infrastructure entry points.",
     shortDescription:
       "PIN-based digital keypad systems for standalone or integrated access control.",
-    image: "/tur/cat-access-readers.jpg",
-    imageAlt: "Digital keypad access control system — PIN-based entry management",
+    image: "/tur/categories/default-941202816201112.jpg",
+    imageAlt: "TU.DG-750 digital keypad system — PIN-based access control",
     eyebrow: "Access Control · Digital Keypad",
     keywords: [
       "digital keypad",
@@ -502,8 +502,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Infrared and wireless request-to-exit devices for touchless egress triggering — compatible with electromagnetic locks and access-controlled doors in hygiene-sensitive and high-traffic environments.",
     shortDescription:
       "Touchless infrared and wireless RTE devices for access-controlled egress.",
-    image: "/tur/slider-6.webp",
-    imageAlt: "Infrared wireless exit device — touchless request-to-exit sensor",
+    image: "/tur/categories/default-107836858201112.jpg",
+    imageAlt: "TU.RTS infrared request-to-exit sensors — touchless egress devices",
     eyebrow: "Access Control · Exit Devices",
     keywords: [
       "infrared exit device",
@@ -525,8 +525,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Electromagnetic door hold-open devices for fire-door coordination and smoke-control integration — releasing automatically on alarm activation for compliant circulation management.",
     shortDescription:
       "Electromagnetic door holders for fire-door hold-open with automatic alarm release.",
-    image: "/tur/cat-access-control.jpg",
-    imageAlt: "Electromagnetic door holder — fire door hold-open device",
+    image: "/tur/categories/default-1789777103201112.jpg",
+    imageAlt: "TU.D900 electromagnetic door holders — fire door hold-open devices",
     eyebrow: "Access Control · Door Holders",
     keywords: [
       "electromagnetic door holder",
@@ -547,8 +547,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Supporting accessories completing access control packages — door loops, power supplies, control panels, exit buttons and wiring accessories for coordinated project-wide electronic access systems.",
     shortDescription:
       "Door loops, power supplies and accessories completing access control installations.",
-    image: "/tur/project-2.jpg",
-    imageAlt: "Access control accessories — power supply and system components",
+    image: "/tur/categories/default-936568577201112.jpg",
+    imageAlt: "Access control accessories — door loops, magnetic contacts and power supplies",
     eyebrow: "Access Control · Accessories",
     keywords: [
       "access control accessories",
@@ -572,7 +572,7 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Automatic and surface-applied door bottom seals for controlling air, dust and sound at the threshold — including concealed channel, surface-mounted and surface-applied automatic drop-seal profiles.",
     shortDescription:
       "Automatic and surface door bottom seals for threshold draught and sound control.",
-    image: "/tur/cat-sealing-systems.jpg",
+    image: "/tur/categories/default-70562155201109.jpg",
     imageAlt: "Door bottom seal profile — architectural threshold sealing system",
     eyebrow: "Sealing Systems · Door Bottom Seals",
     keywords: [
@@ -597,8 +597,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Threshold plate seals combining a durable floor-mounted aluminium profile with an integrated rubber or neoprene seal — coordinating with door bottom seals for a complete threshold closure.",
     shortDescription:
       "Aluminium threshold plate seals for coordinated floor-level threshold closure.",
-    image: "/tur/sliding-b.jpg",
-    imageAlt: "Threshold plate seals family visual",
+    image: "/tur/categories/default-1123808333201109.jpg",
+    imageAlt: "Threshold plate seals — aluminium floor-mounted sealing profiles",
     eyebrow: "Sealing Systems · Threshold Plate Seals",
     keywords: [
       "threshold plate seal",
@@ -620,8 +620,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Aluminium threshold plates providing a durable, architecturally clean floor-level transition — protecting the threshold area and coordinating with door bottom seals for complete perimeter performance.",
     shortDescription:
       "Aluminium threshold plates for clean floor transitions and perimeter coordination.",
-    image: "/tur/sliding-e.jpg",
-    imageAlt: "Threshold plate — architectural door floor transition and sealing",
+    image: "/tur/categories/default-654990898201109.jpg",
+    imageAlt: "Threshold plates — aluminium floor transition and door sealing",
     eyebrow: "Sealing Systems · Threshold Plates",
     keywords: [
       "threshold plate",
@@ -644,8 +644,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Intumescent fire and smoke seals for fire-rated door assemblies — heat-activated profiles that expand on fire exposure to close the gap between door leaf and frame, maintaining the fire rating of the assembly.",
     shortDescription:
       "Heat-activated intumescent seals for fire-rated door gap closure and smoke control.",
-    image: "/tur/project-c.jpg",
-    imageAlt: "Intumescent seal — fire-rated door gap sealing system",
+    image: "/tur/categories/default-1956765799201109.jpg",
+    imageAlt: "Intumescent seals — heat-activated fire-rated door gap sealing",
     eyebrow: "Sealing Systems · Intumescent Seals",
     keywords: [
       "intumescent seal",
@@ -666,8 +666,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Frame and perimeter sealing profiles for the door head and jambs — surface-applied, rebated and concealed options that seal the gap between door leaf and frame for draught, acoustic and smoke control.",
     shortDescription:
       "Surface and concealed perimeter seals for door head and jamb gap control.",
-    image: "/tur/project-1.jpg",
-    imageAlt: "Door frame or perimeter seal profile — architectural door gap sealing",
+    image: "/tur/categories/default-1021603673201109.jpg",
+    imageAlt: "Door frame and perimeter seals — head and jamb gap sealing profiles",
     eyebrow: "Sealing Systems · Perimeter Seals",
     keywords: [
       "door frame seal",
@@ -692,8 +692,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Astragal sealing profiles for the meeting edge of double doors — surface-applied or rebated seals that close the gap between active and inactive leaves for draught, acoustic and smoke control.",
     shortDescription:
       "Meeting-edge astragal seals for double-door draught and smoke control.",
-    image: "/tur/project-a.jpg",
-    imageAlt: "Astragal door seal — double-door meeting edge sealing",
+    image: "/tur/categories/default-782518864201109.jpg",
+    imageAlt: "Astragal seals — meeting edge sealing for double-door sets",
     eyebrow: "Sealing Systems · Astragals",
     keywords: [
       "astragal",
@@ -714,8 +714,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Magnetic astragal sealing profiles for double-door sets — using magnetic attraction to achieve positive contact at the meeting edge for improved draught, acoustic and smoke performance over standard astragals.",
     shortDescription:
       "Magnetic astragals for positive contact sealing at double-door meeting edges.",
-    image: "/tur/slider-4.webp",
-    imageAlt: "Magnetic astragal seal — double-door positive contact sealing",
+    image: "/tur/categories/default-756307014201109.jpg",
+    imageAlt: "Magnetic astragals — positive contact meeting edge sealing for double doors",
     eyebrow: "Sealing Systems · Magnetic Astragals",
     keywords: [
       "magnetic astragal",
@@ -736,8 +736,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Self-adhesive foam and rubber sealing strips for supplementary draught, dust and light acoustic gap sealing — quick-installation profiles for door and window perimeter applications.",
     shortDescription:
       "Self-adhesive foam and rubber strips for supplementary door perimeter sealing.",
-    image: "/tur/project-3.jpg",
-    imageAlt: "Self-adhesive door seal strip — supplementary draught sealing",
+    image: "/tur/categories/default-1868387964201109.jpg",
+    imageAlt: "Self-adhesive seals — foam and rubber strips for door perimeter sealing",
     eyebrow: "Sealing Systems · Self Adhesive Seals",
     keywords: [
       "self adhesive seal",
@@ -758,8 +758,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Brush strip sealing profiles for door bottoms, thresholds and perimeter applications — flexible nylon bristle bundles that accommodate floor irregularities and varying clearances for dependable draught and dust control.",
     shortDescription:
       "Flexible brush strip seals for door bottom, threshold and perimeter sealing.",
-    image: "/tur/mc-1.jpg",
-    imageAlt: "Brush strip seal — flexible threshold and perimeter door sealing",
+    image: "/tur/categories/default-464847982201109.jpg",
+    imageAlt: "Brush strip seals — flexible nylon bristle sealing profiles for door bottoms",
     eyebrow: "Sealing Systems · Brush Strip Seals",
     keywords: [
       "brush strip seal",
@@ -782,8 +782,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Supporting accessories and completion items for coordinated sealing system packages — smoke seals, compression seals and specialist closure accessories for architectural door sets.",
     shortDescription:
       "Smoke seals, compression seals and accessories completing sealing system packages.",
-    image: "/tur/slider-5.webp",
-    imageAlt: "Sealing system complementary products — completion accessories",
+    image: "/tur/categories/default-342301605201109.jpg",
+    imageAlt: "Complementary sealing products — smoke seals and completion accessories",
     eyebrow: "Sealing Systems · Complementary Products",
     keywords: [
       "smoke seal",
@@ -804,8 +804,8 @@ export const routeGroups: CatalogRouteGroup[] = [
       "Weather stripping profiles for external and internal door applications — surface-applied rubber and foam strips that coordinate with threshold plates and perimeter seals for complete weather and draught performance.",
     shortDescription:
       "Surface-applied weather strips for external door draught and weather control.",
-    image: "/tur/sliding-d.jpg",
-    imageAlt: "Weather stripping family visual",
+    image: "/tur/categories/default-1772346152201109.jpg",
+    imageAlt: "Weather stripping — surface-applied rubber and foam door weather seals",
     eyebrow: "Sealing Systems · Weather Stripping",
     keywords: [
       "weather stripping",

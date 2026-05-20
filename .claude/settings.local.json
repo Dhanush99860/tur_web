@@ -44,7 +44,15 @@
       "Bash(TG\\\\.\" -i | head -40)",
       "Bash(grep -c \"defineThinGlassHardwareProduct\" src/content/catalog/products.ts)",
       "Bash(echo \"thin count: $?\")",
-      "Bash(npx tsx *)"
+      "Bash(npx tsx *)",
+      "Bash(curl -s \"https://www.tur.com.co/door_hardware/sub?id=12&n=glass+hardware\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30)",
+      "Bash(curl -s -L \"https://www.tur.com.co/door_hardware/sub?id=13&n=access+control\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30)",
+      "Bash(curl -s \"https://www.tur.com.co/door_hardware/sub?id=1&n=american+standard\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30)",
+      "Bash(curl -s -L \"https://www.tur.com.co/door_hardware/sub?id=1&n=american+standard\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30)",
+      "Bash(curl -s \"https://www.tur.com.co/door_hardware/sub?id=10&n=american+standard\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30)",
+      "Bash(curl -s -L \"https://www.tur.com.co/door_hardware/sub?id=10&n=american+standard\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30)",
+      "Bash(curl -s \"https://www.tur.com.co/door_hardware/sub?id=14&n=sealing+systems\")",
+      "Bash(curl -s \"https://www.tur.com.co/door_hardware/sub?id=15&n=sealing+systems\")"
     ],
     "additionalDirectories": [
       "f:\\tur\\public\\tur\\american-standard\\secure-the-door\\mortise-locksets"
