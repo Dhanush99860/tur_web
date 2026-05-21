@@ -9,7 +9,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const sectionLastModified = new Map(
     catalogSections.map((section) => [section.slug, section.updatedAt]),
   );
-  const staticPages = [pageSeo.home, pageSeo.about, pageSeo.downloads, pageSeo.contact];
+  const staticPages = [
+    pageSeo.home,
+    pageSeo.about,
+    pageSeo.downloads,
+    pageSeo.contact,
+    pageSeo.masterKey,
+  ];
 
   // Only index products that are real detail pages (not route-group proxies or option-only stubs)
   const indexableProducts = products.filter(

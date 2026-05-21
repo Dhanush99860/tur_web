@@ -394,11 +394,11 @@ export const mainNavigation = [
       groups: [...automaticOperatorsPrimaryGroups, ...automaticOperatorsSupportGroups],
     },
   },
-  { label: "Master Key", href: "/products", comingSoon: true },
+  { label: "Master Key", href: "/master-key-systems" },
   { label: "All Products", href: "/products" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-] satisfies HeaderNavigationItem[];
+] as HeaderNavigationItem[];
 
 export const drawerSupportLinks = [
   {

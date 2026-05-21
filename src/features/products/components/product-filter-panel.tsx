@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { Product } from "@/types";
 import { ChevronDownIcon } from "@/components/shared/icons";
 import { cn } from "@/lib/utils/cn";
@@ -299,16 +300,30 @@ export function ProductFilterPanel({
           );
         })}
 
-        {/* Master Key — coming soon */}
-        <div className="flex cursor-not-allowed select-none items-center gap-3 px-5 py-3.5 opacity-35">
+        {/* Master Key — standalone page link */}
+        <Link
+          href="/master-key-systems"
+          className="flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-[color-mix(in_srgb,var(--panel)_55%,transparent)]"
+        >
           <span className="inline-block h-2 w-2 shrink-0 rounded-full bg-[var(--muted-foreground)]" />
           <span className="text-[13px] font-semibold text-[var(--foreground)]">
             Master Key Systems
           </span>
-          <span className="ml-auto rounded-full border border-[var(--border)] bg-[var(--panel)] px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
-            Soon
-          </span>
-        </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="none"
+            className="ml-auto h-3 w-3 shrink-0 text-[var(--muted-foreground)]"
+          >
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
       </div>
     </div>
   );

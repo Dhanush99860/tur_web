@@ -12,10 +12,10 @@ export function DownloadsPage() {
         <section className="surface-panel p-6 sm:p-8 lg:p-10">
           <p className="eyebrow">Downloads</p>
           <h1 className="display-hero mt-4 max-w-[12ch] text-[var(--foreground)]">
-            Company profile, catalog requests and supporting resources.
+            Company profile, catalogues and technical resources.
           </h1>
           <p className="mt-5 text-lg leading-8 text-[color-mix(in_srgb,var(--foreground)_88%,transparent)]">
-            Use Downloads as the main page for profile material today, with room for future catalogs, technical documents and specification resources.
+            Download the TUR company profile, access product catalogues and submit technical or project support requests directly to the TUR team.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <SmartLink href="/company_profile.pdf" className={buttonClassName()}>
@@ -31,8 +31,8 @@ export function DownloadsPage() {
       <PageContainer className="section-shell pt-0">
         <SectionHeading
           eyebrow="Available Resources"
-          title="A real page for documents and request-led support."
-          description="This route is ready to absorb future catalogs, technical sheets and specification documents page by page."
+          title="Catalogues, profiles and project support."
+          description="Download product catalogues and the company profile, or submit a request for technical documents and specification support."
         />
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {downloadResources.map((resource) => (

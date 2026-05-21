@@ -279,7 +279,7 @@ export const downloadResources: DownloadResource[] = [
   {
     title: "TUR with Format Company Profile",
     description:
-      "Download the main company profile for an overview of heritage, product direction, global structure and project support positioning.",
+      "Download the main company profile for an overview of TUR heritage, product direction, global structure and project support positioning.",
     href: "/company_profile.pdf",
     ctaLabel: "Download PDF",
     eyebrow: "Primary Download",
@@ -287,9 +287,19 @@ export const downloadResources: DownloadResource[] = [
     imageAlt: "TUR company profile download",
   },
   {
+    title: "Master Key Systems — Catalogue 2026",
+    description:
+      "TURN master key systems catalogue covering Euro profile cylinders (TE3606), ANSI mortise cylinders (TA series), IC interchangeable cores, key hierarchy and SKG 2-star certification.",
+    href: "/master-key-systems",
+    ctaLabel: "View Catalogue",
+    eyebrow: "Product Catalogue",
+    image: "/master-key/hero-key.jpg",
+    imageAlt: "TURN master key systems catalogue 2026",
+  },
+  {
     title: "Request Product Catalog",
     description:
-      "Use the inquiry route to request broader category details and supporting catalog information.",
+      "Submit an inquiry to request broader category details, technical data sheets and supporting specification information for any TUR product range.",
     href: createInquiryHref("Request Catalog"),
     ctaLabel: "Request Details",
     eyebrow: "Support",
@@ -299,7 +309,7 @@ export const downloadResources: DownloadResource[] = [
   {
     title: "Technical Services Inquiry",
     description:
-      "Reach TUR for project coordination, specification review and technical support discussions.",
+      "Contact TUR for project coordination, specification review, system design and technical support across door hardware, automatic operators and master key systems.",
     href: "/contact",
     ctaLabel: "Contact TUR",
     eyebrow: "Project Support",

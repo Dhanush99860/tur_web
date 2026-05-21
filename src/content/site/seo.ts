@@ -42,16 +42,18 @@ export const pageSeo = {
   downloads: {
     title: "Downloads",
     description:
-      "Access the TUR company profile and use downloads as the core route for profile, catalog and technical support requests.",
+      "Download the TUR company profile and Master Key Systems catalogue. Request technical data sheets and specification support for door hardware, automatic operators and access control.",
     path: "/downloads",
     image: "/tur/site/meta-default.jpg",
     keywords: [
       "tur downloads",
       "company profile",
-      "catalog request",
-      "technical support",
+      "master key catalogue",
+      "product catalog",
+      "technical data sheet",
+      "specification support",
     ],
-    updatedAt: "2026-03-19",
+    updatedAt: "2026-05-21",
   },
   contact: {
     title: "Contact",
@@ -96,5 +98,26 @@ export const pageSeo = {
       "controlled physical access",
     ],
     updatedAt: "2026-03-20",
+  },
+  masterKey: {
+    title: "Master Key Systems",
+    description:
+      "TURN master key systems — SKG 2-star certified Euro profile cylinders with KA, KD, MK and GMK hierarchy. BS EN 1303:2015 compliant, anti-drill, duplication controlled. Designed for hotels, hospitals, offices and campus projects.",
+    path: "/master-key-systems",
+    image: "/master-key/hero-key.jpg",
+    keywords: [
+      "master key system",
+      "grand master key",
+      "keyed different",
+      "keyed alike",
+      "euro profile cylinder",
+      "SKG 2-star cylinder",
+      "BS EN 1303",
+      "TURN master key",
+      "key hierarchy",
+      "ANSI cylinder",
+      "interchangeable core",
+    ],
+    updatedAt: "2026-05-21",
   },
 } satisfies Record<string, SeoPage>;
