@@ -8,7 +8,6 @@ import { SmartLink } from "@/components/shared/smart-link";
 import { cn } from "@/lib/utils/cn";
 
 const SLIDE_DURATION = 6500;
-// Pinned to dark-mode periwinkle — hero is always on a dark overlay regardless of site theme
 const ACCENT = "#86a2e6";
 
 type HeroStageProps = {
@@ -36,10 +35,7 @@ export function HeroStage({ hero }: HeroStageProps) {
 
     function tick(timestamp: number) {
       if (!pausedRef.current) {
-        if (startRef.current === 0) {
-          startRef.current = timestamp;
-        }
-
+        if (startRef.current === 0) startRef.current = timestamp;
         const p = Math.min((timestamp - startRef.current) / SLIDE_DURATION, 1);
         setProgress(p);
         if (p >= 1) {
@@ -61,14 +57,10 @@ export function HeroStage({ hero }: HeroStageProps) {
   return (
     <div
       className="relative min-h-[calc(100svh-10.75rem)] overflow-hidden rounded-[1.75rem] border border-white/[0.07]"
-      onMouseEnter={() => {
-        pausedRef.current = true;
-      }}
-      onMouseLeave={() => {
-        pausedRef.current = false;
-      }}
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
     >
-      {/* ── Background slides ── */}
+      {/* ── Background slides — full frame, image is the hero ── */}
       {slides.map((s, i) => (
         <div
           key={s.image}
@@ -92,15 +84,18 @@ export function HeroStage({ hero }: HeroStageProps) {
         </div>
       ))}
 
-      {/* ── Gradient overlays ── */}
+      {/* ── Gradients — bottom-heavy so product image shows at top ── */}
+      {/* Bottom gradient for text legibility */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[2] bg-[linear-gradient(112deg,rgba(3,6,8,0.92)_0%,rgba(3,6,8,0.62)_36%,rgba(3,6,8,0.18)_62%,rgba(3,6,8,0.34)_100%)]"
+        className="absolute inset-x-0 bottom-0 z-[2] h-[78%] bg-[linear-gradient(0deg,rgba(3,6,8,0.97)_0%,rgba(3,6,8,0.78)_28%,rgba(3,6,8,0.32)_56%,transparent_100%)]"
       />
+      {/* Subtle left vignette — just enough contrast for text, doesn't block the image */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 z-[2] h-[65%] bg-[linear-gradient(0deg,rgba(3,6,8,0.95)_0%,rgba(3,6,8,0.34)_55%,transparent_100%)]"
+        className="absolute inset-y-0 left-0 z-[2] w-[52%] bg-[linear-gradient(90deg,rgba(3,6,8,0.28)_0%,transparent_100%)]"
       />
+
       {/* Noise film */}
       <div
         aria-hidden="true"
@@ -110,11 +105,11 @@ export function HeroStage({ hero }: HeroStageProps) {
           backgroundSize: "128px",
         }}
       />
-      {/* Accent atmospheric glow */}
+      {/* Accent atmospheric glow — bottom left */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-28 -left-20 z-[2] h-[480px] w-[480px] rounded-full blur-[96px]"
-        style={{ background: "radial-gradient(circle, rgba(134,162,230,0.12) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(134,162,230,0.10) 0%, transparent 70%)" }}
       />
       {/* Top edge shimmer */}
       <div
@@ -122,65 +117,57 @@ export function HeroStage({ hero }: HeroStageProps) {
         className="absolute inset-x-0 top-0 z-[5] h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.10)_30%,rgba(255,255,255,0.18)_50%,rgba(255,255,255,0.10)_70%,transparent)]"
       />
 
-      {/* ── Main content ── */}
-      <div className="relative z-[4] flex min-h-[calc(100svh-10.75rem)] gap-3 p-5 sm:p-7 lg:gap-4 lg:p-9 xl:p-10">
+      {/* Slide counter — top right */}
+      <div className="absolute right-6 top-6 z-[6]">
+        <span className="font-mono text-[9px] font-semibold tracking-[0.26em] text-white/30">
+          {String(active + 1).padStart(2, "0")}
+          <span className="mx-1.5 opacity-50">/</span>
+          {String(slides.length).padStart(2, "0")}
+        </span>
+      </div>
 
-        {/* ── Left / main column ── */}
-        <div className="flex flex-1 flex-col min-w-0">
+      {/* ── All content pinned to bottom ── */}
+      <div className="absolute inset-x-0 bottom-0 z-[6] p-5 sm:p-7 lg:p-9 xl:p-10">
 
-          {/* Slide counter — top right of left column */}
-          <div className="flex items-start justify-end">
-            <span className="font-mono text-[9px] font-semibold tracking-[0.26em] text-white/28">
-              {String(active + 1).padStart(2, "0")}
-              <span className="mx-1.5 opacity-50">/</span>
-              {String(slides.length).padStart(2, "0")}
-            </span>
-          </div>
+        {/* Eyebrow */}
+        <div key={`eyebrow-${active}`} className="hero-slide-text mb-5 flex items-center gap-2.5">
+          <span className="relative flex h-[7px] w-[7px] shrink-0">
+            <span
+              className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-55"
+              style={{ background: ACCENT }}
+            />
+            <span
+              className="relative inline-flex h-[7px] w-[7px] rounded-full"
+              style={{ background: "#95ade9" }}
+            />
+          </span>
+          <span
+            className="font-sans text-[9.5px] font-bold uppercase tracking-[0.28em]"
+            style={{ color: "#a4b9ec" }}
+          >
+            {slide.label}
+          </span>
+          <span
+            className="h-px w-10 shrink-0"
+            style={{ background: "linear-gradient(90deg, rgba(134,162,230,0.42), transparent)" }}
+          />
+        </div>
 
-          <div className="flex-1" />
+        {/* Bottom bar — headline/CTAs left, slide thumbnails right */}
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:gap-8">
 
-          {/* ── Text content — key triggers CSS animation on slide change ── */}
-          <div key={active} className="hero-slide-text mb-5 max-w-[36rem]">
-
-            {/* Eyebrow */}
-            <div className="mb-4 flex items-center gap-2.5">
-              <span className="relative flex h-[7px] w-[7px] shrink-0">
-                <span
-                  className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-55"
-                  style={{ background: ACCENT }}
-                />
-                <span
-                  className="relative inline-flex h-[7px] w-[7px] rounded-full"
-                  style={{ background: "#95ade9" }}
-                />
-              </span>
-              <span
-                className="font-sans text-[9.5px] font-bold uppercase tracking-[0.28em]"
-                style={{ color: "#a4b9ec" }}
-              >
-                {slide.label}
-              </span>
-              <span
-                className="h-px w-10"
-                style={{ background: "linear-gradient(90deg, rgba(134,162,230,0.42), transparent)" }}
-              />
-            </div>
-
-            {/* Headline */}
-            <h1 className="font-display text-[clamp(1.85rem,3.5vw,3.1rem)] font-semibold leading-[1.06] tracking-[-0.04em] text-white">
+          {/* Left: headline + description + CTAs */}
+          <div key={`content-${active}`} className="hero-slide-text flex-1 min-w-0">
+            <h1 className="font-display text-[clamp(2.4rem,4.5vw,4.2rem)] font-semibold leading-[1.03] tracking-[-0.048em] text-white max-w-[22ch]">
               {slide.title}
             </h1>
-
-            {/* Description */}
             {slide.description ? (
-              <p className="mt-3 max-w-[30rem] text-[13px] leading-[1.85] text-white/54 sm:text-[13.5px]">
+              <p className="mt-3 max-w-[42rem] text-[13px] leading-[1.88] text-white/58 sm:text-[13.5px]">
                 {slide.description}
               </p>
             ) : null}
-
-            {/* CTAs */}
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              {/* Primary: solid white — always legible over dark hero overlay in any theme */}
+              {/* Primary CTA — solid white */}
               <SmartLink
                 href={ctaHref}
                 className="button-link group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-white px-5 py-2.5 text-[9.5px] font-bold uppercase tracking-[0.2em] text-slate-900 shadow-[0_8px_24px_-6px_rgba(255,255,255,0.28)] transition-all duration-300 hover:bg-white/90 hover:shadow-[0_12px_32px_-6px_rgba(255,255,255,0.38)]"
@@ -197,19 +184,97 @@ export function HeroStage({ hero }: HeroStageProps) {
                   <ArrowUpRightIcon className="h-2.5 w-2.5" />
                 </span>
               </SmartLink>
-
-              {/* Secondary: frosted glass */}
+              {/* Secondary CTA — frosted glass */}
               <SmartLink
-                href={hero.primaryCta.href}
+                href={hero.secondaryCta.href}
                 className="button-link inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-[9.5px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/16"
               >
-                {hero.primaryCta.label}
+                {hero.secondaryCta.label}
               </SmartLink>
             </div>
           </div>
 
-          {/* ── Mobile slide tabs — visible below lg ── */}
-          <div className="mb-4 grid grid-cols-3 gap-2 lg:hidden">
+          {/* Right: horizontal product thumbnail cards — desktop only */}
+          <div className="hidden shrink-0 lg:flex lg:items-end lg:gap-2">
+            {slides.map((s, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to slide ${i + 1}: ${s.label}`}
+                  className="group relative overflow-hidden rounded-[0.9rem]"
+                  style={{
+                    width: isActive ? "172px" : "88px",
+                    height: "96px",
+                    transition: "width 500ms cubic-bezier(0.4,0,0.2,1)",
+                  }}
+                >
+                  {/* Product image */}
+                  <Image
+                    src={s.image}
+                    alt={s.imageAlt}
+                    fill
+                    sizes="172px"
+                    className={cn(
+                      "object-cover object-center transition-all duration-700 ease-out",
+                      isActive
+                        ? "scale-[1.05] brightness-[0.72]"
+                        : "scale-100 brightness-[0.46] group-hover:brightness-[0.60] group-hover:scale-[1.03]",
+                    )}
+                  />
+                  {/* Bottom gradient */}
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_15%,rgba(3,6,8,0.86)_100%)]" />
+                  {/* Border ring */}
+                  <div
+                    className="pointer-events-none absolute inset-0 rounded-[0.9rem] transition-all duration-300"
+                    style={{
+                      boxShadow: isActive
+                        ? "inset 0 0 0 1px rgba(134,162,230,0.50)"
+                        : "inset 0 0 0 1px rgba(255,255,255,0.10)",
+                    }}
+                  />
+                  {/* Active accent stripe — left edge */}
+                  {isActive && (
+                    <div
+                      className="absolute inset-y-0 left-0 w-[2.5px] rounded-l-[0.9rem]"
+                      style={{ background: ACCENT }}
+                    />
+                  )}
+                  {/* Progress bar — bottom */}
+                  <div
+                    className="absolute bottom-0 left-0 z-10 h-[2px] rounded-full"
+                    style={{
+                      width: isActive ? `${progress * 100}%` : "0%",
+                      background: ACCENT,
+                      transition: "none",
+                    }}
+                  />
+                  {/* Label overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 z-10 p-2.5">
+                    <p
+                      className={cn(
+                        "truncate text-[8px] font-bold uppercase tracking-[0.18em] transition-colors duration-300",
+                        isActive ? "" : "text-white/36 group-hover:text-white/56",
+                      )}
+                      style={isActive ? { color: "#99b1e8" } : undefined}
+                    >
+                      {s.label}
+                    </p>
+                    {isActive && (
+                      <p className="mt-0.5 line-clamp-1 text-[9px] font-medium leading-snug text-white/62">
+                        {s.title}
+                      </p>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Mobile slide tabs — 3 compact buttons */}
+          <div className="grid grid-cols-3 gap-2 lg:hidden">
             {slides.map((s, i) => {
               const isActive = i === active;
               return (
@@ -253,136 +318,20 @@ export function HeroStage({ hero }: HeroStageProps) {
               );
             })}
           </div>
+        </div>
 
-          {/* ── Metrics strip ── */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            {hero.metrics.map((m, i) => (
-              <span key={m.label} className="flex items-center gap-3">
-                {i > 0 && (
-                  <span className="h-2.5 w-px shrink-0 bg-white/16" />
-                )}
-                <span className="font-sans text-[8px] font-semibold uppercase tracking-[0.2em] text-white/32">
-                  {m.value}
-                </span>
+        {/* Metrics strip — full width, below the bottom bar */}
+        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
+          {hero.metrics.map((m, i) => (
+            <span key={m.label} className="flex items-center gap-3">
+              {i > 0 && <span className="h-2.5 w-px shrink-0 bg-white/16" />}
+              <span className="font-sans text-[8px] font-semibold uppercase tracking-[0.2em] text-white/32">
+                {m.value}
               </span>
-            ))}
-          </div>
+            </span>
+          ))}
         </div>
 
-        {/* ── Right column: slide nav cards — desktop only ── */}
-        <div className="hidden w-[200px] lg:flex xl:w-[218px]">
-          {/* Frosted glass panel wraps all cards */}
-          <div className="flex w-full flex-col gap-1.5 self-stretch rounded-[1.4rem] p-1.5 backdrop-blur-[3px] ring-1 ring-inset ring-white/12"
-            style={{ background: "rgba(3,6,8,0.28)" }}
-          >
-            {slides.map((s, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to slide ${i + 1}: ${s.label}`}
-                  className={cn(
-                    "group relative overflow-hidden rounded-[1rem] text-left transition-all duration-500 ease-in-out",
-                    isActive ? "flex-[2.8]" : "flex-[1.2]",
-                  )}
-                >
-                  {/* Card background image */}
-                  <Image
-                    src={s.image}
-                    alt={s.imageAlt}
-                    fill
-                    sizes="218px"
-                    className={cn(
-                      "object-cover object-center transition-all duration-700 ease-out",
-                      isActive
-                        ? "scale-[1.04] brightness-[0.78]"
-                        : "scale-100 brightness-[0.52] group-hover:brightness-[0.68] group-hover:scale-[1.02]",
-                    )}
-                  />
-
-                  {/* Bottom gradient */}
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_28%,rgba(3,6,8,0.88)_100%)]" />
-
-                  {/* Top shimmer line */}
-                  <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.24)_50%,transparent)]" />
-
-                  {/* Border ring — accent tint for active, white for inactive */}
-                  <div
-                    className="pointer-events-none absolute inset-0 rounded-[1rem] ring-1 ring-inset transition-all duration-300"
-                    style={{
-                      boxShadow: isActive
-                        ? "inset 0 0 0 1px rgba(134,162,230,0.38)"
-                        : "inset 0 0 0 1px rgba(255,255,255,0.14)",
-                    }}
-                  />
-
-                  {/* Active: left accent stripe */}
-                  {isActive && (
-                    <div
-                      className="absolute inset-y-0 left-0 w-[3px] rounded-l-[1rem]"
-                      style={{ background: ACCENT }}
-                    />
-                  )}
-
-                  {/* Active: subtle accent glow at bottom */}
-                  {isActive && (
-                    <div
-                      className="absolute inset-x-0 bottom-0 h-24 opacity-30"
-                      style={{ background: "linear-gradient(0deg, rgba(134,162,230,0.22), transparent)" }}
-                    />
-                  )}
-
-                  {/* Progress bar */}
-                  <div
-                    className="absolute bottom-0 left-0 z-10 h-[2.5px] rounded-full"
-                    style={{
-                      width: isActive ? `${progress * 100}%` : "0%",
-                      background: ACCENT,
-                      transition: "none",
-                    }}
-                  />
-
-                  {/* Slide number badge — top right */}
-                  <span className="absolute right-2 top-2 z-10 rounded-full border border-white/14 bg-black/44 px-1.5 py-[2px] font-mono text-[7px] font-semibold tracking-[0.18em] text-white/44 backdrop-blur-sm">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  {/* Card content — bottom */}
-                  <div className="absolute bottom-0 left-0 right-0 z-10 p-3">
-                    <span
-                      className={cn(
-                        "block font-mono text-[7.5px] font-semibold tracking-[0.22em] transition-colors duration-300",
-                        !isActive && "text-white/30 group-hover:text-white/46",
-                      )}
-                      style={isActive ? { color: "#99b1e8" } : undefined}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p
-                      className={cn(
-                        "mt-0.5 truncate text-[10px] font-semibold uppercase tracking-[0.13em] transition-colors duration-300",
-                        isActive ? "text-white/92" : "text-white/40 group-hover:text-white/60",
-                      )}
-                    >
-                      {s.label}
-                    </p>
-                    {isActive ? (
-                      <p className="mt-1 line-clamp-2 text-[10.5px] font-medium leading-snug text-white/62">
-                        {s.title}
-                      </p>
-                    ) : (
-                      <p className="mt-0.5 truncate text-[9px] font-normal leading-snug text-white/28 transition-colors duration-300 group-hover:text-white/42">
-                        {s.title}
-                      </p>
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
       </div>
     </div>
   );

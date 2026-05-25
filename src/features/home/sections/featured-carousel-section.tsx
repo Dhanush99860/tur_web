@@ -4,90 +4,86 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { Product } from "@/types";
 import { PageContainer } from "@/components/layout/page-container";
-import { HomeSectionHeading } from "@/features/home/components/home-section-heading";
 import { SmartLink } from "@/components/shared/smart-link";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/shared/icons";
-import { buttonClassName } from "@/components/ui/button";
 
 type FeaturedCarouselSectionProps = {
   products: Product[];
 };
 
-const CAROUSEL_GAP = 12;
+const CAROUSEL_GAP = 14;
+
+const CATEGORY_TAGS = [
+  "Door Hardware",
+  "Automatic Operators",
+  "Access Control",
+  "Glass Hardware",
+  "Sealing Systems",
+];
 
 function getSectionLabel(product: Product) {
   return product.section === "door-hardware" ? "Door Hardware" : "Automatic Operators";
 }
 
 function getCardsPerView(width: number) {
-  if (width >= 1440) {
-    return 4;
-  }
-
-  if (width >= 1024) {
-    return 3;
-  }
-
-  if (width >= 640) {
-    return 2;
-  }
-
+  if (width >= 1440) return 4;
+  if (width >= 1024) return 3;
+  if (width >= 640) return 2;
   return 1;
 }
 
-function FeaturedCarouselProductCard({ product }: { product: Product }) {
+function CarouselProductCard({ product }: { product: Product }) {
+  const href = product.href ?? `/products/${product.slug}`;
+
   return (
     <SmartLink
-      href={`/products/${product.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[0.85rem] border border-[rgba(38,38,38,0.04)] bg-[color-mix(in_srgb,var(--panel)_56%,white)] p-4 sm:p-5"
+      href={href}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_80%,transparent)] bg-[var(--card)] transition-all duration-300 hover:border-[color-mix(in_srgb,var(--border)_100%,transparent)] hover:shadow-[0_12px_40px_-16px_rgba(0,0,0,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2"
     >
-      {product.badge ? (
-        <span className="absolute left-4 top-4 z-20 rounded-full border border-[color-mix(in_srgb,var(--accent)_18%,white)] bg-[color-mix(in_srgb,var(--accent)_10%,white)] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
-          {product.badge}
+      {/* Image area */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: "3/4" }}>
+        <Image
+          src={product.image}
+          alt={product.imageAlt}
+          fill
+          sizes="(max-width: 639px) 85vw, (max-width: 1023px) 48vw, (max-width: 1439px) 34vw, 24vw"
+          className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.06]"
+        />
+        {/* Bottom gradient */}
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,0.52)_100%)]" />
+
+        {/* Category badge — top left */}
+        <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/38 px-2.5 py-1 text-[8.5px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm">
+          {product.familyTitle}
         </span>
-      ) : null}
 
-      <div className="relative flex min-h-[18rem] items-start justify-center overflow-visible rounded-[0.55rem] bg-transparent pt-4 sm:min-h-[19rem]">
-        <div className="pointer-events-none absolute inset-x-[14%] bottom-6 h-8 rounded-full bg-[rgba(18,20,20,0.16)] blur-2xl transition-opacity duration-300 group-hover:opacity-90" />
+        {/* Badge — top right */}
+        {product.badge && (
+          <span className="absolute right-3 top-3 rounded-full border border-[color-mix(in_srgb,var(--accent)_30%,transparent)] bg-[color-mix(in_srgb,var(--accent)_15%,white)] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
+            {product.badge}
+          </span>
+        )}
 
-        <div className="relative w-[92%] max-w-none transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1">
-          <div className="relative bg-white p-2 shadow-[0_24px_34px_-24px_rgba(0,0,0,0.24)]">
-            <div className="relative aspect-[0.9/1] overflow-hidden bg-[color-mix(in_srgb,var(--surface)_70%,white)]">
-              <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_42%,rgba(12,15,20,0.06)_100%)]" />
-              <div className="absolute inset-y-0 left-[-34%] z-10 w-[60%] rotate-[16deg] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.24),transparent)] opacity-0 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[54%] group-hover:opacity-100" />
-              <Image
-                src={product.image}
-                alt={product.imageAlt}
-                fill
-                sizes="(max-width: 639px) 80vw, (max-width: 1439px) 33vw, 23vw"
-                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.08]"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute inset-x-0 bottom-[-0.7rem] z-20 translate-y-2 opacity-0 transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:translate-y-0 group-hover:opacity-100">
-          <div className="border border-[color-mix(in_srgb,var(--border)_88%,white)] bg-white px-4 py-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--foreground)] shadow-[0_12px_24px_-18px_rgba(0,0,0,0.18)]">
-            Explore Product
+        {/* Hover: View Details pill */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="flex items-center gap-2 rounded-full border border-white/30 bg-white/88 px-4 py-2 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.22)] backdrop-blur-sm">
+            <span className="text-[9.5px] font-bold uppercase tracking-[0.18em] text-slate-800">View Details</span>
+            <ArrowUpRightIcon className="h-3 w-3 text-slate-600" />
           </div>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col pt-6">
-        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
-          {product.familyTitle}
-        </p>
-
-        <h3 className="mt-4 max-w-[30ch] text-[1.28rem] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)] sm:text-[1.34rem]">
+      {/* Content */}
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <h3 className="text-[1.05rem] font-medium leading-[1.12] tracking-[-0.036em] text-[var(--foreground)] sm:text-[1.1rem]">
           {product.title}
         </h3>
-        <div className="mt-3 flex items-center justify-between gap-4">
-          <p className="min-w-0 flex-1 text-[0.96rem] leading-6 text-[var(--muted-foreground)]">
+        <div className="mt-3 flex items-center justify-between gap-3">
+          <span className="text-[11.5px] font-medium text-[var(--muted-foreground)]">
             {getSectionLabel(product)}
-          </p>
-
-          <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent)_64%,white)] bg-transparent text-[var(--accent)] transition duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-white">
-            <ArrowUpRightIcon className="h-4.5 w-4.5" />
+          </span>
+          <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent)_50%,transparent)] text-[var(--accent)] transition-all duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-white">
+            <ArrowUpRightIcon className="h-3 w-3" />
           </span>
         </div>
       </div>
@@ -116,10 +112,7 @@ export function FeaturedCarouselSection({ products }: FeaturedCarouselSectionPro
 
   useEffect(() => {
     const viewport = viewportRef.current;
-
-    if (!viewport) {
-      return;
-    }
+    if (!viewport) return;
 
     const measure = () => {
       const nextWidth = viewport.clientWidth;
@@ -128,10 +121,7 @@ export function FeaturedCarouselSection({ products }: FeaturedCarouselSectionPro
     };
 
     const queueMeasure = () => {
-      if (resizeFrameRef.current !== null) {
-        window.cancelAnimationFrame(resizeFrameRef.current);
-      }
-
+      if (resizeFrameRef.current !== null) window.cancelAnimationFrame(resizeFrameRef.current);
       resizeFrameRef.current = window.requestAnimationFrame(() => {
         resizeFrameRef.current = null;
         measure();
@@ -139,44 +129,32 @@ export function FeaturedCarouselSection({ products }: FeaturedCarouselSectionPro
     };
 
     queueMeasure();
-    const resizeObserver = new ResizeObserver(queueMeasure);
-
-    resizeObserver.observe(viewport);
+    const ro = new ResizeObserver(queueMeasure);
+    ro.observe(viewport);
 
     return () => {
-      if (resizeFrameRef.current !== null) {
-        window.cancelAnimationFrame(resizeFrameRef.current);
-      }
-      resizeObserver.disconnect();
+      if (resizeFrameRef.current !== null) window.cancelAnimationFrame(resizeFrameRef.current);
+      ro.disconnect();
     };
   }, []);
 
   useEffect(() => {
-    if (activeIndex <= maxIndex) {
-      return;
-    }
-
-    const frameId = window.requestAnimationFrame(() => {
-      setActiveIndex(maxIndex);
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-    };
+    if (activeIndex <= maxIndex) return;
+    const id = window.requestAnimationFrame(() => setActiveIndex(maxIndex));
+    return () => window.cancelAnimationFrame(id);
   }, [activeIndex, maxIndex]);
 
-  function moveCarousel(direction: "prev" | "next") {
-    setActiveIndex((current) => {
-      const baseIndex = Math.min(current, maxIndex);
-      return direction === "next"
-        ? Math.min(baseIndex + 1, maxIndex)
-        : Math.max(baseIndex - 1, 0);
+  function move(direction: "prev" | "next") {
+    setActiveIndex((cur) => {
+      const base = Math.min(cur, maxIndex);
+      return direction === "next" ? Math.min(base + 1, maxIndex) : Math.max(base - 1, 0);
     });
   }
 
   return (
     <section className="home-section-shell">
       <PageContainer>
+        {/* Carousel viewport */}
         <div ref={viewportRef} className="overflow-hidden">
           <div
             className="flex"
@@ -186,73 +164,87 @@ export function FeaturedCarouselSection({ products }: FeaturedCarouselSectionPro
               transition: "transform 520ms cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
+            {/* Intro card — dark panel, pinned left */}
             <article
-              className="flex min-h-[31.5rem] shrink-0 flex-col rounded-[0.85rem] border border-[rgba(38,38,38,0.04)] bg-[color-mix(in_srgb,var(--panel)_56%,white)] px-6 py-7 sm:px-7 xl:px-8 xl:py-8"
+              className="flex shrink-0 flex-col overflow-hidden rounded-2xl bg-[var(--foreground)] px-7 py-8 sm:px-8 sm:py-9"
               style={{ width: itemWidth || undefined }}
             >
-              <HomeSectionHeading
-                eyebrow="Core Ranges"
-                title={<>Explore core entry systems.</>}
-                className="max-w-[18rem]"
-                titleClassName="max-w-[7ch]"
-              />
+              {/* Eyebrow */}
+              <p className="text-[9.5px] font-bold uppercase tracking-[0.28em] text-white/40">
+                Core Ranges
+              </p>
 
-              <div className="mt-6 max-w-[24ch]">
-                <p className="text-[15px] leading-8 text-[color-mix(in_srgb,var(--foreground)_84%,transparent)] sm:text-[16px]">
-                  Move quickly from door function to product family across hardware, access, glass and automation.
-                </p>
-                <SmartLink
-                  href="/door-hardware"
-                  className={buttonClassName(
-                    "primary",
-                    "mt-6 min-w-[13.25rem] rounded-[0.7rem] px-7 text-white",
-                  )}
-                >
-                  Browse Categories
-                </SmartLink>
+              {/* Title */}
+              <h2 className="mt-5 text-[clamp(1.7rem,2.6vw,2.4rem)] font-semibold leading-[1.06] tracking-[-0.048em] text-white">
+                Explore core entry systems.
+              </h2>
+
+              {/* Description */}
+              <p className="mt-4 max-w-[20ch] text-[13.5px] leading-[1.8] text-white/55">
+                Hardware, access, glass and automation — all categories in one scroll.
+              </p>
+
+              {/* Category tags */}
+              <div className="mt-7 flex flex-wrap gap-2">
+                {CATEGORY_TAGS.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-white/12 px-3 py-1.5 text-[8.5px] font-bold uppercase tracking-[0.16em] text-white/45"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
+
+              {/* CTA */}
+              <SmartLink
+                href="/door-hardware"
+                className="mt-auto inline-flex items-center gap-2.5 pt-8 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70 transition-colors duration-200 hover:text-white"
+              >
+                Browse All Categories
+                <ArrowUpRightIcon className="h-3.5 w-3.5" />
+              </SmartLink>
             </article>
 
+            {/* Product cards */}
             {products.map((product) => (
-              <div
-                key={product.slug}
-                className="shrink-0"
-                style={{ width: itemWidth || undefined }}
-              >
-                <FeaturedCarouselProductCard product={product} />
+              <div key={product.slug} className="shrink-0" style={{ width: itemWidth || undefined }}>
+                <CarouselProductCard product={product} />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-5 flex items-center gap-5 sm:gap-7">
-          <div className="relative h-px flex-1 bg-[color-mix(in_srgb,var(--border)_90%,transparent)]">
+        {/* Controls row */}
+        <div className="mt-5 flex items-center gap-5 sm:gap-6">
+          {/* Progress track */}
+          <div className="relative h-[2px] flex-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--border)_80%,transparent)]">
             <span
               aria-hidden="true"
-              className="absolute top-1/2 h-[2px] -translate-y-1/2 bg-[var(--accent)] transition-[left,width] duration-500"
-              style={{
-                left: `${progressOffset}%`,
-                width: `${visiblePercent}%`,
-              }}
+              className="absolute inset-y-0 rounded-full bg-[var(--accent)] transition-[left,width] duration-500"
+              style={{ left: `${progressOffset}%`, width: `${visiblePercent}%` }}
             />
           </div>
 
-          <div className="flex items-center gap-4">
+          {/* Prev / Next */}
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              aria-label="Scroll featured products backward"
-              onClick={() => moveCarousel("prev")}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-transparent text-[var(--accent)] transition duration-300 hover:border-[var(--border)] hover:bg-white"
+              aria-label="Previous"
+              onClick={() => move("prev")}
+              disabled={safeActiveIndex === 0}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--border)_90%,transparent)] text-[var(--foreground)] transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-30"
             >
-              <ArrowRightIcon className="h-8 w-8 rotate-180" />
+              <ArrowRightIcon className="h-5 w-5 rotate-180" />
             </button>
             <button
               type="button"
-              aria-label="Scroll featured products forward"
-              onClick={() => moveCarousel("next")}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-transparent text-[var(--accent)] transition duration-300 hover:border-[var(--border)] hover:bg-white"
+              aria-label="Next"
+              onClick={() => move("next")}
+              disabled={safeActiveIndex === maxIndex}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--border)_90%,transparent)] text-[var(--foreground)] transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-30"
             >
-              <ArrowRightIcon className="h-8 w-8" />
+              <ArrowRightIcon className="h-5 w-5" />
             </button>
           </div>
         </div>

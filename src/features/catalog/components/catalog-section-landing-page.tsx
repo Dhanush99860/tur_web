@@ -12,54 +12,74 @@ type CatalogSectionLandingPageProps = {
   breadcrumbs?: BreadcrumbItem[];
 };
 
-// ── Family card — clean icon/text, no photo ──
+// ── 1. Family card — image top, text below ──
 function FamilyCard({ card, index }: { card: CatalogCard; index: number }) {
   const num = String(index + 1).padStart(2, "0");
 
   const inner = (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] p-5 transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--accent)_55%,var(--border))] hover:shadow-[0_12px_36px_-16px_rgba(0,0,0,0.13)]">
-      {/* Top accent rule */}
-      <div className="absolute inset-x-0 top-0 h-[2.5px] origin-left scale-x-0 rounded-t-[1.25rem] bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--accent)_55%,var(--border))] hover:shadow-[0_16px_40px_-18px_rgba(0,0,0,0.16)]">
+      {/* Top accent sweep */}
+      <div className="absolute inset-x-0 top-0 z-10 h-[2.5px] origin-left scale-x-0 rounded-t-[1.25rem] bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
 
-      {/* Header row: eyebrow + number */}
-      <div className="flex items-start justify-between gap-2">
+      {/* Image block */}
+      {card.image ? (
+        <div className="relative h-[200px] shrink-0 overflow-hidden">
+          <Image
+            src={card.image}
+            alt={card.imageAlt ?? card.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.045]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+          <span className="absolute bottom-3 right-4 select-none font-display text-[2.6rem] leading-none tracking-[-0.065em] text-white/18">
+            {num}
+          </span>
+        </div>
+      ) : (
+        /* No-image fallback header */
+        <div className="flex items-start justify-between gap-2 px-5 pt-5">
+          <span className="text-[8.5px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+            {card.eyebrow ?? "Family"}
+          </span>
+          <span className="font-display text-[1.65rem] leading-none tracking-[-0.06em] text-[color-mix(in_srgb,var(--border)_90%,transparent)] transition-colors duration-300 group-hover:text-[color-mix(in_srgb,var(--accent)_22%,var(--border))]">
+            {num}
+          </span>
+        </div>
+      )}
+
+      {/* Text content */}
+      <div className="flex flex-1 flex-col p-5">
         <span className="text-[8.5px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
           {card.eyebrow ?? "Family"}
         </span>
-        <span className="font-display text-[1.65rem] leading-none tracking-[-0.06em] text-[color-mix(in_srgb,var(--border)_90%,transparent)] transition-colors duration-300 group-hover:text-[color-mix(in_srgb,var(--accent)_22%,var(--border))]">
-          {num}
-        </span>
-      </div>
 
-      {/* Title */}
-      <h3 className="mt-3.5 text-[1.05rem] font-semibold leading-[1.18] tracking-[-0.025em] text-[var(--foreground)]">
-        {card.title}
-      </h3>
+        <h3 className="mt-2.5 text-[1.05rem] font-semibold leading-[1.18] tracking-[-0.025em] text-[var(--foreground)]">
+          {card.title}
+        </h3>
 
-      {/* Description */}
-      <p className="mt-2 flex-1 text-[12.5px] leading-[1.72] text-[var(--muted-foreground)]">
-        {card.description}
-      </p>
-
-      {/* Scope tag */}
-      {card.scope ? (
-        <p className="mt-4 rounded-[0.55rem] bg-[var(--panel)] px-3 py-1.5 text-[10.5px] font-medium leading-snug text-[var(--muted-foreground)]">
-          {card.scope}
+        <p className="mt-2 flex-1 text-[12.5px] leading-[1.72] text-[var(--muted-foreground)]">
+          {card.description}
         </p>
-      ) : card.note ? (
-        <p className="mt-4 rounded-[0.55rem] bg-[var(--panel)] px-3 py-1.5 text-[10.5px] font-medium leading-snug text-[var(--muted-foreground)]">
-          {card.note}
-        </p>
-      ) : null}
 
-      {/* CTA row */}
-      <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-4">
-        <span className="text-[12px] font-semibold tracking-[-0.01em] text-[var(--foreground)] transition-colors duration-200 group-hover:text-[var(--accent)]">
-          {card.href ? (card.ctaLabel ?? "Explore Family") : "Available on request"}
-        </span>
-        {card.href ? (
-          <ArrowUpRightIcon className="h-3.5 w-3.5 text-[var(--muted-foreground)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" />
+        {card.scope ? (
+          <p className="mt-4 rounded-[0.55rem] bg-[var(--panel)] px-3 py-1.5 text-[10.5px] font-medium leading-snug text-[var(--muted-foreground)]">
+            {card.scope}
+          </p>
+        ) : card.note ? (
+          <p className="mt-4 rounded-[0.55rem] bg-[var(--panel)] px-3 py-1.5 text-[10.5px] font-medium leading-snug text-[var(--muted-foreground)]">
+            {card.note}
+          </p>
         ) : null}
+
+        <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-4">
+          <span className="text-[12px] font-semibold tracking-[-0.01em] text-[var(--foreground)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+            {card.href ? (card.ctaLabel ?? "Explore Family") : "Available on request"}
+          </span>
+          {card.href ? (
+            <ArrowUpRightIcon className="h-3.5 w-3.5 text-[var(--muted-foreground)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" />
+          ) : null}
+        </div>
       </div>
     </div>
   );
@@ -71,7 +91,6 @@ function FamilyCard({ card, index }: { card: CatalogCard; index: number }) {
       </SmartLink>
     );
   }
-
   return <article className="h-full">{inner}</article>;
 }
 
@@ -141,7 +160,6 @@ export function CatalogSectionLandingPage({
 
             {/* Left — text panel */}
             <div className="flex flex-col rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] p-7 sm:p-9 lg:p-10">
-              {/* Eyebrow row */}
               <div className="flex flex-wrap items-center gap-2.5">
                 <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--accent)]">
                   TUR Architectural
@@ -152,15 +170,12 @@ export function CatalogSectionLandingPage({
                 </span>
               </div>
 
-              {/* Title */}
               <h1 className="mt-5 font-display text-[clamp(2.8rem,5vw,5rem)] font-medium leading-[0.91] tracking-[-0.065em] text-[var(--foreground)]">
                 {section.title}
               </h1>
 
-              {/* Separator */}
               <div className="my-6 h-px w-full bg-[var(--border)]" />
 
-              {/* Description */}
               <p className="max-w-[40ch] text-[clamp(0.98rem,1.3vw,1.14rem)] leading-[1.62] text-[var(--muted-foreground)]">
                 {section.description}
               </p>
@@ -169,12 +184,10 @@ export function CatalogSectionLandingPage({
                 {section.intro}
               </p>
 
-              {/* Hierarchy strip */}
               <div className="my-6 h-px w-full bg-[var(--border)]" />
               <HierarchyStrip section={section} />
               <div className="mb-6 h-px w-full bg-[var(--border)]" />
 
-              {/* CTAs */}
               <div className="flex flex-wrap gap-3">
                 <SmartLink href={section.primaryCta.href} className={buttonClassName()}>
                   {section.primaryCta.label}
@@ -184,7 +197,6 @@ export function CatalogSectionLandingPage({
                 </SmartLink>
               </div>
 
-              {/* Highlights */}
               <div className="mt-7 flex flex-wrap gap-2">
                 {section.highlights.map((h) => (
                   <span
@@ -197,7 +209,7 @@ export function CatalogSectionLandingPage({
               </div>
             </div>
 
-            {/* Right — image */}
+            {/* Right — hero image */}
             <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] border border-[var(--border)] lg:min-h-0">
               <Image
                 src={section.image}
@@ -207,10 +219,7 @@ export function CatalogSectionLandingPage({
                 sizes="(max-width: 1023px) 100vw, 38vw"
                 className="object-cover object-center"
               />
-              {/* Gradient overlay */}
               <div className="absolute inset-0 bg-[linear-gradient(175deg,rgba(6,8,12,0.05)_0%,rgba(6,8,12,0.55)_100%)]" />
-
-              {/* Frosted glass card */}
               <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6">
                 <div className="rounded-[1.1rem] border border-white/14 bg-[rgba(8,10,16,0.56)] p-4 backdrop-blur-[12px] sm:p-5">
                   <p className="text-[8.5px] font-semibold uppercase tracking-[0.28em] text-white/55">
@@ -229,7 +238,27 @@ export function CatalogSectionLandingPage({
         </PageContainer>
 
         {/* ════════════════════════════════════════
-            FAMILY GRID
+            2. METRICS STRIP
+        ════════════════════════════════════════ */}
+        {section.metrics?.length ? (
+          <PageContainer className="pt-5">
+            <div className="grid grid-cols-2 divide-x divide-y divide-[var(--border)] overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] sm:grid-cols-4 sm:divide-y-0">
+              {section.metrics.map((m) => (
+                <div key={m.label} className="flex flex-col items-center px-5 py-6 text-center">
+                  <span className="font-display text-[1.9rem] font-medium leading-none tracking-[-0.055em] text-[var(--foreground)] sm:text-[2.3rem]">
+                    {m.value}
+                  </span>
+                  <span className="mt-2 text-[9.5px] font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]">
+                    {m.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </PageContainer>
+        ) : null}
+
+        {/* ════════════════════════════════════════
+            3. FAMILY GRID — with images
         ════════════════════════════════════════ */}
         <PageContainer className="pt-20 sm:pt-24">
           {/* Section header */}
@@ -245,7 +274,6 @@ export function CatalogSectionLandingPage({
                 {section.familyGrid.description}
               </p>
             </div>
-            {/* Count badge */}
             <div className="shrink-0 rounded-[1rem] border border-[var(--border)] bg-[var(--card)] px-5 py-3 text-center sm:text-right">
               <p className="font-display text-[2.6rem] leading-none tracking-[-0.065em] text-[var(--accent)]">
                 {familyCards.length}
@@ -256,7 +284,6 @@ export function CatalogSectionLandingPage({
             </div>
           </div>
 
-          {/* Cards grid */}
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {familyCards.map((card, i) => (
               <FamilyCard key={card.title} card={card} index={i} />
@@ -265,7 +292,7 @@ export function CatalogSectionLandingPage({
         </PageContainer>
 
         {/* ════════════════════════════════════════
-            FUNCTION / MOVEMENT MAP
+            4. FUNCTION / MOVEMENT MAP — visual upgrade
         ════════════════════════════════════════ */}
         {section.functionMap ? (
           <PageContainer className="pt-20 sm:pt-24">
@@ -290,25 +317,29 @@ export function CatalogSectionLandingPage({
                 ) : null}
               </div>
 
-              {/* Items */}
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Items — visual cards with decorative number */}
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {section.functionMap.items.map((item, i) => (
                   <div
                     key={item.title}
-                    className="flex gap-3.5 rounded-[1rem] border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5"
+                    className="group relative flex flex-col overflow-hidden rounded-[1rem] border border-[var(--border)] bg-[var(--card)] p-5 sm:p-6"
                   >
-                    {/* Number bubble */}
-                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] text-[9.5px] font-bold text-[var(--accent)]">
+                    {/* Large decorative background number */}
+                    <span className="pointer-events-none absolute right-2 top-0 select-none font-display text-[5.5rem] font-black leading-none tracking-[-0.07em] text-[color-mix(in_srgb,var(--accent)_6%,transparent)]">
+                      {String(i + 1)}
+                    </span>
+                    {/* Left accent bar */}
+                    <div className="absolute inset-y-0 left-0 w-[3px] rounded-l-[1rem] bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] transition-colors duration-300 group-hover:bg-[var(--accent)]" />
+                    {/* Step pill */}
+                    <span className="mb-4 inline-flex w-fit items-center rounded-full bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] px-2.5 py-1 text-[9px] font-bold tracking-[0.22em] text-[var(--accent)]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div>
-                      <h3 className="text-[13px] font-semibold leading-snug tracking-[-0.018em] text-[var(--foreground)]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-1.5 text-[12px] leading-[1.66] text-[var(--muted-foreground)]">
-                        {item.description}
-                      </p>
-                    </div>
+                    <h3 className="text-[0.95rem] font-semibold leading-[1.25] tracking-[-0.022em] text-[var(--foreground)]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2.5 text-[12.5px] leading-[1.72] text-[var(--muted-foreground)]">
+                      {item.description}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -317,12 +348,77 @@ export function CatalogSectionLandingPage({
         ) : null}
 
         {/* ════════════════════════════════════════
+            5. NAVIGATION FLOW DIAGRAM
+        ════════════════════════════════════════ */}
+        <PageContainer className="pt-20 sm:pt-24">
+          <div className="overflow-hidden rounded-[1.5rem] border border-[var(--border)]">
+            {/* Header band */}
+            <div className="border-b border-[var(--border)] bg-[var(--panel)] px-7 py-7 sm:px-9 sm:py-8">
+              <p className="mb-2.5 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+                {section.structure.eyebrow}
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <h2 className="font-display text-[clamp(1.55rem,2.4vw,2.3rem)] font-medium leading-[1.05] tracking-[-0.048em] text-[var(--foreground)]">
+                  {section.structure.title}
+                </h2>
+                <p className="max-w-[46ch] text-[0.875rem] leading-[1.72] text-[var(--muted-foreground)] sm:text-right">
+                  {section.structure.description}
+                </p>
+              </div>
+            </div>
+
+            {/* 3-step flow */}
+            <div className="grid bg-[var(--card)] divide-y divide-[var(--border)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              {section.structure.steps.map((step, i) => (
+                <div key={step.label} className="relative flex flex-col gap-4 px-7 py-8 sm:px-8">
+                  {/* Step number + label */}
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] font-display text-[0.95rem] font-semibold text-[var(--accent)]">
+                      {i + 1}
+                    </span>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--muted-foreground)]">
+                      {step.label}
+                    </span>
+                  </div>
+
+                  {/* Arrow connector on right edge (desktop only) */}
+                  {i < section.structure.steps.length - 1 ? (
+                    <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 translate-x-1/2 sm:flex h-7 w-7 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)]">
+                      <svg viewBox="0 0 10 10" fill="none" className="h-2.5 w-2.5 text-[var(--accent)]">
+                        <path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  ) : null}
+
+                  <div>
+                    <h3 className="text-[0.95rem] font-semibold leading-[1.25] tracking-[-0.022em] text-[var(--foreground)]">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-[12.5px] leading-[1.72] text-[var(--muted-foreground)]">
+                      {step.description}
+                    </p>
+                  </div>
+
+                  {/* Down arrow (mobile only) */}
+                  {i < section.structure.steps.length - 1 ? (
+                    <div className="flex sm:hidden justify-center pt-1">
+                      <svg viewBox="0 0 10 12" fill="none" className="h-3 w-3 text-[var(--border)]">
+                        <path d="M5 1v9M2 7l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        </PageContainer>
+
+        {/* ════════════════════════════════════════
             FAQ
         ════════════════════════════════════════ */}
         {section.faq ? (
           <PageContainer className="pt-20 sm:pt-24">
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.3fr] lg:gap-14 xl:gap-20">
-              {/* Left — heading */}
               <div className="lg:sticky lg:top-[7rem] lg:self-start">
                 <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
                   {section.faq.eyebrow}
@@ -343,7 +439,6 @@ export function CatalogSectionLandingPage({
                 </div>
               </div>
 
-              {/* Right — accordion */}
               <div className="rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] px-6 sm:px-8">
                 {section.faq.items.map((item) => (
                   <FaqItem key={item.question} question={item.question} answer={item.answer} />

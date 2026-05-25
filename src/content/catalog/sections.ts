@@ -29,8 +29,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/american-standard",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/home/project-1.jpg",
-        imageAlt: "Coordinated hanging and architectural door hardware from TUR",
+        image: "/tur/door-hardware/format-lockset.jpg",
+        imageAlt: "Format UK lockset and euro cylinder — American Standard door hardware from TUR",
       },
       {
         title: "European Ironmongery",
@@ -40,8 +40,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/european-ironmongery",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/door-hardware/mc-2.jpg",
-        imageAlt: "Premium lever-handle and ironmongery detail from TUR",
+        image: "/tur/door-hardware/mc-1.jpg",
+        imageAlt: "Premium decorative lever handle and European ironmongery from TUR",
       },
       {
         title: "Glass Hardware",
@@ -62,8 +62,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/door-hardware/access-control",
         eyebrow: "Door Hardware Family",
         ctaLabel: "Explore Family",
-        image: "/tur/door-hardware/cat-access-control.jpg",
-        imageAlt: "G·U access control — turnstiles and controlled glass entrance systems",
+        image: "/tur/door-hardware/cat-access-readers.jpg",
+        imageAlt: "Access control card readers and E-ACCESS hardware from TUR",
       },
       {
         title: "Sealing Systems",
@@ -148,6 +148,12 @@ export const catalogSections: CatalogSection[] = [
         },
       ],
     },
+    metrics: [
+      { value: "5", label: "Hardware Families" },
+      { value: "300+", label: "Catalogued Products" },
+      { value: "Since 1670", label: "Format UK Heritage" },
+      { value: "UAE & GCC", label: "Regional Supply" },
+    ],
     supportTitle: "A clean page-based route into core hardware categories",
     supportBody:
       "Use this section as the main entry into TUR's hardware platform, then move into the relevant family or request project-led guidance for packages, approvals and technical coordination.",
@@ -230,7 +236,7 @@ export const catalogSections: CatalogSection[] = [
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
         image: "/tur/door-hardware/sliding-b.jpg",
-        imageAlt: "Automatic sliding entrance system from TUR",
+        imageAlt: "G·U automatic sliding door entrance operator from TUR",
       },
       {
         title: "Controlled Physical Access",
@@ -240,8 +246,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/controlled-physical-access",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/home/project-4.jpg",
-        imageAlt: "Controlled physical access systems and regulated pedestrian flow from TUR",
+        image: "/tur/automatic-operators/controlled-physical-access/full-height-turnstile/full-height-turnstile-main.jpg",
+        imageAlt: "Full-height turnstiles for controlled physical access — G·U from TUR",
       },
       {
         title: "Revolving Doors",
@@ -251,8 +257,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/revolving-doors",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/home/project-c.jpg",
-        imageAlt: "Premium revolving entrance system from TUR",
+        image: "/tur/door-hardware/sliding-f.jpg",
+        imageAlt: "Premium all-glass revolving entrance door system from TUR",
       },
       {
         title: "Swing Door Drives",
@@ -262,8 +268,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/swing-door-drives",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/door-hardware/sliding-d.jpg",
-        imageAlt: "Automatic swing door drive from TUR",
+        image: "/tur/automatic-operators/product-swing-operator.jpg",
+        imageAlt: "G·U automatic swing door drive operator installation from TUR",
       },
       {
         title: "All Glass Systems",
@@ -273,8 +279,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/all-glass-systems",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/door-hardware/sliding-c.jpg",
-        imageAlt: "Automatic all-glass entrance system from TUR",
+        image: "/tur/automatic-operators/all-glass-systems/shopmaster-gsw-m/shopmaster-gsw-m-main.jpg",
+        imageAlt: "shopMaster all-glass automatic entrance system from TUR",
       },
       {
         title: "Automatic Pulse Generators & Sensors",
@@ -284,8 +290,8 @@ export const catalogSections: CatalogSection[] = [
         href: "/automatic-operators/automatic-pulse-generators-and-sensors",
         eyebrow: "Operator Family",
         ctaLabel: "Explore Family",
-        image: "/tur/home/slider-6.webp",
-        imageAlt: "Automatic entrance activation devices and safety sensors from TUR",
+        image: "/tur/door-hardware/sliding-d.jpg",
+        imageAlt: "G·U BKS activation devices, sensors and control inputs from TUR",
       },
     ],
     primaryCta: {
@@ -367,6 +373,12 @@ export const catalogSections: CatalogSection[] = [
         },
       ],
     },
+    metrics: [
+      { value: "6", label: "Operator Families" },
+      { value: "GCC Wide", label: "Project Coverage" },
+      { value: "Since 1670", label: "Format UK Heritage" },
+      { value: "All-Glass", label: "Frameless Systems" },
+    ],
     supportTitle: "A clean page-based route into core automatic entrance families",
     supportBody:
       "Use this section as the main entry into TUR's entrance automation platform, then move into the relevant family or request project-led guidance for circulation logic, approvals, activation devices, access control coordination and system selection.",

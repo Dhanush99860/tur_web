@@ -7,61 +7,61 @@ type FeaturedProductShowcaseCardProps = {
   product: Product;
 };
 
-export function FeaturedProductShowcaseCard({
-  product,
-}: FeaturedProductShowcaseCardProps) {
+export function FeaturedProductShowcaseCard({ product }: FeaturedProductShowcaseCardProps) {
+  const href = product.href ?? `/products/${product.slug}`;
+
   return (
     <SmartLink
-      href={`/products/${product.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[0.85rem] border border-[rgba(38,38,38,0.04)] bg-[color-mix(in_srgb,var(--panel)_56%,white)] p-4 sm:p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]"
+      href={href}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_80%,transparent)] bg-[var(--card)] transition-all duration-300 hover:border-[color-mix(in_srgb,var(--border)_100%,transparent)] hover:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]"
     >
+      {/* Badge */}
       {product.badge ? (
-        <span className="absolute left-4 top-4 z-20 rounded-full border border-[color-mix(in_srgb,var(--accent)_18%,white)] bg-[color-mix(in_srgb,var(--accent)_10%,white)] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--accent)]">
+        <span className="absolute left-4 top-4 z-20 rounded-full bg-[color-mix(in_srgb,var(--accent)_12%,var(--card))] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.18em] text-[var(--accent)] ring-1 ring-[color-mix(in_srgb,var(--accent)_28%,transparent)]">
           {product.badge}
         </span>
       ) : null}
 
-      <div className="relative flex min-h-[15.25rem] items-start justify-center overflow-visible rounded-[0.55rem] bg-transparent pt-4 sm:min-h-[16.25rem]">
-        <div className="pointer-events-none absolute inset-x-[14%] bottom-6 h-8 rounded-full bg-[rgba(18,20,20,0.16)] blur-2xl transition-opacity duration-300 group-hover:opacity-90" />
+      {/* Image area */}
+      <div className="relative overflow-hidden bg-[color-mix(in_srgb,var(--panel)_70%,white)]" style={{ aspectRatio: "4/3" }}>
+        <Image
+          src={product.image}
+          alt={product.imageAlt}
+          fill
+          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
+          className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.06]"
+        />
+        {/* Subtle top gradient */}
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04)_0%,transparent_40%)]" />
 
-        <div className="relative w-[92%] max-w-none transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1">
-          <div className="relative bg-white p-2 shadow-[0_24px_34px_-24px_rgba(0,0,0,0.24)]">
-            <div className="relative aspect-[0.92/1] overflow-hidden bg-[color-mix(in_srgb,var(--surface)_70%,white)]">
-              <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_42%,rgba(12,15,20,0.06)_100%)]" />
-              <div className="absolute inset-y-0 left-[-34%] z-10 w-[60%] rotate-[16deg] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.24),transparent)] opacity-0 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[54%] group-hover:opacity-100" />
-              <Image
-                src={product.image}
-                alt={product.imageAlt}
-                fill
-                sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
-                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.1]"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute inset-x-0 bottom-[-0.7rem] z-20 translate-y-2 opacity-0 transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:translate-y-0 group-hover:opacity-100">
-          <div className="border border-[color-mix(in_srgb,var(--border)_88%,white)] bg-white px-4 py-3 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--foreground)] shadow-[0_12px_24px_-18px_rgba(0,0,0,0.18)]">
-            Explore Product
+        {/* Hover overlay — "Quick View" pill */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="flex items-center gap-2 rounded-full border border-white/30 bg-white/90 px-4 py-2 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-800">
+              View Details
+            </span>
+            <ArrowUpRightIcon className="h-3 w-3 text-slate-600" />
           </div>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col pt-8">
-        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
+      {/* Content */}
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-[9.5px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
           {product.familyTitle}
         </p>
 
-        <h3 className="mt-4 max-w-[17ch] text-[1.28rem] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)] sm:text-[1.34rem]">
+        <h3 className="mt-3 max-w-[17ch] text-[1.15rem] font-medium leading-[1.08] tracking-[-0.04em] text-[var(--foreground)] sm:text-[1.22rem]">
           {product.title}
         </h3>
+
         <div className="mt-3 flex flex-1 items-end justify-between gap-4">
-          <p className="min-w-0 flex-1 text-[0.96rem] leading-7 text-[var(--muted-foreground)]">
+          <p className="min-w-0 flex-1 text-[0.875rem] leading-[1.7] text-[var(--muted-foreground)]">
             {product.shortDescription}
           </p>
 
-          <span className="mb-1 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent)_64%,white)] bg-transparent text-[var(--accent)] transition duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-white">
-            <ArrowUpRightIcon className="h-4.5 w-4.5" />
+          <span className="mb-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent)_50%,transparent)] text-[var(--accent)] transition-all duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-white">
+            <ArrowUpRightIcon className="h-3.5 w-3.5" />
           </span>
         </div>
       </div>

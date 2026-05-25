@@ -239,6 +239,7 @@ export type CatalogSection = {
   supportTitle: string;
   supportBody: string;
   faq?: CatalogSectionFaq;
+  metrics?: Array<{ value: string; label: string }>;
   keywords: string[];
   updatedAt?: string;
 };
@@ -415,6 +416,8 @@ export type Product = {
   resourceHref?: string;
   sourceOldUrl?: string;
   badge?: string;
+  /** Override the default /products/{slug} link (e.g. for standalone section pages) */
+  href?: string;
   inquirySubject: string;
   relatedSlugs: string[];
   updatedAt?: string;
@@ -523,4 +526,22 @@ export type ContactOffice = {
   eyebrow: string;
   href?: string;
   ctaLabel?: string;
+};
+
+export type BlogSection = {
+  heading?: string;
+  paragraphs: string[];
+};
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  image: string;
+  imageAlt: string;
+  publishedAt: string; // ISO date string e.g. "2026-05-15"
+  readingTimeMin: number;
+  tags: string[];
+  body: BlogSection[];
 };

@@ -1,168 +1,178 @@
 "use client";
 
+import Image from "next/image";
 import { startTransition, useState } from "react";
 import type { StoryCard } from "@/types";
 import { PageContainer } from "@/components/layout/page-container";
-import { HomeSectionHeading } from "@/features/home/components/home-section-heading";
-import { CoverImage } from "@/components/shared/cover-image";
 import { cn } from "@/lib/utils/cn";
 
 type StorySectionProps = {
   stories: StoryCard[];
 };
 
-function clampStoryIndex(index: number, total: number) {
-  if (total <= 0) {
-    return 0;
-  }
-
+function clampIndex(index: number, total: number) {
   return (index + total) % total;
 }
 
-type StoryMotionDirection = "next" | "prev";
+type Direction = "next" | "prev";
 
-function getStoryMotionDirection(currentIndex: number, nextIndex: number, total: number) {
-  if (total <= 1) {
-    return "next" as const;
-  }
-
-  if (nextIndex === clampStoryIndex(currentIndex + 1, total)) {
-    return "next" as const;
-  }
-
-  if (nextIndex === clampStoryIndex(currentIndex - 1, total)) {
-    return "prev" as const;
-  }
-
-  return nextIndex > currentIndex ? "next" : "prev";
+function getDirection(current: number, next: number, total: number): Direction {
+  if (total <= 1) return "next";
+  if (next === clampIndex(current + 1, total)) return "next";
+  if (next === clampIndex(current - 1, total)) return "prev";
+  return next > current ? "next" : "prev";
 }
 
 export function StorySection({ stories }: StorySectionProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [motionDirection, setMotionDirection] = useState<StoryMotionDirection>("next");
-  const activeStory = stories[activeIndex] ?? stories[0];
-  const previewStory = stories[clampStoryIndex(activeIndex + 1, stories.length)] ?? activeStory;
-  const canPreview = stories.length > 1;
+  const [dir, setDir] = useState<Direction>("next");
 
-  if (!activeStory) {
-    return null;
-  }
+  const active = stories[activeIndex] ?? stories[0];
+  const previewIndex = clampIndex(activeIndex + 1, stories.length);
+  const preview = stories[previewIndex] ?? active;
+
+  if (!active) return null;
 
   function showStory(nextIndex: number) {
-    if (nextIndex === activeIndex) {
-      return;
-    }
-
-    setMotionDirection(getStoryMotionDirection(activeIndex, nextIndex, stories.length));
-
-    startTransition(() => {
-      setActiveIndex(nextIndex);
-    });
+    if (nextIndex === activeIndex) return;
+    setDir(getDirection(activeIndex, nextIndex, stories.length));
+    startTransition(() => setActiveIndex(nextIndex));
   }
 
   return (
-    <section className="home-section-shell">
+    <section className="home-section-shell" aria-label="Why TUR">
       <PageContainer>
-        <div className="overflow-hidden rounded-[1.15rem] border border-[color-mix(in_srgb,var(--border)_82%,white)] bg-[color-mix(in_srgb,var(--surface)_76%,white)] px-5 py-10 shadow-[0_24px_58px_-40px_rgba(18,20,20,0.14)] sm:px-8 sm:py-12 lg:px-10 lg:py-[3.25rem] xl:px-12 xl:py-14">
-          <div className="grid gap-9 xl:grid-cols-[minmax(18rem,0.78fr)_minmax(0,1.22fr)] xl:items-center xl:gap-12 2xl:gap-14">
-            <div
-              key={`${activeStory.title}-${activeIndex}-copy`}
-              className={cn(
-                "max-w-[29rem] xl:pl-2",
-                motionDirection === "next" ? "story-copy-enter-next" : "story-copy-enter-prev",
-              )}
-            >
-              <HomeSectionHeading
-                eyebrow={activeStory.eyebrow}
-                title={<>{activeStory.title}</>}
-                className="max-w-[29rem]"
-                titleClassName="max-w-[16ch]"
-              />
-              <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--muted-foreground)]">
-                Story {String(activeIndex + 1).padStart(2, "0")}
-              </p>
-              <p className="mt-6 max-w-[33ch] text-[15px] leading-8 text-[color-mix(in_srgb,var(--foreground)_84%,transparent)] sm:text-[16px]">
-                {activeStory.description}
-              </p>
+        <div className="overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_80%,transparent)] bg-[var(--card)] shadow-[0_32px_64px_-40px_rgba(10,14,20,0.12)]">
+          <div className="grid xl:grid-cols-[0.76fr_1.24fr]">
+
+            {/* ── Left: text content ── */}
+            <div className="flex flex-col gap-0 border-b border-[color-mix(in_srgb,var(--border)_70%,transparent)] p-8 sm:p-10 xl:border-b-0 xl:border-r xl:p-12">
+
+              {/* Counter row */}
+              <div className="flex items-center gap-3">
+                <span
+                  className="font-mono text-[10px] font-bold tracking-[0.28em]"
+                  style={{ color: "var(--accent)" }}
+                >
+                  {String(activeIndex + 1).padStart(2, "0")}
+                </span>
+                <div className="h-px flex-1 bg-[color-mix(in_srgb,var(--border)_70%,transparent)]" />
+                <span className="font-mono text-[10px] tracking-[0.28em] text-[var(--muted-foreground)] opacity-50">
+                  {String(stories.length).padStart(2, "0")}
+                </span>
+              </div>
+
+              {/* Content — grows to fill height */}
+              <div
+                key={`copy-${activeIndex}`}
+                aria-live="polite"
+                aria-atomic="true"
+                className={cn(
+                  "mt-8 flex flex-1 flex-col",
+                  dir === "next" ? "story-copy-enter-next" : "story-copy-enter-prev",
+                )}
+              >
+                {/* Eyebrow */}
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="h-1.5 w-1.5 shrink-0 rounded-full"
+                    style={{ background: "var(--accent)" }}
+                  />
+                  <span className="text-[9.5px] font-bold uppercase tracking-[0.28em] text-[var(--muted-foreground)]">
+                    {active.eyebrow}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h2 className="mt-5 text-[clamp(1.7rem,3vw,2.4rem)] font-semibold leading-[1.06] tracking-[-0.046em] text-[var(--foreground)]">
+                  {active.title}
+                </h2>
+
+                {/* Description */}
+                <p className="mt-5 max-w-[34ch] text-[14.5px] leading-[1.85] text-[color-mix(in_srgb,var(--foreground)_72%,transparent)]">
+                  {active.description}
+                </p>
+              </div>
+
+              {/* Navigation */}
+              <div className="mt-10 flex items-center gap-2">
+                {stories.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Show story ${i + 1}`}
+                    aria-pressed={i === activeIndex}
+                    onClick={() => showStory(i)}
+                    className="relative h-1 overflow-hidden rounded-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    style={{
+                      width: i === activeIndex ? "2.5rem" : "1.125rem",
+                      background: i === activeIndex
+                        ? "var(--accent)"
+                        : "color-mix(in srgb, var(--border) 100%, transparent)",
+                    }}
+                  />
+                ))}
+              </div>
             </div>
 
-            <div className="xl:pl-1">
-              <div className="mx-auto max-w-[60rem]">
-                <div className="grid gap-3 sm:gap-3.5 xl:grid-cols-[minmax(0,1fr)_9.25rem]">
+            {/* ── Right: image ── */}
+            <div className="relative min-h-[22rem] sm:min-h-[26rem] xl:min-h-[32rem]">
+
+              {/* Main image — full bleed */}
+              <div
+                key={`media-${activeIndex}`}
+                className={cn(
+                  "absolute inset-0 overflow-hidden",
+                  dir === "next" ? "story-media-enter-next" : "story-media-enter-prev",
+                )}
+              >
+                <Image
+                  src={active.image}
+                  alt={active.imageAlt}
+                  fill
+                  sizes="(max-width: 1279px) 100vw, 60vw"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                />
+                {/* Left-edge blend into panel */}
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-[linear-gradient(90deg,var(--card),transparent)] opacity-60 xl:block hidden" />
+                {/* Bottom gradient */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(0deg,rgba(0,0,0,0.5),transparent)]" />
+              </div>
+
+              {/* Preview card — bottom-right overlay */}
+              {stories.length > 1 && (
+                <button
+                  type="button"
+                  aria-label={`Show next story: ${preview.title}`}
+                  onClick={() => showStory(previewIndex)}
+                  className="group absolute bottom-4 right-4 z-10 hidden w-[7.5rem] overflow-hidden rounded-xl shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)] transition-transform duration-300 hover:scale-[1.03] xl:block"
+                >
                   <div
-                    key={`${activeStory.title}-${activeIndex}-media`}
+                    key={`preview-${activeIndex}`}
                     className={cn(
-                      "overflow-hidden rounded-[0.85rem] border border-[color-mix(in_srgb,var(--border)_74%,white)] bg-[color-mix(in_srgb,var(--card)_88%,white)] p-2 shadow-[0_28px_54px_-36px_rgba(18,20,20,0.22)]",
-                      motionDirection === "next" ? "story-media-enter-next" : "story-media-enter-prev",
+                      "relative h-[8.5rem]",
+                      dir === "next" ? "story-preview-enter-next" : "story-preview-enter-prev",
                     )}
                   >
-                    <CoverImage
-                      src={activeStory.image}
-                      alt={activeStory.imageAlt}
-                      sizes="(max-width: 1279px) 100vw, 54vw"
-                      className="min-h-[18rem] rounded-[0.65rem] sm:min-h-[21rem] lg:min-h-[23rem] xl:min-h-[25rem] 2xl:min-h-[27rem]"
-                      imageClassName="transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                      overlayClassName="bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent_38%,rgba(12,15,20,0.18)_100%)]"
+                    <Image
+                      src={preview.image}
+                      alt={preview.imageAlt}
+                      fill
+                      sizes="120px"
+                      className="object-cover brightness-[0.7] transition-all duration-500 group-hover:brightness-[0.85] group-hover:scale-[1.06]"
                     />
+                    {/* Frosted label */}
+                    <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(0,0,0,0.72)_0%,transparent_100%)] px-3 pb-3 pt-6">
+                      <p className="text-[7.5px] font-bold uppercase tracking-[0.2em] text-white/55">
+                        Next
+                      </p>
+                      <p className="mt-0.5 text-[10.5px] font-semibold leading-tight text-white">
+                        {preview.eyebrow}
+                      </p>
+                    </div>
                   </div>
-
-                  {canPreview ? (
-                    <button
-                      type="button"
-                      aria-label={`Show next story: ${previewStory.title}`}
-                      onClick={() => showStory(clampStoryIndex(activeIndex + 1, stories.length))}
-                      className="group relative hidden overflow-hidden rounded-[0.85rem] border border-[color-mix(in_srgb,var(--border)_78%,white)] bg-[color-mix(in_srgb,var(--card)_82%,white)] p-2 shadow-[0_24px_44px_-36px_rgba(18,20,20,0.18)] xl:block"
-                    >
-                      <div
-                        key={`${previewStory.title}-${activeIndex}-preview`}
-                        className={cn(
-                          "relative h-full",
-                          motionDirection === "next"
-                            ? "story-preview-enter-next"
-                            : "story-preview-enter-prev",
-                        )}
-                      >
-                        <CoverImage
-                          src={previewStory.image}
-                          alt={previewStory.imageAlt}
-                          sizes="148px"
-                          className="h-full min-h-[25rem] rounded-[0.65rem] 2xl:min-h-[27rem]"
-                          imageClassName="transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
-                          overlayClassName="bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(18,20,20,0.24))]"
-                        />
-                        <div className="pointer-events-none absolute inset-x-3 bottom-3 rounded-[0.55rem] border border-white/50 bg-white/78 px-3 py-3 backdrop-blur-sm">
-                          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[var(--muted-foreground)]">
-                            Next Story
-                          </p>
-                          <p className="mt-2 text-sm font-medium leading-5 text-[var(--foreground)]">
-                            {previewStory.eyebrow}
-                          </p>
-                        </div>
-                      </div>
-                    </button>
-                  ) : null}
-                </div>
-
-                <div className="mt-5 flex items-center justify-center gap-2.5 xl:justify-end">
-                  {stories.map((story, index) => (
-                    <button
-                      key={story.title}
-                      type="button"
-                      aria-label={`Show story ${index + 1}`}
-                      aria-pressed={index === activeIndex}
-                      onClick={() => showStory(index)}
-                      className={cn(
-                        "inline-flex h-10 w-10 items-center justify-center rounded-full border text-[11px] font-medium transition duration-300 sm:h-11 sm:w-11",
-                        index === activeIndex
-                          ? "border-[var(--accent)] bg-white text-[var(--accent)] shadow-[0_14px_30px_-24px_rgba(0,0,0,0.18)]"
-                          : "border-[color-mix(in_srgb,var(--border)_88%,white)] bg-white text-[var(--muted-foreground)] hover:border-[var(--accent)] hover:text-[var(--accent)]",
-                      )}
-                    >
-                      {index + 1}
-                    </button>
-                  ))}
-                </div>
-              </div>
+                </button>
+              )}
             </div>
           </div>
         </div>

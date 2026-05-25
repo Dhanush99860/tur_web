@@ -61,7 +61,23 @@ export function createProductSchema(product: Product) {
     category: product.familyTitle,
     brand: {
       "@type": "Brand",
-      name: siteConfig.shortName,
+      name: product.vendor,
+    },
+    manufacturer: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.baseUrl,
+    },
+    offers: {
+      "@type": "Offer",
+      url: absoluteSiteUrl(`/products/${product.slug}`),
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@type": "Organization",
+        name: siteConfig.name,
+        url: siteConfig.baseUrl,
+      },
     },
     image: product.gallery.map((item) => absoluteSiteUrl(item)),
     url: absoluteSiteUrl(`/products/${product.slug}`),

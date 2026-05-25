@@ -396,6 +396,7 @@ export const mainNavigation = [
   },
   { label: "Master Key", href: "/master-key-systems" },
   { label: "All Products", href: "/products" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as HeaderNavigationItem[];
@@ -453,14 +454,14 @@ export const headerSearchPanel = {
     {
       title: "Heritage, global presence and project-led technical support.",
       href: "/about",
-      image: "/tur/home/project-c.jpg",
+      image: "/tur/home/project-1.jpg",
       imageAlt: "TUR about preview",
       eyebrow: "About TUR",
     },
     {
       title: "Reach TUR for product details, technical services and project inquiries.",
       href: "/contact",
-      image: "/tur/home/project-b.jpg",
+      image: "/tur/home/project-4.jpg",
       imageAlt: "TUR contact preview",
       eyebrow: "Contact",
     },
@@ -494,6 +495,12 @@ const topLevelSearchEntries: SearchEntry[] = [
     title: pageSeo.contact.title,
     description: pageSeo.contact.description,
     href: pageSeo.contact.path,
+    category: "Page",
+  },
+  {
+    title: pageSeo.blog.title,
+    description: pageSeo.blog.description,
+    href: pageSeo.blog.path,
     category: "Page",
   },
 ];

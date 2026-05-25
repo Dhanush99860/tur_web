@@ -66,7 +66,16 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     description: product.shortDescription,
     path: `/products/${product.slug}`,
     image: product.image,
-    keywords: [product.title, product.familyTitle, product.category],
+    keywords: [
+      product.title,
+      product.familyTitle,
+      product.category,
+      product.vendor,
+      ...(product.routeGroupTitle ? [product.routeGroupTitle] : []),
+      "TUR",
+      "architectural hardware",
+      "door hardware UAE",
+    ],
   });
 }
 

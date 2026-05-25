@@ -29,7 +29,7 @@ export const pageSeo = {
     description:
       "Learn about TUR's architectural hardware and automatic entry systems offer, heritage through James Gibbons Format, regional experience and technical project support.",
     path: "/about",
-    image: "/tur/home/project-c.jpg",
+    image: "/tur/site/meta-default.jpg",
     keywords: [
       "about tur",
       "james gibbons format",
@@ -60,7 +60,7 @@ export const pageSeo = {
     description:
       "Contact TUR Middle East FZC for product details, technical services, project support and regional coordination.",
     path: "/contact",
-    image: "/tur/home/project-b.jpg",
+    image: "/tur/site/meta-default.jpg",
     keywords: [
       "contact tur",
       "tur middle east fzc",
@@ -74,7 +74,7 @@ export const pageSeo = {
     description:
       "Architectural door hardware families spanning American Standard, European Ironmongery, Glass Hardware, Access Control and Sealing Systems.",
     path: "/door-hardware",
-    image: "/tur/home/project-b.jpg",
+    image: "/tur/site/meta-default.jpg",
     keywords: [
       "door hardware",
       "american standard hardware",
@@ -117,6 +117,21 @@ export const pageSeo = {
       "key hierarchy",
       "ANSI cylinder",
       "interchangeable core",
+    ],
+    updatedAt: "2026-05-21",
+  },
+  blog: {
+    title: "Technical Guides & Specification Resources",
+    description:
+      "Technical guides, specification resources and industry insight from TUR — covering master key systems, automatic door operators, door hardware standards and project coordination.",
+    path: "/blog",
+    image: "/master-key/hero-key.jpg",
+    keywords: [
+      "door hardware guide",
+      "master key specification",
+      "automatic door operators",
+      "SKG certification",
+      "architectural hardware",
     ],
     updatedAt: "2026-05-21",
   },

@@ -3,6 +3,7 @@ import { homeHero } from "@/content/home/hero";
 import {
   homeCarouselProductSlugs,
   homeCollectionTabs,
+  homeCertificationLogos,
   homeFeaturedProductSlugs,
   homePartnerLogos,
   homeResourceCards,
@@ -10,8 +11,8 @@ import {
   homeSpotlightProductSlug,
   homeStoryCards,
   homeTestimonials,
-  homeTrustBannerItems,
 } from "@/content/home/sections";
+import { getLatestBlogPosts } from "@/content/blog/posts";
 import { CollectionTabsSection } from "@/features/home/sections/collection-tabs-section";
 import { FeaturedCarouselSection } from "@/features/home/sections/featured-carousel-section";
 import { FeaturedProductsSection } from "@/features/home/sections/featured-products-section";
@@ -21,17 +22,18 @@ import { SpotlightSection } from "@/features/home/sections/spotlight-section";
 import { StorySection } from "@/features/home/sections/story-section";
 import { TestimonialsSection } from "@/features/home/sections/testimonials-section";
 import { TrustedPartnersSection } from "@/features/home/sections/trusted-partners-section";
-import { TrustBannerSection } from "@/features/home/sections/trust-banner-section";
+import { BlogSection } from "@/features/home/sections/blog-section";
 
 export function HomePage() {
   const featuredProducts = getProductsBySlugs([...homeFeaturedProductSlugs]);
   const carouselProducts = getProductsBySlugs([...homeCarouselProductSlugs]);
   const spotlightProduct = getProductBySlug(homeSpotlightProductSlug);
+  const latestPosts = getLatestBlogPosts(3);
 
   return (
     <>
       <HeroSection hero={homeHero} />
-       <TrustedPartnersSection brands={homePartnerLogos} />
+      <TrustedPartnersSection brands={homePartnerLogos} certifications={homeCertificationLogos} />
       <FeaturedProductsSection products={featuredProducts} />
       <ResourcesSection resources={homeResourceCards} />
       <StorySection stories={homeStoryCards} />
@@ -41,7 +43,7 @@ export function HomePage() {
         <SpotlightSection product={spotlightProduct} images={homeSpotlightImages} />
       ) : null}
       <TestimonialsSection testimonials={homeTestimonials} />
-      <TrustBannerSection items={homeTrustBannerItems} />
+      <BlogSection posts={latestPosts} />
     </>
   );
 }

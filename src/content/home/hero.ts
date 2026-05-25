@@ -35,7 +35,7 @@ export const homeHero: HomeHero = {
       imageAlt: "TSW150 G·U automatic swing door operator",
     },
     {
-      productSlug: "swing-door-drives",
+      productSlug: "sliding-doors",
       label: "Sliding Door Systems",
       title: "Precision Sliding Door Drives",
       description: "From compact configurations to heavy-duty sliding systems — built for demanding architectural and commercial environments.",

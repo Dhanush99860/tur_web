@@ -1,7 +1,6 @@
+import Image from "next/image";
 import type { GalleryImage, Product } from "@/types";
 import { PageContainer } from "@/components/layout/page-container";
-import { HomeSectionHeading } from "@/features/home/components/home-section-heading";
-import { CoverImage } from "@/components/shared/cover-image";
 import { SmartLink } from "@/components/shared/smart-link";
 import { ArrowUpRightIcon } from "@/components/shared/icons";
 
@@ -10,119 +9,158 @@ type SpotlightSectionProps = {
   product: Product;
 };
 
+const SPOTLIGHT_METRICS = [
+  { value: "Grade 4", label: "BS EN 1906:2012" },
+  { value: "200,000", label: "Life cycles tested" },
+  { value: "SS 304", label: "Material standard" },
+] as const;
+
 export function SpotlightSection({ images, product }: SpotlightSectionProps) {
-  const [primaryImage] = images.length >= 1 ? images : [{ src: product.image, alt: product.imageAlt }];
-  const featureHighlights = product.features.slice(0, 3);
-  const primaryApplication = product.applications[0] ?? product.category;
-  const imageLabel = primaryImage.label ?? "Project Reference";
+  const [primaryImage, secondaryImage] = images.length >= 1
+    ? images
+    : [{ src: product.image, alt: product.imageAlt, label: product.category }];
+
+  const href = product.href ?? `/products/${product.slug}`;
+  const topFeatures = product.features.slice(0, 3);
+  const topApplications = product.applications.slice(0, 3);
 
   return (
-    <section className="home-section-shell py-14 sm:py-18">
+    <section className="home-section-shell py-14 sm:py-16">
       <PageContainer>
-        <div className="overflow-hidden rounded-[30px] border border-[color-mix(in_srgb,var(--border)_88%,transparent)] bg-[linear-gradient(180deg,color-mix(in_srgb,var(--panel)_94%,white_6%)_0%,color-mix(in_srgb,var(--background)_96%,transparent)_100%)] shadow-[0_28px_56px_-44px_rgba(15,23,42,0.18)]">
-          <div className="grid min-h-[420px] lg:grid-cols-[1.08fr_0.92fr]">
-            <CoverImage
-              src={primaryImage.src}
-              alt={primaryImage.alt}
-              sizes="(max-width: 1023px) 100vw, 55vw"
-              className="group relative min-h-[300px] sm:min-h-[360px]"
-              overlayClassName="bg-[linear-gradient(180deg,rgba(8,12,18,0.08)_0%,rgba(8,12,18,0.16)_42%,rgba(8,12,18,0.72)_100%)]"
-              imageClassName="object-cover transition duration-700 ease-out group-hover:scale-[1.03]"
-            >
-              <div className="flex h-full flex-col justify-between p-5 sm:p-7 lg:p-8">
-                <div className="flex items-start justify-between gap-3">
-                  <span className="inline-flex items-center rounded-full border border-white/18 bg-black/16 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/78 backdrop-blur-sm">
-                    {product.badge ?? "Featured"}
-                  </span>
-                </div>
+        <div className="overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_82%,transparent)] bg-[var(--card)] shadow-[0_28px_56px_-44px_rgba(10,14,20,0.12)]">
 
-                <div className="flex items-end justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/56">
-                      Featured Product
-                    </p>
-                    <h3 className="mt-1.5 max-w-[18ch] font-display text-[clamp(1.4rem,2.1vw,2rem)] font-normal leading-[1.02] tracking-[-0.04em] text-white">
-                      {product.title}
-                    </h3>
-                  </div>
-                  <span className="shrink-0 rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.14em] text-white/66 backdrop-blur-sm">
-                    {imageLabel}
-                  </span>
-                </div>
+          {/* ── Main grid: image left, content right ── */}
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+
+            {/* Image panel */}
+            <div className="relative min-h-[22rem] overflow-hidden sm:min-h-[28rem] lg:min-h-[38rem]">
+              <Image
+                src={primaryImage.src}
+                alt={primaryImage.alt}
+                fill
+                sizes="(max-width: 1023px) 100vw, 55vw"
+                className="object-cover"
+                priority
+              />
+              {/* Gradient — top + bottom */}
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.32)_0%,transparent_28%,rgba(0,0,0,0.58)_100%)]" />
+
+              {/* Top: badge + category */}
+              <div className="absolute left-5 top-5 flex flex-col gap-2 sm:left-6 sm:top-6">
+                <span className="inline-flex items-center rounded-full border border-white/20 bg-black/36 px-3.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
+                  Featured Collection
+                </span>
               </div>
-            </CoverImage>
 
-            <div className="flex flex-col justify-between border-t border-[color-mix(in_srgb,var(--border)_88%,transparent)] bg-[linear-gradient(180deg,color-mix(in_srgb,var(--card)_94%,transparent)_0%,color-mix(in_srgb,var(--panel)_88%,transparent)_100%)] p-6 sm:p-8 lg:border-l lg:border-t-0 lg:p-9">
-              <div>
-                <HomeSectionHeading
-                  eyebrow="Featured Product"
-                  title={
-                    <>
-                      Premium <em>lever designs</em> for specification-led door sets.
-                    </>
-                  }
-                  className="max-w-[26rem]"
-                  titleClassName="max-w-[12ch]"
-                />
-
-                <p className="mt-4 max-w-[38ch] text-[14px] font-normal leading-7 text-[var(--muted-foreground)] sm:text-[15px]">
-                  A furnishing-led ironmongery option for hospitality, executive and premium architectural interiors.
+              {/* Bottom left: product title + category */}
+              <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6">
+                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/55">
+                  {product.familyTitle}
                 </p>
-
-                <div className="mt-5 flex flex-wrap gap-2.5">
-                  <span className="rounded-full border border-[color-mix(in_srgb,var(--accent)_24%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_8%,white)] px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--accent)]">
-                    {product.familyTitle}
-                  </span>
-                  <span className="rounded-full border border-[color-mix(in_srgb,var(--border)_92%,transparent)] bg-[color-mix(in_srgb,var(--panel)_86%,transparent)] px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--muted-foreground)]">
-                    {primaryApplication}
-                  </span>
-                </div>
+                <h3 className="mt-1 max-w-[18ch] text-[1.4rem] font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-[1.6rem]">
+                  {product.title}
+                </h3>
               </div>
 
-              <div className="mt-7">
-                <SmartLink
-                  href={`/products/${product.slug}`}
-                  className="group flex items-center justify-between gap-3 rounded-[22px] border border-[color-mix(in_srgb,var(--border)_90%,transparent)] bg-[color-mix(in_srgb,var(--card)_96%,transparent)] p-4 shadow-[0_18px_36px_-30px_rgba(15,23,42,0.16)] transition duration-300 hover:border-[color-mix(in_srgb,var(--accent)_22%,var(--border))] hover:shadow-[0_24px_44px_-34px_rgba(15,23,42,0.2)] sm:p-5"
-                >
-                  <div>
-                    <p className="font-display text-[1.3rem] font-normal leading-none tracking-[-0.035em] text-[var(--foreground)] sm:text-[1.4rem]">
-                      {product.title}
-                    </p>
-                    <p className="mt-1.5 text-[12px] font-medium uppercase tracking-[0.1em] text-[var(--muted-foreground)]">
-                      {product.category}
-                    </p>
-                  </div>
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--background)] text-[var(--muted-foreground)] transition-all duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-[var(--foreground-inverse)]">
-                    <ArrowUpRightIcon className="h-4 w-4" />
-                  </span>
-                </SmartLink>
+              {/* Bottom right: secondary image thumbnail */}
+              {secondaryImage && (
+                <div className="absolute bottom-5 right-5 h-[5.5rem] w-[4rem] overflow-hidden rounded-xl border border-white/20 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.5)] sm:bottom-6 sm:right-6 sm:h-[7rem] sm:w-[5.25rem]">
+                  <Image
+                    src={secondaryImage.src}
+                    alt={secondaryImage.alt}
+                    fill
+                    sizes="100px"
+                    className="object-cover"
+                  />
+                  {secondaryImage.label && (
+                    <div className="absolute inset-x-0 bottom-0 bg-black/50 px-1.5 py-1 text-center">
+                      <p className="text-[7px] font-bold uppercase tracking-[0.16em] text-white/80">
+                        {secondaryImage.label}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
+            {/* Content panel */}
+            <div className="flex flex-col border-t border-[color-mix(in_srgb,var(--border)_70%,transparent)] p-7 sm:p-9 lg:border-l lg:border-t-0 lg:p-10">
+
+              {/* Eyebrow */}
+              <div className="flex items-center gap-2.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                <p className="text-[9.5px] font-bold uppercase tracking-[0.28em] text-[var(--muted-foreground)]">
+                  Featured Product
+                </p>
+              </div>
+
+              {/* Title */}
+              <h2 className="mt-5 text-[clamp(1.65rem,2.6vw,2.25rem)] font-semibold leading-[1.07] tracking-[-0.046em] text-[var(--foreground)]">
+                Premium <em className="not-italic text-[var(--accent)]">lever designs</em> for specification-led door sets.
+              </h2>
+
+              {/* Description */}
+              <p className="mt-4 max-w-[38ch] text-[13.5px] leading-[1.8] text-[var(--muted-foreground)]">
+                {product.description}
+              </p>
+
+              {/* Metrics row */}
+              <div className="mt-7 flex flex-wrap gap-x-6 gap-y-4 border-t border-[color-mix(in_srgb,var(--border)_60%,transparent)] pt-6">
+                {SPOTLIGHT_METRICS.map((m) => (
+                  <div key={m.label} className="flex flex-col gap-0.5">
+                    <span className="text-[1.05rem] font-bold tracking-[-0.03em] text-[var(--foreground)]">
+                      {m.value}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
+                      {m.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Application tags */}
+              <div className="mt-6 flex flex-wrap gap-2">
+                {topApplications.map((app) => (
+                  <span
+                    key={app}
+                    className="rounded-full border border-[color-mix(in_srgb,var(--border)_88%,transparent)] bg-[color-mix(in_srgb,var(--border)_30%,transparent)] px-3 py-1.5 text-[10.5px] font-medium text-[var(--muted-foreground)]"
+                  >
+                    {app}
+                  </span>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="mt-auto pt-8">
                 <SmartLink
-                  href={`/products/${product.slug}`}
-                  className="mt-4 inline-flex min-h-11 items-center justify-center gap-2.5 rounded-[14px] border border-[var(--accent)] bg-[var(--accent)] px-5 py-3 text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--foreground-inverse)] transition-all duration-300 hover:border-[var(--accent-hover)] hover:bg-[var(--accent-hover)] sm:w-auto"
+                  href={href}
+                  className="group inline-flex items-center gap-3 rounded-xl border border-[var(--accent)] bg-[var(--accent)] px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[color-mix(in_srgb,var(--accent)_88%,black)]"
                 >
-                  Explore Product
-                  <ArrowUpRightIcon className="h-3.5 w-3.5" />
+                  Explore Range
+                  <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:rotate-45">
+                    <ArrowUpRightIcon className="h-2.5 w-2.5" />
+                  </span>
                 </SmartLink>
               </div>
             </div>
           </div>
 
-          <div className="grid divide-y divide-[color-mix(in_srgb,var(--border)_90%,transparent)] border-t border-[color-mix(in_srgb,var(--border)_90%,transparent)] bg-[color-mix(in_srgb,var(--panel)_58%,transparent)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {featureHighlights.map((feature, i) => (
-              <div
-                key={feature}
-                className="group px-5 py-5 transition-colors duration-300 hover:bg-[color-mix(in_srgb,var(--card)_72%,transparent)] sm:px-6 sm:py-6"
-              >
-                <span className="inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--accent)_20%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] px-2 text-[11px] font-bold tracking-[0.12em] text-[var(--accent)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-3 text-[13px] font-medium leading-6 text-[var(--foreground)] sm:text-[14px]">
-                  {feature}
-                </p>
-              </div>
-            ))}
-          </div>
+          {/* ── Feature strip ── */}
+          {topFeatures.length > 0 && (
+            <div className="grid divide-y divide-[color-mix(in_srgb,var(--border)_70%,transparent)] border-t border-[color-mix(in_srgb,var(--border)_70%,transparent)] bg-[color-mix(in_srgb,var(--border)_18%,transparent)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              {topFeatures.map((feature, i) => (
+                <div key={feature} className="px-6 py-5 sm:px-7 sm:py-6">
+                  <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] px-2 text-[10px] font-bold tracking-[0.12em] text-[var(--accent)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-3 text-[12.5px] leading-[1.65] text-[var(--foreground)] sm:text-[13px]">
+                    {feature}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
         </div>
       </PageContainer>
     </section>

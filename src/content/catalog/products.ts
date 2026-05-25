@@ -165,7 +165,7 @@ function defineEuropeanIronmongeryProduct({
   ...input
 }: EuropeanIronmongeryProductInput): Product {
   const fallbackDescription =
-    `${input.title} migrated from the old TUR European Ironmongery catalogue.`;
+    `${input.title} by TUR European Ironmongery — architectural hardware for commercial, hospitality and high-spec projects. Available in the UAE and GCC.`;
   const resolvedImage = imagePath ?? oldProductImage(imageFilename);
 
   return defineProduct({
@@ -405,7 +405,7 @@ function defineGlassHardwareProduct(input: {
     sourceOldUrl: oldDoorHardwareProductUrlWithName(input.id, input.legacyName),
     isIndexable: true,
     description: `${input.title} by TUR — ${route.category} for frameless glass door systems. ${mat}.`,
-    shortDescription: `${input.title} — ${route.category.toLowerCase()}, ${mat.toLowerCase()}.`,
+    shortDescription: `${input.title} — ${route.category} for glass door systems. ${mat}. TUR glass hardware for architectural and commercial projects in the UAE.`,
     overview: `${input.title} is a ${route.category.toLowerCase()} manufactured in ${mat}, designed for use in frameless glass door and partition systems. It is available in satin and polished stainless steel finish.`,
     features: input.features ?? def.features,
     applications: input.applications ?? def.applications,
@@ -461,7 +461,7 @@ function defineEuropeanDoorCloserProduct(
     ...europeanRoute.control,
     description:
       `${input.title}, model ${input.modelNo}, from the old TUR European Ironmongery Control The Door listing.`,
-    shortDescription: `${input.modelNo} ${input.mechanism} door closer.`,
+    shortDescription: `${input.modelNo} door closer — ${input.mechanism}. TUR European Ironmongery for commercial door specifications and architectural projects.`,
     overview:
       `${input.modelNo} features adjustable closing and latching speed, thermo-constant valve, non-handed installation and ${input.mechanism}.`,
     imageFilename: input.imageFilename,
@@ -517,7 +517,7 @@ function defineEuropeanMortiseLockProduct(
     ...europeanRoute.secure,
     description:
       `${input.title}, model ${input.modelNo}, from the old TUR European Ironmongery Secure The Door listing.`,
-    shortDescription: `${input.modelNo} European Ironmongery lock body.`,
+    shortDescription: `${input.modelNo} mortise lock body — for wood and metal doors. Stainless steel components. TUR European Ironmongery for architectural and commercial specifications.`,
     overview:
       `${input.modelNo} is listed by TUR for wood or metal rebated doors or flush doors, with stainless steel 304 forend/strike/latch/bolt/follower components where applicable and a steel lock case.`,
     imageFilename: input.imageFilename,
@@ -2413,7 +2413,7 @@ const europeanIronmongeryProducts: Product[] = [
       ...europeanRoute.emergency,
       description:
         `${item.title}, model ${item.modelNo}, from the old TUR European Ironmongery Emergency Exits route.`,
-      shortDescription: `${item.modelNo} emergency exit device.`,
+      shortDescription: `${item.modelNo} emergency exit device — EN1125 fire-rated, AL and SSS finishes, for 24 in to 48 in doors. TUR European Ironmongery for life-safety applications.`,
       overview:
         `${item.modelNo} is listed on the old TUR page with finish, strike, latch bolt, dogging, door size, projection, mounting height and fire-rating details.`,
       imageFilename: item.imageFilename,
@@ -2451,7 +2451,7 @@ const europeanIronmongeryProducts: Product[] = [
       ...europeanRoute.emergency,
       description:
         `${item.title}, ${item.detail}, from the old TUR European Ironmongery Emergency Exits route.`,
-      shortDescription: `${item.modelNo} ${item.title.toLowerCase()} for exit devices.`,
+      shortDescription: `${item.modelNo} ${item.title.toLowerCase()} for exit devices — entrance, storeroom, passage and dummy functions, US32D standard. TUR European Ironmongery trim.`,
       overview:
         `The old TUR page lists ${item.modelNo} with entrance, storeroom, passage and dummy functions and US32D standard finish.`,
       imageFilename: item.imageFilename,
@@ -2500,7 +2500,7 @@ const europeanIronmongeryProducts: Product[] = [
       ...europeanRoute.lever,
       description:
         `${item.title}, model ${item.modelNo}, in stainless steel 304 round tube for wood and metal doors.`,
-      shortDescription: `${item.modelNo} lever/knob handle in stainless steel 304 round tube.`,
+      shortDescription: `${item.modelNo} ${item.slug.startsWith("knob") ? "knob" : "lever"} handle in stainless steel 304 (Ø19 mm) — for wood and metal doors 38–45 mm, certified BS EN 1906:2012. TUR European Ironmongery.`,
       overview:
         `${item.modelNo} features stainless steel 304 round tube (Ø19 mm), built-in retaining spring construction, suitable for wood and metal doors 38–45 mm thick. Certified to BS EN 1906:2012.`,
       imageFilename: item.imageFilename,
@@ -12448,6 +12448,36 @@ export const products: Product[] = [
     finishOptions: ["Brown", "White", "Grey"],
     inquirySubject: "TS600 Series Weather Stripping Inquiry",
     relatedSlugs: ["door-bottom-seals-ts5a", "door-frame-or-perimeter-seals-ts120", "threshold-plate-seals-ts115"],
+  }),
+  defineProduct({
+    slug: "master-key-systems",
+    isIndexable: false,
+    href: "/master-key-systems",
+    title: "Master Key Systems",
+    section: "door-hardware",
+    familySlug: "master-key",
+    familyTitle: "Master Key Systems",
+    category: "Master Key Systems",
+    badge: "TURN",
+    description:
+      "TURN master key systems — SKG 2-star certified Euro profile cylinders with KA, KD, MK and GMK hierarchy. Designed for hotels, hospitals, offices and campus projects.",
+    shortDescription:
+      "SKG 2-star Euro cylinders with KA, KD, MK and GMK hierarchy — for hotels, hospitals and campus projects.",
+    overview:
+      "TURN master key systems for commercial and institutional projects. SKG 2-star certified Euro profile cylinders with full KA, KD, MK and GMK key hierarchy.",
+    image: "/master-key/hero-key.jpg",
+    imageAlt: "TURN master key system — SKG 2-star certified Euro profile cylinders",
+    gallery: gallery("/master-key/hero-key.jpg"),
+    features: [
+      "SKG 2-star certified Euro profile cylinder (TE3606).",
+      "KA, KD, MK and GMK key hierarchy.",
+      "Anti-drill, anti-pick and duplication-controlled keys.",
+      "BS EN 1303:2015 compliant.",
+    ],
+    applications: ["Hotels", "Hospitals", "Offices", "Campus projects"],
+    finishOptions: ["Satin Nickel"],
+    inquirySubject: "Master Key Systems Inquiry",
+    relatedSlugs: ["cylinders"],
   }),
 ];
 

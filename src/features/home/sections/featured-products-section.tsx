@@ -15,14 +15,14 @@ export function FeaturedProductsSection({ products }: FeaturedProductsSectionPro
           <div className="grid gap-5 lg:grid-cols-[minmax(0,50rem)_minmax(0,34rem)] lg:items-end lg:justify-between lg:gap-8">
             <HomeSectionHeading
               eyebrow="Representative Solutions"
-              title={<>Four product entry points across the TUR offer.</>}
+              title={<>Hardware, glass, access and master key — four platforms.</>}
               className="max-w-[30rem]"
               titleClassName="max-w-[25ch]"
             />
 
             <div className="max-w-[34rem] lg:justify-self-end lg:pb-1">
               <p className="text-[15px] leading-7 text-[color-mix(in_srgb,var(--foreground)_82%,transparent)] sm:text-[16px]">
-                A quick view of the product types that explain the broader hardware, glass, access and automation platform.
+                Specification, supply and technical coordination across a single project-managed route — from cylinder hardware and glass systems to controlled access and automatic entry.
               </p>
             </div>
           </div>

@@ -73,6 +73,11 @@ export function SiteHeader() {
 
   const handleWindowKeyDown = useEffectEvent((event: KeyboardEvent) => {
     if (event.key === "Escape") closeMenus();
+    if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+      event.preventDefault();
+      setOpenPanel(null);
+      setSearchOpen((current) => !current);
+    }
   });
 
   const handlePointerDown = useEffectEvent((event: MouseEvent) => {
@@ -229,20 +234,23 @@ export function SiteHeader() {
                 {/* Search */}
                 <button
                   type="button"
-                  aria-label={searchOpen ? "Close search" : "Open search"}
+                  aria-label={searchOpen ? "Close search" : "Open search (Ctrl+K)"}
                   aria-expanded={searchOpen}
                   onClick={() => {
                     setOpenPanel(null);
                     setSearchOpen((current) => !current);
                   }}
                   className={cn(
-                    "inline-flex h-10 w-10 items-center justify-center rounded-full border transition duration-200",
+                    "inline-flex h-10 items-center gap-2 rounded-full border px-3 transition duration-200",
                     searchOpen
                       ? "border-[var(--nav-line)] bg-[var(--nav-soft)] text-[var(--accent)]"
                       : "border-transparent text-[var(--foreground)] hover:border-[var(--nav-line)] hover:bg-[var(--nav-soft)] hover:text-[var(--accent)]",
                   )}
                 >
-                  <SearchIcon className="h-4 w-4" />
+                  <SearchIcon className="h-4 w-4 shrink-0" />
+                  <kbd className="hidden select-none font-mono text-[10px] text-[var(--muted-foreground)] xl:inline">
+                    ⌘K
+                  </kbd>
                 </button>
               </div>
             </div>
@@ -257,7 +265,17 @@ export function SiteHeader() {
               />
             ) : null}
 
-            {searchOpen ? <SearchPanel onNavigate={closeMenus} /> : null}
+            {searchOpen ? (
+              <>
+                {/* Backdrop — fixed, behind header (z-70) but above page content */}
+                <div
+                  className="fixed inset-0 z-[64] bg-black/30 backdrop-blur-[2px]"
+                  aria-hidden="true"
+                  onClick={closeMenus}
+                />
+                <SearchPanel onNavigate={closeMenus} />
+              </>
+            ) : null}
           </PageContainer>
         </header>
       </div>

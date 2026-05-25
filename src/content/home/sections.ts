@@ -11,7 +11,7 @@ import { createInquiryHref, siteConfig, siteContact } from "@/content/site/site-
 
 export const homeFeaturedProductSlugs = [
   "tu-d800",
-  "furnish-the-door",
+  "master-key-systems",
   "tg-pf103",
   "tsw150-automatic-door-operator",
 ] as const;
@@ -20,31 +20,27 @@ export const homeCarouselProductSlugs = [
   "hang-the-door",
   "control-the-door",
   "secure-the-door",
-  "furnish-the-door",
   "cylinders",
-  "glass-hinge-glass-clip",
   "tg-pf103",
-  "pull-handle",
   "electromagnetic-locks",
   "door-bottom-seals",
   "tsw150-automatic-door-operator",
   "sliding-doors",
-  "prismatic-sliding-door-cmw",
   "ggg-all-glass-revolving-door",
-  "turnstile-systems",
 ] as const;
 
-export const homeSpotlightProductSlug = "furnish-the-door";
+export const homeSpotlightProductSlug = "furnish-the-door-lever-handle";
 
 export const homeSpotlightImages = [
   {
-    src: "/tur/home/project-b.jpg",
-    alt: "Premium lever handle and door furnishing detail from TUR",
-    label: "Ironmongery Detail",
+    src: "/tur/door-hardware/decorative-lever.jpg",
+    alt: "Premium European lever handle — TE1910 series staged product visual",
+    label: "European Ironmongery",
   },
   {
-    src: "/tur/home/project-2.jpg",
-    alt: "European ironmongery project reference from TUR",
+    src: "/tur/home/project-a.jpg",
+    alt: "Lever handle in context — premium hospitality door set",
+    label: "In Use",
   },
 ] as const satisfies readonly GalleryImage[];
 
@@ -76,8 +72,8 @@ export const homeResourceCards: ResourceCard[] = [
       "Reach TUR for hardware selection, family routing, catalog access, technical clarification and project-specific support from the first conversation through to delivery.",
     href: "/contact",
     ctaLabel: "Contact TUR",
-    image: "/tur/home/project-c.jpg",
-    imageAlt: "Project inquiry and technical coordination with TUR",
+    image: "/tur/home/project-4.jpg",
+    imageAlt: "TUR office — project inquiry and technical coordination",
   },
 ];
 
@@ -111,8 +107,8 @@ export const homeStoryCards: StoryCard[] = [
     title: "A broader platform across three regions.",
     description:
       "Registrations, manufacturing partnerships and project experience across Europe, the Middle East and South Asia give TUR a reach that extends well beyond a single market — supporting international specifications, procurement and coordinated project delivery.",
-    image: "/tur/home/project-c.jpg",
-    imageAlt: "Global presence — TUR platform across Europe, Middle East and South Asia",
+    image: "/tur/home/project-1.jpg",
+    imageAlt: "TUR brand signage — James Gibbons Format, G·U, BKS and partner presence across regions",
   },
 ];
 
@@ -132,14 +128,6 @@ export const homeCollectionTabs: CollectionTab[] = [
       "Sliding, swing, revolving and controlled entrance systems for commercial, healthcare, hospitality and high-traffic project environments.",
     image: "/tur/door-hardware/sliding-b.jpg",
     imageAlt: "Automatic sliding entrance system — TUR Automatic Operators",
-  },
-  {
-    label: "Access Control",
-    href: "/door-hardware/access-control",
-    description:
-      "Electromagnetic locks, electric strikes and E-ACCESS systems for coordinated secure entry — integrated with the broader hardware package.",
-    image: "/tur/door-hardware/cat-access-control.jpg",
-    imageAlt: "G·U access control — secure entry systems and turnstiles",
   },
   {
     label: "Glass Hardware",
@@ -164,6 +152,14 @@ export const homeCollectionTabs: CollectionTab[] = [
       "Threshold, bottom and perimeter seals for entrance performance, acoustic control and architectural detailing across the full door set.",
     image: "/tur/door-hardware/cat-sealing-systems.jpg",
     imageAlt: "Door bottom seal and threshold system for architectural openings",
+  },
+  {
+    label: "Master Key Systems",
+    href: "/master-key-systems",
+    description:
+      "SKG 2-star certified TURN Euro profile cylinders with KA, KD, MK and GMK key hierarchy — designed for hotels, hospitals, offices and campus projects.",
+    image: "/master-key/hero-key.jpg",
+    imageAlt: "TURN master key system — SKG 2-star certified Euro profile cylinders",
   },
 ];
 
@@ -203,40 +199,74 @@ export const homeTestimonials: Testimonial[] = [
       "Heritage through James Gibbons Format and regional delivery experience support a calmer project workflow.",
     author: "TUR Project Approach",
     role: "Specification, supply and technical support",
-    productSlug: "furnish-the-door",
+    productSlug: "cylinders",
   },
 ];
 
-export const homePartnerLogos: GalleryImage[] = [
+export const homePartnerLogos = [
   {
     src: "/tur/site/logo-1-1.png",
-    alt: "BKS partner logo",
-    label: "BKS",
+    alt: "James Gibbons Format — heritage manufacturing partner",
+    label: "James Gibbons Format",
+    role: "Heritage · key supply since 1670",
   },
   {
     src: "/tur/site/logo-1-2.png",
-    alt: "BKS Locks partner logo",
-    label: "BKS Locks",
+    alt: "G·U Automatic — automatic door systems",
+    label: "G·U Automatic",
+    role: "Automatic door systems",
   },
   {
     src: "/tur/site/logo-1-3.png",
-    alt: "DZE partner logo",
-    label: "DZE",
+    alt: "BKS — locks and hardware",
+    label: "BKS",
+    role: "Locks & hardware",
   },
   {
     src: "/tur/site/logo-1-4.png",
-    alt: "TUR Nederland partner logo",
-    label: "TUR Nederland",
+    alt: "BB Locks — security locks",
+    label: "BB Locks",
+    role: "Security locks",
   },
   {
     src: "/tur/site/logo-1-5.png",
-    alt: "VGE partner logo",
-    label: "VGE",
+    alt: "D4E — access control systems",
+    label: "D4E",
+    role: "Access control systems",
   },
   {
     src: "/tur/site/logo-1-6.png",
-    alt: "James Gibbons Format partner logo",
-    label: "James Gibbons Format",
+    alt: "TURN — master key systems",
+    label: "TURN",
+    role: "Master key systems",
+  },
+];
+
+export const homeCertificationLogos: GalleryImage[] = [
+  {
+    src: "/tur/site/logo-2-c1.png",
+    alt: "ANSI certified",
+    label: "ANSI",
+  },
+  {
+    src: "/tur/site/logo-2-c4.png",
+    alt: "GAI — Guild of Architectural Ironmongers member",
+    label: "GAI Member",
+  },
+  {
+    src: "/tur/site/logo-2-c5.png",
+    alt: "CE marked",
+    label: "CE Marked",
+  },
+  {
+    src: "/tur/site/logo-2-c6.png",
+    alt: "SKG 2-star certified",
+    label: "SKG 2-Star",
+  },
+  {
+    src: "/tur/site/logo-2-c7.png",
+    alt: "ISO 9001 certified",
+    label: "ISO 9001",
   },
 ];
 
