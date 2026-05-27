@@ -7,6 +7,7 @@ import {
   aboutHero,
   aboutMission,
   aboutHeritage,
+  aboutMilestones,
   aboutPlatforms,
   aboutServices,
   aboutTeam,
@@ -23,7 +24,6 @@ function getInitials(name: string) {
     .slice(0, 2)
     .join("");
 }
-
 
 export function AboutPage() {
   const primaryOffices = aboutOffices.filter((o) => o.isPrimary);
@@ -112,7 +112,6 @@ export function AboutPage() {
           </p>
         </div>
 
-        {/* Sectors served — replaces duplicate stat grid */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-2.5">
           {aboutMission.sectors.map((sector, i) => (
             <span key={sector} className="flex items-center gap-2.5">
@@ -164,7 +163,43 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 4. PLATFORMS ─────────────────────────────────────────────────────── */}
+      {/* ── 4. KEY MILESTONES ────────────────────────────────────────────────── */}
+      <PageContainer className="pb-16 sm:pb-20">
+        <div className="border-t border-[var(--border)] pt-10">
+          <div className="mb-8">
+            <p className="text-[9.5px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+              Key Milestones
+            </p>
+            <h2 className="mt-4 max-w-[28ch] font-display text-[clamp(1.6rem,2.8vw,2.2rem)] font-semibold leading-[1.07] tracking-[-0.044em] text-[var(--foreground)]">
+              Built from the ground up — 2019 to today.
+            </h2>
+          </div>
+
+          {/* Timeline: desktop horizontal scroll, mobile stacked */}
+          <div className="relative">
+            {/* Connector line */}
+            <div aria-hidden="true" className="absolute left-0 right-0 top-[2.35rem] hidden h-px bg-[var(--border)] lg:block" />
+
+            <div className="grid gap-4 lg:grid-cols-7">
+              {aboutMilestones.map((m, i) => (
+                <div key={m.year} className="flex flex-col gap-3 lg:gap-4">
+                  {/* Year badge + dot */}
+                  <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2">
+                    <div className="relative z-10 flex h-[2.7rem] w-[2.7rem] shrink-0 items-center justify-center rounded-full border-2 border-[var(--accent)] bg-[var(--background)]">
+                      <span className="font-mono text-[9px] font-bold text-[var(--accent)]">{m.year}</span>
+                    </div>
+                    {/* mobile connector */}
+                    <div aria-hidden="true" className="h-px flex-1 bg-[var(--border)] lg:hidden" />
+                  </div>
+                  <p className="text-[11.5px] leading-[1.65] text-[var(--muted-foreground)]">{m.event}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </PageContainer>
+
+      {/* ── 5. PLATFORMS ─────────────────────────────────────────────────────── */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="border-t border-[var(--border)] pt-10">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -205,7 +240,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 5. TECHNICAL SERVICES ────────────────────────────────────────────── */}
+      {/* ── 6. TECHNICAL SERVICES ────────────────────────────────────────────── */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_80%,transparent)] bg-[var(--card)]">
           <div className="grid xl:grid-cols-[1.2fr_0.9fr]">
@@ -246,7 +281,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 6. LEADERSHIP TEAM ───────────────────────────────────────────────── */}
+      {/* ── 7. LEADERSHIP TEAM ───────────────────────────────────────────────── */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="border-t border-[var(--border)] pt-10">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -257,69 +292,52 @@ export function AboutPage() {
               </h2>
             </div>
             <p className="max-w-[36ch] text-[13.5px] leading-[1.8] text-[var(--muted-foreground)] lg:pb-1 lg:text-right">
-              Experienced leadership across hardware, operations and regional markets.
+              100+ years of combined experience across hardware, operations and regional markets.
             </p>
           </div>
 
-          {/* Row layout: 3 on top, 2 on bottom — no empty ghost cell */}
           <div className="mt-8 overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_80%,transparent)]">
             <div className="grid gap-px bg-[color-mix(in_srgb,var(--border)_80%,transparent)] sm:grid-cols-3">
               {aboutTeam.slice(0, 3).map((member) => {
                 const initials = getInitials(member.name);
                 return (
                   <div key={member.name} className="group relative flex flex-col gap-5 bg-[var(--card)] p-6 xl:p-7">
-                  {/* Photo + name row */}
-                  <div className="flex items-start gap-4">
-                    {/* Photo with initials fallback */}
-                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-[#0b0e18]">
-                      {member.photo ? (
-                        <Image
-                          src={member.photo}
-                          alt={member.name}
-                          fill
-                          sizes="56px"
-                          className="object-cover object-top"
-                        />
-                      ) : (
-                        <>
-                          <span className="absolute inset-0 flex items-center justify-center font-display text-[1rem] font-semibold tracking-[-0.02em]" style={{ color: "#86a2e6" }}>
-                            {initials}
-                          </span>
-                          <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-20" style={{ background: "radial-gradient(circle at 30% 30%, rgba(134,162,230,0.5), transparent 70%)" }} />
-                        </>
-                      )}
+                    <div className="flex items-start gap-4">
+                      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-[#0b0e18]">
+                        {member.photo ? (
+                          <Image src={member.photo} alt={member.name} fill sizes="56px" className="object-cover object-top" />
+                        ) : (
+                          <>
+                            <span className="absolute inset-0 flex items-center justify-center font-display text-[1rem] font-semibold tracking-[-0.02em]" style={{ color: "#86a2e6" }}>
+                              {initials}
+                            </span>
+                            <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-20" style={{ background: "radial-gradient(circle at 30% 30%, rgba(134,162,230,0.5), transparent 70%)" }} />
+                          </>
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-[14.5px] font-semibold leading-tight tracking-[-0.02em] text-[var(--foreground)]">
+                          {member.name}
+                        </h3>
+                        <p className="mt-0.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]">
+                          {member.role}
+                        </p>
+                      </div>
                     </div>
-
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-[14.5px] font-semibold leading-tight tracking-[-0.02em] text-[var(--foreground)]">
-                        {member.name}
-                      </h3>
-                      <p className="mt-0.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]">
-                        {member.role}
-                      </p>
+                    <div className="flex items-start gap-2">
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[color-mix(in_srgb,var(--border)_200%,transparent)]" />
+                      <span className="text-[10.5px] font-semibold leading-snug tracking-[0.12em] uppercase text-[var(--muted-foreground)]">
+                        {member.entity}
+                      </span>
                     </div>
+                    <p className="text-[12.5px] leading-[1.75] text-[color-mix(in_srgb,var(--foreground)_62%,transparent)]">
+                      {member.bio}
+                    </p>
+                    <div className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[var(--accent)] transition-transform duration-300 group-hover:scale-x-100" />
                   </div>
-
-                  {/* Entity badge */}
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[color-mix(in_srgb,var(--border)_200%,transparent)]" />
-                    <span className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">
-                      {member.entity}
-                    </span>
-                  </div>
-
-                  {/* Bio */}
-                  <p className="text-[12.5px] leading-[1.75] text-[color-mix(in_srgb,var(--foreground)_62%,transparent)]">
-                    {member.bio}
-                  </p>
-
-                  {/* Bottom accent line on hover */}
-                  <div className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[var(--accent)] transition-transform duration-300 group-hover:scale-x-100" />
-                </div>
                 );
               })}
             </div>
-            {/* Bottom row: remaining members fill evenly — no empty cell */}
             <div className="grid gap-px bg-[color-mix(in_srgb,var(--border)_80%,transparent)] sm:grid-cols-2">
               {aboutTeam.slice(3).map((member) => {
                 const initials = getInitials(member.name);
@@ -340,9 +358,9 @@ export function AboutPage() {
                         <p className="mt-0.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--accent)]">{member.role}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[color-mix(in_srgb,var(--border)_200%,transparent)]" />
-                      <span className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[var(--muted-foreground)]">{member.entity}</span>
+                    <div className="flex items-start gap-2">
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[color-mix(in_srgb,var(--border)_200%,transparent)]" />
+                      <span className="text-[10.5px] font-semibold leading-snug tracking-[0.12em] uppercase text-[var(--muted-foreground)]">{member.entity}</span>
                     </div>
                     <p className="text-[12.5px] leading-[1.75] text-[color-mix(in_srgb,var(--foreground)_62%,transparent)]">{member.bio}</p>
                     <div className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[var(--accent)] transition-transform duration-300 group-hover:scale-x-100" />
@@ -354,14 +372,14 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 7. GLOBAL PRESENCE ───────────────────────────────────────────────── */}
+      {/* ── 8. GLOBAL PRESENCE ───────────────────────────────────────────────── */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="border-t border-[var(--border)] pt-10">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="text-[9.5px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">Global Presence</p>
               <h2 className="mt-4 max-w-[28ch] font-display text-[clamp(1.6rem,2.8vw,2.2rem)] font-semibold leading-[1.07] tracking-[-0.044em] text-[var(--foreground)]">
-                A coordinated network across the Middle East, Europe, Asia and beyond.
+                Seven offices. One coordinated network.
               </h2>
             </div>
             <SmartLink
@@ -373,24 +391,19 @@ export function AboutPage() {
             </SmartLink>
           </div>
 
-          {/* Primary office — full-width featured */}
+          {/* Primary office — HQ */}
           {primaryOffices.map((office) => (
             <div
               key={office.name}
               className="mt-8 overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--accent)_35%,transparent)] bg-[color-mix(in_srgb,var(--accent)_5%,var(--card))]"
             >
-              <div className="grid sm:grid-cols-[1fr_auto] items-start gap-6 p-6 xl:p-7">
+              <div className="grid items-start gap-6 p-6 sm:grid-cols-[1fr_auto] xl:p-7">
                 <div>
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.18em] text-white">
                       <span className="h-1.5 w-1.5 rounded-full bg-white" />
                       Headquarters
                     </span>
-                    {"note" in office && office.note && (
-                      <span className="text-[10.5px] font-medium text-[var(--muted-foreground)] opacity-60">
-                        {office.note}
-                      </span>
-                    )}
                   </div>
                   <h3 className="mt-3 text-[16px] font-semibold tracking-[-0.015em] text-[var(--foreground)]">{office.name}</h3>
                   <p className="mt-0.5 text-[13px] font-semibold text-[var(--accent)]">{office.region}</p>
@@ -417,8 +430,8 @@ export function AboutPage() {
             </div>
           ))}
 
-          {/* Secondary offices — compact grid */}
-          <div className="mt-4 grid gap-3 grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {/* Secondary offices */}
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {secondaryOffices.map((office) => (
               <div
                 key={office.name}
@@ -430,13 +443,31 @@ export function AboutPage() {
                 </h3>
                 <p className="mt-0.5 text-[10.5px] font-semibold text-[var(--accent)]">{office.region}</p>
                 <p className="mt-1.5 text-[11px] leading-[1.65] text-[var(--muted-foreground)]">{office.address}</p>
+                {"phone" in office && office.phone && (
+                  <a
+                    href={`tel:${(office.phone as string).replace(/\s/g, "")}`}
+                    className="mt-2 flex items-center gap-1.5 text-[10.5px] text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
+                  >
+                    <PhoneIcon className="h-3 w-3 shrink-0 text-[var(--accent)]" />
+                    {office.phone as string}
+                  </a>
+                )}
+                {"email" in office && office.email && (
+                  <a
+                    href={`mailto:${office.email as string}`}
+                    className="mt-1 flex items-center gap-1.5 text-[10.5px] text-[var(--muted-foreground)] transition-colors hover:text-[var(--foreground)]"
+                  >
+                    <MailIcon className="h-3 w-3 shrink-0 text-[var(--accent)]" />
+                    {office.email as string}
+                  </a>
+                )}
               </div>
             ))}
           </div>
         </div>
       </PageContainer>
 
-      {/* ── 8. PARTNER BRANDS ────────────────────────────────────────────────── */}
+      {/* ── 9. PARTNER BRANDS ────────────────────────────────────────────────── */}
       <section className="bg-[#0b0e18]">
         <PageContainer className="py-16 sm:py-20">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -457,9 +488,15 @@ export function AboutPage() {
                 key={partner.name}
                 className="group flex flex-col gap-5 rounded-xl border border-white/[0.07] bg-white/[0.03] p-5 transition-colors hover:bg-white/[0.06]"
               >
-                {/* Logo */}
-                <div className="relative h-6 w-20">
-                  <Image src={partner.logo} alt={partner.name} fill sizes="80px" className="object-contain object-left brightness-0 invert opacity-40 transition-opacity group-hover:opacity-65" />
+                {/* Logo — colorful, not grayscale */}
+                <div className="relative h-8 w-28">
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    fill
+                    sizes="112px"
+                    className="object-contain object-left opacity-80 transition-opacity duration-200 group-hover:opacity-100"
+                  />
                 </div>
 
                 {/* Name + description */}
@@ -485,7 +522,7 @@ export function AboutPage() {
         </PageContainer>
       </section>
 
-      {/* ── 9. CERTIFICATIONS + CTA ──────────────────────────────────────────── */}
+      {/* ── 10. CERTIFICATIONS + CTA ─────────────────────────────────────────── */}
       <section className="bg-[#0b0e18]">
         <PageContainer className="pb-16 sm:pb-20">
           <div className="rounded-2xl border border-white/[0.07] bg-white/[0.03] p-8 sm:p-10">
@@ -496,13 +533,17 @@ export function AboutPage() {
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {aboutCertifications.map((cert) => (
-                    <span key={cert} className="rounded-full border border-white/12 px-3.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/45">
-                      {cert}
-                    </span>
+                    <div
+                      key={cert.label}
+                      className="flex flex-col gap-0.5 rounded-xl border border-white/10 px-3.5 py-2.5 text-center"
+                    >
+                      <span className="text-[11px] font-bold text-white/70">{cert.label}</span>
+                      <span className="text-[9px] text-white/30">{cert.description}</span>
+                    </div>
                   ))}
                 </div>
                 <p className="mt-5 max-w-[52ch] text-[13.5px] leading-[1.8] text-white/40">
-                  TUR product families are specified and supplied to ANSI, CE, SKG 2-Star and ISO 9001 standards, with technical coordination aligned to regional compliance and project requirements.
+                  TUR product families are certified to ANSI, UL (2025), CE, Intertek, SKG 2-Star, Warrington and TÜV/DIN EN 1303 standards — with technical coordination aligned to regional compliance and project requirements.
                 </p>
               </div>
               <div className="flex shrink-0 flex-col gap-3 lg:items-end">

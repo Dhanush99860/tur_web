@@ -1,4 +1,5 @@
 import { siteConfig, siteContact, createInquiryHref } from "@/content/site/site-config";
+import { siteOffices } from "@/content/site/offices";
 
 export const contactHero = {
   eyebrow: "Contact & Project Inquiries",
@@ -39,55 +40,7 @@ export const contactInquiryTypes = [
   "Project-based supply and logistics queries",
 ];
 
-export const contactOffices = [
-  {
-    name: "TUR Middle East FZC",
-    region: "Sharjah, UAE",
-    countryCode: "AE",
-    address: "Office No. LV 32B, Hamriyah Free Zone, Sharjah, UAE",
-    note: "Trade License 23473 / 23474",
-    email: siteConfig.email,
-    phone: siteConfig.phoneDisplay,
-    emailHref: siteContact.emailHref,
-    phoneHref: siteContact.phoneHref,
-    isPrimary: true,
-  },
-  {
-    name: "James Gibbons Format Limited",
-    region: "United Kingdom",
-    countryCode: "GB",
-    address: "UK operational base — Format heritage manufacturing",
-    isPrimary: false,
-  },
-  {
-    name: "TUR Netherlands BV",
-    region: "Netherlands",
-    countryCode: "NL",
-    address: "European distribution and coordination",
-    isPrimary: false,
-  },
-  {
-    name: "TUR Lanka Holdings",
-    region: "Sri Lanka",
-    countryCode: "LK",
-    address: "Regional supply and operations",
-    isPrimary: false,
-  },
-  {
-    name: "TUR Arabia Establishment",
-    region: "Middle East / GCC",
-    countryCode: "SA",
-    address: "GCC project coordination",
-    isPrimary: false,
-  },
-  {
-    name: "TUR India",
-    region: "Bengaluru, India",
-    countryCode: "IN",
-    address: "Aurbis Prime, No.11 Kaveri Regent Coronet, 80 Feet Road, 3rd Block, Koramangala, Bengaluru, Karnataka 560034",
-    isPrimary: false,
-  },
-];
+export const contactOffices = siteOffices;
 
 export const contactDownloads = [
   {

@@ -1,4 +1,5 @@
 import { siteConfig, siteContact } from "@/content/site/site-config";
+import { siteOffices } from "@/content/site/offices";
 
 export const aboutHero = {
   eyebrow: "About TUR Middle East FZC",
@@ -11,8 +12,8 @@ export const aboutHero = {
   secondaryCta: { label: "Start an Inquiry", href: "/contact" },
   metrics: [
     { value: "Since 1670", label: "Heritage via James Gibbons Format" },
-    { value: "30+", label: "Years regional experience" },
-    { value: "6", label: "Global offices" },
+    { value: "100+ Years", label: "Combined management experience" },
+    { value: "7", label: "Global offices" },
     { value: "200+", label: "Product families" },
   ],
 };
@@ -27,6 +28,7 @@ export const aboutMission = {
     "Healthcare Facilities",
     "Institutional & Education",
     "High-Spec Residential",
+    "Military & Government",
   ],
 };
 
@@ -36,11 +38,21 @@ export const aboutHeritage = {
   body: [
     "James Gibbons Format Limited traces its origins to 1670 — one of Britain's longest-established architectural hardware manufacturers. The Format name has been synonymous with quality, precision and specification-grade ironmongery across institutional, commercial and residential projects.",
     "TUR carries this heritage into the Middle East and global markets, providing access to the full Format product catalogue alongside G·U Automatic operators, BKS cylinders, BB Locks and the TURN master key range.",
-    "The combination of verified heritage, technical depth and regional experience positions TUR as a credible specification partner for architects, consultants, main contractors and facilities teams.",
+    "The combination of verified heritage, technical depth and regional experience positions TUR as a credible specification partner for architects, consultants, main contractors and facilities teams across the GCC and beyond.",
   ],
   image: "/tur/home/slider-2.webp",
   imageAlt: "James Gibbons Format heritage — architectural hardware since 1670",
 };
+
+export const aboutMilestones = [
+  { year: "2019", event: "TüR branded door hardware development initiated" },
+  { year: "2020", event: "EU Certification completed" },
+  { year: "2021", event: "Access Control & Master Keyed Cylinder development initiated; major GCC client approvals secured" },
+  { year: "2022", event: "Automatic Sliding Door Operators development initiated; ANSI/UL product development completed" },
+  { year: "2023", event: "TUR Middle East FZC founded; Automatic Entry Systems product development completed" },
+  { year: "2024", event: "In-house Master Key Facility operations commenced" },
+  { year: "2025", event: "UL certifications obtained for Door Hinges, Single-point Locks and Fire Door Closers" },
+];
 
 export const aboutPlatforms = [
   {
@@ -102,39 +114,49 @@ export const aboutServices = [
       "A single point of contact for all architectural hardware across the project — from initial specification through supply, installation support and snagging.",
   },
   {
+    title: "Technical Back-office Support",
+    description:
+      "Estimations, specifications, documentation and compliance checks — managed by TUR's technical team to ensure smooth project execution at every stage.",
+  },
+  {
     title: "Supply & Logistics",
     description:
       "Regional warehousing and supply coordination across the Middle East, with international supply routes through UK and European partner entities.",
+  },
+  {
+    title: "Market Research & Sourcing",
+    description:
+      "Tailored market research, regulatory compliance guidance and manpower sourcing — supporting brand entry, project specification and distribution development.",
   },
 ];
 
 export const aboutTeam = [
   {
     name: "Raghunath Sadasivam",
-    role: "Co-Founder & Executive Chairman",
-    entity: "TUR Middle East",
-    bio: "More than four decades of experience in the construction industry of the GCC. Chaired the Board of Directors of three high-profile companies in the region.",
+    role: "Chairman & CEO",
+    entity: "TUR Middle East · Arabian Business Consultants",
+    bio: "More than four decades of experience in the construction industry of the GCC. Managing Director of Arabian Business Consultants and Chairman & CEO of TUR Middle East, having chaired the Board of Directors of three high-profile companies in the region.",
     photo: "/tur/team/ragu.jpg",
   },
   {
     name: "Chamara S. Gunasekara",
     role: "Managing Director",
-    entity: "TUR Middle East",
-    bio: "Fifteen years of experience in the door hardware industry. Managed key accounts throughout the GCC for over a decade.",
+    entity: "TUR Middle East · TUR Lanka Holdings",
+    bio: "Fifteen years of experience in the door hardware industry. Managed key accounts throughout the GCC for over a decade, overseeing both Middle East and Sri Lanka operations.",
     photo: "/tur/team/chamara.jpg",
   },
   {
     name: "Frank Van Uden",
     role: "Managing Director",
-    entity: "TUR Netherlands B.V",
-    bio: "Founding shareholder and Advisory Board Member of TME. Owns seven companies based out of Heeswijk, Netherlands. An expert in managing technology-based building materials with direct links to high-profile European companies.",
+    entity: "TüR Netherlands BV · Synergy Sources · GBI Varpo · D4E · Deurmeesters",
+    bio: "Founding shareholder and Advisory Board Member of TME. Owns multiple companies based out of Heeswijk Dinther, Netherlands. An expert in managing technology-based building materials with direct links to high-profile European companies.",
     photo: "/tur/team/frank.jpg",
   },
   {
     name: "Varun Singh",
     role: "Managing Director",
-    entity: "TUR India",
-    bio: "Leads TUR's India operations, overseeing project coordination, supply and strategic partnerships across the Indian subcontinent.",
+    entity: "TUR India · TUR Canada · UAE",
+    bio: "Leads TUR's India and Canada operations, overseeing project coordination, supply and strategic partnerships across the Indian subcontinent and North America.",
     photo: "/tur/team/varun.jpg",
   },
   {
@@ -146,60 +168,22 @@ export const aboutTeam = [
   },
 ];
 
-export const aboutOffices = [
-  {
-    name: "TUR Middle East FZC",
-    region: "Sharjah, UAE",
-    address: "Office No. LV 32B, Hamriyah Free Zone, Sharjah, UAE",
-    note: "Trade License 23473 / 23474",
-    isPrimary: true,
-  },
-  {
-    name: "James Gibbons Format Limited",
-    region: "United Kingdom",
-    address: "UK operational base — Format heritage manufacturing",
-    isPrimary: false,
-  },
-  {
-    name: "TUR Netherlands BV",
-    region: "Netherlands",
-    address: "European distribution and coordination",
-    isPrimary: false,
-  },
-  {
-    name: "TUR Lanka Holdings",
-    region: "Sri Lanka",
-    address: "Regional supply and operations",
-    isPrimary: false,
-  },
-  {
-    name: "TUR Arabia Establishment",
-    region: "Middle East",
-    address: "GCC project coordination",
-    isPrimary: false,
-  },
-  {
-    name: "TUR India",
-    region: "Bengaluru, India",
-    address: "Aurbis Prime, No.11 Kaveri Regent Coronet, 80 Feet Road, 3rd Block, Koramangala, Bengaluru, Karnataka 560034",
-    isPrimary: false,
-  },
-];
+export const aboutOffices = siteOffices;
 
 export const aboutPartners = [
   {
     name: "James Gibbons Format",
     logo: "/tur/site/logo-1-1.png",
     description:
-      "Specification-grade ironmongery since 1670 — the heritage brand at the core of TUR's door hardware offer, covering locks, levers, cylinders and decorative ironmongery.",
-    productCategories: ["Lever Handles", "Cylinders", "Locks & Latches", "Pull Handles", "Ironmongery"],
+      "Specification-grade ironmongery since 1670 — the heritage brand at the core of TUR's door hardware offer, covering locks, levers, cylinders and decorative ironmongery. UK Made with state-of-the-art designs, including special Anti-microbial coated products for hospitals. Over 50 years of GCC experience.",
+    productCategories: ["Lever Handles", "Cylinders", "Locks & Latches", "Pull Handles", "Anti-microbial Hardware"],
   },
   {
     name: "G·U Automatic",
     logo: "/tur/site/logo-1-2.png",
     description:
-      "High-performance automatic door systems engineered for premium commercial and institutional entrances — from high-traffic sliding systems to all-glass revolving doors.",
-    productCategories: ["Sliding Door Drives", "Swing Door Operators", "Revolving Doors", "All-Glass Systems", "Sensors"],
+      "High-performance automatic door systems engineered for premium commercial and institutional entrances — from high-traffic sliding systems to all-glass revolving doors, swing automation and controlled physical access gates.",
+    productCategories: ["Sliding Door Operators", "Swing Door Drives", "Revolving Doors", "All-Glass Systems", "Access Control Gates"],
   },
   {
     name: "BKS",
@@ -212,31 +196,35 @@ export const aboutPartners = [
     name: "BB Locks",
     logo: "/tur/site/logo-1-4.png",
     description:
-      "Security cylinders and locking solutions engineered for high-security and access-controlled environments across hospitality, healthcare and institutional sectors.",
-    productCategories: ["High-Security Cylinders", "Euro Profile", "Keypad Locks", "Padlocks"],
+      "Belgium-made since 1980. Electronic lock technology engineered for the highest-security environments — banks, prisons, airports, museums, embassies, psychiatric institutions and hospitals. Robustness, reliability and durability in every product.",
+    productCategories: ["Electronic Security Locks", "High-Security Cylinders", "Euro Profile", "Keypad Locks", "Padlocks"],
   },
   {
-    name: "D4E",
+    name: "D4E — Design 4 Excellence",
     logo: "/tur/site/logo-1-5.png",
     description:
-      "Specialist door hardware engineered for demanding architectural applications — including door closers, hinges and overhead hardware for heavy-traffic commercial openings.",
-    productCategories: ["Door Closers", "Hinges", "Floor Springs", "Overhead Hardware"],
+      "Netherlands-based specialist in door hardware and master key cylinders. SKG certified with full anti-tamper protection — drilling, picking, bumping, snapping and plug extraction resistant. Includes door closers, hinges, floor springs and overhead hardware for heavy-traffic commercial openings.",
+    productCategories: ["SKG Certified Cylinders", "Master Key Systems", "Door Closers", "Hinges", "Floor Springs"],
   },
   {
     name: "TURN",
     logo: "/tur/site/logo-1-6.png",
     description:
-      "SKG 2-star certified TURN master key cylinders — Euro profile cylinders with duplication-controlled keys and full master key hierarchy for complex access environments.",
-    productCategories: ["Master Key Cylinders", "Euro Profile", "SKG 2-Star", "Key Hierarchy"],
+      "SKG 2-star certified TURN master key cylinders — Euro profile cylinders with duplication-controlled keys and full master key hierarchy. In-house master key production facility with MARKER 2000 and FUTURA PRO precision cutting machines for hotels, hospitals and campus projects.",
+    productCategories: ["Master Key Cylinders", "Euro Profile", "SKG 2-Star", "Key Hierarchy", "In-House Production"],
   },
 ];
 
 export const aboutCertifications = [
-  "ANSI",
-  "GAI Member",
-  "CE Marked",
-  "SKG 2-Star",
-  "ISO 9001",
+  { label: "ANSI", description: "American National Standards Institute" },
+  { label: "UL", description: "Underwriters Laboratories (2025)" },
+  { label: "CE Marked", description: "European Conformity" },
+  { label: "Intertek", description: "Third-party Testing & Certification" },
+  { label: "SKG 2-Star", description: "Dutch Security Certification" },
+  { label: "GAI Member", description: "Guild of Architectural Ironmongers" },
+  { label: "Warrington", description: "Fire & Security Testing" },
+  { label: "TÜV / DIN EN 1303", description: "German Technical Inspection" },
+  { label: "ISO 9001", description: "Quality Management System" },
 ];
 
 export { siteConfig, siteContact };

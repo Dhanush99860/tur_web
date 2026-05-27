@@ -82,33 +82,33 @@ export const homeStoryCards: StoryCard[] = [
     eyebrow: "Heritage",
     title: "Since 1670, through James Gibbons Format.",
     description:
-      "TUR's hardware platform is rooted in the James Gibbons Format legacy — one of the oldest established names in architectural hardware, founded in 1670. This heritage informs every product family, specification route and brand partnership carried into TUR's offer.",
+      "TUR's hardware platform is anchored in the James Gibbons Format legacy — one of Britain's longest-established architectural hardware manufacturers, founded in 1670. UK Made with state-of-the-art designs and 50 years of GCC project experience, James Gibbons Format supplies specification-grade ironmongery for the most demanding project requirements.",
     image: "/tur/door-hardware/format-lockset.jpg",
     imageAlt: "Format UK branded lockset — architectural hardware heritage since 1670",
   },
   {
-    eyebrow: "Regional Experience",
-    title: "30+ years of project delivery across the region.",
+    eyebrow: "Industry Experience",
+    title: "100 years of combined management expertise.",
     description:
-      "Three decades of hardware specification, supply and coordination across commercial, hospitality, healthcare and institutional projects throughout the Middle East and South Asia — from first inquiry to final commissioning.",
+      "TUR's management team brings over 100 years of combined experience across architectural door hardware, automatic operators and the GCC construction sector — from complex healthcare and hospitality specifications to military and government projects. Offices in UAE, Netherlands, Canada, Sri Lanka, India and the UK.",
     image: "/tur/home/project-a.jpg",
-    imageAlt: "Regional project delivery — architectural hardware specification across the Middle East",
+    imageAlt: "TUR management team — 100 years combined industry experience",
   },
   {
-    eyebrow: "Technical Services",
-    title: "From scheduling to master keying and installation.",
+    eyebrow: "In-House Capability",
+    title: "Master key production, certifications and local stock.",
     description:
-      "TUR's technical services extend across the full project cycle — estimation, scheduling, shop drawings, master keying, installation support and on-site troubleshooting — so that the hardware package is coordinated from specification through to handover.",
+      "TUR operates an in-house master key production facility with MARKER 2000 and FUTURA PRO precision cutting machines — capable of designing full GMK to individual door hierarchies. With ANSI, UL (2025), CE, SKG and Warrington certifications and a UAE-based stock hub in Hamriyah Free Zone, TUR reduces lead times and supports fast project coordination.",
     image: "/tur/door-hardware/mc-2.jpg",
-    imageAlt: "Technical hardware coordination and project services — TUR",
+    imageAlt: "TUR in-house master key facility — certified cylinder production",
   },
   {
-    eyebrow: "Global Presence",
-    title: "A broader platform across three regions.",
+    eyebrow: "Global Reach",
+    title: "6 offices. 15+ countries. Landmark references.",
     description:
-      "Registrations, manufacturing partnerships and project experience across Europe, the Middle East and South Asia give TUR a reach that extends well beyond a single market — supporting international specifications, procurement and coordinated project delivery.",
+      "From Buckingham Palace and Changi Airport to KAFD Riyadh and Al Bayt Stadium — TUR's brands are specified on landmark projects across the UK, Europe, Middle East, Asia Pacific and the Caribbean. Six international offices in the UAE, Netherlands, UK, Canada, Sri Lanka and India support coordinated global project delivery.",
     image: "/tur/home/project-1.jpg",
-    imageAlt: "TUR brand signage — James Gibbons Format, G·U, BKS and partner presence across regions",
+    imageAlt: "TUR global project references — landmark buildings across 15+ countries",
   },
 ];
 
@@ -243,30 +243,64 @@ export const homePartnerLogos = [
 ];
 
 export const homeCertificationLogos: GalleryImage[] = [
+  { src: "/tur/site/logo-2-c1.png", alt: "ANSI certified", label: "ANSI" },
+  { src: "/tur/site/logo-2-c4.png", alt: "GAI Member", label: "GAI Member" },
+  { src: "/tur/site/logo-2-c5.png", alt: "CE marked", label: "CE Marked" },
+  { src: "/tur/site/logo-2-c6.png", alt: "SKG 2-star certified", label: "SKG 2-Star" },
+  { src: "/tur/site/logo-2-c7.png", alt: "ISO 9001 certified", label: "ISO 9001" },
+];
+
+export type HomeCertItem = {
+  label: string;
+  sublabel?: string;
+  description: string;
+  src?: string;
+};
+
+export const homeCertificationItems: HomeCertItem[] = [
   {
-    src: "/tur/site/logo-2-c1.png",
-    alt: "ANSI certified",
     label: "ANSI",
+    sublabel: "American National Standards Institute",
+    description: "Mortise Hinges · Mortise Locks · Auxiliary Locks · Fire Exit Devices · Door Controls · Flushbolts · Coordinators",
+    src: "/tur/site/logo-2-c1.png",
   },
   {
-    src: "/tur/site/logo-2-c4.png",
-    alt: "GAI — Guild of Architectural Ironmongers member",
-    label: "GAI Member",
+    label: "UL Listed",
+    sublabel: "Underwriters Laboratories — 2025",
+    description: "Door Hinges (R41844) · Locks & Latches (R41836) · Swinging Fire Door Closers (R40953)",
   },
   {
-    src: "/tur/site/logo-2-c5.png",
-    alt: "CE marked",
     label: "CE Marked",
+    sublabel: "European Conformity",
+    description: "Hinges · Locks · Panic Devices · Door Controls · EP Cylinders · Lever Handles",
+    src: "/tur/site/logo-2-c5.png",
   },
   {
-    src: "/tur/site/logo-2-c6.png",
-    alt: "SKG 2-star certified",
+    label: "Intertek",
+    sublabel: "Third-party Testing",
+    description: "Certificate of Constancy of Performance — ift Rosenheim · Intertek Deutschland GmbH",
+  },
+  {
     label: "SKG 2-Star",
+    sublabel: "Dutch Security Certification",
+    description: "Cylinders & Door Closers — anti-tamper: drilling, picking, bumping, snapping, plug extraction",
+    src: "/tur/site/logo-2-c6.png",
   },
   {
-    src: "/tur/site/logo-2-c7.png",
-    alt: "ISO 9001 certified",
-    label: "ISO 9001",
+    label: "Warrington",
+    sublabel: "Fire & Security Testing",
+    description: "Independent fire testing and security certification for panic hardware and door closers",
+  },
+  {
+    label: "TÜV / DIN EN 1303",
+    sublabel: "German Technical Inspection",
+    description: "Cylinder testing and quality assurance to DIN EN 1303 standard",
+  },
+  {
+    label: "GAI Member",
+    sublabel: "Guild of Architectural Ironmongers",
+    description: "Membership reflecting professional standards in the UK architectural ironmongery industry",
+    src: "/tur/site/logo-2-c4.png",
   },
 ];
 

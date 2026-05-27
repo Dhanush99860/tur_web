@@ -396,9 +396,7 @@ export const mainNavigation = [
   },
   { label: "Master Key", href: "/master-key-systems" },
   { label: "All Products", href: "/products" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Partners", href: "/partners" },
 ] as HeaderNavigationItem[];
 
 export const drawerSupportLinks = [

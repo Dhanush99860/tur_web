@@ -135,4 +135,22 @@ export const pageSeo = {
     ],
     updatedAt: "2026-05-21",
   },
+  partners: {
+    title: "Partners & Project References",
+    description:
+      "TUR's specification partner network and landmark project references — James Gibbons Format, G·U Automatic, BKS, BB Locks, D4E and TURN, with projects across the UAE, GCC, UK and internationally.",
+    path: "/partners",
+    image: "/tur/site/meta-default.jpg",
+    keywords: [
+      "tur partners",
+      "james gibbons format",
+      "g u automatic",
+      "bks hardware",
+      "architectural hardware brands",
+      "landmark projects uae",
+      "hardware project references",
+      "door hardware specification partners",
+    ],
+    updatedAt: "2026-05-25",
+  },
 } satisfies Record<string, SeoPage>;

@@ -18,9 +18,9 @@ const doorHardwareFamilies: CatalogFamily[] = [
     image: "/tur/door-hardware/categories/default-2026954824201015.jpg",
     imageAlt: "Coordinated American Standard lever, cylinder and mortise lock hardware from TUR",
     highlights: [
-      "7 coordinated routes",
-      "One clear family entry point",
-      "Move from family to the right child route before reviewing deeper detail pages",
+      "7 Coordinated Routes",
+      "UL Certified 2025",
+      "ANSI / BHMA Compliant",
     ],
     cards: [
       {
@@ -141,7 +141,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
       { title: "7 coordinated routes in one family", description: "From hanging and closing to securing, bolting and furnishing — a complete door-set specification under one family." },
       { title: "Specification-led across all project types", description: "Suited to commercial, healthcare, hospitality and institutional hardware schedules with consistent finish and function." },
       { title: "Clear functional hierarchy", description: "Choose the function route, then go deeper into product-level detail — no guesswork in the specification process." },
-      { title: "Project-wide coordination", description: "Designed for projects requiring consistent hardware language across all door types in a building." },
+      { title: "UL Certified — 2025 Listings", description: "American Standard hardware carries current UL certifications: Door Hinges (File R41844), Locks & Latches (File R41836) and Swinging Fire Door Closers (File R40953) — independently verified by Underwriters Laboratories." },
     ],
     faq: [
       { question: "What does American Standard cover?", answer: "American Standard organises core door-set hardware by function: Hang, Control, Secure, Bolt, Furnish, Emergency Exits and Ancillary. It is TUR's primary hardware family for commercial, hospitality and institutional specifications in the American Standard format." },
@@ -299,7 +299,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
       "European Ironmongery brings together core door functions and design-conscious hardware families suited to premium specifications.",
     image: "/tur/door-hardware/european-ironmongery/furnish-the-door-lever-handle/lever-handle-te1920-966/lever-handle-te1920-966-main.jpg",
     imageAlt: "European Ironmongery lever and lockset hardware from TUR",
-    highlights: ["Bolt The Door", "Cylinders", "TE1910 / TE1920 Lever Handles"],
+    highlights: ["Cylinders", "TE1910 / TE1920 Lever Handles", "Anti-microbial Hardware"],
     cards: [
       {
         title: "Hang The Door",
@@ -389,12 +389,12 @@ const doorHardwareFamilies: CatalogFamily[] = [
       href: createInquiryHref("European Ironmongery Inquiry"),
     },
     secondaryCta: {
-      label: "Download Company Profile",
+      label: "View Catalogues",
       href: "/downloads",
     },
     supportTitle: "Premium ironmongery with specification support",
     supportBody:
-      "This family overview provides a clear route into cylinders, lever designs and bolting solutions while keeping broader specification support one step away.",
+      "TUR's European Ironmongery programme covers the complete door-set specification — from SKG 2-star certified cylinders to anti-microbial lever hardware — coordinated for premium commercial, hospitality and healthcare projects.",
     applications: [
       { title: "Premium Hospitality", description: "5-star hotels, resorts and luxury serviced apartments requiring finish-matched ironmongery across guestroom, suite and public area door sets." },
       { title: "Executive Offices", description: "Corporate headquarters and boardrooms where refined lever designs and coordinated finishes are part of the design brief." },
@@ -404,9 +404,9 @@ const doorHardwareFamilies: CatalogFamily[] = [
     ],
     featurePoints: [
       { title: "Complete 9-route ironmongery programme", description: "Covering hanging, controlling, securing, bolting, furnishing, emergency egress and ancillary accessories in a single family." },
-      { title: "Satin Chrome and Polished Chrome finishes", description: "Consistent finish options across the full programme for project-wide ironmongery coordination." },
+      { title: "Satin Chrome, Polished Chrome and Anti-microbial finishes", description: "Consistent finish options across the full programme including anti-microbial coated hardware — engineered specifically for hospitals and healthcare environments as part of the James Gibbons Format UK-made range." },
       { title: "TE1910 / TE1920 lever and knob handle designs", description: "DIN-standard lever and knob handles for architectural coordination across handles, cylinders and escutcheons." },
-      { title: "Master key and cylinder suite compatible", description: "Works with cylinder suite systems for project-wide access management across keyed openings." },
+      { title: "Master key and cylinder suite compatible", description: "Works with TURN cylinder suite systems for project-wide access management — SKG 2-star certified and BS EN 1303:2015 compliant across keyed openings." },
     ],
     faq: [
       { question: "What is European Ironmongery?", answer: "European Ironmongery is TUR's premium hardware programme organised by door function — covering hanging, controlling, securing, bolting, furnishing, emergency egress and ancillary accessories. It is specified for hospitality, executive and institutional projects where finish coordination and architectural quality define the brief." },
@@ -762,7 +762,7 @@ const doorHardwareFamilies: CatalogFamily[] = [
     },
     supportTitle: "Threshold and perimeter performance for coordinated openings",
     supportBody:
-      "This page provides a clear route into the sealing families already present in the build, while keeping the remaining families available as inquiry-led placeholders instead of dead links.",
+      "Use this section to specify the right sealing system for threshold performance, fire compliance, acoustic control and perimeter detailing — across commercial, healthcare and institutional door openings.",
     applications: [
       { title: "Commercial Entrances", description: "Door bottom seals, threshold plates and weather stripping for controlled air and weather performance at commercial building entries." },
       { title: "Healthcare & Clinical", description: "Intumescent and smoke seals for fire-rated door assemblies in hospitals, clinics and care homes requiring life-safety compliance." },
@@ -874,7 +874,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
     },
     supportTitle: "Sliding entrance families for controlled circulation",
     supportBody:
-      "Representative sliding families are listed here as a clean project entry point even where the build does not yet include full product-detail pages for each model.",
+      "Use this family to route into the right G·U Automatic sliding operator — from compact prismatic systems to heavy-duty, telescoping and fire-tested escape route configurations.",
     applications: [
       { title: "Retail & Commercial Entrances", description: "High-throughput automatic sliding entrances for shopping centres, supermarkets and retail frontage requiring reliable daily operation." },
       { title: "Healthcare Facilities", description: "Hygiene-conscious automatic sliding doors for hospital entrance, ward and clinical areas with hands-free operation." },
@@ -984,7 +984,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
     },
     supportTitle: "Secure flow management for controlled environments",
     supportBody:
-      "This route keeps controlled access systems visible within the IA today while deeper model-level migration can happen later.",
+      "Use this family to select the right physical access control system — from tripod turnstiles and full-height barriers to optical sensor barriers, reader posts and DDA-compliant swing gates.",
     applications: [
       { title: "Corporate Headquarters", description: "Turnstiles, speed gates and swing gates for managed staff and visitor entry in commercial office environments." },
       { title: "Transport Terminals", description: "High-throughput tripod turnstiles and full-height barriers for airports, railway stations and bus terminals." },
@@ -1066,7 +1066,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
     },
     supportTitle: "Revolving door families for premium and secure entrances",
     supportBody:
-      "The revolving door families are presented as a lightweight landing page now so navigation remains complete without introducing dead links.",
+      "Use this family to select the right revolving entrance — from standard commercial configurations to all-glass premium systems and high-security anti-tailgating GSI configurations.",
     applications: [
       { title: "Premium Hotel Arrivals", description: "All-glass and standard revolving doors for luxury hotel entrances creating a premium first impression and effective air seal." },
       { title: "Corporate Headquarters", description: "Revolving door entrances for office buildings where architectural quality, energy performance and controlled circulation matter." },
@@ -1134,12 +1134,12 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       href: createInquiryHref("Swing Door Drives Inquiry"),
     },
     secondaryCta: {
-      label: "Download Company Profile",
-      href: "/downloads",
+      label: "Contact TUR",
+      href: "/contact",
     },
     supportTitle: "Automatic swing operators for specification-led projects",
     supportBody:
-      "This page connects the current detail pages for DTN 80, TSW150 and TSW120 within a clearer Automatic Operators hierarchy.",
+      "Use this family to specify the right swing door operator — DTN 80 for fire and smoke door applications, TSW150 for hygiene-conscious healthcare entrances, or TSW120 for refined corporate and institutional projects.",
     applications: [
       { title: "Healthcare Entrances", description: "Hands-free automatic swing door operation for hospitals, clinics and care homes where hygiene and accessibility are primary." },
       { title: "Accessibility Upgrades", description: "DDA-compliant automatic swing operators for retrofitting existing door openings to meet accessibility requirements." },
@@ -1208,7 +1208,7 @@ const automaticOperatorFamilies: CatalogFamily[] = [
     },
     supportTitle: "All-glass movement systems for premium entrances",
     supportBody:
-      "shopMaster families are grouped here to give the homepage and navigation a clean page-based path into all-glass systems without relying on legacy collection anchors.",
+      "Use this family to specify the right all-glass automatic entrance — GSW-A for premium architectural installations, GSW-M G30 for heavier glass specifications and GSW-M for standard commercial all-glass applications.",
     applications: [
       { title: "Premium Retail Frontage", description: "shopMaster all-glass sliding systems for high-street retail, flagship stores and shopping centre entrances requiring maximum transparency." },
       { title: "Corporate Lobbies", description: "All-glass automatic entrances for headquarters and premium office buildings where architectural clarity and brand presence are key." },
@@ -1273,9 +1273,9 @@ const automaticOperatorFamilies: CatalogFamily[] = [
       label: "Send Inquiry",
       href: "/contact",
     },
-    supportTitle: "A clean category route that is ready for deeper migration",
+    supportTitle: "Activation, safety and control devices for automatic entrances",
     supportBody:
-      "This route is intentionally lightweight for now, but it ensures the IA remains complete while activation-device details are migrated page by page.",
+      "Use this family to select the right activation, safety and control devices that complete the automatic entrance system — compatible with all G·U Automatic operator families across sliding, swing and revolving configurations.",
     applications: [
       { title: "All Automatic Sliding Entrances", description: "Presence detection and safety coverage above and around automatic sliding door openings for compliant safe operation." },
       { title: "Swing Door Installations", description: "Activation and safety sensors for automatic swing door drives, providing detection zones and trigger inputs." },

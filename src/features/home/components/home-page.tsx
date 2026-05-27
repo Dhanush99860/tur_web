@@ -4,6 +4,7 @@ import {
   homeCarouselProductSlugs,
   homeCollectionTabs,
   homeCertificationLogos,
+  homeCertificationItems,
   homeFeaturedProductSlugs,
   homePartnerLogos,
   homeResourceCards,
@@ -33,7 +34,7 @@ export function HomePage() {
   return (
     <>
       <HeroSection hero={homeHero} />
-      <TrustedPartnersSection brands={homePartnerLogos} certifications={homeCertificationLogos} />
+      <TrustedPartnersSection brands={homePartnerLogos} certifications={homeCertificationLogos} certItems={homeCertificationItems} />
       <FeaturedProductsSection products={featuredProducts} />
       <ResourcesSection resources={homeResourceCards} />
       <StorySection stories={homeStoryCards} />

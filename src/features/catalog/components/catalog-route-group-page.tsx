@@ -8,10 +8,26 @@ import { buttonClassName } from "@/components/ui/button";
 import { PageContainer } from "@/components/layout/page-container";
 import { cn } from "@/lib/utils/cn";
 
+const CERT_BADGES: Record<string, string[]> = {
+  "American Standard":            ["ANSI", "UL"],
+  "European Ironmongery":         ["CE"],
+  "Glass Hardware":               ["CE"],
+  "Glass hinge / glass clip":     ["CE"],
+  "Bathroom handle / glass knob": ["CE"],
+  "Glass patch fitting":          ["CE"],
+  "Glass pull handle":            ["CE"],
+  "Glass lip seal":               ["CE"],
+  "Access Control":               ["CE"],
+  "Sealing Systems":              ["CE"],
+  "Automatic Operators":          ["CE"],
+  "Master Key Systems":           ["CE", "SKG"],
+};
+
 type ProductCardProps = { product: Product };
 
 function RouteProductCard({ product }: ProductCardProps) {
   const href = `/products/${product.slug}`;
+  const certBadges = CERT_BADGES[product.category] ?? [];
 
   return (
     <SmartLink
@@ -33,6 +49,19 @@ function RouteProductCard({ product }: ProductCardProps) {
             {product.badge}
           </span>
         ) : null}
+        {certBadges.length > 0 && (
+          <div className="absolute bottom-2 left-2 z-20 flex gap-1">
+            {certBadges.map((b) => (
+              <span
+                key={b}
+                className="rounded px-[6px] py-[3px] text-[7.5px] font-bold uppercase tracking-[0.12em] text-white"
+                style={{ background: "rgba(0,0,0,0.52)", backdropFilter: "blur(4px)" }}
+              >
+                {b}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-5">

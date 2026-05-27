@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { GalleryImage } from "@/types";
+import type { HomeCertItem } from "@/content/home/sections";
 import { PageContainer } from "@/components/layout/page-container";
 import { HomeSectionHeading } from "@/features/home/components/home-section-heading";
 
@@ -8,9 +9,10 @@ type BrandLogo = GalleryImage & { role?: string };
 type TrustedPartnersSectionProps = {
   brands: BrandLogo[];
   certifications: GalleryImage[];
+  certItems?: HomeCertItem[];
 };
 
-export function TrustedPartnersSection({ brands, certifications }: TrustedPartnersSectionProps) {
+export function TrustedPartnersSection({ brands, certifications, certItems }: TrustedPartnersSectionProps) {
   if (brands.length === 0) return null;
 
   return (
@@ -55,7 +57,7 @@ export function TrustedPartnersSection({ brands, certifications }: TrustedPartne
                     alt={brand.alt}
                     fill
                     sizes="130px"
-                    className="object-contain grayscale opacity-55 transition duration-300 dark:invert dark:brightness-[1.4] dark:opacity-70 group-hover:grayscale-0 group-hover:opacity-100 dark:group-hover:invert-0 dark:group-hover:brightness-100"
+                    className="object-contain opacity-70 transition duration-300 group-hover:opacity-100"
                   />
                 </div>
 
@@ -76,32 +78,57 @@ export function TrustedPartnersSection({ brands, certifications }: TrustedPartne
             ))}
           </div>
 
-          {/* ── Certifications strip ── */}
-          {certifications.length > 0 && (
-            <div className="border-t border-[color-mix(in_srgb,var(--border)_70%,transparent)] bg-[color-mix(in_srgb,var(--border)_18%,transparent)]">
-              <div className="flex items-center gap-4 px-6 py-2.5">
-                <p className="shrink-0 text-[8.5px] font-bold uppercase tracking-[0.24em] text-[var(--muted-foreground)] opacity-60">
+          {/* ── Certifications grid ── */}
+          {certItems && certItems.length > 0 && (
+            <div className="border-t border-[color-mix(in_srgb,var(--border)_70%,transparent)]">
+              {/* Section label */}
+              <div className="flex flex-col items-center gap-1.5 px-6 pb-6 pt-8 text-center">
+                <p className="text-[9px] font-bold uppercase tracking-[0.30em] text-[var(--muted-foreground)]">
                   Standards &amp; Certifications
                 </p>
-                <div className="h-px flex-1 bg-[color-mix(in_srgb,var(--border)_60%,transparent)]" />
+                <p className="max-w-[44ch] text-[12.5px] leading-[1.7] text-[var(--muted-foreground)]">
+                  Independently tested and certified across American and European standards — covering the full product range.
+                </p>
               </div>
-              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 pb-6 pt-2 sm:justify-start sm:gap-x-10">
-                {certifications.map((cert) => (
-                  <div key={cert.src} className="group flex flex-col items-center gap-2 text-center">
-                    <div className="relative h-7 w-[68px]">
-                      <Image
-                        src={cert.src}
-                        alt={cert.alt}
-                        fill
-                        sizes="80px"
-                        className="object-contain grayscale opacity-40 transition duration-300 dark:invert dark:brightness-[1.4] dark:opacity-55 group-hover:grayscale-0 group-hover:opacity-90 dark:group-hover:invert-0 dark:group-hover:brightness-100"
-                      />
-                    </div>
-                    {cert.label && (
-                      <p className="text-[8.5px] font-bold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">
-                        {cert.label}
-                      </p>
+
+              {/* 4-col grid */}
+              <div className="grid grid-cols-2 gap-px border-t border-[color-mix(in_srgb,var(--border)_60%,transparent)] bg-[color-mix(in_srgb,var(--border)_60%,transparent)] sm:grid-cols-4">
+                {certItems.map((cert) => (
+                  <div
+                    key={cert.label}
+                    className="group flex flex-col items-center gap-3 bg-[var(--card)] px-5 py-6 text-center transition-colors duration-200 hover:bg-[color-mix(in_srgb,var(--border)_22%,transparent)]"
+                  >
+                    {/* Logo or text badge */}
+                    {cert.src ? (
+                      <div className="relative h-8 w-[80px]">
+                        <Image
+                          src={cert.src}
+                          alt={cert.label}
+                          fill
+                          sizes="88px"
+                          className="object-contain opacity-60 transition duration-300 group-hover:opacity-100"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex h-8 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--panel)] px-3">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[var(--foreground)]">
+                          {cert.label}
+                        </span>
+                      </div>
                     )}
+
+                    {/* Label + sublabel */}
+                    <div>
+                      <p className="text-[10.5px] font-bold text-[var(--foreground)]">{cert.label}</p>
+                      {cert.sublabel && (
+                        <p className="mt-0.5 text-[9px] text-[var(--muted-foreground)]">{cert.sublabel}</p>
+                      )}
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-[10px] leading-[1.65] text-[var(--muted-foreground)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                      {cert.description}
+                    </p>
                   </div>
                 ))}
               </div>

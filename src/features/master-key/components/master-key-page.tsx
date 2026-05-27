@@ -193,9 +193,9 @@ const features = [
       "All Euro profile cylinders are manufactured from solid brass with 2.5mm Nickel Silver keys and a 65mm fixing screw included. Available in Satin Nickel finish as standard.",
   },
   {
-    title: "UL437 Listed (ANSI Range)",
+    title: "UL Certified — 2025 Listings",
     description:
-      "TURN ANSI mortise and rim cylinders carry UL437 listing, meeting US performance requirements under ANSI/BHMA A156.5 / A156.30 for high-security applications.",
+      "2025 UL certifications: Door Hinges (File R41844), Locks & Latches (File R41836) and Swinging Fire Door Closers (File R40953). ANSI mortise and rim cylinders also carry UL437 listing under ANSI/BHMA A156.5 / A156.30.",
   },
 ];
 
@@ -236,7 +236,7 @@ export function MasterKeyPage() {
               </SmartLink>
             </div>
             <div className="mt-7 flex flex-wrap gap-2">
-              {["SKG 2-Star Certified", "BS EN 1303:2015", "Anti-Drill Protected", "Duplication Controlled", "UL437 Listed"].map((h) => (
+              {["SKG 2-Star Certified", "BS EN 1303:2015", "UL Certified 2025", "Duplication Controlled", "In-House UAE Facility"].map((h) => (
                 <span key={h} className="rounded-full border border-[var(--border)] px-3 py-1 text-[11px] font-medium text-[var(--foreground)]">
                   {h}
                 </span>
@@ -606,56 +606,60 @@ export function MasterKeyPage() {
       </PageContainer>
 
       {/* ══════════════════════════════════════
-          GLOBAL OFFICES
+          IN-HOUSE MASTER KEY FACILITY
       ══════════════════════════════════════ */}
       <PageContainer className="pt-20 sm:pt-24">
-        <div className="mb-10">
-          <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
-            Global Presence
-          </p>
-          <h2 className="font-display text-[clamp(1.85rem,3.2vw,3rem)] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)]">
-            TURN offices worldwide.
-          </h2>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              region: "Middle East",
-              entity: "TUR Middle East FZC",
-              address: "Office No: LV 32B, Hamriyah Free Zone, Sharjah, United Arab Emirates",
-              phone: "+971 6 539 6440",
-              note: "Trade License No: 23473/23474",
-            },
-            {
-              region: "Corporate HQ",
-              entity: "The Meydan Hotel",
-              address: "Grandstand 6th Floor, Meydan Road, Nad Al Sheba, P.O Box: 9305, Dubai, UAE",
-              phone: "",
-              note: "",
-            },
-            {
-              region: "United Kingdom",
-              entity: "James Gibbons Format Limited",
-              address: "11–13 Jubilee Parkway, Stores Road, Derby, DE21 4BJ, England, UK",
-              phone: "+44 133 234 6521",
-              note: "operations@jgf.co.uk · Authorised key duplication",
-            },
-            {
-              region: "Netherlands",
-              entity: "TUR Netherland BV",
-              address: "Retselseweg 6a, 5473 HC Heeswijk Dinther, Netherlands",
-              phone: "+31 41 372 4988",
-              note: "mailbox@tur-nl.nl",
-            },
-          ].map((office) => (
-            <div key={office.region} className="rounded-[1.25rem] border border-[var(--border)] bg-[var(--card)] p-6">
-              <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--accent)]">{office.region}</p>
-              <p className="mt-2 text-[0.88rem] font-semibold leading-snug tracking-[-0.018em] text-[var(--foreground)]">{office.entity}</p>
-              <p className="mt-2 text-[11.5px] leading-[1.68] text-[var(--muted-foreground)]">{office.address}</p>
-              {office.phone ? <p className="mt-2 text-[11.5px] font-medium text-[var(--foreground)]">{office.phone}</p> : null}
-              {office.note ? <p className="mt-1 text-[10.5px] text-[var(--muted-foreground)] opacity-70">{office.note}</p> : null}
+        <div className="grid gap-0 overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] lg:grid-cols-[1.35fr_1fr]">
+          <div className="flex flex-col justify-center p-7 sm:p-9 lg:p-10">
+            <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
+              In-House Production · Since 2024
+            </p>
+            <h2 className="font-display text-[clamp(1.6rem,2.6vw,2.5rem)] font-medium leading-[1.04] tracking-[-0.05em] text-[var(--foreground)]">
+              UAE-based master key cutting facility.
+            </h2>
+            <p className="mt-4 text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
+              TUR operates an in-house master key production facility in the UAE — equipped with MARKER 2000 and FUTURA PRO precision cutting machines. Operational since 2024, the facility enables rapid key cutting, system duplication and on-site technical support for regional projects without relying on overseas supply.
+            </p>
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              {[
+                "MARKER 2000 Cutting Machine",
+                "FUTURA PRO Precision Cutting",
+                "UAE-Based Operations",
+                "Rapid Key Turnaround",
+                "On-Site Duplication",
+                "In-Region Project Support",
+              ].map((b) => (
+                <div key={b} className="flex items-center gap-2">
+                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--accent)_14%,transparent)]">
+                    <svg viewBox="0 0 10 10" fill="none" className="h-[9px] w-[9px]">
+                      <path d="M1.5 5l2.5 2.5 4.5-5" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span className="text-[12px] font-medium text-[var(--foreground)]">{b}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <div className="relative min-h-[22rem] overflow-hidden border-t border-[var(--border)] lg:min-h-0 lg:border-l lg:border-t-0">
+            <Image
+              src="/master-key/cylinder-product.jpg"
+              alt="TUR in-house master key production facility — MARKER 2000 and FUTURA PRO precision cutting"
+              fill
+              sizes="(max-width: 1023px) 100vw, 42vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(6,8,12,0.06),rgba(6,8,12,0.55))]" />
+            <div className="absolute bottom-5 left-5 right-5">
+              <div className="rounded-[1.1rem] border border-white/14 bg-[rgba(8,10,16,0.64)] p-4 backdrop-blur-[12px]">
+                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/50">
+                  Operational Since 2024
+                </p>
+                <p className="mt-1 text-[12.5px] font-medium leading-snug text-white/85">
+                  MARKER 2000 and FUTURA PRO precision cutting — produced in the UAE.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </PageContainer>
 
@@ -675,7 +679,7 @@ export function MasterKeyPage() {
               Send us your floor plan or zone list and the TUR team will produce a master key schedule, cylinder specification and key hierarchy diagram for your project — at no charge.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
-              {["SKG 2-Star Certified", "BS EN 1303:2015", "UL437 Listed", "Duplication Controlled"].map((h) => (
+              {["SKG 2-Star Certified", "BS EN 1303:2015", "UL Certified 2025", "In-House UAE Facility"].map((h) => (
                 <span
                   key={h}
                   className="rounded-full border border-[color-mix(in_srgb,var(--accent)_28%,transparent)] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)] px-3.5 py-1.5 text-[11px] font-semibold text-[var(--accent)]"

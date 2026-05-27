@@ -82,7 +82,7 @@ export const catalogSections: CatalogSection[] = [
       href: createInquiryHref("Door Hardware Inquiry"),
     },
     secondaryCta: {
-      label: "Download Company Profile",
+      label: "View Catalogues",
       href: "/downloads",
     },
     familyGrid: {
@@ -152,13 +152,15 @@ export const catalogSections: CatalogSection[] = [
       { value: "5", label: "Hardware Families" },
       { value: "300+", label: "Catalogued Products" },
       { value: "Since 1670", label: "Format UK Heritage" },
-      { value: "UAE & GCC", label: "Regional Supply" },
+      { value: "Global", label: "Supply & Operations" },
     ],
-    supportTitle: "A clean page-based route into core hardware categories",
+    supportTitle: "One specification route for architectural door hardware",
     supportBody:
-      "Use this section as the main entry into TUR's hardware platform, then move into the relevant family or request project-led guidance for packages, approvals and technical coordination.",
+      "TUR coordinates product selection, hardware schedules and project-led supply across commercial, hospitality, healthcare and institutional projects — a single inquiry-led platform for hardware across every opening.",
     supportSignals: [
-      "Family guidance",
+      "ANSI / UL Certified",
+      "CE Marked",
+      "SKG 2-Star",
       "Package coordination",
       "Approval support",
     ],
@@ -299,7 +301,7 @@ export const catalogSections: CatalogSection[] = [
       href: createInquiryHref("Automatic Operators Inquiry"),
     },
     secondaryCta: {
-      label: "Download Company Profile",
+      label: "View Catalogues",
       href: "/downloads",
     },
     familyGrid: {
@@ -375,16 +377,17 @@ export const catalogSections: CatalogSection[] = [
     },
     metrics: [
       { value: "6", label: "Operator Families" },
-      { value: "GCC Wide", label: "Project Coverage" },
-      { value: "Since 1670", label: "Format UK Heritage" },
+      { value: "Global", label: "Project Coverage" },
+      { value: "G·U Automatic", label: "Primary Brand Partner" },
       { value: "All-Glass", label: "Frameless Systems" },
     ],
-    supportTitle: "A clean page-based route into core automatic entrance families",
+    supportTitle: "Automatic entrance systems for commercial, healthcare and hospitality projects",
     supportBody:
-      "Use this section as the main entry into TUR's entrance automation platform, then move into the relevant family or request project-led guidance for circulation logic, approvals, activation devices, access control coordination and system selection.",
+      "TUR supplies and coordinates G·U Automatic entrance systems across sliding, revolving, swing and all-glass configurations — from system selection through activation, safety compliance and project handover.",
     supportSignals: [
+      "G·U Automatic Systems",
+      "EN 16005 Safety Compliance",
       "Entrance-system coordination",
-      "Activation and safety logic",
       "Approval support",
     ],
     faq: {

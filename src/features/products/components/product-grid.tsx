@@ -14,6 +14,21 @@ const CATEGORY_ACCENT: Record<string, string> = {
   "Automatic Operators":  "#c47c54",
 };
 
+const CERT_BADGES: Record<string, string[]> = {
+  "American Standard":            ["ANSI", "UL"],
+  "European Ironmongery":         ["CE"],
+  "Glass Hardware":               ["CE"],
+  "Glass hinge / glass clip":     ["CE"],
+  "Bathroom handle / glass knob": ["CE"],
+  "Glass patch fitting":          ["CE"],
+  "Glass pull handle":            ["CE"],
+  "Glass lip seal":               ["CE"],
+  "Access Control":               ["CE"],
+  "Sealing Systems":              ["CE"],
+  "Automatic Operators":          ["CE"],
+  "Master Key Systems":           ["CE", "SKG"],
+};
+
 function getAccent(product: Product) {
   return CATEGORY_ACCENT[product.category] ?? "#86a2e6";
 }
@@ -25,6 +40,9 @@ type ProductCardProps = {
 
 function ProductCard({ product, onQuickView }: ProductCardProps) {
   const accent = getAccent(product);
+  const certBadges = CERT_BADGES[product.category] ?? [];
+  // Suppress the legacy product.badge when cert badges cover this product
+  const showLegacyBadge = product.badge && certBadges.length === 0;
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-[0.85rem] border border-[var(--border)] bg-[var(--card)] transition-[box-shadow,border-color] duration-300 hover:border-[color-mix(in_srgb,var(--border)_50%,transparent)] hover:shadow-[0_10px_40px_-12px_rgba(0,0,0,0.2)]">
@@ -44,15 +62,30 @@ function ProductCard({ product, onQuickView }: ProductCardProps) {
           className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover/img:scale-[1.04]"
         />
 
-        {/* Badge */}
-        {product.badge ? (
+        {/* Legacy badge (only when no cert badges apply) */}
+        {showLegacyBadge && (
           <span
             className="absolute left-3 top-3 z-20 rounded-full px-2.5 py-1 text-[7.5px] font-bold uppercase tracking-[0.18em] text-white"
             style={{ background: accent }}
           >
             {product.badge}
           </span>
-        ) : null}
+        )}
+
+        {/* Cert badges — bottom-left */}
+        {certBadges.length > 0 && (
+          <div className="absolute bottom-2 left-2 z-20 flex gap-1">
+            {certBadges.map((b) => (
+              <span
+                key={b}
+                className="rounded px-[6px] py-[3px] text-[7.5px] font-bold uppercase tracking-[0.12em] text-white"
+                style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)" }}
+              >
+                {b}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Slide-up Quick View bar */}
         <div className="absolute inset-x-0 bottom-0 z-10 flex h-11 translate-y-full items-center justify-center gap-2 bg-[rgba(6,8,10,0.78)] opacity-0 transition-[transform,opacity] duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/img:translate-y-0 group-hover/img:opacity-100">
