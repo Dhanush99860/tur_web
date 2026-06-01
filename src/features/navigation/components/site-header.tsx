@@ -9,6 +9,7 @@ import {
 } from "@/content/site/navigation";
 import { siteConfig, siteContact } from "@/content/site/site-config";
 import {
+  ArrowUpRightIcon,
   MenuIcon,
   PhoneIcon,
   SearchIcon,
@@ -32,6 +33,7 @@ export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [openPanel, setOpenPanel] = useState<string | null>(null);
+  const [announcementIndex, setAnnouncementIndex] = useState(0);
   const closeTimerRef = useRef<number | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -94,26 +96,91 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAnnouncementIndex((i) => (i + 1) % headerAnnouncement.items.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       <div className="sticky top-0 z-[70]" ref={headerRef}>
 
-        {/* ── Announcement strip ── */}
-        <div className="bg-[var(--nav-strip)] text-[var(--nav-strip-foreground)]">
-          <PageContainer className="flex min-h-10 items-center justify-center gap-3 text-center">
-            <span className="hidden sm:inline font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[color-mix(in_srgb,var(--nav-strip-foreground)_72%,transparent)]">
-              {headerAnnouncement.message}
-            </span>
-            <span className="hidden sm:inline h-3 w-px shrink-0 bg-[color-mix(in_srgb,var(--nav-strip-foreground)_22%,transparent)]" />
-            <span className="sm:hidden font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[color-mix(in_srgb,var(--nav-strip-foreground)_72%,transparent)]">
-              Door Hardware &amp; Entry Systems
-            </span>
+        {/* ── Announcement strip — always dark, always white text ── */}
+        <div className="relative overflow-hidden bg-[#0f1117]">
+          {/* Edge fades — same fixed dark colour */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-[linear-gradient(90deg,#0f1117,transparent)]" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-[linear-gradient(270deg,#0f1117,transparent)]" />
+
+          <PageContainer className="relative flex min-h-[2.4rem] items-center justify-between gap-4">
+
+            {/* Left — pulsing dot + label */}
+            <div className="relative z-20 hidden shrink-0 items-center gap-2 sm:flex">
+              <span className="relative flex h-1.5 w-1.5 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3055A6] opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#3055A6]" />
+              </span>
+              <span className="font-sans text-[8px] font-bold uppercase tracking-[0.22em] text-white/40">
+                TUR Global
+              </span>
+              <span className="h-3 w-px bg-white/10" />
+            </div>
+
+            {/* Center — rotating messages */}
+            <div className="relative flex min-h-[1.1rem] flex-1 items-center justify-center overflow-hidden">
+              {headerAnnouncement.items.map((item, i) => (
+                <span
+                  key={i}
+                  aria-hidden={i !== announcementIndex}
+                  className={cn(
+                    "absolute inset-0 flex items-center justify-center font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] text-white/75 transition-all duration-500 ease-in-out",
+                    i === announcementIndex
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-2 opacity-0 pointer-events-none",
+                  )}
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+
+            {/* Right — progress dots + CTA */}
+            <div className="relative z-20 hidden shrink-0 items-center gap-3 sm:flex">
+              <div className="flex items-center gap-1">
+                {headerAnnouncement.items.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Announcement ${i + 1}`}
+                    onClick={() => setAnnouncementIndex(i)}
+                    className={cn(
+                      "h-1 rounded-full transition-all duration-300",
+                      i === announcementIndex
+                        ? "w-4 bg-[#3055A6]"
+                        : "w-1 bg-white/25 hover:bg-white/50",
+                    )}
+                  />
+                ))}
+              </div>
+              <span className="h-3 w-px bg-white/10" />
+              <SmartLink
+                href={headerAnnouncement.ctaHref}
+                className="flex items-center gap-1.5 rounded-full border border-white/30 px-3 py-1 font-sans text-[9px] font-bold uppercase tracking-[0.18em] text-white transition-all duration-200 hover:border-white/60 hover:bg-white/10"
+              >
+                {headerAnnouncement.ctaLabel}
+                <ArrowUpRightIcon className="h-2.5 w-2.5" />
+              </SmartLink>
+            </div>
+
+            {/* Mobile — just the CTA */}
             <SmartLink
               href={headerAnnouncement.ctaHref}
-              className="shrink-0 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-white underline underline-offset-2 decoration-white/40 transition duration-200 hover:decoration-white"
+              className="shrink-0 font-sans text-[9px] font-bold uppercase tracking-[0.18em] text-white/70 underline underline-offset-2 decoration-white/30 transition duration-200 hover:text-white sm:hidden"
             >
               {headerAnnouncement.ctaLabel}
             </SmartLink>
+
           </PageContainer>
         </div>
 

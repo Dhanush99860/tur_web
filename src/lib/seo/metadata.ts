@@ -19,9 +19,14 @@ function prefixProtocol(url: string) {
 }
 
 function resolveMetadataBase() {
+  const vercelUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : undefined;
+
   const candidates = [
     process.env.NEXT_PUBLIC_SITE_URL,
     process.env.SITE_URL,
+    vercelUrl,
     siteConfig.baseUrl,
   ];
 
@@ -146,11 +151,14 @@ export function createRootMetadata(): Metadata {
     authors: [{ name: siteConfig.legalName }],
     creator: siteConfig.legalName,
     publisher: siteConfig.legalName,
-    manifest: siteConfig.manifestPath,
+    manifest: "/favicon/site.webmanifest",
     icons: {
-      icon: [{ url: "/favicon.ico", sizes: "any" }],
-      shortcut: ["/favicon.ico"],
-      apple: [{ url: "/favicon.ico" }],
+      icon: [
+        { url: "/favicon/favicon.ico",      sizes: "any",   type: "image/x-icon" },
+        { url: "/favicon/favicon.svg",       type: "image/svg+xml" },
+        { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      ],
+      apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     },
   };
 }

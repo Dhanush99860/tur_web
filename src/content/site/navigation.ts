@@ -212,7 +212,13 @@ const doorHardwareFamilies = getCatalogFamiliesBySection("door-hardware");
 const automaticOperatorFamilies = getCatalogFamiliesBySection("automatic-operators");
 
 export const headerAnnouncement = {
-  message: "Architectural Door Hardware & Automatic Entry Systems — Since 1670",
+  items: [
+    "Architectural Door Hardware & Automatic Entry Systems — Since 1670",
+    "UL Certified 2025 — Door Hinges · Single-point Locks · Fire Door Closers",
+    "7 Global Offices — Sharjah · Dubai · Derby · Amsterdam · Toronto · Bangalore · Colombo",
+    "TURN Master Key Systems — SKG 2-Star Certified · In-house UAE Facility",
+    "ANSI · UL · CE · SKG · Warrington Certified Product Families",
+  ],
   ctaLabel: "Get in Touch",
   ctaHref: "/contact",
 };
