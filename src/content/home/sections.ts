@@ -205,7 +205,7 @@ export const homeTestimonials: Testimonial[] = [
 
 export const homePartnerLogos = [
   {
-    src: "/tur/site/logo-1-1.png",
+    src: "/tur/site/JG-BLACK-LOGO-e1731511078224.png",
     alt: "James Gibbons Format — heritage manufacturing partner",
     label: "James Gibbons Format",
     role: "Heritage · key supply since 1670",
