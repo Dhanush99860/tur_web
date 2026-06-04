@@ -1,10 +1,10 @@
-export const partnersHero = {
+﻿export const partnersHero = {
   eyebrow: "Partner Network",
   headline: "Trusted brands. Landmark projects.",
   description:
-    "TUR operates through a curated network of specification-grade manufacturers — each selected for technical depth, product range and the ability to support complex architectural projects across the Middle East and beyond.",
-  image: "/tur/home/project-1.jpg",
-  imageAlt: "TUR landmark project reference — architectural hardware supply",
+    "TUR operates through a curated network of specification-grade manufacturers â€” each selected for technical depth, product range and the ability to support complex architectural projects across the Middle East and beyond.",
+  image: "/tur/home/project-1.png",
+  imageAlt: "TUR landmark project reference â€” architectural hardware supply",
   metrics: [
     { value: "Since 1670", label: "Heritage via James Gibbons Format" },
     { value: "6", label: "Specification partner brands" },
@@ -21,9 +21,9 @@ export const partnerBrands = [
     origin: "United Kingdom",
     since: "1670",
     description:
-      "One of Britain's longest-established architectural hardware manufacturers — specification-grade ironmongery covering locks, levers, cylinders and decorative ironmongery for commercial, institutional and hospitality projects across the GCC and beyond.",
+      "One of Britain's longest-established architectural hardware manufacturers â€” specification-grade ironmongery covering locks, levers, cylinders and decorative ironmongery for commercial, institutional and hospitality projects across the GCC and beyond.",
     highlights: [
-      "UK Made Since 1670 — state-of-the-art unique designs",
+      "UK Made Since 1670 â€” state-of-the-art unique designs",
       "Special Anti-microbial coated products for hospitals",
       "50 years of project experience in the GCC",
     ],
@@ -31,13 +31,13 @@ export const partnerBrands = [
     href: "/door-hardware",
   },
   {
-    name: "G·U Automatic",
+    name: "GÂ·U Automatic",
     logo: "/tur/site/logo-1-2.png",
     eyebrow: "Automatic Operators",
     origin: "Germany",
     since: null,
     description:
-      "High-performance automatic door systems engineered for premium commercial entrances — from high-traffic sliding systems to all-glass revolving doors, swing automation and controlled physical access gates for institutional and commercial projects.",
+      "High-performance automatic door systems engineered for premium commercial entrances â€” from high-traffic sliding systems to all-glass revolving doors, swing automation and controlled physical access gates for institutional and commercial projects.",
     highlights: [
       "Automatic Sliding Door Operators & Swing Door Drives",
       "Automatic Revolving Doors & All-Glass Systems",
@@ -53,7 +53,7 @@ export const partnerBrands = [
     origin: "Germany",
     since: null,
     description:
-      "Precision lock and latch systems, panic hardware and cylinders — BKS supplies the mechanical security backbone for commercial and institutional door hardware schedules across European and international projects.",
+      "Precision lock and latch systems, panic hardware and cylinders â€” BKS supplies the mechanical security backbone for commercial and institutional door hardware schedules across European and international projects.",
     highlights: [
       "Precision mortice locks & panic hardware",
       "Euro profile cylinders & deadbolts",
@@ -69,9 +69,9 @@ export const partnerBrands = [
     origin: "Belgium",
     since: "1980",
     description:
-      "Electronic lock technology engineered for the highest-security environments — banks, prisons, airports, museums, embassies, psychiatric institutions and hospitals. Robustness, reliability and durability in every product.",
+      "Electronic lock technology engineered for the highest-security environments â€” banks, prisons, airports, museums, embassies, psychiatric institutions and hospitals. Robustness, reliability and durability in every product.",
     highlights: [
-      "Belgium Made Since 1980 — electronic lock technology",
+      "Belgium Made Since 1980 â€” electronic lock technology",
       "Banks, Prisons, Airports, Museums, Embassies & Hospitals",
       "Robustness, Reliability, Durability",
     ],
@@ -79,16 +79,16 @@ export const partnerBrands = [
     href: "/door-hardware/access-control",
   },
   {
-    name: "D4E — Design 4 Excellence",
+    name: "D4E â€” Design 4 Excellence",
     logo: "/tur/site/logo-1-5.png",
     eyebrow: "Cylinders & Closers",
     origin: "Netherlands",
     since: null,
     description:
-      "SKG-certified specialist in master key cylinders and door hardware — anti-tamper protection against drilling, picking, bumping, snapping and plug extraction. Plus door closers, hinges and floor springs for heavy-traffic commercial openings.",
+      "SKG-certified specialist in master key cylinders and door hardware â€” anti-tamper protection against drilling, picking, bumping, snapping and plug extraction. Plus door closers, hinges and floor springs for heavy-traffic commercial openings.",
     highlights: [
-      "SKG Certified — Manufacturing cylinders under Master Key systems",
-      "Anti-tamper: Drilling · Picking · Bumping · Snapping · Plug extraction",
+      "SKG Certified â€” Manufacturing cylinders under Master Key systems",
+      "Anti-tamper: Drilling Â· Picking Â· Bumping Â· Snapping Â· Plug extraction",
       "Master Key System Design Guide",
     ],
     categories: ["SKG Certified Cylinders", "Master Key Systems", "Door Closers", "Hinges", "Floor Springs"],
@@ -101,11 +101,11 @@ export const partnerBrands = [
     origin: "In-House Brand",
     since: null,
     description:
-      "TUR's own master key brand — SKG 2-star certified Euro profile cylinders with full KA, KD, MK and GMK hierarchy. Duplication-controlled keys, in-house production facility with MARKER 2000 and FUTURA PRO precision cutting machines.",
+      "TUR's own master key brand â€” SKG 2-star certified Euro profile cylinders with full KA, KD, MK and GMK hierarchy. Duplication-controlled keys, in-house production facility with MARKER 2000 and FUTURA PRO precision cutting machines.",
     highlights: [
-      "SKG 2-Star certified — BS EN 1303:2015 compliant",
-      "Full hierarchy: Grand Master → Master → individual doors",
-      "In-house production — CATALOGUE 2026",
+      "SKG 2-Star certified â€” BS EN 1303:2015 compliant",
+      "Full hierarchy: Grand Master â†’ Master â†’ individual doors",
+      "In-house production â€” CATALOGUE 2026",
     ],
     categories: ["Master Key Cylinders", "Euro Profile", "SKG 2-Star", "Key Hierarchy", "In-House Production"],
     href: "/master-key-systems",
@@ -267,6 +267,7 @@ export const partnerCertifications = [
   { label: "SKG 2-Star", description: "Dutch Security Certification" },
   { label: "GAI Member", description: "Guild of Architectural Ironmongers" },
   { label: "Warrington", description: "Fire & Security Testing" },
-  { label: "TÜV / DIN EN 1303", description: "German Technical Inspection" },
+  { label: "TÃœV / DIN EN 1303", description: "German Technical Inspection" },
   { label: "ISO 9001", description: "Quality Management System" },
 ];
+

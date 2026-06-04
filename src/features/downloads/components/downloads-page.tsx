@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { PageContainer } from "@/components/layout/page-container";
 import { SmartLink } from "@/components/shared/smart-link";
 import { buttonClassName } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import {
   FileIcon,
 } from "@/components/shared/icons";
 
-// ── Data ───────────────────────────────────────────────────────────────
+// â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 type DocItem = {
   eyebrow: string;
@@ -27,7 +27,7 @@ type DocItem = {
 
 const primaryDocs: DocItem[] = [
   {
-    eyebrow: "Company Overview · PDF",
+    eyebrow: "Company Overview Â· PDF",
     title: "TUR with Format Company Profile",
     description:
       "A consolidated reference covering TUR's heritage through James Gibbons Format, product verticals, partner brands, global office structure, certifications and project delivery positioning.",
@@ -39,26 +39,26 @@ const primaryDocs: DocItem[] = [
     accent: "#c4a96b",
     covers: [
       "Heritage through James Gibbons Format (est. 1670)",
-      "Product verticals — hardware, operators, access",
-      "6 global offices — UAE, UK, NL, CA, LK, IN",
+      "Product verticals â€” hardware, operators, access",
+      "6 global offices â€” UAE, UK, NL, CA, LK, IN",
       "Certifications: ANSI, UL, CE, SKG, GAI",
       "Landmark project references",
       "Regional and global delivery structure",
     ],
   },
   {
-    eyebrow: "Product Catalogue · PDF · 2024",
-    title: "TüR American Standard 2024",
+    eyebrow: "Product Catalogue Â· PDF Â· 2024",
+    title: "TÃ¼R American Standard 2024",
     description:
-      "Full product range conforming to ANSI and UL standards — mortise hinges, mortise locks, panic exit devices, door controls, coordinators and flush bolts for US-market specification.",
+      "Full product range conforming to ANSI and UL standards â€” mortise hinges, mortise locks, panic exit devices, door controls, coordinators and flush bolts for US-market specification.",
     href: "/downloads/tur-american-standard-2024.pdf",
     fileSize: "50 MB",
     ctaLabel: "Download Catalogue",
     image: "/tur/door-hardware/format-lockset.jpg",
-    imageAlt: "TüR American Standard 2024",
+    imageAlt: "TÃ¼R American Standard 2024",
     accent: "#4e8ae6",
     covers: [
-      'Mortise hinges — 3½" through 6" series',
+      'Mortise hinges â€” 3Â½" through 6" series',
       "Mortise lock bodies, trim and cylinders",
       "Panic exit devices and emergency hardware",
       "Door closers, coordinators and controls",
@@ -67,18 +67,18 @@ const primaryDocs: DocItem[] = [
     ],
   },
   {
-    eyebrow: "Product Catalogue · PDF · 2025",
-    title: "TüR European Standard 2025",
+    eyebrow: "Product Catalogue Â· PDF Â· 2025",
+    title: "TÃ¼R European Standard 2025",
     description:
-      "CE-marked architectural hardware conforming to EN standards — Euro profile cylinders, lever handles, hinges, closers, panic devices and coordinated ironmongery packages for European specification.",
+      "CE-marked architectural hardware conforming to EN standards â€” Euro profile cylinders, lever handles, hinges, closers, panic devices and coordinated ironmongery packages for European specification.",
     href: "/downloads/tur-european-standard-2025.pdf",
     fileSize: "21 MB",
     ctaLabel: "Download Catalogue",
     image: "/tur/door-hardware/european-lockset.jpg",
-    imageAlt: "TüR European Standard 2025",
+    imageAlt: "TÃ¼R European Standard 2025",
     accent: "#64aa8c",
     covers: [
-      "Euro profile cylinders — SKG 2-star certified",
+      "Euro profile cylinders â€” SKG 2-star certified",
       "Premium lever handles and furnishing sets",
       "CE-marked hinges, locks and closers",
       "Panic and emergency exit hardware",
@@ -88,7 +88,7 @@ const primaryDocs: DocItem[] = [
   },
 ];
 
-// ── Download Row ────────────────────────────────────────────────────────
+// â”€â”€ Download Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function DownloadRow({ doc, index }: { doc: DocItem; index: number }) {
   const flipped = index % 2 === 1;
@@ -116,11 +116,11 @@ function DownloadRow({ doc, index }: { doc: DocItem; index: number }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-        {/* File badge — bottom left of image */}
+        {/* File badge â€” bottom left of image */}
         <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1.5 backdrop-blur-sm">
           <FileIcon className="h-2.5 w-2.5 text-white/55" />
           <span className="font-sans text-[8px] font-bold uppercase tracking-[0.22em] text-white/65">
-            PDF · {doc.fileSize}
+            PDF Â· {doc.fileSize}
           </span>
         </div>
       </div>
@@ -145,7 +145,7 @@ function DownloadRow({ doc, index }: { doc: DocItem; index: number }) {
           {doc.description}
         </p>
 
-        {/* Covers — 2-col checklist */}
+        {/* Covers â€” 2-col checklist */}
         <div className="mt-5 grid grid-cols-1 gap-y-2 border-t border-[color-mix(in_srgb,var(--border)_55%,transparent)] pt-5 sm:grid-cols-2 sm:gap-x-5">
           {doc.covers.map((item) => (
             <div key={item} className="flex items-start gap-2">
@@ -176,15 +176,15 @@ function DownloadRow({ doc, index }: { doc: DocItem; index: number }) {
   );
 }
 
-// ── Page ───────────────────────────────────────────────────────────────
+// â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export function DownloadsPage() {
   return (
     <main id="main-content">
 
-      {/* ═══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           HERO
-      ═══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <div className="border-b border-[color-mix(in_srgb,var(--border)_70%,transparent)] bg-[var(--card)]">
         <PageContainer className="py-10 sm:py-12">
           {/* Headline row */}
@@ -237,9 +237,9 @@ export function DownloadsPage() {
         </PageContainer>
       </div>
 
-      {/* ═══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           DOWNLOAD ROWS
-      ═══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-12 sm:py-14">
         <PageContainer>
           {/* Section header */}
@@ -251,7 +251,7 @@ export function DownloadsPage() {
               </h2>
             </div>
             <p className="hidden max-w-[28ch] text-right font-sans text-[11.5px] leading-[1.75] text-[var(--muted-foreground)] sm:block">
-              Current editions — full specifications and certification references included.
+              Current editions â€” full specifications and certification references included.
             </p>
           </div>
 
@@ -268,9 +268,9 @@ export function DownloadsPage() {
         </PageContainer>
       </section>
 
-      {/* ═══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           ONLINE RESOURCES
-      ═══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="border-t border-[color-mix(in_srgb,var(--border)_55%,transparent)] py-12 sm:py-14">
         <PageContainer>
           <div className="mb-7">
@@ -288,7 +288,7 @@ export function DownloadsPage() {
             >
               <div className="relative aspect-[16/6] overflow-hidden">
                 <Image
-                  src="/master-key/hero-key.jpg"
+                  src="/master-key/hero-key.png"
                   alt="Master Key Systems"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
@@ -303,7 +303,7 @@ export function DownloadsPage() {
                     Master Key Systems
                   </p>
                   <p className="mt-1 font-sans text-[12px] leading-[1.6] text-[var(--muted-foreground)]">
-                    TURN cylinders · SKG 2-star · GMK hierarchy
+                    TURN cylinders Â· SKG 2-star Â· GMK hierarchy
                   </p>
                 </div>
                 <ArrowUpRightIcon className="h-4 w-4 shrink-0 text-[var(--muted-foreground)] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" />
@@ -342,9 +342,9 @@ export function DownloadsPage() {
         </PageContainer>
       </section>
 
-      {/* ═══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SUPPORT STRIP
-      ═══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="border-t border-[color-mix(in_srgb,var(--border)_55%,transparent)] bg-[var(--card)] py-11">
         <PageContainer>
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -360,7 +360,7 @@ export function DownloadsPage() {
               </p>
             </div>
 
-            {/* Right — CTAs */}
+            {/* Right â€” CTAs */}
             <div className="flex shrink-0 flex-col gap-2.5 sm:items-end">
               <SmartLink href="/contact" className={buttonClassName()}>
                 Contact TUR
@@ -396,3 +396,4 @@ export function DownloadsPage() {
     </main>
   );
 }
+

@@ -8195,7 +8195,7 @@ export const products: Product[] = [
       "TE7820 acts as a representative glass hardware detail page for patch fittings while broader glass hardware migration continues.",
     image: "/tur/door-hardware/cat-glass-patch.png",
     imageAlt: "Glass corner patch fitting — TE7820 hydraulic glass door hardware",
-    gallery: gallery("/tur/door-hardware/cat-glass-patch.png", "/tur/door-hardware/cat-glass-hardware.jpg", "/tur/home/project-1.jpg"),
+    gallery: gallery("/tur/door-hardware/cat-glass-patch.png", "/tur/door-hardware/cat-glass-hardware.jpg", "/tur/home/project-1.png"),
     features: [
       "Supports controlled glass door movement.",
       "Suitable for frameless premium entrances.",
@@ -8268,9 +8268,9 @@ export const products: Product[] = [
     description: "Electric strike products from the TUR Access Control catalogue.",
     shortDescription: "Electric strikes for integrated access release.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/electric-strikes.",
-    image: "/tur/home/slider-6.webp",
+    image: "/tur/home/slider-6.png",
     imageAlt: "Electric strikes product family visual",
-    gallery: gallery("/tur/home/slider-6.webp"),
+    gallery: gallery("/tur/home/slider-6.png"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -9972,9 +9972,9 @@ export const products: Product[] = [
     description: "Infrared and wireless exit device products from the TUR Access Control catalogue.",
     shortDescription: "Infrared and wireless RTE devices for touchless access-controlled egress.",
     overview: "This is a noindex route-group proxy. The canonical browsing page is /door-hardware/access-control/infrared-wireless-exit-devices.",
-    image: "/tur/home/slider-6.webp",
+    image: "/tur/home/slider-6.png",
     imageAlt: "Infrared wireless exit device — touchless request-to-exit sensor",
-    gallery: gallery("/tur/home/slider-6.webp"),
+    gallery: gallery("/tur/home/slider-6.png"),
     features: [],
     applications: [],
     finishOptions: [],
@@ -12465,9 +12465,9 @@ export const products: Product[] = [
       "SKG 2-star Euro cylinders with KA, KD, MK and GMK hierarchy — for hotels, hospitals and campus projects.",
     overview:
       "TURN master key systems for commercial and institutional projects. SKG 2-star certified Euro profile cylinders with full KA, KD, MK and GMK key hierarchy.",
-    image: "/master-key/hero-key.jpg",
+    image: "/master-key/hero-key.png",
     imageAlt: "TURN master key system — SKG 2-star certified Euro profile cylinders",
-    gallery: gallery("/master-key/hero-key.jpg"),
+    gallery: gallery("/master-key/hero-key.png"),
     features: [
       "SKG 2-star certified Euro profile cylinder (TE3606).",
       "KA, KD, MK and GMK key hierarchy.",
@@ -12499,3 +12499,6 @@ export function getRelatedProducts(product: Product, limit = 3) {
     .filter((related) => !related.isRouteGroup && related.isIndexable !== false)
     .slice(0, limit);
 }
+
+
+

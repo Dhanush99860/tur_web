@@ -458,7 +458,7 @@ export const headerSearchPanel = {
     {
       title: "Heritage, global presence and project-led technical support.",
       href: "/about",
-      image: "/tur/home/project-1.jpg",
+      image: "/tur/home/project-1.png",
       imageAlt: "TUR about preview",
       eyebrow: "About TUR",
     },
@@ -542,3 +542,4 @@ export const searchEntries: SearchEntry[] = [
     category: "Office",
   },
 ];
+

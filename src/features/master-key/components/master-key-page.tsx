@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { PageContainer } from "@/components/layout/page-container";
 import { SmartLink } from "@/components/shared/smart-link";
 import { buttonClassName } from "@/components/ui/button";
@@ -41,36 +41,36 @@ const euroCylinders = [
   {
     code: "TE3606.DC",
     label: "Double Cylinder",
-    detail: "Both sides opening by key · 6-pin · 70mm (35/35) · CAM 30°",
-    specs: "Satin Nickel · Anti-Drill Pin each side · 2.5mm Nickel Silver Keys · 65mm Screw",
+    detail: "Both sides opening by key Â· 6-pin Â· 70mm (35/35) Â· CAM 30Â°",
+    specs: "Satin Nickel Â· Anti-Drill Pin each side Â· 2.5mm Nickel Silver Keys Â· 65mm Screw",
     note: "Standard specification for exterior and security doors",
   },
   {
     code: "TE3606.TT",
     label: "Thumb Turn Cylinder",
-    detail: "One side thumb turn, other side key · 6-pin · 70mm (35/35) · CAM 30°",
-    specs: "Satin Nickel · Anti-Drill Pin at cylinder end and core · 2.5mm Nickel Silver Keys · 65mm Screw",
+    detail: "One side thumb turn, other side key Â· 6-pin Â· 70mm (35/35) Â· CAM 30Â°",
+    specs: "Satin Nickel Â· Anti-Drill Pin at cylinder end and core Â· 2.5mm Nickel Silver Keys Â· 65mm Screw",
     note: "Internal door compliance and privacy applications",
   },
   {
     code: "TE3606.PC",
     label: "Privacy Cylinder",
-    detail: "Thumb turn outside · coin emergency inside · 6-pin · 70mm (35/35) · CAM 30°",
-    specs: "Satin Nickel · Anti-Drill Pin at cylinder end and core · 2.5mm Nickel Silver Keys · 65mm Screw",
+    detail: "Thumb turn outside Â· coin emergency inside Â· 6-pin Â· 70mm (35/35) Â· CAM 30Â°",
+    specs: "Satin Nickel Â· Anti-Drill Pin at cylinder end and core Â· 2.5mm Nickel Silver Keys Â· 65mm Screw",
     note: "Bathroom, ensuite and privacy room applications",
   },
   {
     code: "TE3606.SC",
     label: "Half Cylinder",
-    detail: "One side opening by key · 6-pin · 45mm (10/35) · CAM 30°",
-    specs: "Satin Nickel · Anti-Drill Pin at cylinder end and core · 2.5mm Nickel Silver Keys · 65mm Screw",
+    detail: "One side opening by key Â· 6-pin Â· 45mm (10/35) Â· CAM 30Â°",
+    specs: "Satin Nickel Â· Anti-Drill Pin at cylinder end and core Â· 2.5mm Nickel Silver Keys Â· 65mm Screw",
     note: "Cabinets, lockers and secondary access points",
   },
   {
     code: "TE3606.ST",
     label: "Half Cylinder Thumb Turn",
-    detail: "One side opening by thumb turn · 6-pin · 45mm (10/35) · CAM 30°",
-    specs: "Satin Nickel · Anti-Drill Pin at cylinder end and core · 2.5mm Nickel Silver Keys · 65mm Screw",
+    detail: "One side opening by thumb turn Â· 6-pin Â· 45mm (10/35) Â· CAM 30Â°",
+    specs: "Satin Nickel Â· Anti-Drill Pin at cylinder end and core Â· 2.5mm Nickel Silver Keys Â· 65mm Screw",
     note: "Emergency access and override secondary openings",
   },
 ];
@@ -79,29 +79,29 @@ const ansiCylinders = [
   {
     code: "TA3100",
     label: "Mortise Conventional Cylinder",
-    detail: "Lengths: 118 / 138 / 158mm · Rings: 04, 10, 11, 12, 13, 15 · CAM: 01",
-    specs: "Keying: KA / KD / MKD · Finish: 626",
+    detail: "Lengths: 118 / 138 / 158mm Â· Rings: 04, 10, 11, 12, 13, 15 Â· CAM: 01",
+    specs: "Keying: KA / KD / MKD Â· Finish: 626",
     note: "Standard mortise application. Order: TA3100-118-04-15-MKD-626",
   },
   {
     code: "TA2172KASC",
     label: "Double Mortise Key Cylinder",
-    detail: "Schlage 'C' Keyway · Keyed Alike · 1\" Long · 6 Pin · 1-5/32\" diameter",
-    specs: "AR MS-Type Cam · 3/16\" cylinder ring · Two keys supplied · Aluminium · US28 finish",
+    detail: "Schlage 'C' Keyway Â· Keyed Alike Â· 1\" Long Â· 6 Pin Â· 1-5/32\" diameter",
+    specs: "AR MS-Type Cam Â· 3/16\" cylinder ring Â· Two keys supplied Â· Aluminium Â· US28 finish",
     note: "Includes cylinder ring. Compatible with standard mortise lock body.",
   },
   {
     code: "TA2172Z",
     label: "Mortise Thumb Turn Cylinder",
-    detail: "1\" Long · 6 Pin · 1-5/32\" diameter · AR MS-Type Cam",
-    specs: "3/16\" cylinder ring · Aluminium · US28 finish",
+    detail: "1\" Long Â· 6 Pin Â· 1-5/32\" diameter Â· AR MS-Type Cam",
+    specs: "3/16\" cylinder ring Â· Aluminium Â· US28 finish",
     note: "Thumb turn operation for internal or privacy mortise locks",
   },
   {
     code: "TA2173Z",
     label: "Mortise Dummy Cylinder",
-    detail: "1-5/32\" diameter · 7/8\" Long",
-    specs: "3/16\" cylinder ring · Aluminium · US26 finish",
+    detail: "1-5/32\" diameter Â· 7/8\" Long",
+    specs: "3/16\" cylinder ring Â· Aluminium Â· US26 finish",
     note: "Non-functional dummy cylinder for aesthetic applications",
   },
 ];
@@ -110,19 +110,19 @@ const icCores = [
   {
     code: "TA3200",
     label: "Small Format Interchangeable Core (SFIC)",
-    detail: "IC core removable with control key · No locksmith required for rekeying",
+    detail: "IC core removable with control key Â· No locksmith required for rekeying",
     note: "Order: TA3200-MKD-626",
   },
   {
     code: "TA3300",
     label: "Interchangeable Core Housing (SFIC Housing)",
-    detail: "Lengths: 138mm · Rings: 04, 10, 11, 12, 13, 15 · CAM: 01",
-    note: "Order: TA3300-138-04-15-626 · Finish: 626",
+    detail: "Lengths: 138mm Â· Rings: 04, 10, 11, 12, 13, 15 Â· CAM: 01",
+    note: "Order: TA3300-138-04-15-626 Â· Finish: 626",
   },
   {
     code: "TA3500",
     label: "Knob / Lever Cylinder",
-    detail: "Standard cylinder · 1-1/4\" long · Specify tail bar and keyway",
+    detail: "Standard cylinder Â· 1-1/4\" long Â· Specify tail bar and keyway",
     note: "For knob and lever locksets requiring IC core compatibility",
   },
 ];
@@ -162,7 +162,7 @@ const applications = [
     title: "Manufacturing & Logistics",
     image: "/master-key/installation-service.jpg",
     description:
-      "Warehouses and distribution centres use GMKs to assign distinct access rights to storage areas, loading bays and production zones — each independently keyed.",
+      "Warehouses and distribution centres use GMKs to assign distinct access rights to storage areas, loading bays and production zones â€” each independently keyed.",
   },
 ];
 
@@ -180,7 +180,7 @@ const features = [
   {
     title: "Duplication Controlled Keys",
     description:
-      "TURN keys carry built-in duplication resistance and can only be copied by professional locksmiths at authorised James Gibbons Format (JGF) duplication centres — protecting key control integrity across the system life.",
+      "TURN keys carry built-in duplication resistance and can only be copied by professional locksmiths at authorised James Gibbons Format (JGF) duplication centres â€” protecting key control integrity across the system life.",
   },
   {
     title: "BS EN 1303:2015 Compliant",
@@ -193,7 +193,7 @@ const features = [
       "All Euro profile cylinders are manufactured from solid brass with 2.5mm Nickel Silver keys and a 65mm fixing screw included. Available in Satin Nickel finish as standard.",
   },
   {
-    title: "UL Certified — 2025 Listings",
+    title: "UL Certified â€” 2025 Listings",
     description:
       "2025 UL certifications: Door Hinges (File R41844), Locks & Latches (File R41836) and Swinging Fire Door Closers (File R40953). ANSI mortise and rim cylinders also carry UL437 listing under ANSI/BHMA A156.5 / A156.30.",
   },
@@ -203,17 +203,17 @@ export function MasterKeyPage() {
   return (
     <main id="main-content" className="pb-28">
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           HERO
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-10 sm:pt-14">
         <div className="grid items-stretch gap-6 lg:grid-cols-[1fr_0.72fr] lg:gap-8 xl:gap-10">
 
-          {/* Left — text panel */}
+          {/* Left â€” text panel */}
           <div className="flex flex-col rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] p-7 sm:p-9 lg:p-10">
             <div className="mb-6">
               <span className="text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
-                TUR · Master Key Systems · Catalogue 2026
+                TUR Â· Master Key Systems Â· Catalogue 2026
               </span>
             </div>
             <h1 className="font-display text-[clamp(2.5rem,4.6vw,4.6rem)] font-medium leading-[0.91] tracking-[-0.065em] text-[var(--foreground)]">
@@ -221,7 +221,7 @@ export function MasterKeyPage() {
             </h1>
             <div className="my-6 h-px bg-[var(--border)]" />
             <p className="max-w-[40ch] text-[clamp(0.95rem,1.25vw,1.1rem)] leading-[1.64] text-[var(--muted-foreground)]">
-              TURN master key systems define, organise and control access to buildings, hotels, hospitals, offices, factories and schools. Every person gets exactly the access they need — and nothing more.
+              TURN master key systems define, organise and control access to buildings, hotels, hospitals, offices, factories and schools. Every person gets exactly the access they need â€” and nothing more.
             </p>
             <p className="mt-4 max-w-[54ch] text-[0.89rem] leading-[1.76] text-[var(--muted-foreground)] opacity-80">
               Built on SKG 2-star certified solid brass Euro profile cylinders with hardened anti-drill pins, an extra-wide key neck, duplication-controlled keys and BS EN 1303:2015 compliance. High quality at an affordable price.
@@ -244,11 +244,11 @@ export function MasterKeyPage() {
             </div>
           </div>
 
-          {/* Right — hero key image */}
+          {/* Right â€” hero key image */}
           <div className="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[#1a1008] lg:min-h-0">
             <Image
-              src="/master-key/hero-key.jpg"
-              alt="TURN master key — Do not duplicate, Made in UAE"
+              src="/master-key/hero-key.png"
+              alt="TURN master key â€” Do not duplicate, Made in UAE"
               fill
               priority
               sizes="(max-width: 1023px) 100vw, 38vw"
@@ -257,10 +257,10 @@ export function MasterKeyPage() {
             <div className="absolute bottom-5 left-5 right-5">
               <div className="rounded-[1.1rem] border border-white/14 bg-[rgba(8,10,16,0.64)] p-4 backdrop-blur-[12px]">
                 <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/50">
-                  TURN · UAE Manufactured
+                  TURN Â· UAE Manufactured
                 </p>
                 <p className="mt-1 text-[12.5px] font-medium leading-snug text-white/85">
-                  Every key is marked &ldquo;Do not duplicate&rdquo; — copies available only through authorised James Gibbons Format centres.
+                  Every key is marked &ldquo;Do not duplicate&rdquo; â€” copies available only through authorised James Gibbons Format centres.
                 </p>
               </div>
             </div>
@@ -268,9 +268,9 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
-          KEY HIERARCHY — KA / KD / MK / GMK
-      ══════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          KEY HIERARCHY â€” KA / KD / MK / GMK
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="mb-10">
           <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -280,15 +280,15 @@ export function MasterKeyPage() {
             Four levels of access. One system.
           </h2>
           <p className="mt-4 max-w-[58ch] text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
-            Think of it as the level of authority in an organisation — structured like a corporate organisational chart. The Grand Master Key sits at the top and can open every lock, down to individual keyed-different locks at the base.
+            Think of it as the level of authority in an organisation â€” structured like a corporate organisational chart. The Grand Master Key sits at the top and can open every lock, down to individual keyed-different locks at the base.
           </p>
         </div>
 
         {/* Hierarchy diagram image */}
         <div className="mb-10 overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-white">
           <Image
-            src="/master-key/cylinder-system-diagram.jpg"
-            alt="TURN master key system diagram — one master key opens all cylinder types in the hierarchy"
+            src="/master-key/cylinder-system-diagram.png"
+            alt="TURN master key system diagram â€” one master key opens all cylinder types in the hierarchy"
             width={1053}
             height={694}
             className="w-full object-contain p-6 sm:p-8"
@@ -328,15 +328,15 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           PLANNING GUIDANCE
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="grid gap-8 overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] lg:grid-cols-2">
           <div className="relative min-h-[22rem] overflow-hidden lg:min-h-0">
             <Image
-              src="/master-key/cylinder-product.jpg"
-              alt="TURN branded key — Do not duplicate, Product of UAE"
+              src="/master-key/cylinder-product.png"
+              alt="TURN branded key â€” Do not duplicate, Product of UAE"
               fill
               sizes="(max-width: 1023px) 100vw, 50vw"
               className="object-cover object-center"
@@ -352,8 +352,8 @@ export function MasterKeyPage() {
             </h2>
             <div className="mt-7 flex flex-col gap-5">
               {[
-                { n: "01", t: "Map your zones", d: "Identify every area in the building — floors, departments, core services, restricted rooms — and define who needs access to each." },
-                { n: "02", t: "Don't forget the building core", d: "Core areas — stairwells, mechanical rooms, electrical, phone and HVAC — are typically grouped under their own MK separate from floor or department masters. Key all similar core areas alike to reduce the number of master keys issued to maintenance." },
+                { n: "01", t: "Map your zones", d: "Identify every area in the building â€” floors, departments, core services, restricted rooms â€” and define who needs access to each." },
+                { n: "02", t: "Don't forget the building core", d: "Core areas â€” stairwells, mechanical rooms, electrical, phone and HVAC â€” are typically grouped under their own MK separate from floor or department masters. Key all similar core areas alike to reduce the number of master keys issued to maintenance." },
                 { n: "03", t: "Set the hierarchy", d: "Assign KD locks to individual openings, group them under zone master keys for managers, then place a grand master above all zones for senior access. For large campuses, add Sub-Master Keys (SMK) for intermediate levels." },
                 { n: "04", t: "Controlled key issue", d: "Keys are manufactured by TURN, stamped with your system code and issued only through authorised James Gibbons Format (JGF) duplication centres. You retain full key control throughout the system life." },
               ].map((step) => (
@@ -372,16 +372,16 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
-          EURO CYLINDERS — TE3606
-      ══════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          EURO CYLINDERS â€” TE3606
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
 
           <div className="relative min-h-[24rem] overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-white lg:min-h-0">
             <Image
               src="/master-key/thumb-turn-cylinder.jpg"
-              alt="TURN TE3606 thumb turn Euro profile cylinder — technical drawing and product photo"
+              alt="TURN TE3606 thumb turn Euro profile cylinder â€” technical drawing and product photo"
               fill
               sizes="(max-width: 1023px) 100vw, 44vw"
               className="object-contain p-8"
@@ -390,7 +390,7 @@ export function MasterKeyPage() {
 
           <div className="flex flex-col justify-center">
             <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
-              Euro Profile Cylinders · TE3606
+              Euro Profile Cylinders Â· TE3606
             </p>
             <h2 className="font-display text-[clamp(1.6rem,2.6vw,2.5rem)] font-medium leading-[1.04] tracking-[-0.05em] text-[var(--foreground)]">
               SKG 2-star certified cylinders built for master key systems.
@@ -427,19 +427,19 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           ANSI CYLINDERS
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="mb-10">
           <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
-            ANSI Cylinders · TA Series
+            ANSI Cylinders Â· TA Series
           </p>
           <h2 className="font-display text-[clamp(1.85rem,3.2vw,3rem)] font-medium leading-[1.02] tracking-[-0.05em] text-[var(--foreground)]">
             American standard cylinders for mortise and exit device applications.
           </h2>
           <p className="mt-4 max-w-[62ch] text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
-            TURN ANSI cylinders meet ANSI/BHMA A156.5 and A156.30 performance requirements, UL437 listed. Mortise cylinders thread directly into the mortise lock body; rim cylinders operate surface-mounted auxiliary locks. Cylinders are not supplied with exit devices or trim — order separately.
+            TURN ANSI cylinders meet ANSI/BHMA A156.5 and A156.30 performance requirements, UL437 listed. Mortise cylinders thread directly into the mortise lock body; rim cylinders operate surface-mounted auxiliary locks. Cylinders are not supplied with exit devices or trim â€” order separately.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -455,24 +455,24 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           IC CORE
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)]">
           <div className="grid lg:grid-cols-2">
             <div className="border-b border-[var(--border)] p-7 sm:p-9 lg:border-b-0 lg:border-r lg:p-10">
               <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
-                IC Core · Interchangeable Core
+                IC Core Â· Interchangeable Core
               </p>
               <h2 className="font-display text-[clamp(1.6rem,2.6vw,2.5rem)] font-medium leading-[1.04] tracking-[-0.05em] text-[var(--foreground)]">
-                Rekey any lock in seconds — without a locksmith.
+                Rekey any lock in seconds â€” without a locksmith.
               </h2>
               <p className="mt-4 text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
-                An IC core (Interchangeable Core) cylinder can be removed and replaced using a special control key. When a key is lost or stolen, locks are rekeyed instantly — remove the old core, install the new one. Security is regained in seconds.
+                An IC core (Interchangeable Core) cylinder can be removed and replaced using a special control key. When a key is lost or stolen, locks are rekeyed instantly â€” remove the old core, install the new one. Security is regained in seconds.
               </p>
               <p className="mt-3 text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
-                TURN IC cores come in Small Format (SFIC) for high-security environments. Construction keying is available — temporary cores keyed alike during build-out are replaced with permanent system cores at handover.
+                TURN IC cores come in Small Format (SFIC) for high-security environments. Construction keying is available â€” temporary cores keyed alike during build-out are replaced with permanent system cores at handover.
               </p>
               <div className="mt-6 grid grid-cols-2 gap-3">
                 {["Quick rekeying", "No locksmith needed", "Construction keying", "SFIC compatible", "Cost-effective", "High-security rated"].map((b) => (
@@ -506,9 +506,9 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           APPLICATIONS
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="mb-10">
           <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -527,7 +527,7 @@ export function MasterKeyPage() {
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
                   src={app.image}
-                  alt={`${app.title} — TURN master key application`}
+                  alt={`${app.title} â€” TURN master key application`}
                   fill
                   sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
@@ -547,9 +547,9 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           KEY FEATURES
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)]">
           <div className="grid lg:grid-cols-2">
@@ -566,7 +566,7 @@ export function MasterKeyPage() {
               <div className="relative mt-8 min-h-[14rem] overflow-hidden rounded-[1rem] border border-[var(--border)]">
                 <Image
                   src="/master-key/dubai-skyline.jpg"
-                  alt="Dubai skyline — TURN master key systems specified across the Middle East"
+                  alt="Dubai skyline â€” TURN master key systems specified across the Middle East"
                   fill
                   sizes="(max-width: 1023px) 100vw, 44vw"
                   className="object-cover"
@@ -605,20 +605,20 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           IN-HOUSE MASTER KEY FACILITY
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="grid gap-0 overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] lg:grid-cols-[1.35fr_1fr]">
           <div className="flex flex-col justify-center p-7 sm:p-9 lg:p-10">
             <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
-              In-House Production · Since 2024
+              In-House Production Â· Since 2024
             </p>
             <h2 className="font-display text-[clamp(1.6rem,2.6vw,2.5rem)] font-medium leading-[1.04] tracking-[-0.05em] text-[var(--foreground)]">
               UAE-based master key cutting facility.
             </h2>
             <p className="mt-4 text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
-              TUR operates an in-house master key production facility in the UAE — equipped with MARKER 2000 and FUTURA PRO precision cutting machines. Operational since 2024, the facility enables rapid key cutting, system duplication and on-site technical support for regional projects without relying on overseas supply.
+              TUR operates an in-house master key production facility in the UAE â€” equipped with MARKER 2000 and FUTURA PRO precision cutting machines. Operational since 2024, the facility enables rapid key cutting, system duplication and on-site technical support for regional projects without relying on overseas supply.
             </p>
             <div className="mt-6 grid grid-cols-2 gap-3">
               {[
@@ -642,8 +642,8 @@ export function MasterKeyPage() {
           </div>
           <div className="relative min-h-[22rem] overflow-hidden border-t border-[var(--border)] lg:min-h-0 lg:border-l lg:border-t-0">
             <Image
-              src="/master-key/cylinder-product.jpg"
-              alt="TUR in-house master key production facility — MARKER 2000 and FUTURA PRO precision cutting"
+              src="/master-key/cylinder-product.png"
+              alt="TUR in-house master key production facility â€” MARKER 2000 and FUTURA PRO precision cutting"
               fill
               sizes="(max-width: 1023px) 100vw, 42vw"
               className="object-cover object-center"
@@ -655,7 +655,7 @@ export function MasterKeyPage() {
                   Operational Since 2024
                 </p>
                 <p className="mt-1 text-[12.5px] font-medium leading-snug text-white/85">
-                  MARKER 2000 and FUTURA PRO precision cutting — produced in the UAE.
+                  MARKER 2000 and FUTURA PRO precision cutting â€” produced in the UAE.
                 </p>
               </div>
             </div>
@@ -663,9 +663,9 @@ export function MasterKeyPage() {
         </div>
       </PageContainer>
 
-      {/* ══════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           INQUIRY CTA
-      ══════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PageContainer className="pt-20 sm:pt-24">
         <div className="grid gap-8 overflow-hidden rounded-[1.5rem] border border-[color-mix(in_srgb,var(--accent)_35%,var(--border))] bg-[color-mix(in_srgb,var(--accent)_6%,var(--background))] p-7 sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16 lg:p-10">
           <div>
@@ -676,7 +676,7 @@ export function MasterKeyPage() {
               Ready to design your master key system?
             </h2>
             <p className="mt-3 max-w-[58ch] text-[0.9rem] leading-[1.74] text-[var(--muted-foreground)]">
-              Send us your floor plan or zone list and the TUR team will produce a master key schedule, cylinder specification and key hierarchy diagram for your project — at no charge.
+              Send us your floor plan or zone list and the TUR team will produce a master key schedule, cylinder specification and key hierarchy diagram for your project â€” at no charge.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {["SKG 2-Star Certified", "BS EN 1303:2015", "UL Certified 2025", "In-House UAE Facility"].map((h) => (
@@ -703,3 +703,6 @@ export function MasterKeyPage() {
     </main>
   );
 }
+
+
+

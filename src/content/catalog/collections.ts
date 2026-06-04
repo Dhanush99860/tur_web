@@ -7,7 +7,7 @@ export const catalogCollections: CatalogCollection[] = [
     subtitle: "Core hardware for coordinated door schedules",
     description:
       "Foundational hanging, control and securing families for commercial, hospitality and institutional door sets.",
-    image: "/tur/home/project-1.jpg",
+    image: "/tur/home/project-1.png",
     imageAlt: "American Standard architectural door hardware",
     linkHref: "/door-hardware/american-standard",
     highlights: ["Hang The Door", "Control The Door", "Secure The Door"],
@@ -84,3 +84,4 @@ export const catalogCollections: CatalogCollection[] = [
     section: "automatic-operators",
   },
 ];
+

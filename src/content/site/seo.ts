@@ -89,7 +89,7 @@ export const pageSeo = {
     description:
       "Sliding, revolving, swing and controlled access systems shaped for premium entrance performance and project coordination.",
     path: "/automatic-operators",
-    image: "/tur/home/slider-3.webp",
+    image: "/tur/home/slider-3.png",
     keywords: [
       "automatic operators",
       "sliding doors",
@@ -104,7 +104,7 @@ export const pageSeo = {
     description:
       "TURN master key systems — SKG 2-star certified Euro profile cylinders with KA, KD, MK and GMK hierarchy. BS EN 1303:2015 compliant, anti-drill, duplication controlled. Designed for hotels, hospitals, offices and campus projects.",
     path: "/master-key-systems",
-    image: "/master-key/hero-key.jpg",
+    image: "/master-key/hero-key.png",
     keywords: [
       "master key system",
       "grand master key",
@@ -125,7 +125,7 @@ export const pageSeo = {
     description:
       "Technical guides, specification resources and industry insight from TUR — covering master key systems, automatic door operators, door hardware standards and project coordination.",
     path: "/blog",
-    image: "/master-key/hero-key.jpg",
+    image: "/master-key/hero-key.png",
     keywords: [
       "door hardware guide",
       "master key specification",
@@ -154,3 +154,5 @@ export const pageSeo = {
     updatedAt: "2026-05-25",
   },
 } satisfies Record<string, SeoPage>;
+
+

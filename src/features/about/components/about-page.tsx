@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { cn } from "@/lib/utils/cn";
 import { PageContainer } from "@/components/layout/page-container";
 import { SmartLink } from "@/components/shared/smart-link";
@@ -32,7 +32,7 @@ export function AboutPage() {
   return (
     <main id="main-content">
 
-      {/* ── 1. HERO ──────────────────────────────────────────────────────────── */}
+      {/* â”€â”€ 1. HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="pt-5 sm:pt-6">
         <div className="relative min-h-[calc(88svh-5rem)] overflow-hidden rounded-[1.75rem] border border-white/[0.07]">
           <Image
@@ -98,7 +98,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 2. BRAND STATEMENT ───────────────────────────────────────────────── */}
+      {/* â”€â”€ 2. BRAND STATEMENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[62rem] text-center">
           <p className="text-[9.5px] font-bold uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -126,7 +126,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 3. HERITAGE ──────────────────────────────────────────────────────── */}
+      {/* â”€â”€ 3. HERITAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_80%,transparent)]">
           <div className="grid xl:grid-cols-[1fr_1.15fr]">
@@ -163,7 +163,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 4. KEY MILESTONES ────────────────────────────────────────────────── */}
+      {/* â”€â”€ 4. KEY MILESTONES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="border-t border-[var(--border)] pt-10">
           <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -172,11 +172,11 @@ export function AboutPage() {
                 Key Milestones
               </p>
               <h2 className="mt-4 max-w-[32ch] font-display text-[clamp(1.6rem,2.8vw,2.2rem)] font-semibold leading-[1.07] tracking-[-0.044em] text-[var(--foreground)]">
-                From first product to UL certification — 2019 to 2025.
+                From first product to UL certification â€” 2019 to 2025.
               </h2>
             </div>
             <p className="shrink-0 text-[11.5px] text-[var(--muted-foreground)] sm:pb-1">
-              7 milestones &nbsp;·&nbsp; 2019 – 2025
+              7 milestones &nbsp;Â·&nbsp; 2019 â€“ 2025
             </p>
           </div>
 
@@ -234,7 +234,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 5. PLATFORMS ─────────────────────────────────────────────────────── */}
+      {/* â”€â”€ 5. PLATFORMS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="border-t border-[var(--border)] pt-10">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -245,7 +245,7 @@ export function AboutPage() {
               </h2>
             </div>
             <p className="max-w-[38ch] text-[14px] leading-[1.8] text-[var(--muted-foreground)] lg:pb-1 lg:text-right">
-              Every opening, every system — specified, coordinated and supplied through a single technical team.
+              Every opening, every system â€” specified, coordinated and supplied through a single technical team.
             </p>
           </div>
 
@@ -275,7 +275,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 6. TECHNICAL SERVICES ────────────────────────────────────────────── */}
+      {/* â”€â”€ 6. TECHNICAL SERVICES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="overflow-hidden rounded-2xl border border-[color-mix(in_srgb,var(--border)_80%,transparent)] bg-[var(--card)]">
           <div className="grid xl:grid-cols-[1.2fr_0.9fr]">
@@ -285,7 +285,7 @@ export function AboutPage() {
                 Coordination from specification to supply.
               </h2>
               <p className="mt-4 max-w-[46ch] text-[14px] leading-[1.8] text-[var(--muted-foreground)]">
-                TUR operates as a single technical contact for all door hardware and automatic entry systems — supporting architects, consultants and main contractors from early specification through to site delivery.
+                TUR operates as a single technical contact for all door hardware and automatic entry systems â€” supporting architects, consultants and main contractors from early specification through to site delivery.
               </p>
               <div className="mt-8 grid gap-6 sm:grid-cols-2">
                 {aboutServices.map((service, i) => (
@@ -309,14 +309,14 @@ export function AboutPage() {
               </SmartLink>
             </div>
             <div className="relative min-h-[18rem] border-t border-[color-mix(in_srgb,var(--border)_80%,transparent)] xl:border-l xl:border-t-0">
-              <Image src="/tur/home/project-1.jpg" alt="TUR project coordination and technical services" fill sizes="(max-width: 1279px) 100vw, 40vw" className="object-cover" />
+              <Image src="/tur/home/project-1.png" alt="TUR project coordination and technical services" fill sizes="(max-width: 1279px) 100vw, 40vw" className="object-cover" />
               <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.20))]" />
             </div>
           </div>
         </div>
       </PageContainer>
 
-      {/* ── 7. LEADERSHIP TEAM ───────────────────────────────────────────────── */}
+      {/* â”€â”€ 7. LEADERSHIP TEAM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="border-t border-[var(--border)] pt-10">
           <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -392,7 +392,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 8. GLOBAL PRESENCE ───────────────────────────────────────────────── */}
+      {/* â”€â”€ 8. GLOBAL PRESENCE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <PageContainer className="pb-16 sm:pb-20">
         <div className="border-t border-[var(--border)] pt-10">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -411,7 +411,7 @@ export function AboutPage() {
             </SmartLink>
           </div>
 
-          {/* Primary office — HQ */}
+          {/* Primary office â€” HQ */}
           {primaryOffices.map((office) => (
             <div
               key={office.name}
@@ -491,7 +491,7 @@ export function AboutPage() {
         </div>
       </PageContainer>
 
-      {/* ── 9. PARTNER BRANDS ────────────────────────────────────────────────── */}
+      {/* â”€â”€ 9. PARTNER BRANDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="bg-[var(--background)]">
         <PageContainer className="py-16 sm:py-20">
           <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -543,7 +543,7 @@ export function AboutPage() {
         </PageContainer>
       </section>
 
-      {/* ── 10. CERTIFICATIONS + CTA ─────────────────────────────────────────── */}
+      {/* â”€â”€ 10. CERTIFICATIONS + CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="bg-[var(--background)]">
         <PageContainer className="pb-16 sm:pb-20">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 sm:p-10">
@@ -564,7 +564,7 @@ export function AboutPage() {
                   ))}
                 </div>
                 <p className="mt-5 max-w-[52ch] text-[13.5px] leading-[1.8] text-[var(--muted-foreground)]">
-                  TUR product families are certified to ANSI, UL 2025 (Door Hinges R41844, Single-point Locks R41836, Fire Door Closers R40953), CE, Intertek, SKG 2-Star, Warrington and TÜV/DIN EN 1303 standards — with technical coordination aligned to regional compliance and project requirements.
+                  TUR product families are certified to ANSI, UL 2025 (Door Hinges R41844, Single-point Locks R41836, Fire Door Closers R40953), CE, Intertek, SKG 2-Star, Warrington and TÃœV/DIN EN 1303 standards â€” with technical coordination aligned to regional compliance and project requirements.
                 </p>
               </div>
               <div className="flex shrink-0 flex-col gap-3 lg:items-end">
@@ -591,3 +591,4 @@ export function AboutPage() {
     </main>
   );
 }
+

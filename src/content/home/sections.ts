@@ -107,7 +107,7 @@ export const homeStoryCards: StoryCard[] = [
     title: "6 offices. 15+ countries. Landmark references.",
     description:
       "From Buckingham Palace and Changi Airport to KAFD Riyadh and Al Bayt Stadium — TUR's brands are specified on landmark projects across the UK, Europe, Middle East, Asia Pacific and the Caribbean. Six international offices in the UAE, Netherlands, UK, Canada, Sri Lanka and India support coordinated global project delivery.",
-    image: "/tur/home/project-1.jpg",
+    image: "/tur/home/project-1.png",
     imageAlt: "TUR global project references — landmark buildings across 15+ countries",
   },
 ];
@@ -158,7 +158,7 @@ export const homeCollectionTabs: CollectionTab[] = [
     href: "/master-key-systems",
     description:
       "SKG 2-star certified TURN Euro profile cylinders with KA, KD, MK and GMK key hierarchy — designed for hotels, hospitals, offices and campus projects.",
-    image: "/master-key/hero-key.jpg",
+    image: "/master-key/hero-key.png",
     imageAlt: "TURN master key system — SKG 2-star certified Euro profile cylinders",
   },
 ];
@@ -357,7 +357,7 @@ export const downloadResources: DownloadResource[] = [
     href: "/master-key-systems",
     ctaLabel: "View Catalogue",
     eyebrow: "Product Catalogue",
-    image: "/master-key/hero-key.jpg",
+    image: "/master-key/hero-key.png",
     imageAlt: "TURN master key systems catalogue 2026",
   },
   {
@@ -411,3 +411,5 @@ export const contactOffices: ContactOffice[] = [
     eyebrow: "Regional Presence",
   },
 ];
+
+
