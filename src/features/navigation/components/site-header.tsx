@@ -197,6 +197,16 @@ export function SiteHeader() {
 
               {/* ── Right: language + phone + theme + search ── */}
               <div className="flex items-center gap-2 lg:gap-3 xl:gap-4">
+                <SmartLink
+                  href="/channel-partner"
+                  aria-label="Channel Partner Login"
+                  onClick={closeMenus}
+                  onMouseEnter={dismissMegaPanel}
+                  onFocus={dismissMegaPanel}
+                  className="hidden min-h-11 items-center justify-center rounded-full border border-[#1f478f] bg-[#1f478f] px-5 font-sans text-[12px] font-black uppercase tracking-[0.12em] text-white shadow-[0_10px_24px_-14px_rgba(31,71,143,0.9)] transition duration-200 hover:border-[#183a78] hover:bg-[#183a78] dark:border-[#9cb4ee] dark:bg-[#9cb4ee] dark:text-[#101820] dark:hover:border-[#b4c5f3] dark:hover:bg-[#b4c5f3] lg:inline-flex"
+                >
+                  Partner Login
+                </SmartLink>
 
                 {/* Phone — desktop only */}
                 <a

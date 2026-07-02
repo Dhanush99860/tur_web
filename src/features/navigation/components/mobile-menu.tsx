@@ -223,6 +223,14 @@ export function MobileMenu({ onClose, open }: MobileMenuProps) {
             })}
           </nav>
 
+          <SmartLink
+            href="/channel-partner"
+            onClick={onClose}
+            className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-[1rem] border border-[#1f478f] bg-[#1f478f] px-5 py-3 text-[0.98rem] font-black uppercase tracking-[0.12em] text-white shadow-[0_12px_28px_-18px_rgba(31,71,143,0.9)] transition duration-150 hover:border-[#183a78] hover:bg-[#183a78] dark:border-[#9cb4ee] dark:bg-[#9cb4ee] dark:text-[#101820] dark:hover:border-[#b4c5f3] dark:hover:bg-[#b4c5f3]"
+          >
+            Channel Partner Login
+          </SmartLink>
+
           {/* Quick support */}
           <div className="mt-6">
             <p className="mb-3 px-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[var(--muted-foreground)]">
